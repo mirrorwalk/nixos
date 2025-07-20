@@ -82,8 +82,8 @@
         setopt PROMPT_SUBST
         PS1=$'\e[36m[\e[33m%n\e[32m@\e[34m%m \e[35m%~\e[36m]\e[31m$(git_branch)\e[0m$ '
 
-        export LANG=en_US.UTF-8
-        export LC_ALL=en_US.UTF-8
+        export LC_CTYPE=en_US.UTF-8
+        unset LC_ALL
 
         eval "$(direnv hook zsh)"
     '';
