@@ -78,13 +78,10 @@
         git_branch() {
             git branch 2>/dev/null | grep '^*' | colrm 1 2
         }
-            
+
         setopt PROMPT_SUBST
-        PS1=$'\e[36m[\e[33m%n\e[32m@\e[34m%m \e[35m%~\e[36m]\e[31m$(git_branch)\e[0m$ '
-
-        export LC_CTYPE=en_US.UTF-8
-        unset LC_ALL
-
+            PS1='%{$fg[cyan]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%m %{$fg[magenta]%}%~%{$fg[cyan]%}]%{$fg[red]%}$(git branch --show-current 2>/dev/null | sed "s/.*/(&)/")%{$reset_color%}$ '
+            
         eval "$(direnv hook zsh)"
     '';
 
