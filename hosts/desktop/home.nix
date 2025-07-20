@@ -75,11 +75,13 @@
             sudo nixos-rebuild switch --flake $HOME/.config/nixos#desktop
         }
 
-        autoload -Uz vcs_info
-        precmd() { vcs_info }
-        zstyle ':vcs_info:git:*' formats '%{$fg[red]%}(%b)%{$reset_color%}'
+        git_branch() {
+            git branch 2>/dev/null | grep '^*' | colrm 1 2
+        }
+            
         setopt PROMPT_SUBST
-        PS1='%{$fg[green]%}%n%{$fg[white]%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ ''${vcs_info_msg_0_}%{$reset_color%}$ '
+        PS1=$'\e[36m[\e[33m%n\e[32m@\e[34m%m \e[35m%~\e[36m]\e[31m$(git_branch)\e[0m$ '
+
 
         eval "$(direnv hook zsh)"
     '';
