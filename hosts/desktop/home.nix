@@ -56,6 +56,26 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    
+    shellAliases = {
+        vi = "nvim";
+        vim = "nvim";
+
+        enix = "nvim $HOME/.config/nixos";
+    };
+
+    initContent = ''
+        rebuildNixOS() {
+            cd "$HOME/.config/nixos"
+
+            git add .
+            git commit -m "Backup: $(date '+%Y-%m-%d %H:%M:%S')"
+            git push
+
+            sudo nixos-rebuild switch --flake $HOME/.config/nixos#desktop
+        }
+    '';
+
   };
 
   programs.git = {
