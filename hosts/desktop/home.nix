@@ -51,10 +51,12 @@
     pkgs.zls
   ];
 
-  programs.direnv = {
+  programs.zsh = {
     enable = true;
-    nix-direnv.enable = true;
-  };
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+  }
 
   programs.git = {
     enable = true;
