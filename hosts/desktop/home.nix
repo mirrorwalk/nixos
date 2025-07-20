@@ -56,7 +56,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-  }
+  };
 
   programs.git = {
     enable = true;
