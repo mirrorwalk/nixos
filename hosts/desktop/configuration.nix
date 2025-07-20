@@ -99,6 +99,7 @@
   users.users.brog = {
     isNormalUser = true;
     description = "brog";
+    shell = zsh
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
