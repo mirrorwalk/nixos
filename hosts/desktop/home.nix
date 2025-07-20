@@ -74,6 +74,11 @@
 
             sudo nixos-rebuild switch --flake $HOME/.config/nixos#desktop
         }
+
+                autoload -U colors && colors
+        PS1="%{$fg[cyan]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%m %{$fg[magenta]%}%~%{$fg[cyan]%}]%{$reset_color%}$ "
+
+        eval "$(direnv hook zsh)"
     '';
 
   };
@@ -135,6 +140,7 @@
   #
   home.sessionVariables = {
   	EDITOR="nvim";
+    VISUAL="nvim";
   };
 
   # Let Home Manager install and manage itself.
