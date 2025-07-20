@@ -79,7 +79,7 @@
         precmd() { vcs_info }
         zstyle ':vcs_info:git:*' formats '%{$fg[red]%}(%b)%{$reset_color%}'
         setopt PROMPT_SUBST
-        PS1='%{$fg[green]%}%n%{$fg[white]%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ ${vcs_info_msg_0_}%{$reset_color%}$ '
+        PS1='%{$fg[green]%}%n%{$fg[white]%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ ''${vcs_info_msg_0_}%{$reset_color%}$ '
 
         eval "$(direnv hook zsh)"
     '';
