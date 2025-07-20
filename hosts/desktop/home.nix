@@ -79,8 +79,11 @@
             git branch 2>/dev/null | grep '^*' | colrm 1 2
         }
 
+        autoload -U colors
+        colors
+
         setopt PROMPT_SUBST
-            PS1='%{$fg[cyan]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%m %{$fg[magenta]%}%~%{$fg[cyan]%}]%{$fg[red]%}$(git branch --show-current 2>/dev/null | sed "s/.*/(&)/")%{$reset_color%}$ '
+        PS1='%{$fg[cyan]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%m %{$fg[magenta]%}%~%{$fg[cyan]%}]%{$fg[red]%}$(git branch --show-current 2>/dev/null | sed "s/.*/(&)/")%{$reset_color%}$ '
             
         eval "$(direnv hook zsh)"
     '';
