@@ -75,8 +75,11 @@
             sudo nixos-rebuild switch --flake $HOME/.config/nixos#desktop
         }
 
-                autoload -U colors && colors
-        PS1="%{$fg[cyan]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%m %{$fg[magenta]%}%~%{$fg[cyan]%}]%{$reset_color%}$ "
+        autoload -Uz vcs_info
+        precmd() { vcs_info }
+        zstyle ':vcs_info:git:*' formats '%{$fg[red]%}(%b)%{$reset_color%}'
+        setopt PROMPT_SUBST
+        PS1='%{$fg[green]%}%n%{$fg[white]%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ ${vcs_info_msg_0_}%{$reset_color%}$ '
 
         eval "$(direnv hook zsh)"
     '';
