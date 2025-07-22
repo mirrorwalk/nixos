@@ -92,7 +92,7 @@
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
-    variant = "";
+    variant = "dvp";
   };
 
   programs.zsh.enable = true;

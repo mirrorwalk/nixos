@@ -51,11 +51,6 @@
     pkgs.zls
   ];
 
-  home.keyboard = {
-      layout = "us";
-      variant = "dvp";
-  };
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
