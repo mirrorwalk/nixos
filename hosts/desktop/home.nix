@@ -51,6 +51,8 @@
     pkgs.zls
   ];
 
+  console.keyMap = "dvorak-programmer";
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
