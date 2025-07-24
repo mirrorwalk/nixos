@@ -54,6 +54,7 @@
   # Fonts
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs; [
+    orbitron
   ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # Use latest kernel.
