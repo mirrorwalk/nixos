@@ -51,6 +51,7 @@
     pkgs.zls
     pkgs.jujutsu
     pkgs.vscode-fhs
+    pkgs.nodejs_24
   ];
 
   programs.zsh = {
