@@ -49,6 +49,7 @@
     pkgs.clipman
     pkgs.python314
     pkgs.zls
+    pkgs.jujutsu
   ];
 
   programs.zsh = {
