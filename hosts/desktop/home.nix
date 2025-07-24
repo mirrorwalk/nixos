@@ -50,6 +50,7 @@
     pkgs.python314
     pkgs.zls
     pkgs.jujutsu
+    pkgs.vscode-fhs
   ];
 
   programs.zsh = {
