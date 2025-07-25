@@ -83,6 +83,14 @@
             git branch 2>/dev/null | grep '^*' | colrm 1 2
         }
 
+        nvimcd() {
+            if [[ -d $1 ]]; then
+                cd "$1" || return
+                nvim .
+            else
+                nvim "$@"
+            fi
+
         setopt PROMPT_SUBST
         PS1='%F{cyan}[%F{yellow}%n%F{green}@%F{blue}%m %F{magenta}%~%F{cyan}]%F{red}$(git branch --show-current 2>/dev/null | sed "s/.*/(&)/")%f$ '
             
