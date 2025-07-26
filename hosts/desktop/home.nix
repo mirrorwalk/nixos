@@ -53,6 +53,7 @@
     pkgs.vscode-fhs
     pkgs.nodejs_24
     pkgs.ollama-rocm
+    pkgs.gh
   ];
 
   programs.zsh = {
