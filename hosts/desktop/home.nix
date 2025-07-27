@@ -52,8 +52,8 @@
     pkgs.jujutsu
     pkgs.vscode-fhs
     pkgs.nodejs_24
-    pkgs.ollama-rocm
     pkgs.gh
+    pkgs.freetube
   ];
 
   programs.zsh = {
