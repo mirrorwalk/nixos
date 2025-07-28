@@ -54,6 +54,7 @@
     pkgs.nodejs_24
     pkgs.gh
     pkgs.freetube
+    pkgs.qbittorrent
   ];
 
   programs.zsh = {
