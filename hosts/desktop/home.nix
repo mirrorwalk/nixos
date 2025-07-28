@@ -55,6 +55,7 @@
     pkgs.gh
     pkgs.freetube
     pkgs.qbittorrent
+    pkgs.calibre
   ];
 
   programs.zsh = {
