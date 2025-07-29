@@ -56,6 +56,7 @@
     pkgs.freetube
     pkgs.qbittorrent
     pkgs.calibre
+    pkgs.ungoogled-chromium
   ];
 
   programs.zsh = {
