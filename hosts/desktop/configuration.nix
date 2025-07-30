@@ -126,6 +126,7 @@
      neovim
      git
      zig
+     elixir
      file
      unzip
   ];
