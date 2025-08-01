@@ -57,6 +57,7 @@
     pkgs.qbittorrent
     pkgs.calibre
     pkgs.ungoogled-chromium
+    pkgs.elixir-ls
   ];
 
   programs.zsh = {
