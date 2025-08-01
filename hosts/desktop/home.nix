@@ -58,6 +58,7 @@
     pkgs.calibre
     pkgs.ungoogled-chromium
     pkgs.elixir-ls
+    pkgs.gleam
   ];
 
   programs.zsh = {
