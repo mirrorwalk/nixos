@@ -59,6 +59,7 @@
     pkgs.ungoogled-chromium
     pkgs.elixir-ls
     pkgs.gleam
+    pkgs.erlang
   ];
 
   programs.zsh = {
