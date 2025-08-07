@@ -60,6 +60,7 @@
     pkgs.elixir-ls
     pkgs.gleam
     pkgs.erlang
+    pkgs.qutebrowser
   ];
 
   programs.zsh = {
