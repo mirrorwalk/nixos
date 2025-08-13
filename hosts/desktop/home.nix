@@ -62,6 +62,7 @@
     pkgs.erlang
     pkgs.rebar3
     pkgs.qutebrowser
+    pkgs.kiwix
   ];
 
   programs.zsh = {
