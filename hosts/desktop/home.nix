@@ -63,6 +63,7 @@
     pkgs.rebar3
     pkgs.qutebrowser
     pkgs.kiwix
+    pkgs.zed-editor
   ];
 
   programs.zsh = {
