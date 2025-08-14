@@ -64,6 +64,7 @@
     pkgs.qutebrowser
     pkgs.kiwix
     pkgs.zed-editor
+    pkgs.inotify-tools
   ];
 
   programs.zsh = {
