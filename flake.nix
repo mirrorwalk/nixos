@@ -25,7 +25,7 @@
 
                   home-manager.nixosModules.default
 
-                  stylix.homeManagerModules.stylix
+                  stylix.homeModules.stylix
           ];
       };
   };
