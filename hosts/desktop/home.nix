@@ -109,23 +109,21 @@
                     return 0
             fi
 
-            echo "Building new NixOS configuration..."
-            if sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"; then
-                echo "Build succeeded, committing changes..."
+            echo "Building new NixOS configuration (test build)..."
+            if nixos-rebuild build --flake "$HOME/.config/nixos#desktop"; then
+                echo "Build succeeded. Committing changes..."
                     git add .
                     git commit -m "Backup: $(date '+%Y-%m-%d %H:%M:%S')"
                     git push
-                    echo "Changes committed and pushed."
+
+                    echo "Activating committed configuration..."
+                    sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"
+                    echo "Rebuild complete."
             else
                 echo "Build failed — no commit made."
-                return 1
+                    return 1
             fi
         }
-
-        git_branch() {
-            git branch 2>/dev/null | grep '^*' | colrm 1 2
-        }
-
         nvimcd() {
             if [[ -d $1 ]]; then
                 cd "$1" || return
