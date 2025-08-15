@@ -100,13 +100,16 @@
 
     initContent = ''
         rebuildNixOS() {
-            cd "$HOME/.config/nixos"
+            cd "$HOME/.config/nixos" || return 1
 
-            git add .
-            git commit -m "Backup: $(date '+%Y-%m-%d %H:%M:%S')"
-            git push
-
-            sudo nixos-rebuild switch --flake $HOME/.config/nixos#desktop
+                if sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"; then
+                    git add .
+                        git commit -m "Backup: $(date '+%Y-%m-%d %H:%M:%S')"
+                        git push
+                else
+                    echo "❌ NixOS rebuild failed — no commit made."
+                        return 1
+                        fi
         }
 
         git_branch() {
