@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+      imports = [
+    "${pkgs.home-manager.src}/modules/programs/dconf.nix"
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "brog";
