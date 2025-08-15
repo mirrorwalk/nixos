@@ -28,7 +28,7 @@ outputs = { self, nixpkgs, stylix, home-manager, ... }@inputs: {
         home-manager.nixosModules.default
 
         # Optional: Stylix Home Manager module
-        stylix.homeManagerModules.stylix
+        stylix.homeModules.stylix
       ];
     };
   };
