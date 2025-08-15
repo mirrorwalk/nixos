@@ -65,8 +65,24 @@
     pkgs.kiwix
     pkgs.zed-editor
     pkgs.inotify-tools
-    inputs.zen-browser.packages.${pkgs.system}.specific
   ];
+
+  gtk = {
+      enable = true;
+      theme = {
+          name = "Adwaita-dark";
+          package = pkgs.gnome-themes-extra;
+      };
+      gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+      gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+  };
+
+  qt = {
+      enable = true;
+      style = {
+          name = "adwaita-dark";
+      };
+  };
 
   programs.zsh = {
     enable = true;
