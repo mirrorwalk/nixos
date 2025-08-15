@@ -25,8 +25,6 @@
     pkgs.librewolf
     pkgs.ripgrep
     pkgs.fzf
-    pkgs.wine
-    pkgs.nix-index
     pkgs.pavucontrol
     pkgs.mullvad-vpn
     pkgs.mullvad-browser
@@ -46,7 +44,6 @@
     pkgs.xwayland-satellite
     pkgs.cryptsetup
     pkgs.wl-clipboard
-    pkgs.clipman
     pkgs.python314
     pkgs.zls
     pkgs.jujutsu
@@ -56,7 +53,6 @@
     pkgs.freetube
     pkgs.qbittorrent
     pkgs.calibre
-    pkgs.ungoogled-chromium
     pkgs.elixir-ls
     pkgs.gleam
     pkgs.erlang
