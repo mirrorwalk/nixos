@@ -15,13 +15,18 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/desktop/configuration.nix
-        inputs.home-manager.nixosModules.default
-      ];
-    };
+  outputs = { self, nixpkgs, stylix, home-manager, ... }@inputs: {
+      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+              ./hosts/desktop/configuration.nix
+
+                  stylix.nixosModules.stylix
+
+                  home-manager.nixosModules.default
+
+                  stylix.homeManagerModules.stylix
+          ];
+      };
   };
 }
