@@ -67,6 +67,7 @@
     pkgs.inotify-tools
     pkgs.swaybg
   ];
+
 systemd.user.services = {
     waybar = {
       Unit = {
@@ -90,7 +91,7 @@ systemd.user.services = {
         PartOf = [ "niri.service" ];
       };
       Service = {
-        ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i %h/Pictures/nix-anime.png";
+        ExecStart = "%h/bin/random-wallpaper.sh";
         Restart = "on-failure";
       };
       Install = {
