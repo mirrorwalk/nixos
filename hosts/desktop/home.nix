@@ -65,6 +65,7 @@
     pkgs.kiwix
     pkgs.zed-editor
     pkgs.inotify-tools
+    inputs.zen-browser.packages.${pkgs.system}.specific
   ];
 
   programs.zsh = {
