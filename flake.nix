@@ -8,25 +8,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    stylix = {
-        url = "github:nix-community/stylix";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, stylix, home-manager, ... }@inputs: {
-      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-              ./hosts/desktop/configuration.nix
-
-                  stylix.nixosModules.stylix
-
-                  home-manager.nixosModules.default
-
-                  stylix.homeModules.stylix
-          ];
-      };
+  outputs = { self, nixpkgs, ... }@inputs: {
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./hosts/desktop/configuration.nix
+        inputs.home-manager.nixosModules.default
+      ];
+    };
   };
 }
