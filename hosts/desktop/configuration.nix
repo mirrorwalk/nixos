@@ -72,8 +72,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  services.dconf.enable = true;
-
   # Set your time zone.
   time.timeZone = "Europe/Prague";
 
