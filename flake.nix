@@ -9,26 +9,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-        url = "github:nix-community/stylix";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-outputs = { self, nixpkgs, stylix, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = {inherit inputs;};
       modules = [
         ./hosts/desktop/configuration.nix
-        
-        # Stylix NixOS module
-        stylix.nixosModules.stylix
-        
-        # Home Manager (system integration)
-        home-manager.nixosModules.default
-
-        # Optional: Stylix Home Manager module
-        stylix.homeModules.stylix
+        inputs.home-manager.nixosModules.default
       ];
     };
   };
