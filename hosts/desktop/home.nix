@@ -65,6 +65,7 @@
     pkgs.kiwix
     pkgs.zed-editor
     pkgs.inotify-tools
+    pkgs.swaybg
   ];
 
   # gtk = {
