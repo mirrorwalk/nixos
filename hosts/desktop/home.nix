@@ -67,8 +67,39 @@
     pkgs.inotify-tools
     pkgs.swaybg
   ];
+systemd.user.services = {
+    waybar = {
+      Unit = {
+        Description = "Waybar status bar";
+        After = [ "niri.service" ];
+        PartOf = [ "niri.service" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.waybar}/bin/waybar";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "niri.service" ];
+      };
+    };
 
-  # gtk = {
+    swaybg = {
+      Unit = {
+        Description = "swaybg wallpaper background";
+        After = [ "niri.service" ];
+        PartOf = [ "niri.service" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.swaybg}/bin/swaybg -m fill -i %h/Pictures/nix-anime.png";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = [ "niri.service" ];
+      };
+    };
+  };
+
+  # gtk = systemd.user.services = {
   #     enable = true;
   #     theme = {
   #         name = "Adwaita-dark";
