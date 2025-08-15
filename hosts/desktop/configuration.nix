@@ -40,6 +40,9 @@
     pkgsi686Linux.mesa
   ];
 
+
+programs.dconf.enable = true;
+
   services.mullvad-vpn.enable = true;
 
   # Hyprland
