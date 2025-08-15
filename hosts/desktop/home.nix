@@ -67,24 +67,23 @@
     pkgs.inotify-tools
   ];
 
-  # gtk = {
-  #     enable = true;
-  #     theme = {
-  #         name = "Adwaita-dark";
-  #         package = pkgs.gnome-themes-extra;
-  #     };
-  #     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-  #     gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
-  # };
-  #
-  # qt = {
-  #     enable = true;
-  #     style = {
-  #         name = "adwaita-dark";
-  #     };
-  # };
+  gtk = {
+      enable = true;
+      theme = {
+          name = "Adwaita-dark";
+          package = pkgs.gnome-themes-extra;
+      };
+      gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+      gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+  };
 
-programs.dconf.enable = true;
+  qt = {
+      enable = true;
+      style = {
+          name = "adwaita-dark";
+      };
+  };
+
 
   programs.zsh = {
     enable = true;
