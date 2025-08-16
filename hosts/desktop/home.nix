@@ -96,16 +96,16 @@ systemd.user.services = {
     };
   };
 
-  # gtk = systemd.user.services = {
-  #     enable = true;
-  #     theme = {
-  #         name = "Adwaita-dark";
-  #         package = pkgs.gnome-themes-extra;
-  #     };
-  #     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-  #     gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
-  # };
-  #
+  gtk = {
+      enable = true;
+      theme = {
+          name = "Adwaita-dark";
+          package = pkgs.gnome-themes-extra;
+      };
+      gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+      gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
+  };
+
   qt = {
       enable = true;
       style = {
@@ -123,7 +123,7 @@ systemd.user.services = {
         vi = "nvim";
         vim = "nvim";
 
-        enix = "nvim $HOME/.config/nixos";
+        enix = "cd $HOME/.config/nixos && nvim $HOME/.config/nixos";
     };
 
     initContent = ''
