@@ -62,6 +62,7 @@
     pkgs.zed-editor
     pkgs.inotify-tools
     pkgs.swaybg
+    pkgs.digikam
   ];
 
 systemd.user.services = {
