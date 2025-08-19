@@ -88,7 +88,7 @@ systemd.user.services = {
         PartOf = [ "niri.service" ];
       };
       Service = {
-        ExecStart = "%h/bin/random-wallpaper.sh";
+        ExecStart = "%h/.local/bin/random-wallpaper.sh";
         Restart = "on-failure";
       };
       Install = {
