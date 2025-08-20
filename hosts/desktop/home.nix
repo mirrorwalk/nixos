@@ -37,6 +37,7 @@
     pkgs.keepassxc
     pkgs.mpv
     pkgs.brave
+    pkgs.steam
     pkgs.direnv
     pkgs.hyprcursor
     pkgs.fuzzel
