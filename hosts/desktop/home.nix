@@ -63,6 +63,7 @@
     pkgs.inotify-tools
     pkgs.swaybg
     pkgs.digikam
+    pkgs.btop
   ];
 
 systemd.user.services = {
