@@ -63,6 +63,7 @@
     pkgs.swaybg
     pkgs.digikam
     pkgs.btop
+    pkgs.wine
   ];
 
 systemd.user.services = {
