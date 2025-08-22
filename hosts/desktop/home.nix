@@ -49,6 +49,7 @@
     pkgs.jujutsu
     pkgs.vscode-fhs
     pkgs.nodejs_24
+    pkgs.bun
     pkgs.gh
     pkgs.freetube
     pkgs.qbittorrent
@@ -62,7 +63,6 @@
     pkgs.zed-editor
     pkgs.inotify-tools
     pkgs.swaybg
-    pkgs.digikam
     pkgs.btop
     pkgs.wine
     pkgs.tree
