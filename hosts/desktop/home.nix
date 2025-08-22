@@ -127,10 +127,20 @@ systemd.user.services = {
         vim = "nvim";
 
         enix = "cd $HOME/.config/nixos && nvim $HOME/.config/nixos";
+        backup-system="$HOME/.local/bin/system-backup-git.sh";
     };
 
     initContent = ''
-        rebuildNixOS() {
+    rebuild-nixos-no-git() {
+        local prev_dir="$PWD"
+            cd "$HOME/.config/nixos" || {
+                echo "Could not find $HOME/.config/nixos"
+                    return 1
+            }
+        sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"
+        cd "$prev_dir" || return
+    }
+        rebuild-nixos() {
             cd "$HOME/.config/nixos" || {
                 echo "Could not find $HOME/.config/nixos"
                     return 1
