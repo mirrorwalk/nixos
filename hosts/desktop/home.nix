@@ -66,6 +66,7 @@
     pkgs.btop
     pkgs.wine
     pkgs.tree
+    pkgs.fd
     # pkgs.gitbutler
 
 # Themes
