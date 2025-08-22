@@ -158,7 +158,40 @@ dconf.settings = {
     };
 
     initContent = ''
+    if [ -f $HOME/.config/zsh/paths.zsh ]; then
+        source $HOME/.config/zsh/paths.zsh
+    fi
+
 # Functions
+    addpath() {
+        if [ -d "$1" ]; then
+# convert to absolute path
+            local abs_path
+                abs_path=$(realpath "$1" 2>/dev/null || readlink -f "$1")
+
+# check if already in PATH
+        case ":$PATH:" in
+               *":$abs_path:"*) 
+                   echo "$abs_path is already in PATH"
+                   return
+                   ;;
+               esac
+
+# add to current session
+                   export PATH="$abs_path:$PATH"
+                   echo "Added $abs_path to PATH"
+
+# persist it in ~/.config/zsh/paths.zsh if not already there
+                   local path_file="$HOME/.config/zsh/paths.zsh"
+                   grep -qxF "export PATH=\"$abs_path:\$PATH\"" "$path_file" 2>/dev/null || \
+                   echo "export PATH=\"$abs_path:\$PATH\"" >> "$path_file"
+        else
+            echo "Directory $1 does not exist."
+                fi
+    }
+    listpaths() {
+        echo $PATH | tr ':' '\n'
+    }
 
     rebuild-nixos-no-git() {
         local prev_dir="$PWD"
@@ -214,7 +247,7 @@ dconf.settings = {
 # Keybinds
 
         bindkey '^g' nvim-fzf-widget
-        bindkey '^z' nvimcd
+        bindkey -s '^x' "tmux-workspace\n"
 
 # Other
 
