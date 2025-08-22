@@ -64,7 +64,7 @@
     pkgs.digikam
     pkgs.btop
     pkgs.wine
-    pkgs.floorp
+    # pkgs.floorp
   ];
 
 systemd.user.services = {
