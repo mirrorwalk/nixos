@@ -113,6 +113,7 @@
     users = {
       "brog" = import ./home.nix;
     };
+    backupFileExtension = "backup";
   };
 
 

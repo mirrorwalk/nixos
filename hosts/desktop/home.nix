@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -9,6 +9,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # This value determines the Home Manager release that your configuration is
+
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
   #
@@ -65,6 +66,9 @@
     pkgs.btop
     pkgs.wine
     # pkgs.floorp
+    pkgs.adwaita-qt
+    pkgs.gnome-themes-extra
+    pkgs.gsettings-desktop-schemas
   ];
 
 systemd.user.services = {
@@ -99,6 +103,17 @@ systemd.user.services = {
     };
   };
 
+    xdg.mimeApps = {
+        enable = true;
+        defaultApplications = {
+            "text/html"              = [ "mullvad-browser.desktop" ];
+            "x-scheme-handler/http"  = [ "mullvad-browser.desktop" ];
+            "x-scheme-handler/https" = [ "mullvad-browser.desktop" ];
+            "x-scheme-handler/about" = [ "mullvad-browser.desktop" ];
+            "x-scheme-handler/unknown" = [ "mullvad-browser.desktop" ];
+        };
+    };
+
   gtk = {
       enable = true;
       theme = {
@@ -109,12 +124,21 @@ systemd.user.services = {
       gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };
 
-  qt = {
-      enable = true;
-      style = {
-          name = "adwaita-dark";
-      };
+qt = {
+  enable = true;
+  style = {
+    name = "adwaita-dark";
+    package = pkgs.adwaita-qt;
   };
+  platformTheme = "gtk3";  # This helps Qt apps follow GTK theme
+};
+
+dconf.settings = {
+  "org/gnome/desktop/interface" = {
+    gtk-theme = "Adwaita-dark";
+    color-scheme = "prefer-dark";
+  };
+};
 
   programs.zsh = {
     enable = true;
@@ -245,6 +269,8 @@ systemd.user.services = {
   home.sessionVariables = {
   	EDITOR="nvim";
     VISUAL="nvim";
+    GTK_THEME="Adwaita:dark";
+    QT_STYLE_OVERRIDE="adwaita-dark";
   };
 
   # Let Home Manager install and manage itself.
