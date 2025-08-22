@@ -155,6 +155,7 @@ dconf.settings = {
 
         enix = "cd $HOME/.config/nixos && nvim $HOME/.config/nixos";
         backup-system="$HOME/.local/bin/system-backup-git.sh";
+        la= "ls -aF --color=auto";
     };
 
     initContent = ''
