@@ -50,6 +50,7 @@
     pkgs.vscode-fhs
     pkgs.nodejs_24
     pkgs.bun
+    pkgs.go
     pkgs.gh
     pkgs.freetube
     pkgs.qbittorrent
