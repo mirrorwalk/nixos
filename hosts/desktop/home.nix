@@ -64,6 +64,7 @@
     pkgs.digikam
     pkgs.btop
     pkgs.wine
+    pkgs.ungoogled-chromium
   ];
 
 systemd.user.services = {
