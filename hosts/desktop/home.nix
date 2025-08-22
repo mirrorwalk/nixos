@@ -65,7 +65,7 @@
     pkgs.digikam
     pkgs.btop
     pkgs.wine
-    # pkgs.floorp
+    pkgs.floorp
     pkgs.adwaita-qt
     pkgs.gnome-themes-extra
     pkgs.gsettings-desktop-schemas
