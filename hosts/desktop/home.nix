@@ -65,6 +65,7 @@
     pkgs.btop
     pkgs.wine
     pkgs.ungoogled-chromium
+    pkgs.firefox
   ];
 
 systemd.user.services = {
