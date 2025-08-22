@@ -67,7 +67,6 @@
     pkgs.wine
     pkgs.tree
     # pkgs.gitbutler
-    pkgs.floorp
 
 # Themes
     pkgs.adwaita-qt
