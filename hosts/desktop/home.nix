@@ -209,11 +209,18 @@ dconf.settings = {
             $HOME/.local/bin/nvim-fzf/nvim-fzf.sh
             zle reset-prompt
         }
+        tmux-workspace-widget() {
+            $HOME/.local/bin/tmux-workspace/tmux-workspace.sh
+            zle reset-prompt
+        }
+
 # ZLE widgets
         zle -N nvim-fzf-widget
+        zle -N tmux-workspace-widget
 # Keybinds
 
         bindkey '^g' nvim-fzf-widget
+        bindkey '^z' tmux-workspace-widget
 
 # Other
 
