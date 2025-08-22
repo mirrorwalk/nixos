@@ -214,6 +214,7 @@ dconf.settings = {
 # Keybinds
 
         bindkey '^g' nvim-fzf-widget
+        bindkey '^z' nvimcd
 
 # Other
 
