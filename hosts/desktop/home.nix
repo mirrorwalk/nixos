@@ -65,9 +65,9 @@
     pkgs.digikam
     pkgs.btop
     pkgs.wine
-    pkgs.floorp
     pkgs.tree
-    pkgs.gitbutler
+    # pkgs.gitbutler
+    pkgs.floorp
 
 # Themes
     pkgs.adwaita-qt
