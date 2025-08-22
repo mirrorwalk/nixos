@@ -66,6 +66,10 @@
     pkgs.btop
     pkgs.wine
     pkgs.floorp
+    pkgs.tree
+    pkgs.gitbutler
+
+# Themes
     pkgs.adwaita-qt
     pkgs.gnome-themes-extra
     pkgs.gsettings-desktop-schemas
@@ -130,7 +134,7 @@ qt = {
     name = "adwaita-dark";
     package = pkgs.adwaita-qt;
   };
-  platformTheme = "gtk3";  # This helps Qt apps follow GTK theme
+  platformTheme.name = "gtk3";  # This helps Qt apps follow GTK theme
 };
 
 dconf.settings = {
@@ -155,6 +159,8 @@ dconf.settings = {
     };
 
     initContent = ''
+# Functions
+
     rebuild-nixos-no-git() {
         local prev_dir="$PWD"
             cd "$HOME/.config/nixos" || {
@@ -164,31 +170,33 @@ dconf.settings = {
         sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"
         cd "$prev_dir" || return
     }
-        rebuild-nixos() {
+    rebuild-nixos() {
+        local prev_dir="$PWD"
             cd "$HOME/.config/nixos" || {
                 echo "Could not find $HOME/.config/nixos"
                     return 1
             }
 
-            if [[ -z $(git status --porcelain) ]]; then
-                echo "No configuration changes — skipping rebuild."
-                    return 0
-            fi
+        if [[ -z $(git status --porcelain) ]]; then
+            echo "No configuration changes — skipping rebuild."
+                return 0
+                fi
 
-            echo "Building new NixOS configuration (test build)..."
-            if nixos-rebuild build --flake "$HOME/.config/nixos#desktop"; then
-                echo "Build succeeded. Committing changes..."
-                    git add .
-                    git commit -m "Backup: $(date '+%Y-%m-%d %H:%M:%S')"
-                    git push
+                echo "Building new NixOS configuration (test build)..."
+                if nixos-rebuild build --flake "$HOME/.config/nixos#desktop"; then
+                    echo "Build succeeded. Committing changes..."
+                        git add .
+                        git commit -m "Backup: $(date '+%Y-%m-%d %H:%M:%S')"
+                        git push
 
-                    echo "Activating committed configuration..."
-                    sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"
-                    echo "Rebuild complete."
-            else
-                echo "Build failed — no commit made."
-                    return 1
-            fi
+                        echo "Activating committed configuration..."
+                        sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"
+                        echo "Rebuild complete."
+                else
+                    echo "Build failed — no commit made."
+                        return 1
+                        fi
+                        cd "$prev_dir" || return
         }
         nvimcd() {
             if [[ -d $1 ]]; then
@@ -198,6 +206,17 @@ dconf.settings = {
                 nvim "$@"
             fi
         }
+        nvim-fzf-widget() {
+            $HOME/.local/bin/nvim-fzf/nvim-fzf.sh
+            zle reset-prompt
+        }
+# ZLE widgets
+        zle -N nvim-fzf-widget
+# Keybinds
+
+        bindkey '^g' nvim-fzf-widget
+
+# Other
 
         setopt PROMPT_SUBST
         PS1='%F{cyan}[%F{yellow}%n%F{green}@%F{blue}%m %F{magenta}%~%F{cyan}]%F{red}$(git branch --show-current 2>/dev/null | sed "s/.*/(&)/")%f$ '
