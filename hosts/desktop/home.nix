@@ -210,7 +210,7 @@ dconf.settings = {
             zle reset-prompt
         }
         tmux-workspace-widget() {
-            $HOME/.local/bin/tmux-workspace/tmux-workspace.sh
+            zsh -ic "$HOME/.local/bin/tmux-workspace/tmux-workspace.sh"
             zle reset-prompt
         }
 
