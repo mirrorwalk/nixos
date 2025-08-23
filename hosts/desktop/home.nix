@@ -282,6 +282,12 @@ dconf.settings = {
       init = {
         defaultBranch = "master";
       };
+      column = {
+          ui = "auto";
+      };
+      branch = {
+          sort = "-committerdate";
+      };
     };
 
     delta = {
