@@ -288,13 +288,42 @@ dconf.settings = {
       branch = {
           sort = "-committerdate";
       };
+      tag = {
+            sort = "version:refname";
+        };
+      diff = {
+          algorithm = "histogram";
+          colorMoved = "plain";
+      };
+      push = {
+          default = "simple";
+          autoSetupRemote = "true";
+          followTags = "true";
+      };
+      prone = {
+          prune = "true";
+          pruneTags = "true";
+      };
+      commit = {
+          verbose = "true";
+      };
+      help = {
+            autocorrect = "prompt";
+      };
+      rerere = {
+            enabled = "true";
+            autoupdate = "true";
+      };
+      merge = {
+          conflictStyle = "zdiff3";
+      };
     };
 
     delta = {
       enable = true;
       options = {
-        navigate = true; # Enable navigation in large diffs
-        light = false; # Set to true for light themes
+        navigate = true;
+        light = false;
         line-numbers = true;
       };
     };
