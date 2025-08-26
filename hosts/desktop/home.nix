@@ -67,6 +67,7 @@
     pkgs.btop
     pkgs.wine
     pkgs.tree
+    pkgs.sdl3
     pkgs.fd
     # pkgs.gitbutler
 
