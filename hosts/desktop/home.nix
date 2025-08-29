@@ -236,7 +236,6 @@ dconf.settings = {
                         echo "Activating committed configuration..."
                         sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"
                         echo "Rebuild complete."
-                        cd "$prev_dir" || return
                 else
                     echo "Build failed — no commit made."
                         return 1
