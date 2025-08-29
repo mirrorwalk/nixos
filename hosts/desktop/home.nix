@@ -69,6 +69,7 @@
             pkgs.sdl3
             pkgs.fd
             pkgs.jq
+            pkgs.bat
 # pkgs.gitbutler
 
 # Themes
@@ -372,6 +373,7 @@
         VISUAL="nvim";
         GTK_THEME="Adwaita:dark";
         QT_STYLE_OVERRIDE="adwaita-dark";
+        PAGER="bat";
     };
 
 # Let Home Manager install and manage itself.
