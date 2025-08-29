@@ -227,6 +227,8 @@ dconf.settings = {
                 echo "Building new NixOS configuration (test build)..."
                 if nixos-rebuild build --flake "$HOME/.config/nixos#desktop"; then
                     echo "Build succeeded. Committing changes..."
+                        rm ./result
+
                         git add .
                         git commit -m "Backup: $(date '+%Y-%m-%d %H:%M:%S')"
                         git push
