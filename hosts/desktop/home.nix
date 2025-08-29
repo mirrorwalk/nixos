@@ -265,8 +265,8 @@ dconf.settings = {
 # Other
 
         setopt PROMPT_SUBST
-        PS1='%F{cyan}[%F{yellow}%n%F{green}@%F{blue}%m %F{magenta}%~%F{cyan}]%F{red}$(git branch --show-current 2>/dev/null | sed "s/.*/(&)/")%f$ '
-            
+        PS1='%F{cyan}[%F{yellow}%n%F{green}@%F{blue}%m %F{magenta}%~%F{cyan}]%F{red}$(git branch --show-current 2>/dev/null | sed "s/.*/(&)/")%F{cyan}(%j)%f$ '            
+
         eval "$(direnv hook zsh)"
 
         autoload -U compinit
