@@ -68,6 +68,7 @@
             pkgs.tree
             pkgs.sdl3
             pkgs.fd
+            pkgs.jq
 # pkgs.gitbutler
 
 # Themes
