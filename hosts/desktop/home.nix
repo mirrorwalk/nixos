@@ -45,7 +45,6 @@
     pkgs.cryptsetup
     pkgs.wl-clipboard
     pkgs.python314
-    pkgs.zls
     pkgs.jujutsu
     pkgs.vscode-fhs
     pkgs.nodejs_24
