@@ -173,7 +173,8 @@
 # Functions
                     fcd() {
                         local dir
-                            dir=$(fd --type d 2>/dev/null | fzf) && cd "$dir"
+                            dir=$(fd --type d 2>/dev/null | fzf)
+                            cd "$dir"
                     }
         addpath() {
             if [ -d "$1" ]; then
