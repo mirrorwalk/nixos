@@ -1,3 +1,5 @@
+{ config, ... }:
+
 {
 
   programs.git = {
@@ -6,18 +8,18 @@
     userEmail = "git.cresting327@passmail.net";
 
     aliases = {
-        st = "status";
-        s = "status --short";
-        br = "branch";
-        bra = "branch -a";
-        lg = "log --oneline --graph --all --decorate";
-        l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
+      st = "status";
+      s = "status --short";
+      br = "branch";
+      bra = "branch -a";
+      lg = "log --oneline --graph --all --decorate";
+      l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
 
-        ci = "commit";
-        cm = "commit -m";
+      ci = "commit";
+      cm = "commit -m";
 
-        co = "checkout";
-        cb = "checkout -b";
+      co = "checkout";
+      cb = "checkout -b";
     };
 
     extraConfig = {

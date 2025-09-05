@@ -5,6 +5,7 @@
     baseIndex = 1;
     keyMode = "vi";
     mouse = false;
+    escapeTime = 0;
     extraConfig = ''
       bind-key C-a send-prefix
       set -g status-style 'bg=#000000 fg=#ffffff'
