@@ -69,6 +69,8 @@
             pkgs.fd
             pkgs.jq
             pkgs.bat
+            pkgs.ungoogled-chromium
+            pkgs.liferea
 # pkgs.gitbutler
 
 # Themes
