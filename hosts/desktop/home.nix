@@ -59,15 +59,14 @@
     pkgs.bun
     pkgs.go
     pkgs.gh
-    pkgs.freetube
-    pkgs.qbittorrent
-    pkgs.calibre
+    # pkgs.freetube
+    # pkgs.qbittorrent
+    # pkgs.calibre
     pkgs.elixir-ls
     pkgs.gleam
     pkgs.erlang
     pkgs.rebar3
-    pkgs.qutebrowser
-    pkgs.kiwix
+    # pkgs.kiwix
     pkgs.zed-editor
     pkgs.inotify-tools
     pkgs.swaybg
@@ -77,10 +76,9 @@
     pkgs.fd
     pkgs.jq
     pkgs.bat
-    pkgs.ungoogled-chromium
-    pkgs.liferea
+    # pkgs.liferea
     pkgs.hyprland
-    pkgs.kdePackages.dolphin
+    # pkgs.kdePackages.dolphin
     pkgs.cargo
     pkgs.rustc
     pkgs.gcc
@@ -90,9 +88,10 @@
     pkgs.elixir
     pkgs.file
     pkgs.unzip
+    pkgs.nix-output-monitor
 
     # Themes
-    pkgs.adwaita-qt
+    # pkgs.adwaita-qt
     pkgs.gnome-themes-extra
     pkgs.gsettings-desktop-schemas
   ];
@@ -184,6 +183,11 @@
       gtk-theme = "Adwaita-dark";
       color-scheme = "prefer-dark";
     };
+  };
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/brog/.config/nixos";
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
