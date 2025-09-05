@@ -91,7 +91,6 @@
     pkgs.elixir
     pkgs.file
     pkgs.unzip
-    # pkgs.gitbutler
 
     # Themes
     pkgs.adwaita-qt
