@@ -125,8 +125,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      neovim
-     zig_0_15
-     elixir
      file
      unzip
   ];

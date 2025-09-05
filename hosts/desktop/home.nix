@@ -59,9 +59,9 @@
     pkgs.bun
     pkgs.go
     pkgs.gh
-    # pkgs.freetube
-    # pkgs.qbittorrent
-    # pkgs.calibre
+    pkgs.freetube
+    pkgs.qbittorrent
+    pkgs.calibre
     pkgs.elixir-ls
     pkgs.gleam
     pkgs.erlang
@@ -76,9 +76,9 @@
     pkgs.fd
     pkgs.jq
     pkgs.bat
-    # pkgs.liferea
+    pkgs.liferea
     pkgs.hyprland
-    # pkgs.kdePackages.dolphin
+    pkgs.kdePackages.dolphin
     pkgs.cargo
     pkgs.rustc
     pkgs.gcc

@@ -14,8 +14,6 @@
 
       tmuxs = "tmux new -s";
       tmuxa = "tmux attach -t";
-
-      nix-shell = "nix-shell --run zsh";
     };
 
     initContent = ''
