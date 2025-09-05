@@ -8,7 +8,6 @@
   imports = [
     inputs.zen-browser.homeModules.beta
     ../../modules/home-manager/hyprland/desktop-hyprland.nix
-    ../../modules/custom/hyprpaper-random-wallpaper.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -138,7 +137,7 @@
         PartOf = ["hyprpaper.service"];
       };
       Service = {
-        ExecStart = "%h/.local/bin/hyprpaper-random-wallpaper.sh";
+        ExecStart = "%h/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh";
         Restart = "on-failure";
       };
       Install = {
