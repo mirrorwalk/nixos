@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -38,7 +36,7 @@
       };
 
       animations = {
-          enabled = false;
+        enabled = false;
       };
 
       decoration = {

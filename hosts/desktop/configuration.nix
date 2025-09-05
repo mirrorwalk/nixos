@@ -124,7 +124,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      neovim
-     git
      zig_0_15
      elixir
      file

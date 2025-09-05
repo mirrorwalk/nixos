@@ -8,6 +8,11 @@
   imports = [
     inputs.zen-browser.homeModules.beta
     ../../modules/home-manager/hyprland/desktop-hyprland.nix
+    ../../modules/home-manager/ghostty/ghostty.nix
+    ../../modules/home-manager/waybar/waybar.nix
+    ../../modules/home-manager/git/git.nix
+    ../../modules/home-manager/jj/jj.nix
+    ../../modules/home-manager/tmux/tmux.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -27,11 +32,7 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
   home.packages = [
-    pkgs.ghostty
-    pkgs.tmux
     pkgs.librewolf
     pkgs.ripgrep
     pkgs.fzf
@@ -43,7 +44,6 @@
     pkgs.pipewire
     pkgs.pulseaudio
     pkgs.wofi
-    pkgs.waybar
     pkgs.keepassxc
     pkgs.mpv
     pkgs.brave
@@ -86,6 +86,11 @@
     pkgs.rustc
     pkgs.gcc
     pkgs.hyprpaper
+    pkgs.neovim
+    pkgs.zig_0_15
+    pkgs.elixir
+    pkgs.file
+    pkgs.unzip
     # pkgs.gitbutler
 
     # Themes
@@ -270,8 +275,8 @@
 
                                   git add .
                                   git commit -m "Backup: $(date '+%Y-%m-%d %H:%M:%S')"
-                                  git push
 
+                                  git push
                                   echo "Activating committed configuration..."
                                   sudo nixos-rebuild switch --flake "$HOME/.config/nixos#desktop"
                                   echo "Rebuild complete."
@@ -313,66 +318,6 @@
                   source <(jj util completion zsh)
     '';
   };
-
-  programs.git = {
-    enable = true;
-    userName = "mirrorwalk";
-    userEmail = "git.cresting327@passmail.net";
-
-    extraConfig = {
-      core = {
-        editor = "nvim";
-      };
-      init = {
-        defaultBranch = "master";
-      };
-      column = {
-        ui = "auto";
-      };
-      branch = {
-        sort = "-committerdate";
-      };
-      tag = {
-        sort = "version:refname";
-      };
-      diff = {
-        algorithm = "histogram";
-        colorMoved = "plain";
-      };
-      push = {
-        default = "simple";
-        autoSetupRemote = "true";
-        followTags = "true";
-      };
-      prone = {
-        prune = "true";
-        pruneTags = "true";
-      };
-      commit = {
-        verbose = "true";
-      };
-      help = {
-        autocorrect = "prompt";
-      };
-      rerere = {
-        enabled = "true";
-        autoupdate = "true";
-      };
-      merge = {
-        conflictStyle = "zdiff3";
-      };
-    };
-
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-        light = false;
-        line-numbers = true;
-      };
-    };
-  };
-
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
