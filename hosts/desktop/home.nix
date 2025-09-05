@@ -1,6 +1,12 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
+
+    imports = [ 
+        inputs.zen-browser.homeModules.beta
+    ];
+
+
 # Home Manager needs a bit of information about you and the paths it should
 # manage.
     home.username = "brog";
@@ -71,13 +77,16 @@
             pkgs.bat
             pkgs.ungoogled-chromium
             pkgs.liferea
-# pkgs.gitbutler
+            # pkgs.gitbutler
 
-# Themes
+            # Themes
             pkgs.adwaita-qt
             pkgs.gnome-themes-extra
             pkgs.gsettings-desktop-schemas
             ];
+
+
+    # programs.zen-browser.enable = true;
 
     systemd.user.services = {
         waybar = {
