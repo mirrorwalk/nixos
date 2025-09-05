@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   inputs,
   ...
 }: {
@@ -13,6 +11,7 @@
     ../../modules/home-manager/git/git.nix
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
+    ../../modules/home-manager/zsh/zsh.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
