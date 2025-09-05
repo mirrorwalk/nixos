@@ -43,8 +43,6 @@
 
   services.mullvad-vpn.enable = true;
 
-  # Hyprland
-  programs.hyprland.enable = true;
 
   #Niri
   programs.niri.enable = true;
