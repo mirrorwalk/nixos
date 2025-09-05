@@ -89,6 +89,8 @@
     pkgs.file
     pkgs.unzip
     pkgs.nix-output-monitor
+    pkgs.gnupg
+    pkgs.pinentry-curses
 
     # Themes
     # pkgs.adwaita-qt
@@ -100,6 +102,12 @@
 
   wayland.windowManager.hyprland.enable = true;
   services.hyprpaper.enable = true;
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
 
   systemd.user.services = {
     waybar = {
