@@ -191,7 +191,8 @@
       }
 
       #workspaces,
-      #custom-niri-window {
+      #custom-niri-window 
+      #tray{
           background: #1a1a1a;
           border-radius: 8px;
           padding: 2px;
@@ -260,8 +261,7 @@
       }
 
       #pulseaudio,
-      #custom-weather
-      #tray {
+      #custom-weather {
           background: #1a1a1a;
           border-radius: 8px;
           padding: 4px 10px;
