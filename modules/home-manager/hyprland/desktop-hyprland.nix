@@ -91,6 +91,7 @@
         kb_rules = "";
         follow_mouse = 1;
         mouse_refocus = false;
+        numlock_by_default = true;
         sensitivity = 0.2;
       };
 
