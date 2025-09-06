@@ -66,7 +66,6 @@
     pkgs.gleam
     pkgs.erlang
     pkgs.rebar3
-    # pkgs.kiwix
     pkgs.zed-editor
     pkgs.inotify-tools
     pkgs.swaybg
