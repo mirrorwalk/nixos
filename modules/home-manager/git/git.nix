@@ -22,6 +22,11 @@
       cb = "checkout -b";
     };
 
+    signing = {
+        signByDefault = true;
+        key = "204104CBF418A401";
+    };
+
     extraConfig = {
       core = {
         editor = "nvim";
@@ -53,6 +58,7 @@
       };
       commit = {
         verbose = "true";
+        gpgSign = "true";
       };
       help = {
         autocorrect = "prompt";

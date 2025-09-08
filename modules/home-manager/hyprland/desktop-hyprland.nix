@@ -15,6 +15,8 @@
 
       "exec-once" = [
         "waybar"
+        # "hyprpaper"
+        # "/home/brog/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh"
         "mullvad-vpn"
       ];
 
@@ -143,7 +145,7 @@
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-        "$mainMod, C, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
+        "$mainMod, W, submap, wallpaper"
       ];
 
       bindm = [
@@ -159,6 +161,19 @@
         "pin, title:^(Picture-in-Picture)$"
         "move 75% 75%, title:^(Picture-in-Picture)$"
       ];
+
+    };
+    submaps = {
+        wallpaper = {
+            settings = {
+                bind = [
+                    ", c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
+                    ", r, exec, systemctl --user restart hyprpaper-random.service"
+
+                    ", escape, submap, reset"
+                ];
+            };
+        };
     };
   };
 }

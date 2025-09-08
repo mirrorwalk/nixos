@@ -16,6 +16,7 @@
           "hyprland/submap"
           "hyprland/window"
           "custom/separator"
+          "custom/wallpaper-category"
         ];
         "modules-center" = [
           "clock"
@@ -37,12 +38,11 @@
           format = "{}";
           "max-length" = 40;
         };
+        "custom/wallpaper-category" = {
+            exec = "basename $(readlink $HOME/.local/bin/random-wallpaper/hyprpaper/wallpapers)";
+            format = "{}";
+            interval = 1;
 
-        "custom/niri-window" = {
-          exec = "~/.config/waybar/scripts/niri-window.sh";
-          "return-type" = "json";
-          tooltip = true;
-          format = "{}";
         };
 
         "hyprland/workspaces" = {

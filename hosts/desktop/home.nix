@@ -12,6 +12,7 @@
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
     ../../modules/home-manager/zsh/zsh.nix
+    ../../modules/home-manager/gpg/gpg.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -90,12 +91,10 @@
     pkgs.nix-output-monitor
 
     # Themes
-    # pkgs.adwaita-qt
+    pkgs.adwaita-qt
     pkgs.gnome-themes-extra
     pkgs.gsettings-desktop-schemas
   ];
-
-  # programs.zen-browser.enable = true;
 
   wayland.windowManager.hyprland.enable = true;
   services.hyprpaper.enable = true;
@@ -113,6 +112,21 @@
       };
       Install = {
         WantedBy = ["niri.service"];
+      };
+    };
+
+    hyprpaper = {
+      Unit = {
+        # Description = "Hyprpaper wallpaper background";
+        After = ["hyprland-session.target"];
+        PartOf = ["hyprland-session.target"];
+      };
+      Service = {
+        ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
+        # Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = ["hyprland-session.target"];
       };
     };
 
