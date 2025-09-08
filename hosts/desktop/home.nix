@@ -84,7 +84,6 @@
     pkgs.rustc
     pkgs.gcc
     pkgs.hyprpaper
-    pkgs.neovim
     pkgs.zig_0_15
     pkgs.elixir
     pkgs.file
@@ -205,36 +204,41 @@
     flake = "/home/brog/.config/nixos";
   };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
     # ".config/niri/".source = ./dotfiles/niri;
+    ".config/nvim-fzf/config".text = ''
+      [roots]
+      $HOME/.config/nixos
+      $HOME/.config
+      $HOME/projects
+      $HOME/notes
+      $HOME/.local/bin
+
+      [ignore]
+      .git
+      node_modules
+      target
+      .direnv
+
+    '';
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/brog/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
-    EDITOR = "nvim";
     VISUAL = "nvim";
     GTK_THEME = "Adwaita:dark";
     QT_STYLE_OVERRIDE = "adwaita-dark";
     PAGER = "bat";
   };
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

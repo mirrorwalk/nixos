@@ -1,0 +1,3 @@
+[submodule "modules/custom/nvim-fzf/nvim-fzf"]
+	path = modules/custom/nvim-fzf/nvim-fzf
+	url = git@github.com:mirrorwalk/nvim-fzf.git

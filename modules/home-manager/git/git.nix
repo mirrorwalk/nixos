@@ -7,6 +7,7 @@
     aliases = {
       st = "status";
       s = "status --short";
+      d = "diff"; 
       br = "branch";
       bra = "branch -a";
       lg = "log --oneline --graph --all --decorate";

@@ -5,8 +5,6 @@
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
         shellAliases = {
-            vi = "nvim";
-            vim = "nvim";
             enix = "cd $HOME/.config/nixos && nvim $HOME/.config/nixos";
             la = "ls -aF --color=auto";
             tmuxs = "tmux new -s";
@@ -101,16 +99,6 @@
                 fi
             }
 
-            nvim-fzf-widget() {
-                $HOME/.local/bin/nvim-fzf/nvim-fzf.sh
-                zle reset-prompt
-            }
-
-            # ZLE widgets
-            zle -N nvim-fzf-widget
-
-            # Keybinds
-            bindkey '^g' nvim-fzf-widget
             bindkey -s '^x' "tmux-workspace\n"
 
             # Other
