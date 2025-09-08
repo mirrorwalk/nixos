@@ -14,10 +14,10 @@
     ../../modules/home-manager/zsh/zsh.nix
     ../../modules/home-manager/gpg/gpg.nix
     ../../modules/home-manager/ssh/ssh.nix
+    ../../modules/custom/nvim-fzf/nvim-fzf.nix
+    ../../modules/custom/tmux-workspace/tmux-workspace.nix
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "brog";
   home.homeDirectory = "/home/brog";
 
@@ -215,22 +215,6 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # ".config/niri/".source = ./dotfiles/niri;
-    ".config/nvim-fzf/config".text = ''
-      [roots]
-      $HOME/.config/nixos
-      $HOME/.config
-      $HOME/projects
-      $HOME/notes
-      $HOME/.local/bin
-
-      [ignore]
-      .git
-      node_modules
-      target
-      .direnv
-
-    '';
   };
 
   home.sessionVariables = {

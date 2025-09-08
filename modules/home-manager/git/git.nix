@@ -8,6 +8,7 @@
       st = "status";
       s = "status --short";
       d = "diff"; 
+      p = "push"; 
       br = "branch";
       bra = "branch -a";
       lg = "log --oneline --graph --all --decorate";
@@ -46,6 +47,9 @@
       diff = {
         algorithm = "histogram";
         colorMoved = "plain";
+      };
+      pull = {
+        rebase = "true";
       };
       push = {
         default = "simple";

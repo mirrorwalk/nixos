@@ -99,7 +99,6 @@
                 fi
             }
 
-            bindkey -s '^x' "tmux-workspace\n"
 
             # Other
             setopt PROMPT_SUBST

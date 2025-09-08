@@ -11,23 +11,19 @@
   '';
 
   home.file = {
-    ".local/bin/nvim-fzf".source = "./nvim-fzf";
+    ".config/nvim-fzf/config".text = ''
+      [roots]
+      $HOME/.config/nixos
+      $HOME/.config
+      $HOME/projects
+      $HOME/notes
+      $HOME/.local/bin
 
-    ".config/tmux-workspace/config.sh".text = ''
-      #!/bin/bash
-
-      declare -A ROOT_FOLDERS
-      ROOT_FOLDERS["$HOME/projects"]="1:1"
-      ROOT_FOLDERS["$HOME/projects/zig"]="1:1"
-      ROOT_FOLDERS["$HOME/projects/svelte"]="1:1"
-      ROOT_FOLDERS["$HOME/.config"]="1:1"
-      ROOT_FOLDERS["$HOME/.config/nvim"]="0:1"
-
-      declare -A CUSTOM_WINDOWS
-      CUSTOM_WINDOWS["$HOME/projects/passim"]="code:terminal"
-      CUSTOM_WINDOWS["$HOME/projects/zig/taskrhythm"]="code:terminal"
-      CUSTOM_WINDOWS["$HOME/projects/svelte/TaskFlow"]="code:server"
-      CUSTOM_WINDOWS["$HOME/projects/TaterRogue"]="code:terminal"
+      [ignore]
+      .git
+      node_modules
+      target
+      .direnv
     '';
   };
 }
