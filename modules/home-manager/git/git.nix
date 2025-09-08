@@ -82,12 +82,6 @@
     };
   };
 
-  # programs.ssh.extraConfig = ''
-  #     Host github.com
-  #         HostName github.com
-  #         User git
-  #         IdentityFile ~/.ssh/git
-  # '';
   programs.ssh.matchBlocks = {
     "github.com" = {
         hostname = "github.com";
