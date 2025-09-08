@@ -1,7 +1,4 @@
-{ config, ... }:
-
-{
-
+{config, ...}: {
   programs.git = {
     enable = true;
     userName = "mirrorwalk";
@@ -22,12 +19,14 @@
       cb = "checkout -b";
     };
 
-    signing = {
-        signByDefault = true;
-        key = "204104CBF418A401";
-    };
+    # signing = {
+    #     signByDefault = true;
+    #     key = "204104CBF418A401";
+    # };
 
     extraConfig = {
+      gpg.format = "ssh";
+      user.signingkey = "~/.ssh/git";
       core = {
         editor = "nvim";
       };
@@ -84,14 +83,14 @@
 
   programs.ssh.matchBlocks = {
     "github.com" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/git";
+      hostname = "github.com";
+      user = "git";
+      identityFile = "~/.ssh/git";
     };
     "gitlab.com" = {
-        hostname = "gitlab.com";
-        user = "git";
-        identityFile = "~/.ssh/git";
+      hostname = "gitlab.com";
+      user = "git";
+      identityFile = "~/.ssh/git";
     };
   };
 }

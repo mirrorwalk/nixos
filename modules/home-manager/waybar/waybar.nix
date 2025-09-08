@@ -40,7 +40,7 @@
         };
         "custom/wallpaper-category" = {
             exec = "basename $(readlink $HOME/.local/bin/random-wallpaper/hyprpaper/wallpapers)";
-            format = "{}";
+            format = "Wallpaper: {}";
             interval = 1;
 
         };

@@ -11,6 +11,8 @@
             la = "ls -aF --color=auto";
             tmuxs = "tmux new -s";
             tmuxa = "tmux attach -t";
+            nix-shell = "nom-shell";
+            nix-build = "nom-build";
         };
         initContent = ''
             if [ -f $HOME/.config/zsh/paths.zsh ]; then

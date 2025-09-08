@@ -13,6 +13,7 @@
     ../../modules/home-manager/tmux/tmux.nix
     ../../modules/home-manager/zsh/zsh.nix
     ../../modules/home-manager/gpg/gpg.nix
+    ../../modules/home-manager/ssh/ssh.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -96,8 +97,6 @@
     pkgs.gnome-themes-extra
     pkgs.gsettings-desktop-schemas
   ];
-
-  programs.ssh.enable = true;
 
   wayland.windowManager.hyprland.enable = true;
   services.hyprpaper.enable = true;
