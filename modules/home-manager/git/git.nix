@@ -91,7 +91,7 @@
   programs.ssh.matchBlocks = {
     "github.com" = {
         hostname = "github.com";
-        user = "git";
+        user = "mirrorwalk";
         identityFile = "~/.ssh/git";
     };
   };

@@ -29,7 +29,7 @@
         enable = true;
         defaultCacheTtl = 60;
         maxCacheTtl = 120;
-        pinentryPackage = pkgs.pinentry-curses;
+        pinentry.package = pkgs.pinentry-curses;
         extraConfig = ''
             allow-preset-passphrase
             ttyname $GPG_TTY
