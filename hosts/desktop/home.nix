@@ -96,6 +96,8 @@
     pkgs.gsettings-desktop-schemas
   ];
 
+  programs.ssh.enable = true;
+
   wayland.windowManager.hyprland.enable = true;
   services.hyprpaper.enable = true;
 
