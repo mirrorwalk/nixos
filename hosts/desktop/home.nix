@@ -89,6 +89,7 @@
     pkgs.file
     pkgs.unzip
     pkgs.nix-output-monitor
+    pkgs.ripgrep
 
     # Themes
     pkgs.adwaita-qt
