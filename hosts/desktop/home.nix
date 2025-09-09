@@ -12,7 +12,6 @@
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
     ../../modules/home-manager/zsh/zsh.nix
-    # ../../modules/home-manager/bash/bash.nix
     ../../modules/home-manager/gpg/gpg.nix
     ../../modules/home-manager/ssh/ssh.nix
     ../../modules/home-manager/fish/fish.nix
@@ -180,7 +179,7 @@
       name = "adwaita-dark";
       package = pkgs.adwaita-qt;
     };
-    platformTheme.name = "gtk3"; # This helps Qt apps follow GTK theme
+    platformTheme.name = "gtk3";
   };
 
   dconf.settings = {
@@ -203,8 +202,6 @@
     vimdiffAlias = true;
   };
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
   };
 
