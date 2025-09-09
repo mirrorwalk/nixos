@@ -2,6 +2,7 @@
   programs.zsh.initContent = ''
     bindkey -s '^x' "tmux-workspace\n"
   '';
+
   home.file = {
     ".config/tmux-workspace/config.sh".text = ''
 #!/bin/bash

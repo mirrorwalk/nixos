@@ -12,8 +12,10 @@
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
     ../../modules/home-manager/zsh/zsh.nix
+    # ../../modules/home-manager/bash/bash.nix
     ../../modules/home-manager/gpg/gpg.nix
     ../../modules/home-manager/ssh/ssh.nix
+    ../../modules/home-manager/fish/fish.nix
     ../../modules/custom/nvim-fzf/nvim-fzf.nix
     ../../modules/custom/tmux-workspace/tmux-workspace.nix
   ];
@@ -43,7 +45,6 @@
     pkgs.tor
     pkgs.tor-browser
     pkgs.pipewire
-    pkgs.pulseaudio
     pkgs.wofi
     pkgs.keepassxc
     pkgs.mpv
@@ -54,20 +55,13 @@
     pkgs.xwayland-satellite
     pkgs.cryptsetup
     pkgs.wl-clipboard
-    pkgs.python314
     pkgs.jujutsu
     pkgs.vscode-fhs
-    pkgs.nodejs_24
-    pkgs.bun
-    pkgs.go
     pkgs.gh
     pkgs.freetube
     pkgs.qbittorrent
     pkgs.calibre
     pkgs.elixir-ls
-    pkgs.gleam
-    pkgs.erlang
-    pkgs.rebar3
     pkgs.zed-editor
     pkgs.inotify-tools
     pkgs.swaybg
@@ -78,18 +72,15 @@
     pkgs.jq
     pkgs.bat
     pkgs.liferea
-    pkgs.hyprland
     pkgs.kdePackages.dolphin
-    pkgs.cargo
-    pkgs.rustc
-    pkgs.gcc
-    pkgs.hyprpaper
-    pkgs.zig_0_15
-    pkgs.elixir
     pkgs.file
     pkgs.unzip
     pkgs.nix-output-monitor
-    pkgs.ripgrep
+    pkgs.nushell
+    pkgs.gnumake
+    pkgs.zig_0_15
+    pkgs.tokei
+    pkgs.lm_sensors
 
     # Themes
     pkgs.adwaita-qt

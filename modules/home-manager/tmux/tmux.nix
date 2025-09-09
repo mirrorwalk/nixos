@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   programs.tmux = {
     enable = true;
@@ -6,8 +7,16 @@
     keyMode = "vi";
     mouse = false;
     escapeTime = 0;
+    # shell = "${pkgs.fish}/bin/fish";
+    terminal = "screen-256color";
+    secureSocket = true;
     extraConfig = ''
       bind-key C-a send-prefix
+      set-window-option -g mode-keys vi
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
       set -g status-style 'bg=#000000 fg=#ffffff'
       set -g renumber-windows on
       bind-key q kill-window

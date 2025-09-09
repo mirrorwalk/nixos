@@ -9,6 +9,8 @@
             shell-integration-features = "cursor,sudo,no-title";
         };
         enableZshIntegration = true;
+        enableFishIntegration = true;
+        enableBashIntegration = true;
         installBatSyntax = true;
         installVimSyntax = true;
     };

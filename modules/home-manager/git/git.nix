@@ -7,8 +7,8 @@
     aliases = {
       st = "status";
       s = "status --short";
-      d = "diff"; 
-      p = "push"; 
+      d = "diff";
+      p = "push";
       br = "branch";
       bra = "branch -a";
       lg = "log --oneline --graph --all --decorate";
@@ -27,53 +27,53 @@
     # };
 
     extraConfig = {
-      gpg.format = "ssh";
-      user.signingkey = "~/.ssh/git";
-      core = {
-        editor = "nvim";
-      };
-      init = {
-        defaultBranch = "master";
+      branch = {
+        sort = "-committerdate";
       };
       column = {
         ui = "auto";
       };
-      branch = {
-        sort = "-committerdate";
+      commit = {
+        gpgSign = "true";
+        verbose = "true";
       };
-      tag = {
-        sort = "version:refname";
+      core = {
+        editor = "nvim";
       };
       diff = {
         algorithm = "histogram";
         colorMoved = "plain";
       };
-      pull = {
-        rebase = "true";
+      gpg.format = "ssh";
+      help = {
+        autocorrect = "prompt";
       };
-      push = {
-        default = "simple";
-        autoSetupRemote = "true";
-        followTags = "true";
+      init = {
+        defaultBranch = "master";
+      };
+      merge = {
+        conflictStyle = "zdiff3";
       };
       prone = {
         prune = "true";
         pruneTags = "true";
       };
-      commit = {
-        verbose = "true";
-        gpgSign = "true";
+      pull = {
+        rebase = "true";
       };
-      help = {
-        autocorrect = "prompt";
+      push = {
+        autoSetupRemote = "true";
+        default = "simple";
+        followTags = "true";
       };
       rerere = {
-        enabled = "true";
         autoupdate = "true";
+        enabled = "true";
       };
-      merge = {
-        conflictStyle = "zdiff3";
+      tag = {
+        sort = "version:refname";
       };
+      user.signingkey = "~/.ssh/git";
     };
 
     delta = {
