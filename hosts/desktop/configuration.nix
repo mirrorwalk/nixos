@@ -98,13 +98,12 @@
     variant = "dvp";
   };
 
-  programs.zsh.enable = true;
+   programs.bash.enable = true; 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.brog = {
     isNormalUser = true;
     description = "brog";
-    shell = pkgs.zsh;
     extraGroups = ["networkmanager" "wheel"];
   };
 

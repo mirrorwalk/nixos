@@ -11,6 +11,7 @@
       tmuxa = "tmux attach -t";
       nix-shell = "nom-shell";
       nix-build = "nom-build";
+      zbr = "zig build run";
     };
     initContent = ''
         if [ -f $HOME/.config/zsh/paths.zsh ]; then

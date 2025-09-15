@@ -89,7 +89,7 @@
         kb_layout = "us";
         kb_variant = "";
         kb_model = "";
-        kb_options = "";
+        kb_options = "caps:escape";
         kb_rules = "";
         follow_mouse = 1;
         mouse_refocus = false;
@@ -167,7 +167,8 @@
         wallpaper = {
             settings = {
                 bind = [
-                    ", c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
+                    "SHIFT, c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
+                    ", c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-choose-wallpaper.sh"
                     ", r, exec, systemctl --user restart hyprpaper-random.service"
 
                     ", escape, submap, reset"

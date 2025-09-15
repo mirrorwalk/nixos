@@ -12,9 +12,10 @@
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
     ../../modules/home-manager/zsh/zsh.nix
+    ../../modules/home-manager/bash/bash.nix
     ../../modules/home-manager/gpg/gpg.nix
     ../../modules/home-manager/ssh/ssh.nix
-    ../../modules/home-manager/fish/fish.nix
+    ../../modules/home-manager/nvim/nvim.nix
     ../../modules/custom/nvim-fzf/nvim-fzf.nix
     ../../modules/custom/tmux-workspace/tmux-workspace.nix
   ];
@@ -37,7 +38,6 @@
   home.packages = [
     pkgs.librewolf
     pkgs.ripgrep
-    pkgs.fzf
     pkgs.pavucontrol
     pkgs.mullvad-vpn
     pkgs.mullvad-browser
@@ -76,10 +76,9 @@
     pkgs.unzip
     pkgs.nix-output-monitor
     pkgs.nushell
-    pkgs.gnumake
-    pkgs.zig_0_15
     pkgs.tokei
     pkgs.lm_sensors
+    pkgs.godot
 
     # Themes
     pkgs.adwaita-qt
@@ -91,21 +90,21 @@
   services.hyprpaper.enable = true;
 
   systemd.user.services = {
-    waybar = {
-      Unit = {
-        Description = "Waybar status bar";
-        After = ["niri.service"];
-        PartOf = ["niri.service"];
-      };
-      Service = {
-        ExecStart = "${pkgs.waybar}/bin/waybar";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = ["niri.service"];
-      };
-    };
-
+    # waybar = {
+    #   Unit = {
+    #     Description = "Waybar status bar";
+    #     After = ["hyprland-session.service"];
+    #     PartOf = ["hyprland-session.service"];
+    #   };
+    #   Service = {
+    #     ExecStart = "${pkgs.waybar}/bin/waybar";
+    #     Restart = "on-failure";
+    #   };
+    #   Install = {
+    #     WantedBy = ["hyprland-session.service"];
+    #   };
+    # };
+    #
     hyprpaper = {
       Unit = {
         # Description = "Hyprpaper wallpaper background";
@@ -194,19 +193,11 @@
     flake = "/home/brog/.config/nixos";
   };
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-  };
 
   home.file = {
   };
 
   home.sessionVariables = {
-    VISUAL = "nvim";
     GTK_THEME = "Adwaita:dark";
     QT_STYLE_OVERRIDE = "adwaita-dark";
     PAGER = "bat";

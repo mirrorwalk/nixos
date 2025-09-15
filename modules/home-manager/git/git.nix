@@ -9,8 +9,8 @@
       s = "status --short";
       d = "diff";
       p = "push";
-      br = "branch";
-      bra = "branch -a";
+      b = "branch";
+      ba = "branch -a";
       lg = "log --oneline --graph --all --decorate";
       l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
 
