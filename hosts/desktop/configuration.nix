@@ -51,6 +51,9 @@
   # Ly
   services.displayManager.ly.enable = true;
 
+  security.pam.services.login.enableGnomeKeyring = true;
+  security.polkit.enable = true;
+
   # Fonts
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs;
@@ -126,6 +129,10 @@
   environment.systemPackages = with pkgs; [
     file
     unzip
+    gnome-keyring
+    seahorse
+    libsecret
+    polkit_gnome
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

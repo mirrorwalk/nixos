@@ -48,7 +48,6 @@
     pkgs.keepassxc
     pkgs.mpv
     pkgs.brave
-    pkgs.direnv
     pkgs.hyprcursor
     pkgs.fuzzel
     pkgs.xwayland-satellite
@@ -79,12 +78,25 @@
     pkgs.tokei
     pkgs.lm_sensors
     pkgs.godot
+    pkgs.proton-authenticator
+    pkgs.seahorse
+    pkgs.cargo
 
     # Themes
     pkgs.adwaita-qt
     pkgs.gnome-themes-extra
     pkgs.gsettings-desktop-schemas
   ];
+
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "pkcs11" "secrets" ];
+  };
+
+  programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+  };
 
   wayland.windowManager.hyprland.enable = true;
   services.hyprpaper.enable = true;
