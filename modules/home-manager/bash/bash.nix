@@ -3,7 +3,8 @@
     enable = true;
     enableCompletion = true;
     shellAliases = {
-      enix = "cd $HOME/.config/nixos && nvim $HOME/.config/nixos";
+      enix = "cd $HOME/.config/nixos && nvim .";
+      evi = "cd $HOME/.config/nvim && nvim .";
       la = "ls -aF --color=auto";
       tmuxs = "tmux new -s";
       tmuxa = "tmux attach -t";

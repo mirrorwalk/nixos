@@ -49,19 +49,18 @@
     pkgs.mpv
     pkgs.brave
     pkgs.hyprcursor
-    pkgs.fuzzel
+    # pkgs.fuzzel
     pkgs.xwayland-satellite
     pkgs.cryptsetup
     pkgs.wl-clipboard
     pkgs.jujutsu
-    pkgs.vscode-fhs
+    # pkgs.vscode-fhs
     pkgs.gh
     pkgs.freetube
     pkgs.qbittorrent
-    pkgs.calibre
-    pkgs.elixir-ls
-    pkgs.zed-editor
-    pkgs.inotify-tools
+    # pkgs.calibre
+    # pkgs.zed-editor
+    # pkgs.inotify-tools
     pkgs.swaybg
     pkgs.btop
     pkgs.wine
@@ -69,16 +68,15 @@
     pkgs.fd
     pkgs.jq
     pkgs.bat
-    pkgs.liferea
+    # pkgs.liferea
     pkgs.kdePackages.dolphin
     pkgs.file
     pkgs.unzip
     pkgs.nix-output-monitor
     pkgs.nushell
-    pkgs.tokei
-    pkgs.lm_sensors
+    # pkgs.tokei
+    # pkgs.lm_sensors
     pkgs.godot
-    pkgs.proton-authenticator
     pkgs.seahorse
 
     # Themes
