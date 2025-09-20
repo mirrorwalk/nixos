@@ -4,6 +4,7 @@
     pkgs.gcc
     pkgs.gnumake
     pkgs.git
+    pkgs.cargo
   ];
   programs.neovim = {
     enable = true;

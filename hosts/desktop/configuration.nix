@@ -51,7 +51,7 @@
   # Ly
   services.displayManager.ly.enable = true;
 
-  security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.ly.enableGnomeKeyring = true;
   security.polkit.enable = true;
 
   # Fonts
@@ -133,6 +133,7 @@
     seahorse
     libsecret
     polkit_gnome
+    libgnome-keyring
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -80,7 +80,6 @@
     pkgs.godot
     pkgs.proton-authenticator
     pkgs.seahorse
-    pkgs.cargo
 
     # Themes
     pkgs.adwaita-qt
@@ -90,12 +89,12 @@
 
   services.gnome-keyring = {
     enable = true;
-    components = [ "pkcs11" "secrets" ];
+    components = ["pkcs11" "secrets" "ssh"];
   };
 
   programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
+    enable = true;
+    nix-direnv.enable = true;
   };
 
   wayland.windowManager.hyprland.enable = true;
@@ -204,7 +203,6 @@
     enable = true;
     flake = "/home/brog/.config/nixos";
   };
-
 
   home.file = {
   };
