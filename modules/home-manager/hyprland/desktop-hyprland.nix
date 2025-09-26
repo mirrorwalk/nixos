@@ -15,7 +15,7 @@
 
       "exec-once" = [
         "waybar"
-        # "hyprpaper"
+        "hyprpaper"
         # "/home/brog/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh"
         "mullvad-vpn"
       ];

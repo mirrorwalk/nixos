@@ -12,6 +12,12 @@
       nix-build = "nom-build";
       zbr = "zig build run";
       cat = "bat";
+      rnos = "nh os switch";
+      nosr = "nh os switch";
+      nr = "nh os switch";
+      rn = "nh os switch";
+      ns = "nh os switch";
+      nos = "nh os switch";
     };
     initExtra = ''
       if [ -f $HOME/.config/bash/paths.bash ]; then

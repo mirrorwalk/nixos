@@ -1,4 +1,21 @@
 {
+  home.file = {
+    ".config/waybar/scripts/fullscreen" = {
+      text = ''
+        #!/usr/bin/env bash
+        active=$(hyprctl activewindow -j)
+        is_fullscreen=$(echo "$active" | jq '.fullscreen')
+
+        if [ "$is_fullscreen" = "1" ]; then
+          echo "Fullscreen"
+        else
+          echo "Window"
+        fi
+      '';
+      executable = true;
+    };
+  };
+
   programs.waybar = {
     enable = true;
     settings = [
@@ -15,6 +32,8 @@
           "hyprland/workspaces"
           "hyprland/submap"
           "hyprland/window"
+          "custom/separator"
+          "custom/fullscreen"
           "custom/separator"
           "custom/wallpaper-category"
         ];
@@ -38,11 +57,17 @@
           format = "{}";
           "max-length" = 40;
         };
-        "custom/wallpaper-category" = {
-            exec = "basename $(readlink $HOME/.local/bin/random-wallpaper/hyprpaper/wallpapers)";
-            format = "Wallpaper: {}";
-            interval = 1;
 
+        "custom/fullscreen" = {
+            exec = ".config/waybar/scripts/fullscreen";       
+            interval = 1;
+            format = "{}";
+        };
+
+        "custom/wallpaper-category" = {
+          exec = "basename $(readlink $HOME/.local/bin/random-wallpaper/hyprpaper/wallpapers)";
+          format = "Wallpaper: {}";
+          interval = 1;
         };
 
         "hyprland/workspaces" = {
@@ -190,7 +215,7 @@
       }
 
       #workspaces,
-      #custom-niri-window 
+      #custom-niri-window
       #tray{
           background: #1a1a1a;
           border-radius: 8px;

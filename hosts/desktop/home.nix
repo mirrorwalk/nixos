@@ -11,7 +11,7 @@
     ../../modules/home-manager/git/git.nix
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
-    ../../modules/home-manager/zsh/zsh.nix
+    # ../../modules/home-manager/zsh/zsh.nix
     ../../modules/home-manager/bash/bash.nix
     ../../modules/home-manager/gpg/gpg.nix
     ../../modules/home-manager/ssh/ssh.nix
@@ -114,35 +114,35 @@
     #   };
     # };
     #
-    hyprpaper = {
-      Unit = {
-        # Description = "Hyprpaper wallpaper background";
-        After = ["hyprland-session.target"];
-        PartOf = ["hyprland-session.target"];
-      };
-      Service = {
-        ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
-        # Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = ["hyprland-session.target"];
-      };
-    };
+    # hyprpaper = {
+    #   Unit = {
+    #     # Description = "Hyprpaper wallpaper background";
+    #     After = ["hyprland-session.target"];
+    #     PartOf = ["hyprland-session.target"];
+    #   };
+    #   Service = {
+    #     ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
+    #     # Restart = "on-failure";
+    #   };
+    #   Install = {
+    #     WantedBy = ["hyprland-session.target"];
+    #   };
+    # };
 
-    swaybg-random = {
-      Unit = {
-        Description = "swaybg wallpaper background";
-        After = ["niri.service"];
-        PartOf = ["niri.service"];
-      };
-      Service = {
-        ExecStart = "%h/.local/bin/swaybg-random-wallpaper.sh";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = ["niri.service"];
-      };
-    };
+    # swaybg-random = {
+    #   Unit = {
+    #     Description = "swaybg wallpaper background";
+    #     After = ["niri.service"];
+    #     PartOf = ["niri.service"];
+    #   };
+    #   Service = {
+    #     ExecStart = "%h/.local/bin/swaybg-random-wallpaper.sh";
+    #     Restart = "on-failure";
+    #   };
+    #   Install = {
+    #     WantedBy = ["niri.service"];
+    #   };
+    # };
 
     hyprpaper-random = {
       Unit = {
