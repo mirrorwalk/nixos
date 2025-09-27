@@ -21,6 +21,12 @@
     '';
   };
 
+  programs.bash = lib.mkIf (lib.hasAttr "bash" pkgs) {
+      initExtra = ''
+        bind '"\C-x":"/home/brog/.local/bin/tmux-workspace/tmux-workspace\n"'
+      '';
+  };
+
   home.file = {
     ".config/tmux-workspace/config.sh".text = ''
       #!/bin/bash
@@ -40,9 +46,4 @@
     '';
   };
 
-  programs.bash = lib.mkIf (lib.hasAttr "bash" pkgs) {
-      initExtra = ''
-        bind '"\C-x":"$(/home/brog/.local/bin/tmux-workspace/tmux-workspace)\n"'
-      '';
-  };
 }

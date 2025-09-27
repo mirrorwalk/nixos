@@ -15,7 +15,7 @@
 
   programs.bash = lib.mkIf (lib.hasAttr "bash" pkgs) {
       initExtra = ''
-        bind '"\C-g":"$(/home/brog/.local/bin/nvim-fzf/nvim-fzf.sh)\n"'
+        bind '"\C-g":"/home/brog/.local/bin/nvim-fzf/nvim-fzf.sh\n"'
       '';
   };
 

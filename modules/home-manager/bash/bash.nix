@@ -5,7 +5,7 @@
     shellAliases = {
       enix = "cd $HOME/.config/nixos && nvim .";
       evi = "cd $HOME/.config/nvim && nvim .";
-      la = "ls -aF --color=auto";
+      la = "ls -AF --color=auto";
       tmuxs = "tmux new -s";
       tmuxa = "tmux attach -t";
       nix-shell = "nom-shell";

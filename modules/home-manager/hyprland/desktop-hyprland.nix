@@ -83,6 +83,7 @@
         focus_on_activate = true;
         enable_swallow = true;
         swallow_regex = "^(kitty|alacritty|Alacritty)$";
+        new_window_takes_over_fullscreen = 0;
       };
 
       input = {
@@ -156,7 +157,7 @@
       windowrulev2 = [
         "opacity 1.0, class:^(steam|Steam)$"
         "float,class:^(Tor Browser)$"
-        "float,class:Mullvad\\ Browser"
+        "float,fullscreen:0,class:Mullvad\ Browser"
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
         "move 75% 75%, title:^(Picture-in-Picture)$"
