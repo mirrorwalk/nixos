@@ -7,12 +7,10 @@
     inputs.zen-browser.homeModules.beta
     ../../modules/home-manager/hyprland/desktop-hyprland.nix
     ../../modules/home-manager/ghostty/ghostty.nix
-    # ../../modules/home-manager/waybar/waybar.nix
-    ../../modules/home-manager/waybar/waybar-new.nix
+    ../../modules/home-manager/waybar/waybar.nix
     ../../modules/home-manager/git/git.nix
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
-    # ../../modules/home-manager/zsh/zsh.nix
     ../../modules/home-manager/bash/bash.nix
     ../../modules/home-manager/gpg/gpg.nix
     ../../modules/home-manager/ssh/ssh.nix
@@ -88,6 +86,7 @@
 
   waybar.hyprland.enable = true;
   waybar.mullvad.enable = true;
+  waybar.weatherCity = "Prague";
 
   services.gnome-keyring = {
     enable = true;
@@ -100,35 +99,8 @@
   };
 
   wayland.windowManager.hyprland.enable = true;
-  services.hyprpaper.enable = true;
 
   systemd.user.services = {
-    waybar = {
-      Unit = {
-        Description = "Waybar status bar";
-        After = ["graphical-session.target"];
-      };
-      Service = {
-        ExecStart = "${pkgs.waybar}/bin/waybar";
-      };
-      Install = {
-        WantedBy = ["graphical-session.target"];
-      };
-    };
-
-    hyprpaper = {
-      Unit = {
-        ConditionPathExists = "/run/user/%U/wayland-1";
-        After = ["graphical-session.target"];
-      };
-      Service = {
-        ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
-      };
-      Install = {
-        WantedBy = ["graphical-session.target"];
-      };
-    };
-
     # swaybg-random = {
     #   Unit = {
     #     Description = "swaybg wallpaper background";
@@ -143,20 +115,6 @@
     #     WantedBy = ["niri.service"];
     #   };
     # };
-
-    hyprpaper-random = {
-      Unit = {
-        Description = "hyprpaper random wallpaper background";
-        After = ["hyprpaper.service"];
-      };
-      Service = {
-        ExecStart = "%h/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh";
-        Restart = "on-failure";
-      };
-      Install = {
-        WantedBy = ["hyprpaper.service"];
-      };
-    };
   };
 
   xdg.mimeApps = {

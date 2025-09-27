@@ -1,0 +1,32 @@
+{pkgs, ...}: {
+  services.hyprpaper.enable = true;
+
+  systemd.user.services = {
+    hyprpaper = {
+      Unit = {
+        ConditionPathExists = "/run/user/%U/wayland-1";
+        After = ["graphical-session.target"];
+      };
+      Service = {
+        ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
+      };
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
+    };
+  };
+
+  hyprpaper-random = {
+    Unit = {
+      Description = "hyprpaper random wallpaper background";
+      After = ["hyprpaper.service"];
+    };
+    Service = {
+      ExecStart = "%h/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = ["hyprpaper.service"];
+    };
+  };
+}
