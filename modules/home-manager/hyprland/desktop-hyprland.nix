@@ -15,7 +15,7 @@
 
       "exec-once" = [
         "waybar"
-        "hyprpaper"
+        # "hyprpaper"
         # "/home/brog/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh"
         "mullvad-vpn"
       ];
@@ -157,7 +157,8 @@
       windowrulev2 = [
         "opacity 1.0, class:^(steam|Steam)$"
         "float,class:^(Tor Browser)$"
-        "float,fullscreen:0,class:Mullvad\ Browser"
+        # "float,fullscreen:0,fullscreenrequest:0,class:Mullvad\ Browser"
+        "float,fullscreen:0,fullscreenrequest:0,noinitialfocus,initialClass:^(Mullvad Browser)$"
         "float, title:^(Picture-in-Picture)$"
         "pin, title:^(Picture-in-Picture)$"
         "move 75% 75%, title:^(Picture-in-Picture)$"

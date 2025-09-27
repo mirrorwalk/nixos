@@ -102,32 +102,30 @@
     # waybar = {
     #   Unit = {
     #     Description = "Waybar status bar";
-    #     After = ["hyprland-session.service"];
-    #     PartOf = ["hyprland-session.service"];
+    #     After = ["graphical-session.target"];
+    #     PartOf = ["graphical-session.target"];
     #   };
     #   Service = {
     #     ExecStart = "${pkgs.waybar}/bin/waybar";
     #     Restart = "on-failure";
     #   };
     #   Install = {
-    #     WantedBy = ["hyprland-session.service"];
+    #     WantedBy = ["graphical-session.target"];
     #   };
     # };
-    #
-    # hyprpaper = {
-    #   Unit = {
-    #     # Description = "Hyprpaper wallpaper background";
-    #     After = ["hyprland-session.target"];
-    #     PartOf = ["hyprland-session.target"];
-    #   };
-    #   Service = {
-    #     ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
-    #     # Restart = "on-failure";
-    #   };
-    #   Install = {
-    #     WantedBy = ["hyprland-session.target"];
-    #   };
-    # };
+
+    hyprpaper = {
+      Unit = {
+        After = ["graphical-session.target"];
+        Wants = ["graphical-session.target"];
+      };
+      # Service = {
+      #   ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
+      # };
+      # Install = {
+      #   WantedBy = ["graphical-session.target"];
+      # };
+    };
 
     # swaybg-random = {
     #   Unit = {

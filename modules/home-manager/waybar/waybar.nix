@@ -1,4 +1,24 @@
 {
+  pkgs,
+  lib,
+  ...
+}: let
+  mullvad-waybar-script = pkgs.writeShellScriptBin "mullvad-status" ''
+    #!${pkgs.runtimeShell}
+
+    export PATH=${lib.makeBinPath [pkgs.mullvad-vpn pkgs.gnugrep pkgs.jq]}:$PATH
+
+    STATUS=$(mullvad status)
+
+    if echo "$STATUS" | grep -q "Connected"; then
+        echo "Connected"
+    else
+        echo "Disconnected"
+    fi
+  '';
+in {
+  home.packages = [mullvad-waybar-script];
+
   home.file = {
     ".config/waybar/scripts/fullscreen" = {
       text = ''
@@ -50,6 +70,7 @@
           "custom/separator"
           "custom/weather"
           "custom/separator"
+          "custom/mullvad"
           "tray"
         ];
 
@@ -58,10 +79,16 @@
           "max-length" = 40;
         };
 
+        "custom/mullvad" = {
+          format = "{}";
+          exec = "${mullvad-waybar-script}/bin/mullvad-status";
+          interval = 10;
+        };
+
         "custom/fullscreen" = {
-            exec = ".config/waybar/scripts/fullscreen";       
-            interval = 1;
-            format = "{}";
+          exec = ".config/waybar/scripts/fullscreen";
+          interval = 1;
+          format = "{}";
         };
 
         "custom/wallpaper-category" = {
@@ -194,6 +221,24 @@
           font-size: 13px;
           font-weight: bold;
       }
+
+        #custom-mullvad {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 4px 10px;
+    margin: 0 3px;
+    border: 1px solid #ff0000;
+    color: #ffffff;
+  }
+
+      #custom-mullvad.connected {
+        color: #86efac; /* Green */
+      }
+
+      #custom-mullvad.disconnected {
+        color: #f87171; /* Red */
+      }
+
 
       /* Main waybar window */
       window#waybar {
