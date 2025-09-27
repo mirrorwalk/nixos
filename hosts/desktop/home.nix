@@ -7,7 +7,8 @@
     inputs.zen-browser.homeModules.beta
     ../../modules/home-manager/hyprland/desktop-hyprland.nix
     ../../modules/home-manager/ghostty/ghostty.nix
-    ../../modules/home-manager/waybar/waybar.nix
+    # ../../modules/home-manager/waybar/waybar.nix
+    ../../modules/home-manager/waybar/waybar-new.nix
     ../../modules/home-manager/git/git.nix
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
@@ -85,6 +86,9 @@
     pkgs.gsettings-desktop-schemas
   ];
 
+  waybar.hyprland.enable = true;
+  waybar.mullvad.enable = true;
+
   services.gnome-keyring = {
     enable = true;
     components = ["pkcs11" "secrets" "ssh"];
@@ -99,32 +103,30 @@
   services.hyprpaper.enable = true;
 
   systemd.user.services = {
-    # waybar = {
-    #   Unit = {
-    #     Description = "Waybar status bar";
-    #     After = ["graphical-session.target"];
-    #     PartOf = ["graphical-session.target"];
-    #   };
-    #   Service = {
-    #     ExecStart = "${pkgs.waybar}/bin/waybar";
-    #     Restart = "on-failure";
-    #   };
-    #   Install = {
-    #     WantedBy = ["graphical-session.target"];
-    #   };
-    # };
+    waybar = {
+      Unit = {
+        Description = "Waybar status bar";
+        After = ["graphical-session.target"];
+      };
+      Service = {
+        ExecStart = "${pkgs.waybar}/bin/waybar";
+      };
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
+    };
 
     hyprpaper = {
       Unit = {
+        ConditionPathExists = "/run/user/%U/wayland-1";
         After = ["graphical-session.target"];
-        Wants = ["graphical-session.target"];
       };
-      # Service = {
-      #   ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
-      # };
-      # Install = {
-      #   WantedBy = ["graphical-session.target"];
-      # };
+      Service = {
+        ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
+      };
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
     };
 
     # swaybg-random = {
@@ -146,7 +148,6 @@
       Unit = {
         Description = "hyprpaper random wallpaper background";
         After = ["hyprpaper.service"];
-        PartOf = ["hyprpaper.service"];
       };
       Service = {
         ExecStart = "%h/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh";
