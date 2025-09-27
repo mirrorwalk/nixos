@@ -88,8 +88,8 @@ in {
           network = {
             interface = "enp42s0";
             interval = 5;
-            format-disconnected = "❌ Disconnected";
-            format-ethernet = "🔺{bandwidthUpBytes} 🔻{bandwidthDownBytes}";
+            format-disconnected = "Disconnected";
+            format-ethernet = "UP: {bandwidthUpBytes} | DOWN: {bandwidthDownBytes}";
             tooltip-format = "{ifname}: {ipaddr}/{cidr}";
           };
 

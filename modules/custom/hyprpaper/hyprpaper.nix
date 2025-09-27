@@ -14,19 +14,19 @@
         WantedBy = ["graphical-session.target"];
       };
     };
-  };
 
-  hyprpaper-random = {
-    Unit = {
-      Description = "hyprpaper random wallpaper background";
-      After = ["hyprpaper.service"];
-    };
-    Service = {
-      ExecStart = "%h/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh";
-      Restart = "on-failure";
-    };
-    Install = {
-      WantedBy = ["hyprpaper.service"];
+    hyprpaper-random = {
+      Unit = {
+        Description = "hyprpaper random wallpaper background";
+        After = ["hyprpaper.service"];
+      };
+      Service = {
+        ExecStart = "%h/.local/bin/random-wallpaper/hyprpaper/hyprpaper-random-wallpaper.sh";
+        Restart = "on-failure";
+      };
+      Install = {
+        WantedBy = ["hyprpaper.service"];
+      };
     };
   };
 }

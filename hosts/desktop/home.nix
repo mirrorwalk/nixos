@@ -17,6 +17,7 @@
     ../../modules/home-manager/nvim/nvim.nix
     ../../modules/custom/nvim-fzf/nvim-fzf.nix
     ../../modules/custom/tmux-workspace/tmux-workspace.nix
+    ../../modules/custom/hyprpaper/hyprpaper.nix
   ];
 
   home.username = "brog";
