@@ -49,17 +49,13 @@
     pkgs.mpv
     pkgs.brave
     pkgs.hyprcursor
-    # pkgs.fuzzel
     pkgs.xwayland-satellite
     pkgs.cryptsetup
     pkgs.wl-clipboard
     pkgs.jujutsu
-    # pkgs.vscode-fhs
     pkgs.gh
     pkgs.freetube
     pkgs.qbittorrent
-    # pkgs.calibre
-    # pkgs.zed-editor
     # pkgs.inotify-tools
     pkgs.swaybg
     pkgs.btop
