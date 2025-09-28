@@ -80,7 +80,7 @@ in {
               "custom/separator"
               "custom/weather"
             ]
-            ++ mullvad-features ++ ["tray"];
+            ++ mullvad-features ++ ["tray" "custom/separator" "custom/shutdown"];
 
           "hyprland/workspaces" = {
             format = "{icon}";
@@ -174,6 +174,12 @@ in {
             tooltip = false;
           };
 
+          "custom/shutdown" = {
+            format = "X";
+            tooltip = false;
+            on-click = "~/.local/bin/shutdown-menu.sh";
+          };
+
           "custom/wallpaper-category" = {
             exec = "basename $(readlink $HOME/.local/bin/random-wallpaper/hyprpaper/wallpapers)";
             format = "Wallpaper: {}";
@@ -200,6 +206,7 @@ in {
             format = "{}";
             interval = 3600;
             tooltip = false;
+            on-click = "pkill -RTMIN+10 waybar";
           };
         };
       };
@@ -210,7 +217,7 @@ in {
         }
 
         #waybar {
-            background-color: black;
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
         #workspaces,
@@ -227,6 +234,7 @@ in {
         #custom-wallpaper-category,
         #custom-mullvad,
         #custom-weather,
+        #custom-shutdown,
         #custom-fullscreen {
             border-radius: 8px;
             border: 1px solid red;

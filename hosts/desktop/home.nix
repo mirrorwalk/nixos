@@ -17,7 +17,6 @@
     ../../modules/home-manager/nvim/nvim.nix
     ../../modules/custom/nvim-fzf/nvim-fzf.nix
     ../../modules/custom/tmux-workspace/tmux-workspace.nix
-    ../../modules/custom/hyprpaper/hyprpaper.nix
   ];
 
   home.username = "brog";
@@ -65,8 +64,8 @@
     pkgs.jq
     pkgs.bat
     # pkgs.liferea
-    pkgs.kdePackages.dolphin
     pkgs.file
+    pkgs.kdePackages.dolphin
     pkgs.unzip
     pkgs.nix-output-monitor
     pkgs.nushell

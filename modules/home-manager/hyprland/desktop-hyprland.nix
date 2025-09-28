@@ -1,10 +1,18 @@
-{
+{pkgs, ...}: {
+  imports = [
+    ../../custom/hyprpaper/hyprpaper.nix
+  ];
+
+  home.packages = [
+    pkgs.fuzzel
+  ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       "$terminal" = "ghostty";
       "$fileManager" = "dolphin";
-      "$menu" = "wofi --show drun";
+      "$menu" = "fuzzel";
       "$webBrowser" = "mullvad-browser";
       "$mainMod" = "SUPER";
 
@@ -159,20 +167,19 @@
         "pin, title:^(Picture-in-Picture)$"
         "move 75% 75%, title:^(Picture-in-Picture)$"
       ];
-
     };
     submaps = {
-        wallpaper = {
-            settings = {
-                bind = [
-                    "SHIFT, c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
-                    ", c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-choose-wallpaper.sh"
-                    ", r, exec, systemctl --user restart hyprpaper-random.service"
+      wallpaper = {
+        settings = {
+          bind = [
+            "SHIFT, c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
+            ", c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-choose-wallpaper.sh"
+            ", r, exec, systemctl --user restart hyprpaper-random.service"
 
-                    ", escape, submap, reset"
-                ];
-            };
+            ", escape, submap, reset"
+          ];
         };
+      };
     };
   };
 }
