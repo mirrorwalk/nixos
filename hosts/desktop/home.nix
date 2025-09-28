@@ -53,7 +53,7 @@
     pkgs.wl-clipboard
     pkgs.jujutsu
     pkgs.gh
-    pkgs.freetube
+    # pkgs.freetube
     pkgs.qbittorrent
     # pkgs.inotify-tools
     pkgs.swaybg
