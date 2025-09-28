@@ -39,7 +39,7 @@
     pkgs.librewolf
     pkgs.ripgrep
     pkgs.pavucontrol
-    pkgs.mullvad-vpn
+    # pkgs.mullvad-vpn
     pkgs.mullvad-browser
     pkgs.tor
     pkgs.tor-browser
@@ -78,6 +78,7 @@
     # pkgs.lm_sensors
     pkgs.godot
     pkgs.seahorse
+    pkgs.cava
 
     # Themes
     pkgs.adwaita-qt

@@ -3,7 +3,7 @@
     enable = true;
     enableCompletion = true;
     shellAliases = {
-      enix = "cd $HOME/.config/nixos && nvim .";
+      # enix = "cd $HOME/.config/nixos && nvim .";
       evi = "cd $HOME/.config/nvim && nvim .";
       la = "ls -AF --color=auto";
       tmuxs = "tmux new -s";
@@ -24,11 +24,23 @@
           source $HOME/.config/bash/paths.bash
       fi
 
+      enix() {
+        if ! command -v tmux >/dev/null || [ -n "$TMUX" ]; then
+            cd $HOME/.config/nixos
+            nvim .
+        elif tmux has-session -t nixos 2>/dev/null; then
+            tmux attach -t nixos
+        else
+            tmux new -s nixos -c ~/.config/nixos 'nvim .; exec bash'
+        fi
+      }
+
       fcd() {
           local dir
           dir=$(fd --type d 2>/dev/null | fzf)
           cd "$dir"
       }
+
       addpath() {
           if [ -d "$1" ]; then
               # Convert to absolute path
@@ -80,7 +92,7 @@
   };
 
   programs.fzf = {
-      enable = true;
-      enableBashIntegration = true;
+    enable = true;
+    enableBashIntegration = true;
   };
 }

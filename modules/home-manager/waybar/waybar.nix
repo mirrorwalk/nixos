@@ -44,9 +44,14 @@ in {
         Unit = {
           Description = "Waybar status bar";
           After = ["graphical-session.target"];
+          Wants = ["graphical-session.target"];
+          ConditionEnvironment = "WAYLAND_DISPLAY";
         };
         Service = {
+          Type = "simple";
           ExecStart = "${pkgs.waybar}/bin/waybar";
+          Restart = "on-failure";
+          RestartSec = "5s";
         };
         Install = {
           WantedBy = ["graphical-session.target"];
@@ -64,20 +69,57 @@ in {
               "custom/separator"
               "custom/wallpaper-category"
             ];
-          "modules-center" = ["clock"];
+          "modules-center" = ["clock" "privacy"];
           "modules-right" =
             load-features
             ++ [
               "network"
               "custom/separator"
+              "cava"
               "pulseaudio"
               "custom/separator"
               "custom/weather"
             ]
             ++ mullvad-features ++ ["tray"];
 
+          "hyprland/workspaces" = {
+            format = "{icon}";
+            format-icons = {
+              urgent = "!";
+            };
+          };
+
+          "hyprland/window" = {
+            max-length = 40;
+          };
+
+          privacy = {
+            icon-spacing = 4;
+            icon-size = 18;
+            transition-duration = 250;
+            ignore-monitor = true;
+            modules = [
+              {
+                type = "screenshare";
+                tooltip = true;
+                tooltip-icon-size = 24;
+              }
+              {
+                type = "audio-out";
+                tooltip = true;
+                tooltip-icon-size = 24;
+              }
+              {
+                type = "audio-in";
+                tooltip = true;
+                tooltip-icon-size = 24;
+              }
+            ];
+          };
+
           clock = {
-            format = "{:%H:%M %Y-%m-%d}";
+            format = "{:%T %F}";
+            interval = 1;
           };
 
           pulseaudio = {
@@ -89,8 +131,9 @@ in {
             interface = "enp42s0";
             interval = 5;
             format-disconnected = "Disconnected";
-            format-ethernet = "UP: {bandwidthUpBytes} | DOWN: {bandwidthDownBytes}";
-            tooltip-format = "{ifname}: {ipaddr}/{cidr}";
+            # format-ethernet = "UP: {bandwidthUpBytes} | DOWN: {bandwidthDownBytes}";
+            format-ethernet = "Ethernet";
+            tooltip-format = "UP: {bandwidthUpBytes} | DOWN: {bandwidthDownBytes}\n{ifname}: {ipaddr}/{cidr}";
           };
 
           cpu = {
@@ -116,6 +159,16 @@ in {
             };
           };
 
+          cava = {
+            framerate = 30;
+            autosens = 1;
+            bars = 14;
+            input_delay = 2;
+            stereo = true;
+            bar_delimiter = 0;
+            format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+          };
+
           "custom/separator" = {
             format = "│";
             tooltip = false;
@@ -134,6 +187,7 @@ in {
           };
 
           "custom/mullvad" = {
+            format = "Mullvad: {}";
             exec = "$HOME/.config/waybar/scripts/mullvad-status";
             interval = 30;
             on-click = "mullvad connect && sleep 1 && pkill -RTMIN+10 waybar";
@@ -142,7 +196,7 @@ in {
           };
 
           "custom/weather" = {
-            exec = "curl -s 'wttr.in/"+ config.waybar.weatherCity +"?format=1' | head -c 15";
+            exec = "curl -s 'wttr.in/" + config.waybar.weatherCity + "?format=1' | head -c 15";
             format = "{}";
             interval = 3600;
             tooltip = false;
@@ -169,6 +223,7 @@ in {
         #cpu,
         #load,
         #memory,
+        #privacy,
         #custom-wallpaper-category,
         #custom-mullvad,
         #custom-weather,
@@ -178,7 +233,6 @@ in {
             margin: 0 3px;
             padding: 0 3px;
         }
-
 
         #workspaces button.active {
             background: red;
@@ -191,9 +245,48 @@ in {
         }
 
         #workspaces button.urgent {
-            background: #ff0000;
-            color: #ffffff;
+            background-color: red;
+            color: white;
         }
+
+        @keyframes flashBackground {
+            0% {
+                background-color: red;
+            }
+            50% {
+                background-color: black;
+            }
+            100% {
+                background-color: red;
+            }
+        }
+
+        #network.ethernet {
+            background-color: green;
+        }
+
+        #network.disconnected,
+        #network.disabled {
+            animation-name: flashBackground;
+            animation-iteration-count: 10;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            background-color: red;
+        }
+
+
+        #custom-mullvad.disconnected {
+            animation-name: flashBackground;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            background-color: black;
+        }
+
+        #custom-mullvad.connected {
+            background-color: green;
+        }
+
       '';
     };
 
@@ -216,20 +309,21 @@ in {
         text = ''
           #!/usr/bin/env bash
           if ! status_output=$(mullvad status 2>&1); then
-              echo "{\"text\": \"Error\", \"tooltip\": \"Failed to get Mullvad status\"}"
-              exit 1
+            echo "{\"text\": \"Error\", \"tooltip\": \"Failed to get Mullvad status\", \"class\": \"error\"}"
+            exit 1
           fi
 
           if echo "$status_output" | grep -q "^Connected"; then
               status="Connected"
-
+              class="connected"
               tooltip=$(echo "$status_output" | sed '1d' | sed 's/^[[:space:]]*//' | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')
           else
               status="Disconnected"
+              class="disconnected"
               tooltip="Mullvad is not connected"
           fi
 
-          echo "{\"text\": \"$status\", \"tooltip\": \"$tooltip\"}"
+          echo "{\"text\": \"$status\", \"tooltip\": \"$tooltip\", \"class\": \"$class\"}"
         '';
         executable = true;
       };

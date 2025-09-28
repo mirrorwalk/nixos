@@ -1,5 +1,11 @@
 {pkgs, ...}: {
-  services.hyprpaper.enable = true;
+  services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = "$HOME/Pictures/Wallpapers/sfw/thumb-1920-1345286.png";
+        wallpaper = "DP-1,$HOME/Pictures/Wallpapers/sfw/thumb-1920-1345286.png"; 
+      };
+  };
 
   systemd.user.services = {
     hyprpaper = {
