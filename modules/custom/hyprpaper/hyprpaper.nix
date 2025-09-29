@@ -1,10 +1,10 @@
 {pkgs, ...}: {
   services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload = "$HOME/Pictures/Wallpapers/sfw/thumb-1920-1345286.png";
-        wallpaper = "DP-1,$HOME/Pictures/Wallpapers/sfw/thumb-1920-1345286.png"; 
-      };
+    enable = true;
+    settings = {
+      preload = "$HOME/Pictures/Wallpapers/sfw/thumb-1920-1345286.png";
+      wallpaper = "DP-1,$HOME/Pictures/Wallpapers/sfw/thumb-1920-1345286.png";
+    };
   };
 
   systemd.user.services = {
@@ -14,6 +14,7 @@
         After = ["graphical-session.target"];
       };
       Service = {
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
         ExecStart = "${pkgs.hyprpaper}/bin/hyprpaper";
       };
       Install = {

@@ -49,6 +49,7 @@ in {
         };
         Service = {
           Type = "simple";
+          ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
           ExecStart = "${pkgs.waybar}/bin/waybar";
           Restart = "on-failure";
           RestartSec = "5s";
@@ -97,7 +98,6 @@ in {
             icon-spacing = 4;
             icon-size = 18;
             transition-duration = 250;
-            ignore-monitor = true;
             modules = [
               {
                 type = "screenshare";
@@ -114,6 +114,12 @@ in {
                 tooltip = true;
                 tooltip-icon-size = 24;
               }
+            ];
+            ignore = [
+                {
+                    type = "audio-in";
+                    name = "cava";
+                }
             ];
           };
 
