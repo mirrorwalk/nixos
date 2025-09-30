@@ -70,13 +70,22 @@ in {
           fi
 
           enix() {
-            if ! command -v tmux >/dev/null || [ -n "$TMUX" ]; then
+            if ! command -v tmux >/dev/null; then
                 cd $HOME/.config/nixos
                 nvim .
             elif tmux has-session -t nixos 2>/dev/null; then
-                tmux attach -t nixos
+                if [ -n "$TMUX" ]; then
+                    tmux switch-client -t "nixos"
+                else
+                    tmux attach-session -t "nixos"
+                fi
             else
-                tmux new -s nixos -c ~/.config/nixos 'nvim .; exec bash'
+                tmux new -d -s nixos -c ~/.config/nixos 'nvim .'
+                if [ -n "$TMUX" ]; then
+                    tmux switch-client -t "nixos"
+                else
+                    tmux attach-session -t "nixos"
+                fi
             fi
           }
 
