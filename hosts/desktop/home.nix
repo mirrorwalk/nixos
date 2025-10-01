@@ -15,6 +15,7 @@
     ../../modules/home-manager/gpg/gpg.nix
     ../../modules/home-manager/ssh/ssh.nix
     ../../modules/home-manager/nvim/nvim.nix
+    ../../modules/home-manager/cava/cava.nix
     ../../modules/custom/nvim-fzf/nvim-fzf.nix
     ../../modules/custom/tmux-workspace/tmux-workspace.nix
   ];
@@ -38,7 +39,7 @@
     pkgs.librewolf
     pkgs.ripgrep
     pkgs.pavucontrol
-    # pkgs.mullvad-vpn
+    pkgs.mullvad-vpn
     pkgs.mullvad-browser
     pkgs.tor
     pkgs.tor-browser
@@ -73,7 +74,6 @@
     # pkgs.lm_sensors
     pkgs.godot
     pkgs.seahorse
-    pkgs.cava
 
     # Themes
     pkgs.adwaita-qt

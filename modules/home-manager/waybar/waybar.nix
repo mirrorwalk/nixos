@@ -28,6 +28,10 @@
     ]
     else [];
 in {
+  imports = [
+    ../../nixos/desktop-variables/variables.nix
+  ];
+
   options.waybar.hyprland.enable = lib.mkEnableOption "Enable hyprland features";
   options.waybar.mullvad.enable = lib.mkEnableOption "Enable mullvad features";
   options.waybar.load.enable = lib.mkEnableOption "Enable load features";
@@ -49,10 +53,10 @@ in {
         };
         Service = {
           Type = "simple";
-          ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
+          # ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
           ExecStart = "${pkgs.waybar}/bin/waybar";
           Restart = "on-failure";
-          RestartSec = "5s";
+          # RestartSec = "5s";
         };
         Install = {
           WantedBy = ["graphical-session.target"];
@@ -81,7 +85,7 @@ in {
               "custom/separator"
               "custom/weather"
             ]
-            ++ mullvad-features ++ ["tray" "custom/separator" "custom/shutdown"];
+            ++ mullvad-features ++ ["custom/separator" "tray" "custom/separator" "custom/shutdown"];
 
           "hyprland/workspaces" = {
             format = "{icon}";
@@ -116,10 +120,10 @@ in {
               }
             ];
             ignore = [
-                {
-                    type = "audio-in";
-                    name = "cava";
-                }
+              {
+                type = "audio-in";
+                name = "cava";
+              }
             ];
           };
 
@@ -223,7 +227,8 @@ in {
         }
 
         #waybar {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: ${config.colorScheme.background};
+            opacity: 0.8;
         }
 
         #workspaces,
@@ -243,19 +248,17 @@ in {
         #custom-shutdown,
         #custom-fullscreen {
             border-radius: 8px;
-            border: 1px solid red;
+            border: 1px solid ${config.colorScheme.accent};
             margin: 0 3px;
             padding: 0 3px;
         }
 
         #workspaces button.active {
-            background: red;
-            color: white;
+            background: ${config.colorScheme.primary};
         }
 
         #workspaces button:hover {
-            background: white;
-            color: red;
+            background: ${config.colorScheme.primary};
         }
 
         #workspaces button.urgent {
