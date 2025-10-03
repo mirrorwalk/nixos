@@ -1,10 +1,5 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    inputs.zen-browser.homeModules.beta
     ../../modules/home-manager/hyprland/desktop-hyprland.nix
     ../../modules/home-manager/ghostty/ghostty.nix
     ../../modules/home-manager/waybar/waybar.nix
@@ -16,6 +11,7 @@
     ../../modules/home-manager/ssh/ssh.nix
     ../../modules/home-manager/nvim/nvim.nix
     ../../modules/home-manager/cava/cava.nix
+    # ../../modules/home-manager/browsers/zen-browser/zen-browser.nix
     ../../modules/custom/nvim-fzf/nvim-fzf.nix
     ../../modules/custom/tmux-workspace/tmux-workspace.nix
   ];
@@ -36,10 +32,11 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   home.packages = [
+    pkgs.exfatprogs
     pkgs.librewolf
     pkgs.ripgrep
     pkgs.pavucontrol
-    pkgs.mullvad-vpn
+    # pkgs.mullvad-vpn
     pkgs.mullvad-browser
     pkgs.tor
     pkgs.tor-browser
@@ -72,8 +69,10 @@
     pkgs.nushell
     # pkgs.tokei
     # pkgs.lm_sensors
-    pkgs.godot
+    # pkgs.godot
     pkgs.seahorse
+    pkgs.lutris
+    pkgs.protonup
 
     # Themes
     pkgs.adwaita-qt

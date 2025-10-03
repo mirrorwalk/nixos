@@ -51,7 +51,7 @@ in {
         evi = "cd $HOME/.config/nvim && nvim .";
         la = "ls -AF --color=auto";
         tmuxs = "tmux new -s";
-        tmuxa = "tmux attach -t";
+        tmuxa = "tmux attach-session -t nixos || tmux switch-client -t nixos";
         nix-shell = "nom-shell";
         nix-build = "nom-build";
         zbr = "zig build run";

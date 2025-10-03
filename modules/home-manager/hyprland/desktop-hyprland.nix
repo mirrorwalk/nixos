@@ -54,6 +54,7 @@
       ];
 
       "exec-once" = [
+        "systemctl --user restart waybar hyprpaper" 
       ];
 
       env = [
@@ -137,7 +138,8 @@
       bind = [
         "$mainMod, Return, exec, $terminal"
         "$mainMod, Q, killactive,"
-        "$mainMod, M, exit,"
+        "$mainMod SHIFT, Q, exit,"
+        # "$mainMod, M, exit,"
         "$mainMod, E, exec, $fileManager"
         "$mainMod, V, togglefloating,"
         "$mainMod, Space, exec, $menu"
@@ -180,6 +182,8 @@
         "$mainMod SHIFT, 0, movetoworkspace, 10"
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
+        "$mainMod, M, togglespecialworkspace, music"
+        "$mainMod SHIFT, M, movetoworkspace, special:music"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
         "$mainMod, W, submap, wallpaper"

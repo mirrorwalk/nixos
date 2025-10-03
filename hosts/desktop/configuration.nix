@@ -16,6 +16,18 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  hardware.graphics = {
+    enable = true;
+    # driSupport32Bit = true;
+  };
+
+  services.xserver.videoDrivers = ["amdgpu"];
+
+  programs.gamemode.enable = true;
+
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     libglvnd
@@ -67,9 +79,9 @@
 
   networking.hostName = "desktop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.extraHosts = ''
-    0.0.0.0 google.com
-  '';
+  # networking.extraHosts = ''
+  #   0.0.0.0 google.com
+  # '';
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
@@ -104,7 +116,7 @@
     variant = "dvp";
   };
 
-   programs.bash.enable = true; 
+  programs.bash.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.brog = {
