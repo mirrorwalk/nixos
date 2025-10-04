@@ -9,7 +9,9 @@
     then [
       "hyprland/workspaces"
       "custom/hyprland-music"
+      "custom/separator"
       "hyprland/submap"
+      "custom/separator"
       "hyprland/window"
       "custom/separator"
       "custom/fullscreen"
@@ -54,10 +56,8 @@ in {
         };
         Service = {
           Type = "simple";
-          # ExecStartPre = "${pkgs.coreutils}/bin/sleep 2";
           ExecStart = "${pkgs.waybar}/bin/waybar";
           Restart = "on-failure";
-          # RestartSec = "5s";
         };
         Install = {
           WantedBy = ["graphical-session.target"];
