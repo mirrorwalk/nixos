@@ -1,4 +1,6 @@
 {
+  programs.gh.enable = true;
+
   programs.git = {
     enable = true;
     userName = "mirrorwalk";
@@ -20,11 +22,6 @@
       co = "checkout";
       cb = "checkout -b";
     };
-
-    # signing = {
-    #     signByDefault = true;
-    #     key = "204104CBF418A401";
-    # };
 
     extraConfig = {
       branch = {

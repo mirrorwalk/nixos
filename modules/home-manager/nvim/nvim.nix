@@ -1,17 +1,18 @@
-{pkgs, ...}:
-{
-  home.packages = [
-    pkgs.gcc
-    pkgs.gnumake
-    pkgs.git
-    pkgs.cargo
-  ];
+{pkgs, ...}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+
+    extraPackages = [
+      pkgs.gcc
+      pkgs.gnumake
+      pkgs.git
+      pkgs.cargo
+      pkgs.nodejs
+    ];
   };
 
   home.sessionVariables = {

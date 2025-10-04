@@ -11,7 +11,6 @@
     ../../modules/home-manager/ssh/ssh.nix
     ../../modules/home-manager/nvim/nvim.nix
     ../../modules/home-manager/cava/cava.nix
-    # ../../modules/home-manager/browsers/zen-browser/zen-browser.nix
     ../../modules/custom/nvim-fzf/nvim-fzf.nix
     ../../modules/custom/tmux-workspace/tmux-workspace.nix
   ];
@@ -36,7 +35,6 @@
     pkgs.librewolf
     pkgs.ripgrep
     pkgs.pavucontrol
-    # pkgs.mullvad-vpn
     pkgs.mullvad-browser
     pkgs.tor
     pkgs.tor-browser
@@ -49,47 +47,30 @@
     pkgs.xwayland-satellite
     pkgs.cryptsetup
     pkgs.wl-clipboard
-    pkgs.jujutsu
-    pkgs.gh
-    # pkgs.freetube
     pkgs.qbittorrent
-    # pkgs.inotify-tools
-    pkgs.swaybg
     pkgs.btop
     pkgs.wine
     pkgs.tree
     pkgs.fd
     pkgs.jq
     pkgs.bat
-    # pkgs.liferea
-    pkgs.file
     pkgs.kdePackages.dolphin
-    pkgs.unzip
     pkgs.nix-output-monitor
     pkgs.nushell
-    # pkgs.tokei
-    # pkgs.lm_sensors
-    # pkgs.godot
-    pkgs.seahorse
     pkgs.lutris
     pkgs.protonup
-
-    # Themes
-    pkgs.adwaita-qt
-    pkgs.gnome-themes-extra
-    pkgs.gsettings-desktop-schemas
+    pkgs.yt-dlp
   ];
 
   waybar.hyprland.enable = true;
   waybar.mullvad.enable = true;
-  waybar.weatherCity = "Prague";
 
   bash.tmuxStartup.enable = true;
 
-  services.gnome-keyring = {
-    enable = true;
-    components = ["pkcs11" "secrets" "ssh"];
-  };
+  # services.gnome-keyring = {
+  #   enable = true;
+  #   components = ["pkcs11" "secrets" "ssh"];
+  # };
 
   programs.direnv = {
     enable = true;
@@ -97,23 +78,6 @@
   };
 
   wayland.windowManager.hyprland.enable = true;
-
-  systemd.user.services = {
-    # swaybg-random = {
-    #   Unit = {
-    #     Description = "swaybg wallpaper background";
-    #     After = ["niri.service"];
-    #     PartOf = ["niri.service"];
-    #   };
-    #   Service = {
-    #     ExecStart = "%h/.local/bin/swaybg-random-wallpaper.sh";
-    #     Restart = "on-failure";
-    #   };
-    #   Install = {
-    #     WantedBy = ["niri.service"];
-    #   };
-    # };
-  };
 
   xdg.mimeApps = {
     enable = true;
@@ -155,9 +119,6 @@
   programs.nh = {
     enable = true;
     flake = "/home/brog/.config/nixos";
-  };
-
-  home.file = {
   };
 
   home.sessionVariables = {

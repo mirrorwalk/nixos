@@ -16,6 +16,7 @@
     self,
     nixpkgs,
     nix-index-database,
+    home-manager,
     ...
   } @ inputs: {
     nixosConfigurations = {
@@ -24,6 +25,11 @@
         modules = [
           ./hosts/desktop/configuration.nix
           nix-index-database.nixosModules.nix-index
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.sharedModules = [
+            ];
+          }
         ];
       };
     };

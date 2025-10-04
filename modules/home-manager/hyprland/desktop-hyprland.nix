@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ../../custom/hyprpaper/hyprpaper.nix
   ];
@@ -42,10 +42,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      "$terminal" = "ghostty";
-      "$fileManager" = "dolphin";
-      "$menu" = "fuzzel";
-      "$webBrowser" = "mullvad-browser";
+      "$terminal" = "${pkgs.ghostty}/bin/ghostty";
+      "$fileManager" = "${pkgs.kdePackages.dolphin}/bin/dolphin";
+      "$menu" = "${pkgs.fuzzel}/bin/fuzzel";
+      "$webBrowser" = "${pkgs.mullvad-browser}/bin/mullvad-browser";
       "$mainMod" = "SUPER";
 
       monitor = [
@@ -54,7 +54,7 @@
       ];
 
       "exec-once" = [
-        "systemctl --user restart waybar hyprpaper" 
+        "systemctl --user restart waybar hyprpaper"
       ];
 
       env = [

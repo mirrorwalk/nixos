@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }: let
@@ -62,6 +63,7 @@ in {
         rn = "nh os switch";
         ns = "nh os switch";
         nos = "nh os switch";
+        ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
       };
       initExtra =
         ''
