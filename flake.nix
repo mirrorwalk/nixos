@@ -8,14 +8,16 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
-    nix-index-database,
+    stylix,
     home-manager,
     ...
   } @ inputs: {
@@ -24,7 +26,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/desktop/configuration.nix
-          nix-index-database.nixosModules.nix-index
+          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.sharedModules = [
