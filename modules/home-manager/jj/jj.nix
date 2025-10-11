@@ -12,6 +12,7 @@
       };
       aliases = {
         init = ["git" "init" "--colocate"];
+        push = ["git" "push"];
         d = ["diff" "--color=always"];
         n = ["new"];
         l = ["log" "--color=always"];

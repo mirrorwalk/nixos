@@ -41,21 +41,18 @@
     else "";
 in {
   options.bash.tmuxStartup.enable = lib.mkEnableOption "Enable tmux on startup";
-  # ".config/waybar/scripts/fullscreen" = lib.mkIf config.waybar.hyprland.enable {
 
   config = {
     programs.bash = {
       enable = true;
       enableCompletion = true;
       shellAliases = {
-        # enix = "cd $HOME/.config/nixos && nvim .";
         evi = "cd $HOME/.config/nvim && nvim .";
         la = "ls -AF --color=auto";
         tmuxs = "tmux new -s";
         tmuxa = "tmux attach-session -t nixos || tmux switch-client -t nixos";
         nix-shell = "nom-shell";
         nix-build = "nom-build";
-        zbr = "zig build run";
         cat = "bat";
         rnos = "nh os switch";
         nosr = "nh os switch";
@@ -63,6 +60,7 @@ in {
         rn = "nh os switch";
         ns = "nh os switch";
         nos = "nh os switch";
+        nd = "nom develop";
         ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
       };
       initExtra =
