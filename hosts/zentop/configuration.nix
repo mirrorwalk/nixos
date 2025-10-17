@@ -30,31 +30,10 @@
   programs.steam.gamescopeSession.enable = true;
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    libglvnd
-    xorg.libXmu
-    xorg.libX11
-    xorg.libXext
-    xorg.libSM
-    xorg.libICE
-    xorg.libXrender
-    xorg.libXfixes
-    xorg.libXi
-    SDL2
-    mesa
-    pulseaudio
-    pipewire
-    pkgsi686Linux.libglvnd
-    pkgsi686Linux.xorg.libX11
-    pkgsi686Linux.xorg.libXext
-    pkgsi686Linux.xorg.libXrender
-    pkgsi686Linux.xorg.libXfixes
-    pkgsi686Linux.xorg.libXi
-    pkgsi686Linux.SDL2
-    pkgsi686Linux.mesa
-  ];
+  # programs.nix-ld.libraries = with pkgs; [
+  # ];
 
-  services.mullvad-vpn.enable = true;
+  # services.mullvad-vpn.enable = true;
 
   programs.hyprland.enable = true;
 
@@ -78,7 +57,7 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "desktop"; # Define your hostname.
+  networking.hostName = "zentop"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.extraHosts = ''
   #   0.0.0.0 google.com

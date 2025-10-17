@@ -2,17 +2,11 @@
   imports = [
     ../../modules/home-manager/hyprland/desktop-hyprland.nix
     ../../modules/home-manager/ghostty/ghostty.nix
-    ../../modules/home-manager/waybar/waybar.nix
     ../../modules/home-manager/git/git.nix
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
     ../../modules/home-manager/bash/bash.nix
-    ../../modules/home-manager/gpg/gpg.nix
-    ../../modules/home-manager/ssh/ssh.nix
     ../../modules/home-manager/nvim/nvim.nix
-    ../../modules/home-manager/cava/cava.nix
-    ../../modules/custom/nvim-fzf/nvim-fzf.nix
-    ../../modules/custom/tmux-workspace/tmux-workspace.nix
   ];
 
   home.username = "brog";
@@ -36,41 +30,22 @@
     pkgs.ripgrep
     pkgs.pavucontrol
     pkgs.mullvad-browser
-    pkgs.tor
-    pkgs.tor-browser
     pkgs.pipewire
     pkgs.wofi
-    pkgs.keepassxc
     pkgs.mpv
-    pkgs.brave
     pkgs.hyprcursor
     pkgs.xwayland-satellite
     pkgs.cryptsetup
     pkgs.wl-clipboard
-    pkgs.qbittorrent
     pkgs.btop
-    pkgs.wine
     pkgs.tree
     pkgs.fd
     pkgs.jq
     pkgs.bat
     pkgs.kdePackages.dolphin
     pkgs.nix-output-monitor
-    pkgs.nushell
-    pkgs.lutris
-    pkgs.protonup
     pkgs.yt-dlp
   ];
-
-  waybar.hyprland.enable = true;
-  waybar.mullvad.enable = true;
-
-  bash.tmuxStartup.enable = true;
-
-  # services.gnome-keyring = {
-  #   enable = true;
-  #   components = ["pkcs11" "secrets" "ssh"];
-  # };
 
   programs.direnv = {
     enable = true;

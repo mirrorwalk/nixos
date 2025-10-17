@@ -34,6 +34,17 @@
           }
         ];
       };
+      zentop = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/zentop/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.sharedModules = [
+            ];
+          }
+        ];
+      };
     };
   };
 }
