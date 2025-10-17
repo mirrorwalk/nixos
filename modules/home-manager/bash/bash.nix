@@ -49,18 +49,20 @@ in {
       shellAliases = {
         evi = "cd $HOME/.config/nvim && nvim .";
         la = "ls -AF --color=auto";
-        tmuxs = "tmux new -s";
-        tmuxa = "tmux attach-session -t nixos || tmux switch-client -t nixos";
-        nix-shell = "nom-shell";
-        nix-build = "nom-build";
-        cat = "bat";
-        rnos = "nh os switch";
-        nosr = "nh os switch";
-        nr = "nh os switch";
-        rn = "nh os switch";
-        ns = "nh os switch";
-        nos = "nh os switch";
-        nd = "nom develop";
+        tmuxs = "${pkgs.tmux}/bin/tmux new -s";
+        tmuxa = "${pkgs.tmux}/bin/tmux attach-session -t nixos || ${pkgs.tmux}/bin/tmux switch-client -t ";
+        nix-shell = "${pkgs.nix-output-monitor}/bin/nom-shell";
+        nix-build = "${pkgs.nix-output-monitor}/bin/nom-build";
+        nix = "${pkgs.nix-output-monitor}/bin/nom";
+        cat = "${pkgs.bat}/bin/bat";
+        rnos = "${pkgs.nh}/bin/nh os switch";
+        nosr = "${pkgs.nh}/bin/nh os switch";
+        nr = "${pkgs.nh}/bin/nh os switch";
+        nt = "${pkgs.nh}/bin/nh os test";
+        rn = "${pkgs.nh}/bin/nh os switch";
+        ns = "${pkgs.nh}/bin/nh os switch";
+        nos = "${pkgs.nh}/bin/nh os switch";
+        nd = "${pkgs.nix-output-monitor}/bin/nom develop";
         ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
       };
       initExtra =

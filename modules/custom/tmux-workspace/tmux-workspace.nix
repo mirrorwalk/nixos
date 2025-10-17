@@ -35,6 +35,7 @@
               ROOT_FOLDERS["$HOME/projects"]="1:1"
               ROOT_FOLDERS["$HOME/projects/zig"]="1:1"
               ROOT_FOLDERS["$HOME/projects/svelte"]="1:1"
+              ROOT_FOLDERS["$HOME/projects/python"]="1:1"
               ROOT_FOLDERS["$HOME/.config"]="1:1"
               ROOT_FOLDERS["$HOME/.config/nvim"]="0:1"
 
