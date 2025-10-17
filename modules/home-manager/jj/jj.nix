@@ -13,6 +13,7 @@
       aliases = {
         init = ["git" "init" "--colocate"];
         push = ["git" "push"];
+        pushr = ["git" "push" "--remote"];
         d = ["diff" "--color=always"];
         n = ["new"];
         l = ["log" "--color=always"];
