@@ -6,27 +6,29 @@
 
   programs.git = {
     enable = true;
-    userName = "mirrorwalk";
-    userEmail = "git.cresting327@passmail.net";
+    settings = {
+      user = {
+        name = "mirrorwalk";
+        email = "git.cresting327@passmail.net";
+      };
 
-    aliases = {
-      st = "status";
-      s = "status --short";
-      d = "diff";
-      p = "push";
-      b = "branch";
-      ba = "branch -a";
-      lg = "log --oneline --graph --all --decorate";
-      l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
+      alias = {
+        st = "status";
+        s = "status --short";
+        d = "diff";
+        p = "push";
+        b = "branch";
+        ba = "branch -a";
+        lg = "log --oneline --graph --all --decorate";
+        l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
 
-      ci = "commit";
-      cm = "commit -m";
+        ci = "commit";
+        cm = "commit -m";
 
-      co = "checkout";
-      cb = "checkout -b";
-    };
+        co = "checkout";
+        cb = "checkout -b";
+      };
 
-    extraConfig = {
       branch = {
         sort = "-committerdate";
       };
@@ -76,14 +78,17 @@
       user.signingkey = "~/.ssh/git";
     };
 
-    delta = {
-      enable = true;
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
       options = {
         navigate = true;
         light = false;
         line-numbers = true;
       };
-    };
+
   };
 
   programs.ssh.matchBlocks = {
