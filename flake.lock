@@ -195,20 +195,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1761236834,
-        "narHash": "sha256-+pthv6hrL5VLW2UqPdISGuLiUZ6SnAXdd2DdUE+fV2Q=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d5faa84122bc0a1fd5d378492efce4e289f8eac1",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -235,15 +221,12 @@
       }
     },
     "privateConfig": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2"
-      },
       "locked": {
-        "lastModified": 1761346573,
-        "narHash": "sha256-OcD3An0nXS2Uy2/ESt/gpcvDA7DW3x5hB3abuTpG960=",
+        "lastModified": 1761346678,
+        "narHash": "sha256-dgQ8JtKTFva0XokFDCn5sR3mmUO6qasg6VLR/FCg0yg=",
         "ref": "refs/heads/master",
-        "rev": "03be763809800062bf02a1d4b372283395c25147",
-        "revCount": 11,
+        "rev": "9a2d68cab63f1efc1c3f135fe242e43bc478f457",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
       },
