@@ -13,7 +13,7 @@
       ../../modules/home-manager/jj/jj.nix
       ../../modules/home-manager/tmux/tmux.nix
       ../../modules/home-manager/bash/bash.nix
-      ../../modules/home-manager/gpg/gpg.nix
+      # ../../modules/home-manager/gpg/gpg.nix
       ../../modules/home-manager/ssh/ssh.nix
       ../../modules/home-manager/nvim/nvim.nix
       ../../modules/home-manager/cava/cava.nix
