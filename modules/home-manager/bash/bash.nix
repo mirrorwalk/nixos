@@ -47,6 +47,7 @@ in {
       enable = true;
       enableCompletion = true;
       shellAliases = {
+        backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
         evi = "cd $HOME/.config/nvim && nvim .";
         la = "ls -AF --color=auto";
         tmuxs = "${pkgs.tmux}/bin/tmux new -s";

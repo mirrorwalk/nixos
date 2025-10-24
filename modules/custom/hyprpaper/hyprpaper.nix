@@ -2,8 +2,8 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = "$HOME/Pictures/Wallpapers/sfw/thumb-1920-1345286.png";
-      wallpaper = "DP-1,$HOME/Pictures/Wallpapers/sfw/thumb-1920-1345286.png";
+      preload = "$HOME/Pictures/Wallpapers/thumb-1920-1345286.png";
+      wallpaper = "DP-1,$HOME/Pictures/Wallpapers/thumb-1920-1345286.png";
     };
   };
 
