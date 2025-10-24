@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ../../modules/home-manager/hyprland/desktop-hyprland.nix
     ../../modules/home-manager/ghostty/ghostty.nix
@@ -13,6 +17,7 @@
     ../../modules/home-manager/cava/cava.nix
     ../../modules/custom/nvim-fzf/nvim-fzf.nix
     ../../modules/custom/tmux-workspace/tmux-workspace.nix
+    ../../modules/home-manager/browsers/browsers.nix
   ];
 
   home.username = "brog";
@@ -62,15 +67,12 @@
     pkgs.yt-dlp
   ];
 
+  browser.zen-browser.enable = true;
+
   waybar.hyprland.enable = true;
   waybar.mullvad.enable = true;
 
   bash.tmuxStartup.enable = true;
-
-  # services.gnome-keyring = {
-  #   enable = true;
-  #   components = ["pkcs11" "secrets" "ssh"];
-  # };
 
   programs.direnv = {
     enable = true;
