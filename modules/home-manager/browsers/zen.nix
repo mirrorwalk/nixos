@@ -115,7 +115,9 @@
           "zen.view.compact.animate-sidebar" = false;
           "zen.welcome-screen.seen" = true;
           "browser.backspace_action" = 0;
-          "zen.keyboard.shortcuts" = "{\"Backward Workspace\":\"Ctrl Alt Q\"}";
+          "media.videocontrols.picture-in-picture.enabled" = false;
+          "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
+          "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
         };
 
         bookmarks = {
@@ -146,10 +148,10 @@
 
         pinsForce = true;
         pins = {
-          YouTube = {
-            id = "8dc95002-4c12-4ab1-a94e-5c5a6ed899dd";
+          Music = {
+            id = "04b980ef-0fb1-447e-9ff9-23f2fcf5dd2c";
             workspace = spaces.YouTube.id;
-            url = "https://youtube.com";
+            url = "https://www.youtube.com/results?search_query=my+mix";
             position = 1;
             isEssential = false;
             container = containers."Google".id;
