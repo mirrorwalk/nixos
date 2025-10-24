@@ -22,6 +22,7 @@
 
     privateConfig = {
         url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
