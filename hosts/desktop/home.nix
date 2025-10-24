@@ -1,24 +1,29 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
-  imports = [
-    ../../modules/home-manager/hyprland/desktop-hyprland.nix
-    ../../modules/home-manager/ghostty/ghostty.nix
-    ../../modules/home-manager/waybar/waybar.nix
-    ../../modules/home-manager/git/git.nix
-    ../../modules/home-manager/jj/jj.nix
-    ../../modules/home-manager/tmux/tmux.nix
-    ../../modules/home-manager/bash/bash.nix
-    ../../modules/home-manager/gpg/gpg.nix
-    ../../modules/home-manager/ssh/ssh.nix
-    ../../modules/home-manager/nvim/nvim.nix
-    ../../modules/home-manager/cava/cava.nix
-    ../../modules/custom/nvim-fzf/nvim-fzf.nix
-    ../../modules/custom/tmux-workspace/tmux-workspace.nix
-    ../../modules/home-manager/browsers/browsers.nix
-  ];
+  imports =
+    [
+      ../../modules/home-manager/hyprland/desktop-hyprland.nix
+      ../../modules/home-manager/ghostty/ghostty.nix
+      ../../modules/home-manager/waybar/waybar.nix
+      ../../modules/home-manager/git/git.nix
+      ../../modules/home-manager/jj/jj.nix
+      ../../modules/home-manager/tmux/tmux.nix
+      ../../modules/home-manager/bash/bash.nix
+      ../../modules/home-manager/gpg/gpg.nix
+      ../../modules/home-manager/ssh/ssh.nix
+      ../../modules/home-manager/nvim/nvim.nix
+      ../../modules/home-manager/cava/cava.nix
+      ../../modules/custom/nvim-fzf/nvim-fzf.nix
+      ../../modules/custom/tmux-workspace/tmux-workspace.nix
+      ../../modules/home-manager/browsers/browsers.nix
+    ]
+    ++ lib.optionals (inputs ? privateConfig) [
+      inputs.privateConfig.homeModules.default
+    ];
 
   home.username = "brog";
   home.homeDirectory = "/home/brog";

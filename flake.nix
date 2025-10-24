@@ -19,6 +19,10 @@
       # to have it up-to-date or simply don't specify the nixpkgs input
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    privateConfig = {
+        url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
+    };
   };
 
   outputs = {
@@ -26,11 +30,12 @@
     nixpkgs,
     stylix,
     home-manager,
+    privateConfig,
     ...
   } @ inputs: {
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs; };
         modules = [
           ./hosts/desktop/configuration.nix
           stylix.nixosModules.stylix
