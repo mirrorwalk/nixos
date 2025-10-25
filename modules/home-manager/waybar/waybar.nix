@@ -30,19 +30,29 @@
       "custom/separator"
     ]
     else [];
+  wallpaper-features =
+    if config.waybar.wallpaper.enable
+    then [
+      "custom/separator"
+      "custom/wallpaper-category"
+    ]
+    else [];
 in {
   imports = [
     ../../nixos/desktop-variables/variables.nix
   ];
 
-  options.waybar.hyprland.enable = lib.mkEnableOption "Enable hyprland features";
-  options.waybar.mullvad.enable = lib.mkEnableOption "Enable mullvad features";
-  options.waybar.load.enable = lib.mkEnableOption "Enable load features";
+  options.waybar = {
+    hyprland.enable = lib.mkEnableOption "Enable hyprland features";
+    mullvad.enable = lib.mkEnableOption "Enable mullvad features";
+    load.enable = lib.mkEnableOption "Enable load features";
+    wallpaper.enable = lib.mkEnableOption "Enable wallpaper features";
 
-  options.waybar.weatherCity = lib.mkOption {
-    type = lib.types.str;
-    default = "Prague";
-    description = "Set the target city for weather";
+    weatherCity = lib.mkOption {
+      type = lib.types.str;
+      default = "Prague";
+      description = "Set the target city for weather";
+    };
   };
 
   config = {
@@ -71,10 +81,7 @@ in {
         mainBar = {
           "modules-left" =
             hyprland-features
-            ++ [
-              "custom/separator"
-              "custom/wallpaper-category"
-            ];
+            ++ wallpaper-features;
           "modules-center" = ["clock" "privacy"];
           "modules-right" =
             load-features

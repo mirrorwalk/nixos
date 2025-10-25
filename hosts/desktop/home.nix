@@ -72,11 +72,16 @@
     pkgs.yt-dlp
   ];
 
-  browsers.zen-browser.enable = true;
-  browsers.librewolf.enable = true;
+  browsers = {
+      zen-browser.enable = true;
+  librewolf.enable = true;
+  };
 
-  waybar.hyprland.enable = true;
-  waybar.mullvad.enable = true;
+  waybar = {
+    hyprland.enable = true;
+    mullvad.enable = true;
+    wallpaper.enable = true;
+  };
 
   shells = {
     bash.enable = true;
