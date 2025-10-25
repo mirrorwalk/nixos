@@ -41,6 +41,7 @@
 
   home.packages = [
     pkgs.exfatprogs
+    pkgs.mullvad-vpn
     pkgs.ripgrep
     pkgs.pavucontrol
     pkgs.mullvad-browser

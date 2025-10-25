@@ -24,14 +24,26 @@
             name = "Nano Gpt";
             url = "https://nano-gpt.com/conversation/new";
           }
+          {
+            name = "NixOS";
+            bookmarks = [
+              {
+                name = "Nixpkgs";
+                url = "search.nixos.org";
+              }
+              {
+                name = "My NixOS";
+                url = "https://mynixos.com/";
+              }
+            ];
+          }
         ];
       }
     ];
   };
 in {
   imports = [
-    # (import ./zen.nix {inherit bookmarks;})
-    ./zen.nix
+    (import ./zen.nix {inherit bookmarks;})
     (import ./librewolf.nix {inherit bookmarks;})
   ];
 }
