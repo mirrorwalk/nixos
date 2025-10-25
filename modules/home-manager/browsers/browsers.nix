@@ -29,8 +29,8 @@ let
             name = "NixOS";
             bookmarks = [
               {
-                name = "Search NixOS";
-                url = "search.nixos.org";
+                name = "Nixpkgs Search";
+                url = "https://search.nixos.org";
                 tags = ["nix"];
               }
               {
