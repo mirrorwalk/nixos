@@ -58,9 +58,6 @@
 
   programs.hyprland.enable = true;
 
-  #Niri
-  # programs.niri.enable = true;
-
   # Ly
   services.displayManager.ly.enable = true;
 

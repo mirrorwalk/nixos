@@ -6,7 +6,6 @@
     keyMode = "vi";
     mouse = false;
     escapeTime = 0;
-    # shell = "${pkgs.fish}/bin/fish";
     terminal = "screen-256color";
     secureSocket = true;
     extraConfig = ''

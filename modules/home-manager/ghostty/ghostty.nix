@@ -8,8 +8,8 @@
             font-size = 12;
             shell-integration-features = "cursor,sudo,no-title";
         };
-        enableZshIntegration = true;
-        enableFishIntegration = true;
+        # enableZshIntegration = true;
+        # enableFishIntegration = true;
         enableBashIntegration = true;
         installBatSyntax = true;
         installVimSyntax = true;

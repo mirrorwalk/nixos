@@ -1,12 +1,12 @@
 {
   pkgs,
-  lib,
   ...
 }: {
   imports = [
     ./zsh.nix
     ./bash.nix
     ./tmuxStartup.nix
+    ./fish.nix
   ];
 
   home.shellAliases = {
