@@ -212,6 +212,7 @@
               ];
               definedAliases = ["@k" "@kagi"];
             };
+            perplexity.metaData.alias = "@p";
             google.metaData.hidden = true;
             bing.metaData.hidden = true;
           };
