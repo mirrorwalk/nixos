@@ -8,9 +8,9 @@
     inputs.zen-browser.homeModules.twilight
   ];
   options = {
-    browser.zen-browser.enable = lib.mkEnableOption "Enables Zen browser";
+    browsers.zen-browser.enable = lib.mkEnableOption "Enables Zen browser";
   };
-  config = lib.mkIf config.browser.zen-browser.enable {
+  config = lib.mkIf config.browsers.zen-browser.enable {
     programs.zen-browser = {
       enable = true;
 
@@ -81,7 +81,7 @@
           };
           "search@kagi.com" = "kagi-search-for-firefox";
           "deArrow@ajay.app" = "dearrow";
-          "sponsorBlocker@ajay.app" = "sponsor-block";
+          "sponsorBlocker@ajay.app" = "sponsorblock";
           "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = "return-youtube-dislikes";
         };
 
@@ -197,6 +197,7 @@
         search = {
           force = true;
           default = "Kagi";
+          privateDefault = "Kagi";
           engines = {
             Kagi = {
               urls = [
@@ -235,15 +236,10 @@
             icon = "circle";
             id = 3;
           };
-          Random = {
-            color = "orange";
-            icon = "vacation";
-            id = 4;
-          };
           Proton = {
             color = "purple";
             icon = "fingerprint";
-            id = 5;
+            id = 4;
           };
         };
         spacesForce = true;
@@ -334,16 +330,10 @@
               opacity = 0.7;
             };
           };
-          Random = {
-            id = "be8b706e-503f-4b82-8608-e76a564732f1";
-            icon = "🎲";
-            position = 5;
-            container = containers.Random.id;
-          };
           School = {
             id = "4f9a74ce-0c8b-4977-a4c8-18a44e3859f5";
             icon = "🏫";
-            position = 6;
+            position = 5;
             container = containers.School.id;
             theme = {
               colors = [

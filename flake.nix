@@ -3,6 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nur = {
+    #   url = "github:nix-community/NUR";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    firefox-addons = {
+        url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -21,13 +29,14 @@
     };
 
     privateConfig = {
-        url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
+      url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
     };
   };
 
   outputs = {
     self,
     nixpkgs,
+    # nur,
     stylix,
     home-manager,
     privateConfig,
@@ -35,12 +44,13 @@
   } @ inputs: {
     nixosConfigurations = {
       desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs; };
+        specialArgs = {inherit inputs;};
         modules = [
           ./hosts/desktop/configuration.nix
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
+            # nixpkgs.overlays = [nur.overlays.default];
             home-manager.sharedModules = [
             ];
           }

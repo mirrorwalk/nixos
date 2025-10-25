@@ -18,6 +18,7 @@
       ../../modules/custom/tmux-workspace/tmux-workspace.nix
       ../../modules/home-manager/browsers/browsers.nix
       ../../modules/home-manager/shells/shells.nix
+      # inputs.nur.modules.homeManager.default
     ]
     ++ lib.optionals (inputs ? privateConfig) [
       inputs.privateConfig.homeModules.default
@@ -40,7 +41,6 @@
 
   home.packages = [
     pkgs.exfatprogs
-    pkgs.librewolf
     pkgs.ripgrep
     pkgs.pavucontrol
     pkgs.mullvad-browser
@@ -70,7 +70,8 @@
     pkgs.yt-dlp
   ];
 
-  browser.zen-browser.enable = true;
+  browsers.zen-browser.enable = true;
+  browsers.librewolf.enable = true;
 
   waybar.hyprland.enable = true;
   waybar.mullvad.enable = true;

@@ -5,6 +5,7 @@
   ...
 }: {
   options = {
+    shells.bash.tmuxStartup.enable = lib.mkEnableOption "Enable tmux on startup";
     shells.bash.enable = lib.mkEnableOption "Enable bash";
   };
 

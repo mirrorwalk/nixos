@@ -68,6 +68,28 @@
         "type": "github"
       }
     },
+    "firefox-addons": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1761278620,
+        "narHash": "sha256-wXblionelTRI2Bpiigez6UpCiz+760ItWHeXcrQA2cE=",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "rev": "de5552e6036ecfdf1cab325bf17b3c9040869d45",
+        "type": "gitlab"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "rycee",
+        "repo": "nur-expressions",
+        "type": "gitlab"
+      }
+    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -239,11 +261,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1761352951,
-        "narHash": "sha256-vDSWzZwiSx14W7nqG1o4h/uVEg8n0BGnDp36xYaYT1U=",
+        "lastModified": 1761359599,
+        "narHash": "sha256-dhwIlC8xqrZht3A5iTt/jx6hYVzRDMdJ5u7x124awB8=",
         "ref": "refs/heads/master",
-        "rev": "d1376a6a881a90e8e9e6ca6fda9c252996713a3d",
-        "revCount": 20,
+        "rev": "a5aa532cf8f05f503863bc26d5bfc642a15acbd5",
+        "revCount": 29,
         "type": "git",
         "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
       },
@@ -254,6 +276,7 @@
     },
     "root": {
       "inputs": {
+        "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "privateConfig": "privateConfig",
