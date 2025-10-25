@@ -86,7 +86,7 @@ in {
           "modules-right" =
             load-features
             ++ [
-              # "network"
+              "network"
               "custom/separator"
               "cava"
               "pulseaudio"

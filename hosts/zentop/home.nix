@@ -14,7 +14,6 @@
     ../../modules/home-manager/browsers/browsers.nix
     ../../modules/home-manager/waybar/waybar.nix
     ../../modules/custom/backup-git/backup-git.nix
-      ../../modules/custom/nvim-fzf/nvim-fzf.nix
     inputs.privateConfig.homeModules.default
   ];
 
