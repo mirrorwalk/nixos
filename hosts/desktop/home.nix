@@ -14,10 +14,11 @@
       ../../modules/home-manager/tmux/tmux.nix
       ../../modules/home-manager/nvim/nvim.nix
       ../../modules/home-manager/cava/cava.nix
-      ../../modules/custom/nvim-fzf/nvim-fzf.nix
-      ../../modules/custom/tmux-workspace/tmux-workspace.nix
       ../../modules/home-manager/browsers/browsers.nix
       ../../modules/home-manager/shells/shells.nix
+      ../../modules/custom/nvim-fzf/nvim-fzf.nix
+      ../../modules/custom/tmux-workspace/tmux-workspace.nix
+      ../../modules/custom/backup-git/backup-git.nix
       # inputs.nur.modules.homeManager.default
     ]
     ++ lib.optionals (inputs ? privateConfig) [
@@ -78,8 +79,8 @@
   waybar.mullvad.enable = true;
 
   shells = {
-      bash.enable = true;
-      tmuxStartup.enable = true;
+    bash.enable = true;
+    tmuxStartup.enable = true;
   };
 
   programs.direnv = {
