@@ -1,4 +1,4 @@
-{inputs, ...}: let
+let
   bookmarks = {
     force = true;
     settings = [
@@ -23,17 +23,20 @@
           {
             name = "Nano Gpt";
             url = "https://nano-gpt.com/conversation/new";
+            tags = ["ai"];
           }
           {
             name = "NixOS";
             bookmarks = [
               {
-                name = "Nixpkgs";
+                name = "Search NixOS";
                 url = "search.nixos.org";
+                tags = ["nix"];
               }
               {
                 name = "My NixOS";
                 url = "https://mynixos.com/";
+                tags = ["nix"];
               }
             ];
           }
