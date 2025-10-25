@@ -28,6 +28,6 @@
     nos = "${pkgs.nh}/bin/nh os switch";
     nd = "${pkgs.nix-output-monitor}/bin/nom develop";
     ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
-    flake = "nix flake";
+    flake = "${pkgs.nix}/bin/nix flake";
   };
 }

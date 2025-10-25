@@ -141,6 +141,10 @@
                     }
                   ];
                 }
+                {
+                    name = "Nano Gpt";
+                    url = "https://nano-gpt.com/conversation/new";
+                }
               ];
             }
           ];
@@ -220,7 +224,7 @@
                   ];
                 }
               ];
-              definedAliases = ["@p"];
+              definedAliases = ["@p" "@per"];
             };
             google.metaData.hidden = true;
             bing.metaData.hidden = true;
