@@ -16,8 +16,8 @@
       ../../modules/home-manager/cava/cava.nix
       ../../modules/home-manager/browsers/browsers.nix
       ../../modules/home-manager/shells/shells.nix
-      ../../modules/custom/nvim-fzf/nvim-fzf.nix
-      ../../modules/custom/tmux-workspace/tmux-workspace.nix
+      # ../../modules/custom/nvim-fzf/nvim-fzf.nix
+      # ../../modules/custom/tmux-workspace/tmux-workspace.nix
       ../../modules/custom/backup-git/backup-git.nix
       # inputs.nur.modules.homeManager.default
     ]
@@ -73,8 +73,8 @@
   ];
 
   browsers = {
-      zen-browser.enable = true;
-  librewolf.enable = true;
+    zen-browser.enable = true;
+    librewolf.enable = true;
   };
 
   waybar = {
@@ -87,6 +87,9 @@
     bash.enable = true;
     tmuxStartup.enable = true;
   };
+
+  nvim-fzf.enable = true;
+  tmux-workspace.enable = true;
 
   programs.direnv = {
     enable = true;
