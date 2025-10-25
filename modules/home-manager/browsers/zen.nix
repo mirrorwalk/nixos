@@ -212,20 +212,6 @@
               ];
               definedAliases = ["@k" "@kagi"];
             };
-            Perplexity = {
-              urls = [
-                {
-                  template = "perplexity.ai/search/new";
-                  params = [
-                    {
-                      name = "q";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              definedAliases = ["@p" "@per"];
-            };
             google.metaData.hidden = true;
             bing.metaData.hidden = true;
           };

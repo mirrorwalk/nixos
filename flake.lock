@@ -239,11 +239,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1761352253,
-        "narHash": "sha256-Vo+yKiYnO8QyHajM8s1yeQOYJMwSIQ1Z/clxfUJBs8s=",
+        "lastModified": 1761352951,
+        "narHash": "sha256-vDSWzZwiSx14W7nqG1o4h/uVEg8n0BGnDp36xYaYT1U=",
         "ref": "refs/heads/master",
-        "rev": "bfd464e40d91cc0c5a46ee539e76967c83bcbd88",
-        "revCount": 19,
+        "rev": "d1376a6a881a90e8e9e6ca6fda9c252996713a3d",
+        "revCount": 20,
         "type": "git",
         "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
       },
