@@ -17,18 +17,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  hardware.graphics = {
-    enable = true;
-    # driSupport32Bit = true;
-  };
-
-  services.xserver.videoDrivers = ["amdgpu"];
-
-  programs.gamemode.enable = true;
-
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
-
   programs.nix-ld.enable = true;
   # programs.nix-ld.libraries = with pkgs; [
   # ];
@@ -37,14 +25,8 @@
 
   programs.hyprland.enable = true;
 
-  #Niri
-  # programs.niri.enable = true;
-
   # Ly
   services.displayManager.ly.enable = true;
-
-  security.pam.services.ly.enableGnomeKeyring = true;
-  security.polkit.enable = true;
 
   # Fonts
   fonts.fontDir.enable = true;
@@ -124,11 +106,6 @@
   environment.systemPackages = with pkgs; [
     file
     unzip
-    gnome-keyring
-    seahorse
-    libsecret
-    polkit_gnome
-    libgnome-keyring
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
