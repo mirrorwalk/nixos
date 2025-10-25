@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ../../modules/home-manager/hyprland/zentop-hyprland.nix
     ../../modules/home-manager/ghostty/ghostty.nix
@@ -8,6 +12,10 @@
     ../../modules/home-manager/shells/shells.nix
     ../../modules/home-manager/nvim/nvim.nix
     ../../modules/home-manager/browsers/browsers.nix
+    ../../modules/home-manager/waybar/waybar.nix
+    ../../modules/custom/backup-git/backup-git.nix
+      ../../modules/custom/nvim-fzf/nvim-fzf.nix
+    inputs.privateConfig.homeModules.default
   ];
 
   home.username = "brog";
@@ -55,20 +63,26 @@
     nix-direnv.enable = true;
   };
 
-  programs.ssh.enable = true;
-
-  programs.ssh.matchBlocks = {
-    "github.com" = {
-      hostname = "github.com";
-      user = "git";
-      identityFile = "~/.ssh/git";
-    };
-    "gitlab.com" = {
-      hostname = "gitlab.com";
-      user = "git";
-      identityFile = "~/.ssh/git";
-    };
+  waybar = {
+    hyprland.enable = true;
+    mullvad.enable = false;
+    wallpaper.enable = true;
   };
+
+  # programs.ssh.enable = true;
+  #
+  # programs.ssh.matchBlocks = {
+  #   "github.com" = {
+  #     hostname = "github.com";
+  #     user = "git";
+  #     identityFile = "~/.ssh/git";
+  #   };
+  #   "gitlab.com" = {
+  #     hostname = "gitlab.com";
+  #     user = "git";
+  #     identityFile = "~/.ssh/git";
+  #   };
+  # };
 
   browsers.zen-browser.enable = true;
 

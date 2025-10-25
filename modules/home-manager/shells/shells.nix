@@ -5,8 +5,10 @@
   imports = [
     ./zsh.nix
     ./bash.nix
-    ./tmuxStartup.nix
     ./fish.nix
+    ../../custom/tmux-startup/tmux-startup.nix
+    ../../custom/tmux-workspace/tmux-workspace.nix
+    ../../custom/nvim-fzf/nvim-fzf.nix
   ];
 
   home.shellAliases = {

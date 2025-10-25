@@ -1,38 +1,45 @@
-{ lib, pkgs, ...}:
 {
-  programs.zsh = lib.mkIf (lib.hasAttr "zsh" pkgs) {
-    initContent = ''
-      nvim-fzf-widget() {
-          $HOME/.local/bin/nvim-fzf/nvim-fzf.sh
-          zle reset-prompt
-      }
+  lib,
+  config,
+  ...
+}: {
+  options.nvim-fzf.enable = lib.mkEnableOption "enable nvim-fzf";
 
-      zle -N nvim-fzf-widget
+  config = lib.mkIf config.nvim-fzf.enable {
+    programs.zsh = lib.mkIf config.shells.zsh.enable {
+      initContent = ''
+        nvim-fzf-widget() {
+            $HOME/.local/bin/nvim-fzf/nvim-fzf.sh
+            zle reset-prompt
+        }
 
-      bindkey '^g' nvim-fzf-widget
-    '';
-  };
+        zle -N nvim-fzf-widget
 
-  programs.bash = lib.mkIf (lib.hasAttr "bash" pkgs) {
+        bindkey '^g' nvim-fzf-widget
+      '';
+    };
+
+    programs.bash = lib.mkIf config.shells.bash.enable {
       initExtra = ''
         bind '"\C-g":"/home/brog/.local/bin/nvim-fzf/nvim-fzf.sh\n"'
       '';
-  };
+    };
 
-  home.file = {
-    ".config/nvim-fzf/config".text = ''
-      [roots]
-      $HOME/.config/nixos
-      $HOME/.config
-      $HOME/projects
-      $HOME/notes
-      $HOME/.local/bin
+    home.file = {
+      ".config/nvim-fzf/config".text = ''
+        [roots]
+        $HOME/.config/nixos
+        $HOME/.config
+        $HOME/projects
+        $HOME/notes
+        $HOME/.local/bin
 
-      [ignore]
-      .git
-      node_modules
-      target
-      .direnv
-    '';
+        [ignore]
+        .git
+        node_modules
+        target
+        .direnv
+      '';
+    };
   };
 }
