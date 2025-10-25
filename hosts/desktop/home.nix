@@ -12,7 +12,6 @@
       ../../modules/home-manager/git/git.nix
       ../../modules/home-manager/jj/jj.nix
       ../../modules/home-manager/tmux/tmux.nix
-      ../../modules/home-manager/bash/bash.nix
       ../../modules/home-manager/nvim/nvim.nix
       ../../modules/home-manager/cava/cava.nix
       ../../modules/custom/nvim-fzf/nvim-fzf.nix
@@ -76,7 +75,10 @@
   waybar.hyprland.enable = true;
   waybar.mullvad.enable = true;
 
-  bash.tmuxStartup.enable = true;
+  shells = {
+      bash.enable = true;
+      tmuxStartup.enable = true;
+  };
 
   programs.direnv = {
     enable = true;

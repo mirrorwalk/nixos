@@ -12,15 +12,6 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      shellAliases = {
-        enix = "cd $HOME/.config/nixos && nvim $HOME/.config/nixos";
-        la = "ls -aF --color=auto";
-        tmuxs = "tmux new -s";
-        tmuxa = "tmux attach -t";
-        nix-shell = "nom-shell";
-        nix-build = "nom-build";
-        zbr = "zig build run";
-      };
       initContent = ''
           if [ -f $HOME/.config/zsh/paths.zsh ]; then
               source $HOME/.config/zsh/paths.zsh
