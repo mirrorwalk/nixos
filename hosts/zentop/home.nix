@@ -1,12 +1,13 @@
 {pkgs, ...}: {
   imports = [
-    ../../modules/home-manager/hyprland/desktop-hyprland.nix
+    ../../modules/home-manager/hyprland/zentop-hyprland.nix
     ../../modules/home-manager/ghostty/ghostty.nix
     ../../modules/home-manager/git/git.nix
     ../../modules/home-manager/jj/jj.nix
     ../../modules/home-manager/tmux/tmux.nix
-    ../../modules/home-manager/bash/bash.nix
+    ../../modules/home-manager/shells/shells.nix
     ../../modules/home-manager/nvim/nvim.nix
+    ../../modules/home-manager/browsers/browsers.nix
   ];
 
   home.username = "brog";
@@ -47,12 +48,33 @@
     pkgs.yt-dlp
   ];
 
+  shells.bash.enable = true;
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
 
+  programs.ssh.enable = true;
+
+  programs.ssh.matchBlocks = {
+    "github.com" = {
+      hostname = "github.com";
+      user = "git";
+      identityFile = "~/.ssh/git";
+    };
+    "gitlab.com" = {
+      hostname = "gitlab.com";
+      user = "git";
+      identityFile = "~/.ssh/git";
+    };
+  };
+
+  browsers.zen-browser.enable = true;
+
   wayland.windowManager.hyprland.enable = true;
+
+  programs.git.settings.user.signingkey = "~/.ssh/git";
 
   xdg.mimeApps = {
     enable = true;
