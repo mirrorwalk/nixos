@@ -4,17 +4,17 @@
   ...
 }: {
   imports = [
-    ../../modules/home-manager/hyprland/zentop-hyprland.nix
+    ../../modules/home-manager/hyprland/hyprland.nix
     ../../modules/home-manager/ghostty/ghostty.nix
     ../../modules/home-manager/git/git.nix
     ../../modules/home-manager/jj/jj.nix
-    ../../modules/home-manager/tmux/tmux.nix
     ../../modules/home-manager/shells/shells.nix
     ../../modules/home-manager/nvim/nvim.nix
     ../../modules/home-manager/browsers/browsers.nix
     ../../modules/home-manager/waybar/waybar.nix
+    ../../modules/home-manager/shells/shells.nix
     ../../modules/custom/backup-git/backup-git.nix
-    inputs.privateConfig.homeModules.default
+    inputs.privateConfig.homeModules.laptop
   ];
 
   home.username = "brog";
@@ -34,7 +34,6 @@
 
   home.packages = [
     pkgs.exfatprogs
-    pkgs.librewolf
     pkgs.ripgrep
     pkgs.pavucontrol
     pkgs.mullvad-browser
@@ -55,7 +54,20 @@
     pkgs.yt-dlp
   ];
 
-  shells.bash.enable = true;
+  hyprland.monitors = [
+    "eDP-1, 1920x1080@60, 0x0, 1"
+  ];
+
+  shells = {
+    bash.enable = true;
+    tmux = {
+      enable = true;
+      tmuxStartup = {
+        enable = true;
+        ghosttyIntegration = true;
+      };
+    };
+  };
 
   programs.direnv = {
     enable = true;
@@ -65,7 +77,7 @@
   waybar = {
     hyprland.enable = true;
     mullvad.enable = false;
-    wallpaper.enable = true;
+    # wallpaper.enable = true;
   };
 
   browsers.zen-browser.enable = true;
