@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   lib,
+  config,
   ...
 }: {
   imports =
@@ -70,6 +71,7 @@
     pkgs.lutris
     pkgs.protonup
     pkgs.yt-dlp
+    pkgs.cider
   ];
 
   browsers = {

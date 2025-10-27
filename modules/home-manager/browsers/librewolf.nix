@@ -1,4 +1,4 @@
-{bookmarks}: {
+{
   lib,
   pkgs,
   config,
@@ -12,18 +12,21 @@
     programs.librewolf = {
       enable = true;
       profiles.default = {
-        inherit bookmarks;
-        extensions = {
-          force = true;
-          packages = with inputs.firefox-addons.packages."x86_64-linux"; [
-            ublock-origin
-            proton-pass
-            sponsorblock
-            return-youtube-dislikes
-            dearrow
-            kagi-search
-          ];
-        };
+        # inherit bookmarks;
+        # extensions = {
+        #   force = true;
+        #   packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+        #     ublock-origin
+        #     proton-pass
+        #     sponsorblock
+        #     return-youtube-dislikes
+        #     dearrow
+        #     kagi-search
+        #   ];
+        # };
+        # extensions = extensions;
+        bookmarks = config.browsers.firefox-bookmarks;
+        extensions = config.browsers.firefox-extensions;
         search = {
           force = true;
           default = "Kagi";

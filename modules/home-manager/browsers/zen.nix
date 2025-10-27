@@ -1,7 +1,8 @@
-{bookmarks}: {
+{
   lib,
   config,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -19,7 +20,6 @@
           Value = value;
           Status = "locked";
         });
-
         mkPluginUrl = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
 
         mkExtensionEntry = {
@@ -34,7 +34,6 @@
           if pinned
           then base // {default_area = "navbar";}
           else base;
-
         mkExtensionSettings = builtins.mapAttrs (_: entry:
           if builtins.isAttrs entry
           then entry
@@ -70,20 +69,20 @@
           ];
         };
 
-        ExtensionSettings = mkExtensionSettings {
-          "uBlock0@raymondhill.net" = mkExtensionEntry {
-            id = "ublock-origin";
-            pinned = true;
-          };
-          "78272b6fa58f4a1abaac99321d503a20@proton.me" = mkExtensionEntry {
-            id = "proton-pass";
-            pinned = true;
-          };
-          "search@kagi.com" = "kagi-search-for-firefox";
-          "deArrow@ajay.app" = "dearrow";
-          "sponsorBlocker@ajay.app" = "sponsorblock";
-          "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = "return-youtube-dislikes";
-        };
+        # ExtensionSettings = mkExtensionSettings {
+        #   "uBlock0@raymondhill.net" = mkExtensionEntry {
+        #     id = "ublock-origin";
+        #     pinned = true;
+        #   };
+        #   "78272b6fa58f4a1abaac99321d503a20@proton.me" = mkExtensionEntry {
+        #     id = "proton-pass";
+        #     pinned = true;
+        #   };
+        #   "search@kagi.com" = "kagi-search-for-firefox";
+        #   "deArrow@ajay.app" = "dearrow";
+        #   "sponsorBlocker@ajay.app" = "sponsorblock";
+        #   "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = "return-youtube-dislikes";
+        # };
 
         Preferences = mkLockedAttrs {
           "browser.aboutConfig.showWarning" = false;
@@ -106,7 +105,9 @@
         };
       };
 
-      profiles."default" = rec {
+      profiles.default = rec {
+        extensions = config.browsers.firefox-extensions;
+        bookmarks = config.browsers.firefox-bookmarks;
         settings = {
           "zen.workspaces.continue-where-left-off" = true;
           "zen.workspaces.natural-scroll" = true;
@@ -120,7 +121,7 @@
           "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
         };
 
-        inherit bookmarks;
+        # inherit bookmarks;
 
         pinsForce = true;
         pins = {
@@ -151,7 +152,7 @@
           School = {
             id = "2115af96-33d6-4b3e-9fe9-3756d8507a53";
             workspace = spaces.School.id;
-            url = "https://unicornuniversity.net";
+            url = "https://unicornuniversity.net/cs";
             position = 4;
             isEssential = false;
             container = containers.School.id;
