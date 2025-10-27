@@ -83,9 +83,12 @@
 
   shells = {
     bash.enable = true;
-    tmuxStartup.enable = true;
     tmux = {
       enable = true;
+      tmuxStartup = {
+        enable = true;
+        ghosttyIntegration = true;
+      };
       tmux-workspace = {
         enable = true;
         rootFolders = {
@@ -107,7 +110,24 @@
     };
   };
 
-  nvim-fzf.enable = true;
+  programs.nvim-fzf = {
+    enable = true;
+    bashIntegration.enable = true;
+    roots = [
+      "$HOME/.config/nixos"
+      "$HOME/.config"
+      "$HOME/projects"
+      "$HOME/notes"
+      "$HOME/.local/bin"
+    ];
+    ignore = [
+      ".git"
+      "node_modules"
+      "target"
+      ".direnv"
+    ];
+  };
+  # nvim-fzf.enable = true;
 
   programs.direnv = {
     enable = true;

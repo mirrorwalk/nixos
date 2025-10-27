@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
+  imports = [
+    inputs.nvimFZF.default
+  ];
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;

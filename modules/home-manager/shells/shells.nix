@@ -7,7 +7,7 @@
     ./bash.nix
     ./fish.nix
     ./tmux.nix
-    ../../custom/nvim-fzf/nvim-fzf.nix
+    # ../../custom/nvim-fzf/nvim-fzf.nix
     ../../custom/enix/enix.nix
   ];
 

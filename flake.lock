@@ -79,6 +79,21 @@
         "type": "github"
       }
     },
+    "nvimFZF": {
+      "locked": {
+        "lastModified": 1761592919,
+        "narHash": "sha256-49qubk/rJ0ZCLashQ15BCyg1bmzduzRv3TLTiEJlufo=",
+        "owner": "mirrorwalk",
+        "repo": "nvim-fzf",
+        "rev": "d4ec90e5e22502cb55ccbf5e464dc4999c5034b0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mirrorwalk",
+        "repo": "nvim-fzf",
+        "type": "github"
+      }
+    },
     "privateConfig": {
       "inputs": {
         "nixpkgs": [
@@ -104,6 +119,7 @@
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "nvimFZF": "nvimFZF",
         "privateConfig": "privateConfig",
         "tmuxWorkspace": "tmuxWorkspace",
         "zen-browser": "zen-browser"
