@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nur = {
-    #   url = "github:nix-community/NUR";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     firefox-addons = {
         url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -17,10 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # stylix = {
-    #   url = "github:nix-community/stylix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
@@ -38,8 +30,6 @@
   outputs = {
     self,
     nixpkgs,
-    # nur,
-    # stylix,
     home-manager,
     privateConfig,
     ...
@@ -51,7 +41,6 @@
           ./hosts/desktop/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            # nixpkgs.overlays = [nur.overlays.default];
             home-manager.sharedModules = [
             ];
           }
