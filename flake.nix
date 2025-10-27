@@ -17,10 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # stylix = {
+    #   url = "github:nix-community/stylix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
@@ -30,6 +30,7 @@
 
     privateConfig = {
       url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
+      inputs.nixpkgs.follows = "nixpkgs";
       # url = "path:/home/brog/.config/nixos-private";
     };
   };
@@ -38,7 +39,7 @@
     self,
     nixpkgs,
     # nur,
-    stylix,
+    # stylix,
     home-manager,
     privateConfig,
     ...
@@ -48,7 +49,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/desktop/configuration.nix
-          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             # nixpkgs.overlays = [nur.overlays.default];
