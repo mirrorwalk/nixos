@@ -23,7 +23,7 @@
       # inputs.nur.modules.homeManager.default
     ]
     ++ lib.optionals (inputs ? privateConfig) [
-      inputs.privateConfig.homeModules.default
+      inputs.privateConfig.homeModules.desktop
     ];
 
   home.username = "brog";

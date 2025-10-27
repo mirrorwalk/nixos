@@ -261,17 +261,14 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1761583284,
-        "narHash": "sha256-t2w0fziLvV0h3tLCawlA+UpGEo2lvomsXHZbeMuwnyY=",
-        "ref": "refs/heads/master",
-        "rev": "45845c014a8bc1e4edcea54ea436ca2cbfc5c1f3",
-        "revCount": 33,
-        "type": "git",
-        "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
+        "lastModified": 1761584819,
+        "narHash": "sha256-a72Y2pofihoTWLixoLL3K9T0BcUl+usoKXlmftCABOY=",
+        "path": "/home/brog/.config/nixos-private",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
+        "path": "/home/brog/.config/nixos-private",
+        "type": "path"
       }
     },
     "root": {

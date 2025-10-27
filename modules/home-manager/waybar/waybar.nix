@@ -147,7 +147,7 @@ in {
           };
 
           network = {
-            interface = "enp42s0";
+            # interface = "enp42s0";
             interval = 5;
             format-disconnected = "Disconnected";
             # format-ethernet = "UP: {bandwidthUpBytes} | DOWN: {bandwidthDownBytes}";
