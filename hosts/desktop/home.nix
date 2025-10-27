@@ -67,7 +67,6 @@
     pkgs.lutris
     pkgs.protonup
     pkgs.yt-dlp
-    pkgs.cider
   ];
 
   browsers = {
