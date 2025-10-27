@@ -25,6 +25,11 @@
       # url = "path:/home/brog/.config/nixos-private";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tmuxWorkspace = {
+        # url = "path:/home/brog/.local/bin/tmux-workspace";
+        url = "github:mirrorwalk/tmux-workspace";
+    };
   };
 
   outputs = {
@@ -32,6 +37,7 @@
     nixpkgs,
     home-manager,
     privateConfig,
+    tmuxWorkspace,
     ...
   } @ inputs: {
     nixosConfigurations = {

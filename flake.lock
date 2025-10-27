@@ -86,11 +86,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761584852,
-        "narHash": "sha256-7EzDQ3n+Q8pQUxizy9F6qjzMgB1gsrbx3jkEnfI1qo4=",
+        "lastModified": 1761589602,
+        "narHash": "sha256-5RlshNt3SHRcuxeRIdVOj8ndIyeuleR67pp8MSzufMg=",
         "ref": "refs/heads/master",
-        "rev": "fc232c1e98e12b42b658b1a94cdc7762a6984c11",
-        "revCount": 38,
+        "rev": "8a28131630edd2dce93a6d8dc235c94bc0573028",
+        "revCount": 39,
         "type": "git",
         "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
       },
@@ -105,7 +105,23 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "privateConfig": "privateConfig",
+        "tmuxWorkspace": "tmuxWorkspace",
         "zen-browser": "zen-browser"
+      }
+    },
+    "tmuxWorkspace": {
+      "locked": {
+        "lastModified": 1761589384,
+        "narHash": "sha256-EFTc0BNfzmcKtxlMMIBGxGO/GXSn3stCQKHw+IdnPzs=",
+        "owner": "mirrorwalk",
+        "repo": "tmux-workspace",
+        "rev": "8d00fbb5016c332fee984dbdba9a585ba7c897a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mirrorwalk",
+        "repo": "tmux-workspace",
+        "type": "github"
       }
     },
     "zen-browser": {

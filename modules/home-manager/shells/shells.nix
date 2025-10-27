@@ -6,9 +6,10 @@
     ./zsh.nix
     ./bash.nix
     ./fish.nix
+    ./tmux.nix
     ../../custom/tmux-startup/tmux-startup.nix
-    ../../custom/tmux-workspace/tmux-workspace.nix
     ../../custom/nvim-fzf/nvim-fzf.nix
+    ../../custom/enix/enix.nix
   ];
 
   home.shellAliases = {

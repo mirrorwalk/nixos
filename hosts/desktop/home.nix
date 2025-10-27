@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   lib,
+  config,
   ...
 }: {
   imports =
@@ -11,13 +12,10 @@
       ../../modules/home-manager/waybar/waybar.nix
       ../../modules/home-manager/git/git.nix
       ../../modules/home-manager/jj/jj.nix
-      ../../modules/home-manager/tmux/tmux.nix
       ../../modules/home-manager/nvim/nvim.nix
       ../../modules/home-manager/cava/cava.nix
       ../../modules/home-manager/browsers/browsers.nix
       ../../modules/home-manager/shells/shells.nix
-      # ../../modules/custom/nvim-fzf/nvim-fzf.nix
-      # ../../modules/custom/tmux-workspace/tmux-workspace.nix
       ../../modules/custom/backup-git/backup-git.nix
     ]
     ++ lib.optionals (inputs ? privateConfig) [
@@ -86,10 +84,30 @@
   shells = {
     bash.enable = true;
     tmuxStartup.enable = true;
+    tmux = {
+      enable = true;
+      tmux-workspace = {
+        enable = true;
+        rootFolders = {
+          "${config.home.homeDirectory}/projects" = "1:1";
+          "${config.home.homeDirectory}/projects/zig" = "1:1";
+          "${config.home.homeDirectory}/projects/svelte" = "1:1";
+          "${config.home.homeDirectory}/projects/python" = "1:1";
+          "${config.home.homeDirectory}/.config" = "1:1";
+          "${config.home.homeDirectory}/.config/nvim" = "0:1";
+        };
+
+        customWindows = {
+          "${config.home.homeDirectory}/projects/passim" = "code:terminal";
+          "${config.home.homeDirectory}/projects/zig/taskrhythm" = "code:terminal";
+          "${config.home.homeDirectory}/projects/svelte/TaskFlow" = "code:server";
+          "${config.home.homeDirectory}/projects/TaterRogue" = "code:terminal";
+        };
+      };
+    };
   };
 
   nvim-fzf.enable = true;
-  tmux-workspace.enable = true;
 
   programs.direnv = {
     enable = true;
