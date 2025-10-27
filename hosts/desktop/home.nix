@@ -75,6 +75,21 @@
     librewolf.enable = true;
   };
 
+  hyprpaper = {
+      enable = true;
+    random = {
+      enable = true;
+      interval = "5";
+      hyprland = {
+        exec = true;
+        integration = true;
+      };
+      wallpaperFolders = [
+        "/home/brog/Pictures/Wallpapers/nature/"
+      ];
+    };
+  };
+
   waybar = {
     hyprland.enable = true;
     mullvad.enable = true;

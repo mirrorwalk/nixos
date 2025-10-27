@@ -101,11 +101,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761589602,
-        "narHash": "sha256-5RlshNt3SHRcuxeRIdVOj8ndIyeuleR67pp8MSzufMg=",
+        "lastModified": 1761604786,
+        "narHash": "sha256-p1pJ7r1tGq+DIrJWP7sqw/PsAVYwPsy3Ih1cTSjZzrA=",
         "ref": "refs/heads/master",
-        "rev": "8a28131630edd2dce93a6d8dc235c94bc0573028",
-        "revCount": 39,
+        "rev": "ece7b1157229e3e9342e92e677e867c7c9c5ec77",
+        "revCount": 40,
         "type": "git",
         "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
       },

@@ -56,25 +56,6 @@ in {
   };
 
   config = {
-    systemd.user.services = {
-      waybar = {
-        Unit = {
-          Description = "Waybar status bar";
-          After = ["graphical-session.target"];
-          Wants = ["graphical-session.target"];
-          ConditionEnvironment = "WAYLAND_DISPLAY";
-        };
-        Service = {
-          Type = "simple";
-          ExecStart = "${pkgs.waybar}/bin/waybar";
-          Restart = "on-failure";
-        };
-        Install = {
-          WantedBy = ["graphical-session.target"];
-        };
-      };
-    };
-
     programs.waybar = {
       enable = true;
       settings = {
@@ -206,7 +187,7 @@ in {
           };
 
           "custom/wallpaper-category" = {
-            exec = "basename $(readlink $HOME/.local/bin/random-wallpaper/hyprpaper/wallpapers)";
+            exec = "basename $(hyprpaper-random-control get-current)";
             format = "Wallpaper: {}";
             interval = 1;
           };

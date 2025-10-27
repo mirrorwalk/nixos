@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ../../custom/hyprpaper/hyprpaper.nix
+    ../hyprpaper/hyprpaper.nix
   ];
 
   programs.fuzzel = {
