@@ -48,7 +48,6 @@
     pkgs.tree
     pkgs.fd
     pkgs.jq
-    pkgs.bat
     pkgs.kdePackages.dolphin
     pkgs.nix-output-monitor
     pkgs.yt-dlp
@@ -67,6 +66,7 @@
         ghosttyIntegration = true;
       };
     };
+    bat.enable = true;
   };
 
   programs.direnv = {
@@ -131,7 +131,6 @@
   home.sessionVariables = {
     GTK_THEME = "Adwaita:dark";
     QT_STYLE_OVERRIDE = "adwaita-dark";
-    PAGER = "bat";
   };
 
   programs.home-manager.enable = true;

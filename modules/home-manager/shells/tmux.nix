@@ -2,6 +2,7 @@
   lib,
   config,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -9,7 +10,10 @@
     inputs.tmuxWorkspace.default
   ];
 
-  options.shells.tmux.enable = lib.mkEnableOption "Enable tmux";
+  options.shells.tmux = {
+      enable = lib.mkEnableOption "Enable tmux";
+      shellAliases.enable = lib.mkEnableOption "Enable tmux shell aliases";
+  };
 
   config = lib.mkIf config.shells.tmux.enable {
     programs.tmux = {
@@ -33,6 +37,10 @@
         bind-key q kill-window
         bind-key K kill-session
       '';
+    };
+    home.shellAliases = lib.mkIf config.shells.tmux.shellAliases.enable {
+      tmuxs = "${pkgs.tmux}/bin/tmux new -s";
+      tmuxa = "${pkgs.tmux}/bin/tmux attach-session -t nixos || ${pkgs.tmux}/bin/tmux switch-client -t ";
     };
   };
 }

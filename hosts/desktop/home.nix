@@ -13,7 +13,6 @@
       ../../modules/home-manager/git/git.nix
       ../../modules/home-manager/jj/jj.nix
       ../../modules/home-manager/nvim/nvim.nix
-      ../../modules/home-manager/cava/cava.nix
       ../../modules/home-manager/browsers/browsers.nix
       ../../modules/home-manager/shells/shells.nix
       ../../modules/custom/backup-git/backup-git.nix
@@ -60,7 +59,6 @@
     pkgs.tree
     pkgs.fd
     pkgs.jq
-    pkgs.bat
     pkgs.kdePackages.dolphin
     pkgs.nix-output-monitor
     pkgs.nushell
@@ -195,7 +193,6 @@
   home.sessionVariables = {
     GTK_THEME = "Adwaita:dark";
     QT_STYLE_OVERRIDE = "adwaita-dark";
-    PAGER = "bat";
   };
 
   programs.home-manager.enable = true;
