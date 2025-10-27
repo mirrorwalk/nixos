@@ -7,7 +7,7 @@
 }: {
   imports =
     [
-      ../../modules/home-manager/hyprland/desktop-hyprland.nix
+      ../../modules/home-manager/hyprland/hyprland.nix
       ../../modules/home-manager/ghostty/ghostty.nix
       ../../modules/home-manager/waybar/waybar.nix
       ../../modules/home-manager/git/git.nix

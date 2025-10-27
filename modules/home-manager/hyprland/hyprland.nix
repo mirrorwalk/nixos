@@ -168,7 +168,7 @@
           "$mainMod SHIFT, M, movetoworkspace, special:music"
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
-          "$mainMod, W, submap, wallpaper"
+          # "$mainMod, W, submap, wallpaper"
 
           ", XF86PowerOff, exec, ~/.local/bin/shutdown-menu.sh"
         ];
@@ -188,19 +188,19 @@
           "move 75% 75%, title:^(Picture-in-Picture)$"
         ];
       };
-      submaps = {
-        wallpaper = {
-          settings = {
-            bind = [
-              "SHIFT, c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
-              ", c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-choose-wallpaper.sh"
-              ", r, exec, systemctl --user restart hyprpaper-random.service"
-
-              ", escape, submap, reset"
-            ];
-          };
-        };
-      };
+      # submaps = {
+      #   wallpaper = {
+      #     settings = {
+      #       bind = [
+      #         "SHIFT, c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
+      #         ", c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-choose-wallpaper.sh"
+      #         ", r, exec, systemctl --user restart hyprpaper-random.service"
+      #
+      #         ", escape, submap, reset"
+      #       ];
+      #     };
+      #   };
+      # };
     };
   };
 }
