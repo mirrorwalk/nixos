@@ -2,7 +2,6 @@
   pkgs,
   inputs,
   lib,
-  config,
   ...
 }: {
   imports =
@@ -20,7 +19,6 @@
       # ../../modules/custom/nvim-fzf/nvim-fzf.nix
       # ../../modules/custom/tmux-workspace/tmux-workspace.nix
       ../../modules/custom/backup-git/backup-git.nix
-      # inputs.nur.modules.homeManager.default
     ]
     ++ lib.optionals (inputs ? privateConfig) [
       inputs.privateConfig.homeModules.desktop

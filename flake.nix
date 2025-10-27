@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     firefox-addons = {
-        url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -21,8 +21,8 @@
     };
 
     privateConfig = {
-      # url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
-# url = "path:/home/brog/.config/nixos-private";
+      url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
+      # url = "path:/home/brog/.config/nixos-private";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

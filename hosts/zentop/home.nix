@@ -68,21 +68,6 @@
     wallpaper.enable = true;
   };
 
-  # programs.ssh.enable = true;
-  #
-  # programs.ssh.matchBlocks = {
-  #   "github.com" = {
-  #     hostname = "github.com";
-  #     user = "git";
-  #     identityFile = "~/.ssh/git";
-  #   };
-  #   "gitlab.com" = {
-  #     hostname = "gitlab.com";
-  #     user = "git";
-  #     identityFile = "~/.ssh/git";
-  #   };
-  # };
-
   browsers.zen-browser.enable = true;
 
   wayland.windowManager.hyprland.enable = true;
