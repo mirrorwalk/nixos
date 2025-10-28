@@ -184,12 +184,10 @@ in {
   };
   config = lib.mkIf cfg.enable {
     home.packages = [
-      hyprpaper-random
       hyprpaper-random-control
     ];
 
     home.shellAliases = {
-      hr = "hyprpaper-random";
       hrc = "hyprpaper-random-control";
     };
 
