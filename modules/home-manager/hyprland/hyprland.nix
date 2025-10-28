@@ -12,10 +12,28 @@
   options.hyprland = {
     monitors = lib.mkOption {
       default = [
-        "DP-1, 2560x1440@120.00, 1920x0, 1"
+        "DP-1, 2560x1440@120.00, 0x0, 1"
       ];
       type = lib.types.listOf lib.types.nonEmptyStr;
       description = "Monitors config";
+    };
+
+    terminal = lib.mkOption {
+      description = "Default terminal";
+      type = lib.types.str;
+      default = "${pkgs.ghostty}/bin/ghostty";
+    };
+
+    menu = lib.mkOption {
+      description = "Default menu";
+      type = lib.types.str;
+      default = "${pkgs.fuzzel}/bin/fuzzel";
+    };
+
+    fileManager = lib.mkOption {
+      description = "Default file manager";
+      type = lib.types.str;
+      default = "${pkgs.kdePackages.dolphin}/bin/dolphin";
     };
   };
 
@@ -23,9 +41,9 @@
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
-        "$terminal" = "${pkgs.ghostty}/bin/ghostty";
-        "$fileManager" = "${pkgs.kdePackages.dolphin}/bin/dolphin";
-        "$menu" = "${pkgs.fuzzel}/bin/fuzzel";
+        "$terminal" = config.hyprland.terminal;
+        "$fileManager" = config.hyprland.fileManager;
+        "$menu" = config.hyprland.menu;
         "$webBrowser" = "${pkgs.mullvad-browser}/bin/mullvad-browser";
         "$mainMod" = "SUPER";
 
@@ -118,7 +136,6 @@
           "$mainMod, Return, exec, $terminal"
           "$mainMod, Q, killactive,"
           "$mainMod SHIFT, Q, exit,"
-          # "$mainMod, M, exit,"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, V, togglefloating,"
           "$mainMod, Space, exec, $menu"
@@ -165,7 +182,6 @@
           "$mainMod SHIFT, M, movetoworkspace, special:music"
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
-          # "$mainMod, W, submap, wallpaper"
 
           ", XF86PowerOff, exec, ~/.local/bin/shutdown-menu.sh"
         ];
@@ -185,19 +201,6 @@
           "move 75% 75%, title:^(Picture-in-Picture)$"
         ];
       };
-      # submaps = {
-      #   wallpaper = {
-      #     settings = {
-      #       bind = [
-      #         "SHIFT, c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-category-override.sh"
-      #         ", c, exec, ~/.local/bin/random-wallpaper/hyprpaper/hyprpaper-choose-wallpaper.sh"
-      #         ", r, exec, systemctl --user restart hyprpaper-random.service"
-      #
-      #         ", escape, submap, reset"
-      #       ];
-      #     };
-      #   };
-      # };
     };
   };
 }

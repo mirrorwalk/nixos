@@ -9,6 +9,7 @@
     ./bash.nix
     ./fish.nix
     ./tmux.nix
+    ./nushell.nix
     ../../custom/enix/enix.nix
   ];
   options.shells = {

@@ -112,6 +112,7 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "dvp";
+    options = "caps:escape";
   };
 
   programs.bash.enable = true;

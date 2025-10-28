@@ -61,10 +61,10 @@
     pkgs.jq
     pkgs.kdePackages.dolphin
     pkgs.nix-output-monitor
-    pkgs.nushell
     pkgs.lutris
     pkgs.protonup
     pkgs.yt-dlp
+    pkgs.rose-pine-hyprcursor
   ];
 
   browsers = {
@@ -123,6 +123,7 @@
         };
       };
     };
+    nu.enable = true;
   };
 
   programs.nvim-fzf = {
@@ -149,6 +150,10 @@
   };
 
   wayland.windowManager.hyprland.enable = true;
+
+  home.keyboard = {
+      xkbOptions = [ "caps:escape" ];
+  };
 
   xdg.mimeApps = {
     enable = true;
