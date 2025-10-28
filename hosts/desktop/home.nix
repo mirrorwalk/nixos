@@ -73,16 +73,18 @@
   };
 
   hyprpaper = {
-      enable = true;
+    enable = true;
     random = {
       enable = true;
-      interval = "5";
+      interval = "300";
       hyprland = {
         exec = true;
         integration = true;
       };
       wallpaperFolders = [
+        "/home/brog/Pictures/Wallpapers"
         "/home/brog/Pictures/Wallpapers/nature/"
+        "/home/brog/Pictures/Wallpapers/animals/"
       ];
     };
   };
