@@ -21,19 +21,19 @@
     };
 
     privateConfig = {
-      url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
-      # url = "path:/home/brog/.config/nixos-private";
+      # url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
+      url = "path:/home/brog/.config/nixos-private";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     tmuxWorkspace = {
-        # url = "path:/home/brog/.local/bin/tmux-workspace";
-        url = "github:mirrorwalk/tmux-workspace";
+        url = "path:/home/brog/.local/bin/tmux-workspace";
+        # url = "github:mirrorwalk/tmux-workspace";
     };
 
     nvimFZF = {
-        # url = "path:/home/brog/.local/bin/nvim-fzf";
-        url = "github:mirrorwalk/nvim-fzf";
+        url = "path:/home/brog/.local/bin/nvim-fzf";
+        # url = "github:mirrorwalk/nvim-fzf";
     };
   };
 

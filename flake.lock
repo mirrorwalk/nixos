@@ -81,17 +81,14 @@
     },
     "nvimFZF": {
       "locked": {
-        "lastModified": 1761592919,
-        "narHash": "sha256-49qubk/rJ0ZCLashQ15BCyg1bmzduzRv3TLTiEJlufo=",
-        "owner": "mirrorwalk",
-        "repo": "nvim-fzf",
-        "rev": "d4ec90e5e22502cb55ccbf5e464dc4999c5034b0",
-        "type": "github"
+        "lastModified": 1761593558,
+        "narHash": "sha256-2MpU+hi16IbETqR4EmI0awkwGqXgYtuVghSq5M2oXa8=",
+        "path": "/home/brog/.local/bin/nvim-fzf",
+        "type": "path"
       },
       "original": {
-        "owner": "mirrorwalk",
-        "repo": "nvim-fzf",
-        "type": "github"
+        "path": "/home/brog/.local/bin/nvim-fzf",
+        "type": "path"
       }
     },
     "privateConfig": {
@@ -101,17 +98,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1761604786,
-        "narHash": "sha256-p1pJ7r1tGq+DIrJWP7sqw/PsAVYwPsy3Ih1cTSjZzrA=",
-        "ref": "refs/heads/master",
-        "rev": "ece7b1157229e3e9342e92e677e867c7c9c5ec77",
-        "revCount": 40,
-        "type": "git",
-        "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
+        "lastModified": 1761609789,
+        "narHash": "sha256-xAz0lIBiqQktzbrST8AeZH1kIrrLhDsEpn2O2sCiW0A=",
+        "path": "/home/brog/.config/nixos-private",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
+        "path": "/home/brog/.config/nixos-private",
+        "type": "path"
       }
     },
     "root": {
@@ -127,17 +121,14 @@
     },
     "tmuxWorkspace": {
       "locked": {
-        "lastModified": 1761589384,
-        "narHash": "sha256-EFTc0BNfzmcKtxlMMIBGxGO/GXSn3stCQKHw+IdnPzs=",
-        "owner": "mirrorwalk",
-        "repo": "tmux-workspace",
-        "rev": "8d00fbb5016c332fee984dbdba9a585ba7c897a2",
-        "type": "github"
+        "lastModified": 1761589386,
+        "narHash": "sha256-7cCtPVl7wMiTODfueAw9RFK/gocxY7tDjMT0Nv4c/f8=",
+        "path": "/home/brog/.local/bin/tmux-workspace",
+        "type": "path"
       },
       "original": {
-        "owner": "mirrorwalk",
-        "repo": "tmux-workspace",
-        "type": "github"
+        "path": "/home/brog/.local/bin/tmux-workspace",
+        "type": "path"
       }
     },
     "zen-browser": {

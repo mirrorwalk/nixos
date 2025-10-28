@@ -140,7 +140,6 @@
       ".direnv"
     ];
   };
-  # nvim-fzf.enable = true;
 
   programs.direnv = {
     enable = true;

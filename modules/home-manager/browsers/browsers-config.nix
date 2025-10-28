@@ -7,6 +7,7 @@
   options = {
     browsers.firefox-extensions = lib.mkOption {
       description = "Firefox Extensions";
+      type = lib.types.attrs;
       default = {
         force = true;
         packages = with inputs.firefox-addons.packages.${pkgs.system}; [
@@ -21,10 +22,12 @@
     };
     browsers.firefox-bookmarks = {
       force = lib.mkOption {
-          default = true;
+        default = true;
+        type = lib.types.bool;
       };
       settings = lib.mkOption {
         description = "Firefox bookmarks";
+        type = lib.types.listOf lib.types.attrs;
       };
     };
   };

@@ -14,6 +14,7 @@
       default = [
         "DP-1, 2560x1440@120.00, 1920x0, 1"
       ];
+      type = lib.types.listOf lib.types.nonEmptyStr;
       description = "Monitors config";
     };
   };

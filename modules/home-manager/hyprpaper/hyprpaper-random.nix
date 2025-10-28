@@ -162,16 +162,21 @@ in {
     enable = lib.mkEnableOption "Enable random hyprpaper";
     monitor = lib.mkOption {
       default = "DP-1";
+      type = lib.types.nonEmptyStr;
     };
+
     wallpaperFolders = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = ["/home/brog/Pictures/Wallpapers"];
       description = "List of wallpaper folder paths to cycle through";
     };
+
     interval = lib.mkOption {
       description = "Interval between automatic changes of wallpaper";
       default = "300";
+      type = lib.types.nonEmptyStr;
     };
+
     hyprland = {
       exec = lib.mkEnableOption "Put it into exec-once in hyprland config";
       integration = lib.mkEnableOption "Integrate with hyprland and put usefull shortcuts";

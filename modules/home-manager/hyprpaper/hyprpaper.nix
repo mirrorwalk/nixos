@@ -11,6 +11,7 @@
       enable = lib.mkEnableOption "Enables hyprpaper";
     defaultWallpaper = lib.mkOption {
       default = "/home/brog/Pictures/Wallpapers/thumb-1920-1345286.png";
+      type = lib.types.str;
       description = "The default wallpaper to load";
     };
     monitor = lib.mkOption {
