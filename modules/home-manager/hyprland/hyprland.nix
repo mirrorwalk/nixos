@@ -29,10 +29,6 @@
         "$webBrowser" = "${pkgs.mullvad-browser}/bin/mullvad-browser";
         "$mainMod" = "SUPER";
 
-        # monitor = [
-        #   "DP-1, 2560x1440@120.00, 1920x0, 1"
-        #   "HDMI-A-1, 1920x1200@59.95, 0x0, 1"
-        # ];
         monitor = config.hyprland.monitors;
 
         "exec-once" = [
