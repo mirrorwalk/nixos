@@ -38,6 +38,13 @@ else
 fi
 
 for repo in "${REPOS[@]}"; do
+    if [ ! -d "$repo/.git" ]; then
+        echo "No git repo found in $repo, skipping..."
+        continue
+    fi
+done
+
+for repo in "${REPOS[@]}"; do
     echo
     echo "=== Processing $repo ==="
 
