@@ -97,6 +97,7 @@
     bash.enable = true;
     tmux = {
       enable = true;
+      shellAliases.enable = true;
       tmuxStartup = {
         enable = true;
         ghosttyIntegration = true;
