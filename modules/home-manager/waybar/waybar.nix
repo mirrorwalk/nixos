@@ -8,7 +8,7 @@
     if config.waybar.hyprland.enable
     then [
       "hyprland/workspaces"
-      "custom/hyprland-music"
+      # "custom/hyprland-music"
       "custom/separator"
       "hyprland/submap"
       "custom/separator"

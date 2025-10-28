@@ -38,14 +38,12 @@
 
   home.packages = [
     pkgs.exfatprogs
-    pkgs.mullvad-vpn
     pkgs.ripgrep
     pkgs.pavucontrol
     pkgs.mullvad-browser
     pkgs.tor
     pkgs.tor-browser
     pkgs.pipewire
-    pkgs.wofi
     pkgs.keepassxc
     pkgs.mpv
     pkgs.brave
@@ -69,7 +67,7 @@
 
   browsers = {
     zen-browser.enable = true;
-    librewolf.enable = true;
+    # librewolf.enable = true;
   };
 
   hyprpaper = {

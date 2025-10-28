@@ -178,8 +178,8 @@
           "$mainMod SHIFT, 0, movetoworkspace, 10"
           "$mainMod, S, togglespecialworkspace, over"
           "$mainMod SHIFT, S, movetoworkspace, special:over"
-          "$mainMod, M, togglespecialworkspace, music"
-          "$mainMod SHIFT, M, movetoworkspace, special:music"
+          # "$mainMod, M, togglespecialworkspace, music"
+          # "$mainMod SHIFT, M, movetoworkspace, special:music"
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
 
