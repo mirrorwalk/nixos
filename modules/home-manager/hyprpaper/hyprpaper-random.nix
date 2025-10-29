@@ -121,7 +121,7 @@
                         start_timer
                     fi
                     ;;
-                set_interval)
+                set-interval)
                     echo "$args" > "$INTERVAL_FILE"
                     echo "Interval set to: $args"
                     start_timer
@@ -186,19 +186,19 @@
         change|enable|disable|quit|restart_timer)
             echo "$1" > "$PIPE"
             ;;
-        set_interval)
+        set-interval)
             if [[ -z "$2" ]]; then
-                echo "Error: set_interval requires a value"
+                echo "Error: set-interval requires a value"
                 exit 1
             fi
-            echo "set_interval $2" > "$PIPE"
+            echo "set-interval $2" > "$PIPE"
             ;;
         get-current)
             CURRENT_INDEX=$(cat "$STATE_FILE" 2>/dev/null || echo "0")
             echo "''${FOLDERS[$CURRENT_INDEX]}"
             ;;
         *)
-            echo "Usage: $0 {start|change|change-category|enable|disable|set_interval <seconds>|restart_timer|get-current|quit}"
+            echo "Usage: $0 {start|change|change-category|enable|disable|set-interval <seconds>|restart_timer|get-current|quit}"
             exit 1
             ;;
     esac
@@ -213,7 +213,7 @@
           COMPREPLY=()
           cur="''${COMP_WORDS[COMP_CWORD]}"
           prev="''${COMP_WORDS[COMP_CWORD-1]}"
-          opts="change change-category enable disable set_interval get-current quit"
+          opts="change change-category enable disable set-interval get-current quit"
 
           if [[ ''${COMP_CWORD} -eq 1 ]]; then
               COMPREPLY=( $(compgen -W "''${opts}" -- ''${cur}) )
@@ -221,7 +221,7 @@
           fi
 
           case "''${prev}" in
-              set_interval)
+              set-interval)
                   COMPREPLY=( $(compgen -W "60 <tel:300 600 1800> 3600" -- ''${cur}) )
                   return 0
                   ;;
@@ -254,6 +254,7 @@ in {
 
     hyprland.enable = lib.mkEnableOption "Enable hyprland integration";
   };
+
   config = lib.mkIf cfg.enable {
     home.packages = [
       hyprpaper-random-control
