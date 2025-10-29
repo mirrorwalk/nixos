@@ -14,6 +14,8 @@
     ../../modules/home-manager/waybar/waybar.nix
     ../../modules/home-manager/shells/shells.nix
     ../../modules/custom/backup-git/backup-git.nix
+    ../../modules/system-config/system-config.nix
+    ../../modules/style-config/style-config.nix
     inputs.privateConfig.homeModules.laptop
   ];
 
@@ -53,8 +55,13 @@
     pkgs.yt-dlp
   ];
 
-  hyprland.monitors = [
-    "eDP-1, 1920x1080@60, 0x0, 1"
+  systemConfig.monitors = [
+    {
+      name = "eDP-1";
+      width = 1920;
+      height = 1080;
+      refreshRate = 60.0;
+    }
   ];
 
   shells = {
@@ -77,7 +84,6 @@
   waybar = {
     hyprland.enable = true;
     mullvad.enable = false;
-    # wallpaper.enable = true;
   };
 
   browsers.zen-browser.enable = true;
