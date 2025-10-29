@@ -8,9 +8,9 @@
   imports = [
     inputs.zen-browser.homeModules.twilight
   ];
-  options = {
-    browsers.zen-browser.enable = lib.mkEnableOption "Enables Zen browser";
-  };
+
+  options.browsers.zen-browser.enable = lib.mkEnableOption "Enables Zen browser";
+
   config = lib.mkIf config.browsers.zen-browser.enable {
     programs.zen-browser = {
       enable = true;
@@ -69,21 +69,6 @@
           ];
         };
 
-        # ExtensionSettings = mkExtensionSettings {
-        #   "uBlock0@raymondhill.net" = mkExtensionEntry {
-        #     id = "ublock-origin";
-        #     pinned = true;
-        #   };
-        #   "78272b6fa58f4a1abaac99321d503a20@proton.me" = mkExtensionEntry {
-        #     id = "proton-pass";
-        #     pinned = true;
-        #   };
-        #   "search@kagi.com" = "kagi-search-for-firefox";
-        #   "deArrow@ajay.app" = "dearrow";
-        #   "sponsorBlocker@ajay.app" = "sponsorblock";
-        #   "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = "return-youtube-dislikes";
-        # };
-
         Preferences = mkLockedAttrs {
           "browser.aboutConfig.showWarning" = false;
           # "browser.tabs.warnOnClose" = false;
@@ -106,8 +91,8 @@
       };
 
       profiles.default = rec {
-        extensions = config.browsers.firefox-extensions;
-        bookmarks = config.browsers.firefox-bookmarks;
+        extensions = config.browsers.firefox.extensions;
+        bookmarks = config.browsers.firefox.bookmarks;
         settings = {
           "zen.workspaces.continue-where-left-off" = true;
           "zen.workspaces.natural-scroll" = true;
@@ -121,8 +106,6 @@
           "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
         };
 
-        # inherit bookmarks;
-
         pinsForce = true;
         pins = {
           Music = {
@@ -133,6 +116,7 @@
             isEssential = false;
             container = containers."Google".id;
           };
+
           GitHub = {
             id = "962ebf2c-d92e-438f-aab9-193cccb49054";
             workspace = spaces.Programming.id;
@@ -141,6 +125,7 @@
             isEssential = false;
             container = containers."Programming".id;
           };
+
           GitLab = {
             id = "24fa2a42-d903-46af-8b03-c49a5b369ed8";
             workspace = spaces.Programming.id;
@@ -149,6 +134,7 @@
             isEssential = false;
             container = containers."Programming".id;
           };
+
           School = {
             id = "2115af96-33d6-4b3e-9fe9-3756d8507a53";
             workspace = spaces.School.id;
@@ -157,6 +143,7 @@
             isEssential = false;
             container = containers.School.id;
           };
+
           Proton-Mail = {
             id = "ac5aad93-e1fe-4c7a-8253-9deda8c39721";
             workspace = spaces.Proton.id;
@@ -169,27 +156,12 @@
 
         search = {
           force = true;
-          default = "Kagi";
-          privateDefault = "Kagi";
-          engines = {
-            Kagi = {
-              urls = [
-                {
-                  template = "https://kagi.com/search";
-                  params = [
-                    {
-                      name = "q";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              definedAliases = ["@k" "@kagi"];
-            };
-            perplexity.metaData.alias = "@p";
-            google.metaData.hidden = true;
-            bing.metaData.hidden = true;
-          };
+          default = config.browsers.search.defaultEngine;
+          privateDefault = config.browsers.search.private.defaultEngine;
+            # if config.browsers.search.private.same
+            # then config.browsers.search.defaultEngine
+            # else config.browsers.search.private.defaultEngine;
+          engines = config.browsers.search.engines;
         };
 
         containersForce = true;

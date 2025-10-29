@@ -38,7 +38,6 @@
     pkgs.exfatprogs
     pkgs.ripgrep
     pkgs.pavucontrol
-    pkgs.mullvad-browser
     pkgs.tor
     pkgs.tor-browser
     pkgs.pipewire
@@ -83,6 +82,11 @@
 
   browsers = {
     zen-browser.enable = true;
+    librewolf.enable = true;
+    mullvad = {
+        enable = true;
+        defaultBrowser = true;
+    };
   };
 
   programs.fzf.enable = true;
@@ -107,7 +111,6 @@
     nu.enable = true;
     tmux = {
       enable = true;
-      shellAliases.enable = true;
       tmuxStartup = {
         enable = true;
         ghosttyIntegration = true;

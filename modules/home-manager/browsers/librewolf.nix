@@ -5,50 +5,22 @@
   inputs,
   ...
 }: {
-  options = {
-    browsers.librewolf.enable = lib.mkEnableOption "Enables librewolf";
-  };
+  options.browsers.librewolf.enable = lib.mkEnableOption "Enables librewolf";
+
   config = lib.mkIf config.browsers.librewolf.enable {
     programs.librewolf = {
       enable = true;
       profiles.default = {
-        # inherit bookmarks;
-        # extensions = {
-        #   force = true;
-        #   packages = with inputs.firefox-addons.packages.${pkgs.system}; [
-        #     ublock-origin
-        #     proton-pass
-        #     sponsorblock
-        #     return-youtube-dislikes
-        #     dearrow
-        #     kagi-search
-        #   ];
-        # };
-        # extensions = extensions;
-        bookmarks = config.browsers.firefox-bookmarks;
-        extensions = config.browsers.firefox-extensions;
+        bookmarks = config.browsers.firefox.bookmarks;
+        extensions = config.browsers.firefox.extensions;
         search = {
           force = true;
-          default = "Kagi";
-          privateDefault = "Kagi";
-          engines = {
-            Kagi = {
-              urls = [
-                {
-                  template = "https://kagi.com/search";
-                  params = [
-                    {
-                      name = "q";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              definedAliases = ["@k" "@kagi"];
-            };
-            google.metaData.hidden = true;
-            bing.metaData.hidden = true;
-          };
+          default = config.browsers.search.defaultEngine;
+          privateDefault = config.browsers.search.private.defaultEngine;
+            # if config.browsers.search.private.same
+            # then config.browsers.search.defaultEngine
+            # else config.browsers.search.private.defaultEngine;
+          engines = config.browsers.search.engines;
         };
       };
     };

@@ -2,38 +2,145 @@
   lib,
   inputs,
   pkgs,
+  config,
   ...
 }: {
-  options = {
-    browsers.firefox-extensions = lib.mkOption {
-      description = "Firefox Extensions";
-      type = lib.types.attrs;
-      default = {
-        force = true;
-        packages = with inputs.firefox-addons.packages.${pkgs.system}; [
-          ublock-origin
-          proton-pass
-          sponsorblock
-          return-youtube-dislikes
-          dearrow
-          kagi-search
-        ];
+  options.browsers = {
+    firefox = {
+      extensions = lib.mkOption {
+        description = "Firefox Extensions";
+        type = lib.types.attrs;
+        default = {
+          force = true;
+          packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+            ublock-origin
+            proton-pass
+            sponsorblock
+            return-youtube-dislikes
+            dearrow
+            kagi-search
+          ];
+        };
+      };
+
+      bookmarks = {
+        force = lib.mkOption {
+          default = true;
+          type = lib.types.bool;
+        };
+        settings = lib.mkOption {
+          description = "Firefox bookmarks";
+          type = lib.types.listOf lib.types.attrs;
+        };
       };
     };
-    browsers.firefox-bookmarks = {
-      force = lib.mkOption {
-        default = true;
-        type = lib.types.bool;
+
+    search = {
+      defaultEngine = lib.mkOption {
+        type = lib.types.nonEmptyStr;
+        description = "default search engine";
       };
-      settings = lib.mkOption {
-        description = "Firefox bookmarks";
-        type = lib.types.listOf lib.types.attrs;
+
+      private = {
+        defaultEngine = lib.mkOption {
+          type = lib.types.str;
+          default = config.browsers.search.defaultEngine;
+          description = "default private search engine";
+        };
       };
+
+      engines = lib.mkOption {
+        type = lib.types.attrsOf (lib.types.submodule {
+          options = {
+            urls = lib.mkOption {
+              type = lib.types.listOf (lib.types.submodule {
+                options = {
+                  template = lib.mkOption {
+                    type = lib.types.str;
+                  };
+
+                  params = lib.mkOption {
+                    type = lib.types.listOf (lib.types.submodule {
+                      options = {
+                        name = lib.mkOption {
+                          type = lib.types.str;
+                        };
+
+                        value = lib.mkOption {
+                          type = lib.types.str;
+                        };
+                      };
+                    });
+
+                    default = [];
+                  };
+                };
+              });
+              default = [];
+            };
+
+            definedAliases = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [];
+            };
+
+            metaData = lib.mkOption {
+              type = lib.types.attrs;
+              default = {};
+            };
+          };
+        });
+      };
+    };
+
+    defaultAssociations = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "application/x-extension-shtml"
+        "application/x-extension-xhtml"
+        "application/x-extension-html"
+        "application/x-extension-xht"
+        "application/x-extension-htm"
+        "x-scheme-handler/unknown"
+        "x-scheme-handler/mailto"
+        "x-scheme-handler/chrome"
+        "x-scheme-handler/about"
+        "x-scheme-handler/https"
+        "x-scheme-handler/http"
+        "application/xhtml+xml"
+        "application/json"
+        "text/plain"
+        "text/html"
+      ];
     };
   };
-  config = {
-    # browsers.firefox-bookmarks.base-bookmarks = [
-    browsers.firefox-bookmarks.settings = [
+
+  config.browsers = {
+    search = {
+      defaultEngine = "Kagi";
+      engines = {
+        Kagi = {
+          urls = [
+            {
+              template = "https://kagi.com/search";
+              params = [
+                {
+                  name = "q";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+          definedAliases = ["@k" "@kagi"];
+        };
+
+        perplexity.metaData.alias = "@p";
+        google.metaData.hidden = true;
+        bing.metaData.hidden = true;
+      };
+    };
+
+    firefox.bookmarks.settings = [
       {
         toolbar = true;
         bookmarks = [
