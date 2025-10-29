@@ -11,8 +11,8 @@
   ];
 
   options.shells.tmux = {
-      enable = lib.mkEnableOption "Enable tmux";
-      shellAliases.enable = lib.mkEnableOption "Enable tmux shell aliases";
+    enable = lib.mkEnableOption "Enable tmux";
+    shellAliases.enable = lib.mkEnableOption "Enable tmux shell aliases";
   };
 
   config = lib.mkIf config.shells.tmux.enable {
@@ -44,5 +44,3 @@
     };
   };
 }
-  
-
