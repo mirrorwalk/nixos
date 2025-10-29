@@ -21,16 +21,16 @@ in {
           default = 60;
         };
         x = mkOption {
-            type = types.int;
-            default = 0;
+          type = types.int;
+          default = 0;
         };
         y = mkOption {
-            type = types.int;
-            default = 0;
+          type = types.int;
+          default = 0;
         };
         scale = mkOption {
-            type = types.int;
-            default = 1;
+          type = types.int;
+          default = 1;
         };
         enabled = mkOption {
           type = types.bool;
