@@ -7,7 +7,7 @@
   cfg = config.hyprpaper.random;
 
   pipe = "/tmp/hyprpaper-random.pipe";
-  wallpaperFolders = cfg.wallpaperFolders;
+  wallpaperFolders = config.styleConfig.wallpaperFolders;
   initialFolder = lib.head wallpaperFolders;
 
   hyprpaper-random = pkgs.writeShellScriptBin "hyprpaper-random" ''
@@ -17,12 +17,12 @@
     ENABLED_FILE="$STATE_DIR/enabled"
     INTERVAL_FILE="$STATE_DIR/interval"
     TIMER_PID_FILE="$STATE_DIR/timer.pid"
-    WALLPAPER_FOLDER="${initialFolder}"
+    WALLPAPER_FOLDER="${toString initialFolder}"
 
     # Create state directory
     mkdir -p "$STATE_DIR"
     echo "true" > "$ENABLED_FILE"
-    echo "${cfg.interval}" > "$INTERVAL_FILE"
+    echo "${toString cfg.interval}" > "$INTERVAL_FILE"
     echo "$HYPRLAND_INSTANCE_SIGNATURE" > /home/brog/instance_sig_start.txt
 
     # Create named pipe if it doesn't exist
@@ -38,7 +38,7 @@
 
     change_wallpaper() {
         STATE_FILE="$HOME/.cache/hyprpaper-category-index"
-        FOLDERS=(${lib.concatMapStringsSep " " (f: ''"${f}"'') wallpaperFolders})
+        FOLDERS=(${lib.concatMapStringsSep " " (f: ''"${toString f}"'') wallpaperFolders})
 
         if [[ -f "$STATE_FILE" ]]; then
             CURRENT_INDEX=$(cat "$STATE_FILE")
@@ -141,7 +141,7 @@
     #!/usr/bin/env bash
     PIPE=${pipe}
     STATE_FILE="$HOME/.cache/hyprpaper-category-index"
-    FOLDERS=(${lib.concatMapStringsSep " " (f: ''"${f}"'') wallpaperFolders})
+    FOLDERS=(${lib.concatMapStringsSep " " (f: ''"${toString f}"'') wallpaperFolders})
 
     start_daemon() {
         if [[ -p "$PIPE" ]]; then
@@ -228,7 +228,6 @@
           esac
       }
 
-      complete -F _hyprpaper-random-control_completions hrc
       complete -F _hyprpaper-random-control_completions hyprpaper-random-control
     '';
   };
@@ -240,16 +239,10 @@ in {
       type = lib.types.nonEmptyStr;
     };
 
-    wallpaperFolders = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = ["/home/brog/Pictures/Wallpapers"];
-      description = "List of wallpaper folder paths to cycle through";
-    };
-
     interval = lib.mkOption {
       description = "Interval between automatic changes of wallpaper";
-      default = "300";
-      type = lib.types.nonEmptyStr;
+      default = 300;
+      type = lib.types.int;
     };
 
     hyprland.enable = lib.mkEnableOption "Enable hyprland integration";

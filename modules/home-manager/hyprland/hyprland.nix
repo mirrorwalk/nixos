@@ -10,14 +10,6 @@
   ];
 
   options.hyprland = {
-    monitors = lib.mkOption {
-      default = [
-        "DP-1, 2560x1440@120.00, 0x0, 1"
-      ];
-      type = lib.types.listOf lib.types.nonEmptyStr;
-      description = "Monitors config";
-    };
-
     terminal = lib.mkOption {
       description = "Default terminal";
       type = lib.types.str;
@@ -47,7 +39,18 @@
         "$webBrowser" = "${pkgs.mullvad-browser}/bin/mullvad-browser";
         "$mainMod" = "SUPER";
 
-        monitor = config.hyprland.monitors;
+        monitor =
+          map (
+            m: let
+              resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+              position = "${toString m.x}x${toString m.y}";
+            in "${m.name},${
+              if m.enabled
+              then "${resolution},${position},${toString m.scale}"
+              else "disabled"
+            }"
+          )
+          (config.systemConfig.monitors);
 
         exec-once = [
           "waybar"

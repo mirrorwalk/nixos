@@ -5,21 +5,20 @@
   config,
   ...
 }: {
-  imports =
-    [
-      ../../modules/home-manager/hyprland/hyprland.nix
-      ../../modules/home-manager/ghostty/ghostty.nix
-      ../../modules/home-manager/waybar/waybar.nix
-      ../../modules/home-manager/git/git.nix
-      ../../modules/home-manager/jj/jj.nix
-      ../../modules/home-manager/nvim/nvim.nix
-      ../../modules/home-manager/browsers/browsers.nix
-      ../../modules/home-manager/shells/shells.nix
-      ../../modules/custom/backup-git/backup-git.nix
-    ]
-    ++ lib.optionals (inputs ? privateConfig) [
-      inputs.privateConfig.homeModules.desktop
-    ];
+  imports = [
+    ../../modules/home-manager/hyprland/hyprland.nix
+    ../../modules/home-manager/ghostty/ghostty.nix
+    ../../modules/home-manager/waybar/waybar.nix
+    ../../modules/home-manager/git/git.nix
+    ../../modules/home-manager/jj/jj.nix
+    ../../modules/home-manager/nvim/nvim.nix
+    ../../modules/home-manager/browsers/browsers.nix
+    ../../modules/home-manager/shells/shells.nix
+    ../../modules/custom/backup-git/backup-git.nix
+    ../../modules/system-config/system-config.nix
+    ../../modules/style-config/style-config.nix
+    inputs.privateConfig.homeModules.desktop
+  ];
 
   home.username = "brog";
   home.homeDirectory = "/home/brog";
@@ -65,6 +64,24 @@
     pkgs.rose-pine-hyprcursor
   ];
 
+  styleConfig = {
+    defaultWallpaper = /home/brog/Pictures/Wallpapers/thumb-1920-1345286.png;
+    wallpaperFolders = [
+      /home/brog/Pictures/Wallpapers
+      /home/brog/Pictures/Wallpapers/nature
+      /home/brog/Pictures/Wallpapers/animals
+    ];
+  };
+
+  systemConfig.monitors = [
+    {
+      name = "DP-1";
+      width = 2560;
+      height = 1440;
+      refreshRate = 120.0;
+    }
+  ];
+
   browsers = {
     zen-browser.enable = true;
     # librewolf.enable = true;
@@ -74,13 +91,8 @@
     enable = true;
     random = {
       enable = true;
-      interval = "300";
+      interval = 10;
       hyprland.enable = true;
-      wallpaperFolders = [
-        "/home/brog/Pictures/Wallpapers"
-        "/home/brog/Pictures/Wallpapers/nature/"
-        "/home/brog/Pictures/Wallpapers/animals/"
-      ];
     };
   };
 

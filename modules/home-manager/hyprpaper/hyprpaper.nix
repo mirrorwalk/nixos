@@ -14,17 +14,22 @@
       type = lib.types.str;
       description = "The default wallpaper to load";
     };
-    monitor = lib.mkOption {
-      default = "DP-1";
-    };
   };
 
   config = lib.mkIf config.hyprpaper.enable {
     services.hyprpaper = {
       enable = true;
       settings = {
-        preload = config.hyprpaper.defaultWallpaper;
-        wallpaper = "${config.hyprpaper.monitor},${config.hyprpaper.defaultWallpaper}";
+        preload = toString config.styleConfig.defaultWallpaper;
+        wallpaper =
+          map (
+            m: "${m.name},${toString config.styleConfig.defaultWallpaper}"
+          )
+          (
+            lib.filter
+            (m: m.enabled)
+            config.systemConfig.monitors
+          );
       };
     };
   };
