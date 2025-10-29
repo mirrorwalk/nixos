@@ -19,16 +19,13 @@
     TIMER_PID_FILE="$STATE_DIR/timer.pid"
     WALLPAPER_FOLDER="${toString initialFolder}"
 
-    # Create state directory
     mkdir -p "$STATE_DIR"
     echo "true" > "$ENABLED_FILE"
     echo "${toString cfg.interval}" > "$INTERVAL_FILE"
     echo "$HYPRLAND_INSTANCE_SIGNATURE" > /home/brog/instance_sig_start.txt
 
-    # Create named pipe if it doesn't exist
     [[ -p "$PIPE" ]] || mkfifo "$PIPE"
 
-    # Cleanup on exit
     cleanup() {
         [[ -f "$TIMER_PID_FILE" ]] && kill $(cat "$TIMER_PID_FILE") 2>/dev/null
         rm -f "$PIPE" "$TIMER_PID_FILE"
@@ -62,7 +59,6 @@
         fi
     }
 
-    # Timer function
     timer() {
         while true; do
             INTERVAL=$(cat "$INTERVAL_FILE")
@@ -75,7 +71,6 @@
         done
     }
 
-    # Start timer
     start_timer() {
         [[ -f "$TIMER_PID_FILE" ]] && kill $(cat "$TIMER_PID_FILE") 2>/dev/null
         timer &
@@ -83,13 +78,10 @@
         echo "Timer started with PID $(cat "$TIMER_PID_FILE")"
     }
 
-    # Start initial timer
     start_timer
 
-    # Initial wallpaper change
     change_wallpaper
 
-    # Command listener
     while true; do
         if read -r line < "$PIPE"; then
             cmd=$(echo "$line" | awk '{print $1}')

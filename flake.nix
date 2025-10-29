@@ -27,13 +27,13 @@
     };
 
     tmuxWorkspace = {
-        url = "github:mirrorwalk/tmux-workspace";
-        # url = "path:/home/brog/.local/bin/tmux-workspace";
+      url = "github:mirrorwalk/tmux-workspace";
+      # url = "path:/home/brog/.local/bin/tmux-workspace";
     };
 
     nvimFZF = {
-        url = "github:mirrorwalk/nvim-fzf";
-        # url = "path:/home/brog/.local/bin/nvim-fzf";
+      url = "github:mirrorwalk/nvim-fzf";
+      # url = "path:/home/brog/.local/bin/nvim-fzf";
     };
   };
 
