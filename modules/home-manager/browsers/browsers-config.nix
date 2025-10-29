@@ -70,6 +70,11 @@
                 url = "https://mynixos.com/";
                 tags = ["nix"];
               }
+              {
+                name = "Home Manager Options";
+                url = "https://home-manager-options.extranix.com/";
+                tags = ["nix"];
+              }
             ];
           }
         ];

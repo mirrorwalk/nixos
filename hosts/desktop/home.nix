@@ -75,10 +75,7 @@
     random = {
       enable = true;
       interval = "300";
-      hyprland = {
-        exec = true;
-        integration = true;
-      };
+      hyprland.enable = true;
       wallpaperFolders = [
         "/home/brog/Pictures/Wallpapers"
         "/home/brog/Pictures/Wallpapers/nature/"
@@ -94,6 +91,7 @@
   };
 
   shells = {
+    bat.enable = true;
     bash.enable = true;
     tmux = {
       enable = true;
@@ -150,7 +148,7 @@
   wayland.windowManager.hyprland.enable = true;
 
   home.keyboard = {
-      xkbOptions = [ "caps:escape" ];
+    xkbOptions = ["caps:escape"];
   };
 
   xdg.mimeApps = {

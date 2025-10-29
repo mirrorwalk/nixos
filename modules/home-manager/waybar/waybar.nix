@@ -201,7 +201,7 @@ in {
           "custom/mullvad" = {
             format = "Mullvad: {}";
             exec = "$HOME/.config/waybar/scripts/mullvad-status";
-            interval = 30;
+            interval = 1;
             on-click = "mullvad connect && sleep 1 && pkill -RTMIN+10 waybar";
             on-click-right = "mullvad disconnect && sleep 1 && pkill -RTMIN+10 waybar";
             return-type = "json";

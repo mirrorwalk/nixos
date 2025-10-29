@@ -49,9 +49,8 @@
 
         monitor = config.hyprland.monitors;
 
-        "exec-once" = [
+        exec-once = [
           "waybar"
-          "${pkgs.hyprpaper}/bin/hyprpaper"
         ];
 
         env = [

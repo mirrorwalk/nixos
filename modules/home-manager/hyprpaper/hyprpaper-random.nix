@@ -11,20 +11,32 @@
   initialFolder = lib.head wallpaperFolders;
 
   hyprpaper-random = pkgs.writeShellScriptBin "hyprpaper-random" ''
-        #!/usr/bin/env bash
-        PIPE=${pipe}
-        ENABLED=true
-        WALLPAPER_FOLDER="${initialFolder}"
-        INTERVAL=${cfg.interval} # seconds
+    #!/usr/bin/env bash
+    PIPE=${pipe}
+    STATE_DIR="$HOME/.cache/hyprpaper-random"
+    ENABLED_FILE="$STATE_DIR/enabled"
+    INTERVAL_FILE="$STATE_DIR/interval"
+    TIMER_PID_FILE="$STATE_DIR/timer.pid"
+    WALLPAPER_FOLDER="${initialFolder}"
 
-        # Create named pipe if it doesn't exist
-        [[ -p "$PIPE" ]] || mkfifo "$PIPE"
+    # Create state directory
+    mkdir -p "$STATE_DIR"
+    echo "true" > "$ENABLED_FILE"
+    echo "${cfg.interval}" > "$INTERVAL_FILE"
+    echo "$HYPRLAND_INSTANCE_SIGNATURE" > /home/brog/instance_sig_start.txt
 
-        # Cleanup on exit
-        trap "kill 0; rm -f $PIPE" EXIT
+    # Create named pipe if it doesn't exist
+    [[ -p "$PIPE" ]] || mkfifo "$PIPE"
+
+    # Cleanup on exit
+    cleanup() {
+        [[ -f "$TIMER_PID_FILE" ]] && kill $(cat "$TIMER_PID_FILE") 2>/dev/null
+        rm -f "$PIPE" "$TIMER_PID_FILE"
+        exit 0
+    }
+    trap cleanup SIGTERM SIGINT
 
     change_wallpaper() {
-        # Read current category index from state file
         STATE_FILE="$HOME/.cache/hyprpaper-category-index"
         FOLDERS=(${lib.concatMapStringsSep " " (f: ''"${f}"'') wallpaperFolders})
 
@@ -50,55 +62,79 @@
         fi
     }
 
-
-        # Timer function running in background
-        timer() {
-            while true; do
-                sleep "$INTERVAL"
-                if [[ "$ENABLED" == true ]]; then
-                    echo "Timer triggered wallpaper change"
-                    change_wallpaper
-                fi
-            done
-        }
-
-        # Start timer in background
-        timer &
-
-        # Initial wallpaper change
-        change_wallpaper
-
-        # Command listener
+    # Timer function
+    timer() {
         while true; do
-            if read cmd args < "$PIPE"; then
-                echo "Received command: $cmd $args"
-                case "$cmd" in
-                    change)
-                        [[ "$ENABLED" == true ]] && change_wallpaper
-                        ;;
-                    enable)
-                        ENABLED=true
-                        echo "Enabled"
-                        ;;
-                    disable)
-                        ENABLED=false
-                        echo "Disabled"
-                        ;;
-                    set_folder)
-                        WALLPAPER_FOLDER="$args"
-                        echo "Folder set to: $WALLPAPER_FOLDER"
-                        [[ "$ENABLED" == true ]] && change_wallpaper
-                        ;;
-                    set_interval)
-                        INTERVAL="$args"
-                        echo "Interval set to: $INTERVAL"
-                        ;;
-                    quit)
-                        exit 0
-                        ;;
-                esac
+            INTERVAL=$(cat "$INTERVAL_FILE")
+            sleep "$INTERVAL"
+            ENABLED=$(cat "$ENABLED_FILE")
+            if [[ "$ENABLED" == "true" ]]; then
+                echo "Timer triggered wallpaper change"
+                change_wallpaper
             fi
         done
+    }
+
+    # Start timer
+    start_timer() {
+        [[ -f "$TIMER_PID_FILE" ]] && kill $(cat "$TIMER_PID_FILE") 2>/dev/null
+        timer &
+        echo $! > "$TIMER_PID_FILE"
+        echo "Timer started with PID $(cat "$TIMER_PID_FILE")"
+    }
+
+    # Start initial timer
+    start_timer
+
+    # Initial wallpaper change
+    change_wallpaper
+
+    # Command listener
+    while true; do
+        if read -r line < "$PIPE"; then
+            cmd=$(echo "$line" | awk '{print $1}')
+            args=$(echo "$line" | cut -d' ' -f2-)
+
+            echo "Received command: $cmd $args"
+            case "$cmd" in
+                change)
+                    ENABLED=$(cat "$ENABLED_FILE")
+                    if [[ "$ENABLED" == "true" ]]; then
+                        change_wallpaper
+                        start_timer
+                    fi
+                    ;;
+                enable)
+                    echo "true" > "$ENABLED_FILE"
+                    echo "Enabled"
+                    ;;
+                disable)
+                    echo "false" > "$ENABLED_FILE"
+                    echo "Disabled"
+                    ;;
+                set_folder)
+                    WALLPAPER_FOLDER="$args"
+                    echo "Folder set to: $WALLPAPER_FOLDER"
+                    ENABLED=$(cat "$ENABLED_FILE")
+                    if [[ "$ENABLED" == "true" ]]; then
+                        change_wallpaper
+                        start_timer
+                    fi
+                    ;;
+                set_interval)
+                    echo "$args" > "$INTERVAL_FILE"
+                    echo "Interval set to: $args"
+                    start_timer
+                    ;;
+                restart_timer)
+                    start_timer
+                    ;;
+                quit)
+                    cleanup
+                    ;;
+            esac
+        fi
+    done
   '';
 
   hyprpaper-random-control = pkgs.writeShellScriptBin "hyprpaper-random-control" ''
@@ -107,8 +143,18 @@
     STATE_FILE="$HOME/.cache/hyprpaper-category-index"
     FOLDERS=(${lib.concatMapStringsSep " " (f: ''"${f}"'') wallpaperFolders})
 
-    if [[ ! -p "$PIPE" ]]; then
+    start_daemon() {
+        if [[ -p "$PIPE" ]]; then
+            echo "Daemon already running"
+            return 0
+        fi
+        systemctl --user start hyprpaper-random.service
+        echo "hyprpaper-random.service started"
+    }
+
+    if [[ ! -p "$PIPE" ]] && [[ "$1" != "start" ]]; then
         echo "Error: Daemon not running (pipe not found at $PIPE)"
+        echo "Start it with: hyprpaper-random-control start"
         exit 1
     fi
 
@@ -118,33 +164,33 @@
             exit 1
         fi
 
-        # Read current index, default to 0
         CURRENT_INDEX=$(cat "$STATE_FILE" 2>/dev/null || echo "0")
-
-        # Calculate next index (wrap around)
         NEXT_INDEX=$(( (CURRENT_INDEX + 1) % ''${#FOLDERS[@]} ))
 
-        # Save new index
         mkdir -p "$(dirname "$STATE_FILE")"
         echo "$NEXT_INDEX" > "$STATE_FILE"
 
-        # Get the new folder path
         NEW_FOLDER="''${FOLDERS[$NEXT_INDEX]}"
-
         echo "Switching to category $((NEXT_INDEX + 1))/''${#FOLDERS[@]}: $NEW_FOLDER"
 
-        # Send command to daemon
         echo "set_folder $NEW_FOLDER" > "$PIPE"
     }
 
     case "$1" in
+        start)
+            start_daemon
+            ;;
         change-category)
             change_category
             ;;
-        change|enable|disable|quit)
+        change|enable|disable|quit|restart_timer)
             echo "$1" > "$PIPE"
             ;;
         set_interval)
+            if [[ -z "$2" ]]; then
+                echo "Error: set_interval requires a value"
+                exit 1
+            fi
             echo "set_interval $2" > "$PIPE"
             ;;
         get-current)
@@ -152,11 +198,40 @@
             echo "''${FOLDERS[$CURRENT_INDEX]}"
             ;;
         *)
-            echo "Usage: $0 {change|change-category|enable|disable|set_interval <seconds>|get-current|quit}"
+            echo "Usage: $0 {start|change|change-category|enable|disable|set_interval <seconds>|restart_timer|get-current|quit}"
             exit 1
             ;;
     esac
   '';
+
+  hyprpaper-random-control-completion = pkgs.writeTextFile {
+    name = "hyprpaper-random-control-completion";
+    destination = "/share/bash-completion/completions/hyprpaper-random-control";
+    text = ''
+      _hyprpaper-random-control_completions() {
+          local cur prev opts
+          COMPREPLY=()
+          cur="''${COMP_WORDS[COMP_CWORD]}"
+          prev="''${COMP_WORDS[COMP_CWORD-1]}"
+          opts="change change-category enable disable set_interval get-current quit"
+
+          if [[ ''${COMP_CWORD} -eq 1 ]]; then
+              COMPREPLY=( $(compgen -W "''${opts}" -- ''${cur}) )
+              return 0
+          fi
+
+          case "''${prev}" in
+              set_interval)
+                  COMPREPLY=( $(compgen -W "60 <tel:300 600 1800> 3600" -- ''${cur}) )
+                  return 0
+                  ;;
+          esac
+      }
+
+      complete -F _hyprpaper-random-control_completions hrc
+      complete -F _hyprpaper-random-control_completions hyprpaper-random-control
+    '';
+  };
 in {
   options.hyprpaper.random = {
     enable = lib.mkEnableOption "Enable random hyprpaper";
@@ -177,30 +252,25 @@ in {
       type = lib.types.nonEmptyStr;
     };
 
-    hyprland = {
-      exec = lib.mkEnableOption "Put it into exec-once in hyprland config";
-      integration = lib.mkEnableOption "Integrate with hyprland and put usefull shortcuts";
-    };
+    hyprland.enable = lib.mkEnableOption "Enable hyprland integration";
   };
   config = lib.mkIf cfg.enable {
     home.packages = [
       hyprpaper-random-control
+      hyprpaper-random-control-completion
     ];
 
     home.shellAliases = {
-      hrc = "hyprpaper-random-control";
+      hrc = "${hyprpaper-random-control}/bin/hyprpaper-random-control";
     };
 
-    wayland.windowManager.hyprland = {
+    wayland.windowManager.hyprland = lib.mkIf cfg.hyprland.enable {
       settings = {
-        exec-once = lib.mkIf cfg.hyprland.exec [
-          "${hyprpaper-random}/bin/hyprpaper-random"
-        ];
-        bind = lib.mkIf cfg.hyprland.integration [
+        bind = [
           "$mainMod, W, submap, wallpaper"
         ];
       };
-      submaps = lib.mkIf cfg.hyprland.integration {
+      submaps = {
         wallpaper = {
           settings = {
             bind = [
@@ -211,6 +281,15 @@ in {
             ];
           };
         };
+      };
+    };
+
+    systemd.user.services.hyprpaper-random = {
+      Service = {
+        ExecStart = "${hyprpaper-random}/bin/hyprpaper-random";
+      };
+      Unit = {
+        After = ["hyprpaper.service"];
       };
     };
   };
