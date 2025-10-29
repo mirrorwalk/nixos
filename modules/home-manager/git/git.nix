@@ -23,6 +23,7 @@
         l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
 
         ci = "commit";
+        ca = "commit -a -m";
         cm = "commit -m";
 
         co = "checkout";

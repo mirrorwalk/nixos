@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  lib,
   config,
   ...
 }: {
@@ -84,8 +83,9 @@
 
   browsers = {
     zen-browser.enable = true;
-    # librewolf.enable = true;
   };
+
+  programs.fzf.enable = true;
 
   hyprpaper = {
     enable = true;
@@ -103,8 +103,8 @@
   };
 
   shells = {
-    bat.enable = true;
     bash.enable = true;
+    nu.enable = true;
     tmux = {
       enable = true;
       shellAliases.enable = true;
@@ -118,30 +118,21 @@
           "${config.home.homeDirectory}/projects" = "1:1";
           "${config.home.homeDirectory}/projects/zig" = "1:1";
           "${config.home.homeDirectory}/projects/svelte" = "1:1";
-          "${config.home.homeDirectory}/projects/python" = "1:1";
           "${config.home.homeDirectory}/.config" = "1:1";
           "${config.home.homeDirectory}/.config/nvim" = "0:1";
         };
-
-        customWindows = {
-          "${config.home.homeDirectory}/projects/passim" = "code:terminal";
-          "${config.home.homeDirectory}/projects/zig/taskrhythm" = "code:terminal";
-          "${config.home.homeDirectory}/projects/svelte/TaskFlow" = "code:server";
-          "${config.home.homeDirectory}/projects/TaterRogue" = "code:terminal";
-        };
       };
     };
-    nu.enable = true;
+    bat.enable = true;
   };
 
   programs.nvim-fzf = {
     enable = true;
-    bashIntegration.enable = true;
+    bashKeybind.enable = true;
     roots = [
       "$HOME/.config/nixos"
       "$HOME/.config"
       "$HOME/projects"
-      "$HOME/notes"
       "$HOME/.local/bin"
     ];
     ignore = [

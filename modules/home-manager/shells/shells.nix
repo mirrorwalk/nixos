@@ -10,6 +10,7 @@
     ./fish.nix
     ./tmux.nix
     ./nushell.nix
+    ./sh-functions.nix
     ../../custom/enix/enix.nix
   ];
   options.shells = {
@@ -42,6 +43,7 @@
     programs.bat = lib.mkIf config.shells.bat.enable {
       enable = true;
     };
+
     home.sessionVariables = lib.mkIf config.shells.bat.enable {
       PAGER = "bat";
     };
