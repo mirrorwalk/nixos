@@ -1,6 +1,6 @@
 {
-    imports = [
-        ./wallpaper.nix
-        ./color-scheme.nix
-    ];
+  imports = [
+    ./wallpaper.nix
+    ./color-scheme.nix
+  ];
 }

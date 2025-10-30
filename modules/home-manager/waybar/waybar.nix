@@ -8,7 +8,6 @@
     if config.waybar.hyprland.enable
     then [
       "hyprland/workspaces"
-      # "custom/hyprland-music"
       "custom/separator"
       "hyprland/submap"
       "custom/separator"
@@ -169,12 +168,6 @@ in {
             format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
           };
 
-          "custom/hyprland-music" = {
-            format = "M";
-            tooltip-format = "Toggles music workspace";
-            on-click = "hyprctl dispatch togglespecialworkspace music";
-          };
-
           "custom/separator" = {
             format = "│";
             tooltip = false;
@@ -242,7 +235,6 @@ in {
         #custom-mullvad,
         #custom-weather,
         #custom-shutdown,
-        #custom-hyprland-music,
         #custom-fullscreen {
             border-radius: 8px;
             border: 1px solid ${config.colorScheme.accent};
