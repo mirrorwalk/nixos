@@ -15,6 +15,7 @@
     ../../modules/home-manager/shells/shells.nix
     ../../modules/home-manager/nh/nh.nix
     ../../modules/home-manager/nom/nom.nix
+    ../../modules/home-manager/games/games.nix
     ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
@@ -45,7 +46,6 @@
     pkgs.pipewire
     pkgs.keepassxc
     pkgs.mpv
-    pkgs.brave
     pkgs.hyprcursor
     # pkgs.xwayland-satellite
     # pkgs.cryptsetup
@@ -57,8 +57,6 @@
     pkgs.fd
     pkgs.jq
     pkgs.kdePackages.dolphin
-    pkgs.lutris
-    pkgs.protonup
     pkgs.yt-dlp
     pkgs.rose-pine-hyprcursor
   ];
@@ -94,6 +92,7 @@
       enable = true;
       defaultBrowser = true;
     };
+    brave.enable = true;
   };
 
   programs.fzf.enable = true;

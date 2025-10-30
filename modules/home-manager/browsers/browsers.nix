@@ -4,5 +4,6 @@
     ./zen.nix
     ./librewolf.nix
     ./mullvad.nix
+    ./brave.nix
   ];
 }

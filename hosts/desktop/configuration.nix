@@ -9,6 +9,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/nixos/games.nix
     # ../../modules/nixos/stylix/stylix.nix
     inputs.home-manager.nixosModules.default
   ];
@@ -17,17 +18,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  hardware.graphics = {
-    enable = true;
-    # driSupport32Bit = true;
-  };
-
   services.xserver.videoDrivers = ["amdgpu"];
-
-  programs.gamemode.enable = true;
-
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
