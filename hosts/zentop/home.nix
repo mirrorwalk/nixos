@@ -66,6 +66,8 @@
     }
   ];
 
+  programs.fzf.enable = true;
+
   shells = {
     bash.enable = true;
     tmux = {
