@@ -311,6 +311,7 @@ in {
         '';
         executable = true;
       };
+
       ".config/waybar/scripts/mullvad-status" = lib.mkIf config.waybar.mullvad.enable {
         text = ''
           #!/usr/bin/env bash
