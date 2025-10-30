@@ -84,7 +84,6 @@
   home.shellAliases = {
     backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
     evi = "cd $HOME/.config/nvim && nvim .";
-    la = "ls -AF --color=auto";
     ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
     flake = "${pkgs.nix}/bin/nix flake";
   };

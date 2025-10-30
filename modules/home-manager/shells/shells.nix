@@ -19,6 +19,5 @@
     home.shellAliases = {
       la = "ls -AF --color=auto";
     };
-
   };
 }
