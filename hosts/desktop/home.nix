@@ -98,7 +98,15 @@
 
   programs.fzf.enable = true;
 
-  backupGit.enable = true;
+  backupGit = {
+    enable = true;
+    backupFolders = [
+      /home/brog/.config/nvim
+      /home/brog/.config/nixos-private
+      /home/brog/.config/nixos
+      /home/brog/.config
+    ];
+  };
 
   hyprpaper = {
     enable = true;
