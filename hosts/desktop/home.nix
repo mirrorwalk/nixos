@@ -39,28 +39,30 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  home.packages = [
-    pkgs.exfatprogs
-    pkgs.ripgrep
-    pkgs.pavucontrol
-    pkgs.tor
-    pkgs.tor-browser
-    pkgs.pipewire
-    pkgs.keepassxc
-    pkgs.mpv
-    pkgs.hyprcursor
-    # pkgs.xwayland-satellite
-    # pkgs.cryptsetup
-    pkgs.wl-clipboard
-    pkgs.qbittorrent
-    pkgs.btop
-    pkgs.wine
-    pkgs.tree
-    pkgs.fd
-    pkgs.jq
-    pkgs.xfce.thunar
-    pkgs.yt-dlp
-    pkgs.rose-pine-hyprcursor
+  home.packages = with pkgs; [
+    file
+    unzip
+    exfatprogs
+    ripgrep
+    pavucontrol
+    tor
+    tor-browser
+    pipewire
+    keepassxc
+    mpv
+    hyprcursor
+    # xwayland-satellite
+    # cryptsetup
+    wl-clipboard
+    qbittorrent
+    btop
+    wine
+    tree
+    fd
+    jq
+    xfce.thunar
+    yt-dlp
+    rose-pine-hyprcursor
   ];
 
   styleConfig = {

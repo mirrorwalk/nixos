@@ -56,8 +56,8 @@
   # Ly
   services.displayManager.ly.enable = true;
 
-  security.pam.services.ly.enableGnomeKeyring = true;
-  security.polkit.enable = true;
+  # security.pam.services.ly.enableGnomeKeyring = true;
+  # security.polkit.enable = true;
 
   # Fonts
   fonts.fontDir.enable = true;
@@ -136,13 +136,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    file
-    unzip
-    gnome-keyring
-    seahorse
-    libsecret
-    polkit_gnome
-    libgnome-keyring
+    # gnome-keyring
+    # seahorse
+    # libsecret
+    # polkit_gnome
+    # libgnome-keyring
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
