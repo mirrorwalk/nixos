@@ -93,99 +93,121 @@
       };
     };
 
-    defaultAssociations = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [
-        "application/x-extension-shtml"
-        "application/x-extension-xhtml"
-        "application/x-extension-html"
-        "application/x-extension-xht"
-        "application/x-extension-htm"
-        "x-scheme-handler/unknown"
-        "x-scheme-handler/mailto"
-        "x-scheme-handler/chrome"
-        "x-scheme-handler/about"
-        "x-scheme-handler/https"
-        "x-scheme-handler/http"
-        "application/xhtml+xml"
-        "application/json"
-        "text/plain"
-        "text/html"
-      ];
+    default = {
+      associations = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [
+          "application/x-extension-shtml"
+          "application/x-extension-xhtml"
+          "application/x-extension-html"
+          "application/x-extension-xht"
+          "application/x-extension-htm"
+          "x-scheme-handler/unknown"
+          "x-scheme-handler/mailto"
+          "x-scheme-handler/chrome"
+          "x-scheme-handler/about"
+          "x-scheme-handler/https"
+          "x-scheme-handler/http"
+          "application/xhtml+xml"
+          "application/json"
+          "text/plain"
+          "text/html"
+        ];
+      };
+      browser = {
+        enable = lib.mkEnableOption "Enable default browser";
+        desktopName = lib.mkOption {
+          type = lib.types.nonEmptyStr;
+        };
+      };
     };
   };
 
-  config.browsers = {
-    search = {
-      defaultEngine = "Kagi";
-      engines = {
-        Kagi = {
-          urls = [
+  config = {
+    browsers = {
+      search = {
+        defaultEngine = "Kagi";
+        engines = {
+          Kagi = {
+            urls = [
+              {
+                template = "https://kagi.com/search";
+                params = [
+                  {
+                    name = "q";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+            ];
+            definedAliases = ["@k" "@kagi"];
+          };
+
+          perplexity.metaData.alias = "@p";
+          google.metaData.hidden = true;
+          bing.metaData.hidden = true;
+        };
+      };
+
+      firefox.bookmarks.settings = [
+        {
+          toolbar = true;
+          bookmarks = [
             {
-              template = "https://kagi.com/search";
-              params = [
+              name = "Programming";
+              bookmarks = [
                 {
-                  name = "q";
-                  value = "{searchTerms}";
+                  name = "Zig Docs";
+                  url = "https://ziglang.org/documentation/";
+                  tags = ["wiki" "zig" "programming"];
+                }
+                {
+                  name = "jujutsu";
+                  url = "https://jj-vcs.github.io/jj/latest/";
+                  tags = ["wiki" "guide" "git" "jj" "programming"];
+                }
+              ];
+            }
+            {
+              name = "Nano Gpt";
+              url = "https://nano-gpt.com/conversation/new";
+              tags = ["ai"];
+            }
+            {
+              name = "NixOS";
+              bookmarks = [
+                {
+                  name = "Nixpkgs Search";
+                  url = "https://search.nixos.org";
+                  tags = ["nix"];
+                }
+                {
+                  name = "My NixOS";
+                  url = "https://mynixos.com/";
+                  tags = ["nix"];
+                }
+                {
+                  name = "Home Manager Options";
+                  url = "https://home-manager-options.extranix.com/";
+                  tags = ["nix"];
                 }
               ];
             }
           ];
-          definedAliases = ["@k" "@kagi"];
-        };
-
-        perplexity.metaData.alias = "@p";
-        google.metaData.hidden = true;
-        bing.metaData.hidden = true;
-      };
+        }
+      ];
     };
 
-    firefox.bookmarks.settings = [
-      {
-        toolbar = true;
-        bookmarks = [
-          {
-            name = "Programming";
-            bookmarks = [
-              {
-                name = "Zig Docs";
-                url = "https://ziglang.org/documentation/";
-                tags = ["wiki" "zig" "programming"];
-              }
-              {
-                name = "jujutsu";
-                url = "https://jj-vcs.github.io/jj/latest/";
-                tags = ["wiki" "guide" "git" "jj" "programming"];
-              }
-            ];
-          }
-          {
-            name = "Nano Gpt";
-            url = "https://nano-gpt.com/conversation/new";
-            tags = ["ai"];
-          }
-          {
-            name = "NixOS";
-            bookmarks = [
-              {
-                name = "Nixpkgs Search";
-                url = "https://search.nixos.org";
-                tags = ["nix"];
-              }
-              {
-                name = "My NixOS";
-                url = "https://mynixos.com/";
-                tags = ["nix"];
-              }
-              {
-                name = "Home Manager Options";
-                url = "https://home-manager-options.extranix.com/";
-                tags = ["nix"];
-              }
-            ];
-          }
-        ];
-      }
-    ];
+    xdg = lib.mkIf config.browsers.default.browser.enable {
+      mimeApps = let
+        value = config.browsers.default.browser.desktopName;
+        associations = builtins.listToAttrs (map (name: {
+            inherit name value;
+          })
+          config.browsers.default.associations);
+      in {
+        defaultApplications = associations;
+      };
+    };
   };
 }

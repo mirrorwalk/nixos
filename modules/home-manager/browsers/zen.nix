@@ -297,42 +297,14 @@
       };
     };
 
-    xdg = lib.mkIf config.browsers.zen-browser.defaultBrowser {
-      mimeApps = let
-        value = let
-          zen-browser = inputs.zen-browser.package.${pkgs.system}.twilight;
-        in
-          zen-browser.meta.desktopFileName;
-
-        associations = builtins.listToAttrs (map (name: {
-            inherit name value;
-          })
-          config.browsers.defaultAssociations);
+    browsers.default = lib.mkIf config.browsers.zen-browser.defaultBrowser {
+      browser = let
+        zen-browser = inputs.zen-browser.packages.${pkgs.system}.twilight;
+        desktopFile = zen-browser.meta.desktopFileName;
       in {
-        defaultApplications = associations;
+        enable = true;
+        desktopName = desktopFile;
       };
     };
-    # }: let
-    #   value = "mullvad-browser.desktop";
-    #   associations = builtins.listToAttrs (map (name: {
-    #       inherit name value;
-    #     })
-    #     config.browsers.defaultAssociations);
-    # in {
-    #   options.browsers.mullvad = {
-    #     enable = lib.mkEnableOption "Enable mullvad browser";
-    #     defaultBrowser = lib.mkEnableOption "Mullvad as default browser";
-    #   };
-    #
-    #   config = lib.mkIf config.browsers.mullvad.enable {
-    #     home.packages = [
-    #       pkgs.mullvad-browser
-    #     ];
-    #
-    #     xdg.mimeApps = lib.mkIf config.browsers.mullvad.defaultBrowser {
-    #       defaultApplications = associations;
-    #     };
-    #   };
-    # }
   };
 }

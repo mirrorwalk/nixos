@@ -90,7 +90,6 @@
 
   browsers = {
     zen-browser.enable = true;
-    librewolf.enable = true;
     mullvad = {
       enable = true;
       defaultBrowser = true;
