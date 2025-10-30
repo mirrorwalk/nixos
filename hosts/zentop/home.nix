@@ -16,6 +16,8 @@
     ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
+    ../../modules/home-manager/nh/nh.nix
+    ../../modules/home-manager/nom/nom.nix
     inputs.privateConfig.homeModules.laptop
   ];
 
@@ -38,21 +40,22 @@
     pkgs.exfatprogs
     pkgs.ripgrep
     pkgs.pavucontrol
-    pkgs.mullvad-browser
     pkgs.pipewire
-    pkgs.wofi
     pkgs.mpv
     pkgs.hyprcursor
-    pkgs.xwayland-satellite
-    pkgs.cryptsetup
     pkgs.wl-clipboard
     pkgs.btop
     pkgs.tree
     pkgs.fd
     pkgs.jq
-    pkgs.kdePackages.dolphin
-    pkgs.nix-output-monitor
+    pkgs.xfce.thunar
+    pkgs.rose-pine-hyprcursor
   ];
+
+  hyprland = {
+      fileManager = "thunar";
+      webBrowser = "zen-twilight";
+  };
 
   systemConfig.monitors = [
     {
@@ -62,27 +65,6 @@
       refreshRate = 60.0;
     }
   ];
-
-  home.shellAliases = {
-    backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
-    evi = "cd $HOME/.config/nvim && nvim .";
-    la = "ls -AF --color=auto";
-    tmuxs = "${pkgs.tmux}/bin/tmux new -s";
-    tmuxa = "${pkgs.tmux}/bin/tmux attach-session -t nixos || ${pkgs.tmux}/bin/tmux switch-client -t ";
-    nix-shell = "${pkgs.nix-output-monitor}/bin/nom-shell";
-    nix-build = "${pkgs.nix-output-monitor}/bin/nom-build";
-    nix = "${pkgs.nix-output-monitor}/bin/nom";
-    cat = "${pkgs.bat}/bin/bat";
-    rnos = "${pkgs.nh}/bin/nh os switch";
-    nosr = "${pkgs.nh}/bin/nh os switch";
-    nr = "${pkgs.nh}/bin/nh os switch";
-    nt = "${pkgs.nh}/bin/nh os test";
-    rn = "${pkgs.nh}/bin/nh os switch";
-    ns = "${pkgs.nh}/bin/nh os switch";
-    nos = "${pkgs.nh}/bin/nh os switch";
-    nd = "${pkgs.nix-output-monitor}/bin/nom develop";
-    flake = "${pkgs.nix}/bin/nix flake";
-  };
 
   shells = {
     bash.enable = true;
@@ -106,22 +88,14 @@
     mullvad.enable = false;
   };
 
+  nh.enable = true;
+  nom.enable = true;
+
   browsers.zen-browser.enable = true;
 
   wayland.windowManager.hyprland.enable = true;
 
   programs.git.settings.user.signingkey = "~/.ssh/git";
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = ["mullvad-browser.desktop"];
-      "x-scheme-handler/http" = ["mullvad-browser.desktop"];
-      "x-scheme-handler/https" = ["mullvad-browser.desktop"];
-      "x-scheme-handler/about" = ["mullvad-browser.desktop"];
-      "x-scheme-handler/unknown" = ["mullvad-browser.desktop"];
-    };
-  };
 
   gtk = {
     enable = true;
@@ -147,11 +121,6 @@
       gtk-theme = "Adwaita-dark";
       color-scheme = "prefer-dark";
     };
-  };
-
-  programs.nh = {
-    enable = true;
-    flake = "/home/brog/.config/nixos";
   };
 
   home.sessionVariables = {

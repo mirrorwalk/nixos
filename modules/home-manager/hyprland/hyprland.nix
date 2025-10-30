@@ -27,6 +27,12 @@
       type = lib.types.str;
       default = "${pkgs.kdePackages.dolphin}/bin/dolphin";
     };
+
+    webBrowser = lib.mkOption {
+      description = "Default web browser";
+      type = lib.types.str;
+      default = "${pkgs.mullvad-browser}/bin/mullvad-browser";
+    };
   };
 
   config = {
@@ -36,7 +42,7 @@
         "$terminal" = config.hyprland.terminal;
         "$fileManager" = config.hyprland.fileManager;
         "$menu" = config.hyprland.menu;
-        "$webBrowser" = "${pkgs.mullvad-browser}/bin/mullvad-browser";
+        "$webBrowser" = config.hyprland.webBrowser;
         "$mainMod" = "SUPER";
 
         monitor =
