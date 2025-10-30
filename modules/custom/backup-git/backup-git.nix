@@ -1,7 +1,14 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   # backup-git = pkgs.writeShellScriptBin "backup-git" ''
   #   ${builtins.readFile ./backup-git.sh}
   # '';
+  backupFolders = config.backupGit.backupFolders;
+
   backup-git = pkgs.writeShellScriptBin "backup-git" ''
     #!/usr/bin/env bash
 
@@ -38,6 +45,7 @@
               "$HOME/.config/nixos"
               "$HOME/.config"
           )
+          REPOS=(${lib.concatMapStringsSep " " (f: ''"${toString f}"'') backupFolders})
       else
           REPOS=("''${CUSTOM_PATHS[@]}")
       fi
@@ -100,7 +108,21 @@
       done
   '';
 in {
-  home.packages = [
-    backup-git
-  ];
+  options.backupGit = {
+    enable = lib.mkEnableOption "Enable backup-git";
+    backupFolders = lib.mkOption {
+      type = lib.types.listOf lib.types.path;
+      default = [
+        /home/brog/.config/nvim
+        /home/brog/.config/nixos
+        /home/brog/.config
+      ];
+    };
+  };
+
+  config = lib.mkIf config.backupGit.enable {
+    home.packages = [
+      backup-git
+    ];
+  };
 }

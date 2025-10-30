@@ -98,6 +98,8 @@
 
   programs.fzf.enable = true;
 
+  backupGit.enable = true;
+
   hyprpaper = {
     enable = true;
     random = {
