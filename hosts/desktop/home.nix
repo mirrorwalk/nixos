@@ -13,6 +13,8 @@
     ../../modules/home-manager/nvim/nvim.nix
     ../../modules/home-manager/browsers/browsers.nix
     ../../modules/home-manager/shells/shells.nix
+    ../../modules/home-manager/nh/nh.nix
+    ../../modules/home-manager/nom/nom.nix
     ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
@@ -45,8 +47,8 @@
     pkgs.mpv
     pkgs.brave
     pkgs.hyprcursor
-    pkgs.xwayland-satellite
-    pkgs.cryptsetup
+    # pkgs.xwayland-satellite
+    # pkgs.cryptsetup
     pkgs.wl-clipboard
     pkgs.qbittorrent
     pkgs.btop
@@ -55,7 +57,6 @@
     pkgs.fd
     pkgs.jq
     pkgs.kdePackages.dolphin
-    pkgs.nix-output-monitor
     pkgs.lutris
     pkgs.protonup
     pkgs.yt-dlp
@@ -80,12 +81,20 @@
     }
   ];
 
+  home.shellAliases = {
+    backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
+    evi = "cd $HOME/.config/nvim && nvim .";
+    la = "ls -AF --color=auto";
+    ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
+    flake = "${pkgs.nix}/bin/nix flake";
+  };
+
   browsers = {
     zen-browser.enable = true;
     librewolf.enable = true;
     mullvad = {
-        enable = true;
-        defaultBrowser = true;
+      enable = true;
+      defaultBrowser = true;
     };
   };
 
@@ -128,6 +137,9 @@
     };
     bat.enable = true;
   };
+
+  nh.enable = true;
+  nom.enable = true;
 
   programs.nvim-fzf = {
     enable = true;
@@ -192,11 +204,6 @@
       gtk-theme = "Adwaita-dark";
       color-scheme = "prefer-dark";
     };
-  };
-
-  programs.nh = {
-    enable = true;
-    flake = "/home/brog/.config/nixos";
   };
 
   home.sessionVariables = {
