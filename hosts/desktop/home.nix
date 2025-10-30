@@ -104,7 +104,7 @@
     enable = true;
     random = {
       enable = true;
-      interval = 10;
+      interval = 300;
       hyprland.enable = true;
     };
   };
