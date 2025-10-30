@@ -15,6 +15,8 @@
     ../../modules/home-manager/shells/shells.nix
     ../../modules/home-manager/nh/nh.nix
     ../../modules/home-manager/nom/nom.nix
+    ../../modules/home-manager/fuzzel/fuzzel.nix
+    ../../modules/home-manager/hyprpaper/hyprpaper.nix
     ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
@@ -102,10 +104,10 @@
   };
 
   backupGit = {
-      enable = true;
-      backupFolders = [
-        /home/brog/.config/nixos
-      ];
+    enable = true;
+    backupFolders = [
+      /home/brog/.config/nixos
+    ];
   };
 
   nh.enable = true;

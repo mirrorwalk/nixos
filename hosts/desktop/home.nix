@@ -16,6 +16,8 @@
     ../../modules/home-manager/nh/nh.nix
     ../../modules/home-manager/nom/nom.nix
     ../../modules/home-manager/games/games.nix
+    ../../modules/home-manager/fuzzel/fuzzel.nix
+    ../../modules/home-manager/hyprpaper/hyprpaper.nix
     ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
@@ -56,7 +58,7 @@
     pkgs.tree
     pkgs.fd
     pkgs.jq
-    pkgs.kdePackages.dolphin
+    pkgs.xfce.thunar
     pkgs.yt-dlp
     pkgs.rose-pine-hyprcursor
   ];
@@ -80,18 +82,20 @@
   ];
 
   home.shellAliases = {
-    backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
-    evi = "cd $HOME/.config/nvim && nvim .";
     ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
     flake = "${pkgs.nix}/bin/nix flake";
+    backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
+    evi = "cd $HOME/.config/nvim && nvim .";
   };
 
   browsers = {
     zen-browser.enable = true;
+
     mullvad = {
       enable = true;
       defaultBrowser = true;
     };
+
     brave.enable = true;
     search.defaultEngine = "Kagi";
   };
@@ -100,6 +104,7 @@
 
   backupGit = {
     enable = true;
+
     backupFolders = [
       /home/brog/.config/nvim
       /home/brog/.config/nixos-private
@@ -125,7 +130,6 @@
 
   shells = {
     bash.enable = true;
-    nu.enable = true;
     tmux = {
       enable = true;
       tmuxStartup = {
@@ -177,16 +181,7 @@
     xkbOptions = ["caps:escape"];
   };
 
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "text/html" = ["mullvad-browser.desktop"];
-      "x-scheme-handler/http" = ["mullvad-browser.desktop"];
-      "x-scheme-handler/https" = ["mullvad-browser.desktop"];
-      "x-scheme-handler/about" = ["mullvad-browser.desktop"];
-      "x-scheme-handler/unknown" = ["mullvad-browser.desktop"];
-    };
-  };
+  xdg.mimeApps.enable = true;
 
   gtk = {
     enable = true;

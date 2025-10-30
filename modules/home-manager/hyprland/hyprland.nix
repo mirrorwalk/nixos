@@ -5,33 +5,31 @@
   ...
 }: {
   imports = [
-    ../hyprpaper/hyprpaper.nix
-    ../fuzzel/fuzzel.nix
   ];
 
   options.hyprland = {
     terminal = lib.mkOption {
       description = "Default terminal";
       type = lib.types.str;
-      default = "${pkgs.ghostty}/bin/ghostty";
+      default = "ghostty";
     };
 
     menu = lib.mkOption {
       description = "Default menu";
       type = lib.types.str;
-      default = "${pkgs.fuzzel}/bin/fuzzel";
+      default = "fuzzel";
     };
 
     fileManager = lib.mkOption {
       description = "Default file manager";
       type = lib.types.str;
-      default = "${pkgs.kdePackages.dolphin}/bin/dolphin";
+      default = "thunar";
     };
 
     webBrowser = lib.mkOption {
       description = "Default web browser";
       type = lib.types.str;
-      default = "${pkgs.mullvad-browser}/bin/mullvad-browser";
+      default = "mullvad-browser";
     };
   };
 
