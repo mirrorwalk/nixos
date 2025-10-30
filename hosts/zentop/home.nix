@@ -13,11 +13,11 @@
     ../../modules/home-manager/browsers/browsers.nix
     ../../modules/home-manager/waybar/waybar.nix
     ../../modules/home-manager/shells/shells.nix
+    ../../modules/home-manager/nh/nh.nix
+    ../../modules/home-manager/nom/nom.nix
     ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
-    ../../modules/home-manager/nh/nh.nix
-    ../../modules/home-manager/nom/nom.nix
     inputs.privateConfig.homeModules.laptop
   ];
 
@@ -50,11 +50,12 @@
     pkgs.jq
     pkgs.xfce.thunar
     pkgs.rose-pine-hyprcursor
+    pkgs.networkmanagerapplet
   ];
 
   hyprland = {
-      fileManager = "thunar";
-      webBrowser = "zen-twilight";
+    fileManager = "thunar";
+    webBrowser = "zen-twilight";
   };
 
   systemConfig.monitors = [
@@ -65,6 +66,16 @@
       refreshRate = 60.0;
     }
   ];
+
+  # services.network-manager-applet.enable = true;
+
+  wayland.windowManager.hyprland = {
+    settings = {
+      exec-once = [
+        "nm-applet"
+      ];
+    };
+  };
 
   programs.fzf.enable = true;
 
@@ -90,12 +101,22 @@
     mullvad.enable = false;
   };
 
+  backupGit = {
+      enable = true;
+      backupFolders = [
+        /home/brog/.config/nixos
+      ];
+  };
+
   nh.enable = true;
   nom.enable = true;
 
-  browsers.zen-browser = {
+  browsers = {
+    zen-browser = {
       enable = true;
       defaultBrowser = true;
+    };
+    search.defaultEngine = "ddg";
   };
 
   wayland.windowManager.hyprland.enable = true;

@@ -93,6 +93,7 @@
       defaultBrowser = true;
     };
     brave.enable = true;
+    search.defaultEngine = "Kagi";
   };
 
   programs.fzf.enable = true;

@@ -38,6 +38,7 @@
     search = {
       defaultEngine = lib.mkOption {
         type = lib.types.nonEmptyStr;
+        default = "ddg";
         description = "default search engine";
       };
 
@@ -126,7 +127,6 @@
   config = {
     browsers = {
       search = {
-        defaultEngine = "Kagi";
         engines = {
           Kagi = {
             urls = [
