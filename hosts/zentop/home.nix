@@ -93,7 +93,10 @@
   nh.enable = true;
   nom.enable = true;
 
-  browsers.zen-browser.enable = true;
+  browsers.zen-browser = {
+      enable = true;
+      defaultBrowser = true;
+  };
 
   wayland.windowManager.hyprland.enable = true;
 
