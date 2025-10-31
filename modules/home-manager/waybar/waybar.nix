@@ -130,14 +130,14 @@ in {
               #submap,
               #custom-fullscreen {
                 border-radius: 8px;
-                border: 1px solid ${config.colorScheme.accent};
+                border: 1px solid ${cScheme.accent};
                 margin: 0 3px;
                 padding: 0 3px;
               }
 
               #workspaces button.active,
               #workspaces button:hover {
-                background: ${config.colorScheme.primary};
+                background: ${cScheme.primary};
               }
 
               #workspaces button.urgent {
@@ -191,7 +191,7 @@ in {
             default = ''
               #custom-mullvad {
                 border-radius: 8px;
-                border: 1px solid ${config.colorScheme.accent};
+                border: 1px solid ${cScheme.accent};
                 margin: 0 3px;
                 padding: 0 3px;
               }
@@ -274,7 +274,7 @@ in {
               #load,
               #memory {
                 border-radius: 8px;
-                border: 1px solid ${config.colorScheme.accent};
+                border: 1px solid ${cScheme.accent};
                 margin: 0 3px;
                 padding: 0 3px;
               }
@@ -322,7 +322,7 @@ in {
             default = ''
               #custom-wallpaper-category {
                 border-radius: 8px;
-                border: 1px solid ${config.colorScheme.accent};
+                border: 1px solid ${cScheme.accent};
                 margin: 0 3px;
                 padding: 0 3px;
               }
@@ -451,7 +451,7 @@ in {
         }
 
         #waybar {
-          background-color: ${config.colorScheme.background};
+          background-color: ${cScheme.secondary};
           opacity: 0.8;
         }
 
@@ -465,7 +465,7 @@ in {
         #custom-shutdown
          {
           border-radius: 8px;
-          border: 1px solid ${config.colorScheme.accent};
+          border: 1px solid ${cScheme.accent};
           margin: 0 3px;
           padding: 0 3px;
         }
