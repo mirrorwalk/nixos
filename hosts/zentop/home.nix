@@ -69,6 +69,12 @@
     }
   ];
 
+  home.shellAliases = {
+    syss = "systemctl --user status";
+    sysst = "systemctl --user stop";
+    sysr = "systemctl --user restart";
+  };
+
   # services.network-manager-applet.enable = true;
 
   wayland.windowManager.hyprland = {
@@ -135,6 +141,24 @@
   };
 
   wayland.windowManager.hyprland.enable = true;
+
+  styleConfig = {
+    defaultWallpaper = /home/brog/Pictures/Wallpapers/andromenda-galaxy.jpg;
+    wallpaperFolders = [
+      /home/brog/Pictures/Wallpapers
+    ];
+  };
+
+  hyprpaper = {
+    enable = true;
+    random = {
+      enable = true;
+      scriptName = "hrc";
+      interval = 3600;
+      hyprland.enable = true;
+      monitor = "eDP-1";
+    };
+  };
 
   git = {
     enable = true;

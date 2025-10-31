@@ -57,7 +57,7 @@
           (config.systemConfig.monitors);
 
         exec-once = [
-          "waybar"
+          "hyprpaper"
         ];
 
         env = [

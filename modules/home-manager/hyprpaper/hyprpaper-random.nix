@@ -280,8 +280,13 @@ in {
       Service = {
         ExecStart = "${hyprpaper-random}/bin/hyprpaper-random";
       };
+
       Unit = {
         After = ["hyprpaper.service"];
+      };
+
+      Install = {
+        WantedBy = ["hyprpaper.service"];
       };
     };
   };

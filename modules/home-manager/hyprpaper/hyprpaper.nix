@@ -32,5 +32,9 @@
           );
       };
     };
+
+    systemd.user.services.hyprpaper = {
+        Install.WantedBy = ["hyprland-session.target"];
+    };
   };
 }
