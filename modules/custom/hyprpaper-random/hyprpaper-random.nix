@@ -272,6 +272,15 @@ in {
       };
     };
 
+    waybar.wallpaper = {
+      enable = true;
+      settings."custom/wallpaper-category" = {
+        exec = "basename $(${hyprpaper-random-control}/bin/${cfg.scriptName} get-current)";
+        format = "Wallpaper: {}";
+        interval = cfg.interval;
+      };
+    };
+
     systemd.user.services.hyprpaper-random = {
       Unit = {
         Description = "Hyprpaper Random Wallpaper";
