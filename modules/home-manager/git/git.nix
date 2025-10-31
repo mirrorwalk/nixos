@@ -63,12 +63,12 @@ in {
           lg = "log --oneline --graph --all --decorate";
           l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
 
-          ci = "commit";
+          c = "commit";
           ca = "commit -a -m";
           cm = "commit -m";
 
           co = "checkout";
-          cb = "checkout -b";
+          cob = "checkout -b";
         };
 
         branch = {
