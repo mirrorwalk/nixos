@@ -18,7 +18,7 @@
     ../../modules/home-manager/games/games.nix
     ../../modules/home-manager/fuzzel/fuzzel.nix
     ../../modules/home-manager/hyprpaper/hyprpaper.nix
-    ../../modules/custom/backup-git/backup-git.nix
+    # ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
     inputs.privateConfig.homeModules.desktop
@@ -104,6 +104,14 @@
 
   programs.fzf.enable = true;
 
+  git = {
+      enable = true;
+      ssh.enable = true;
+      setupGitRemotes.enable = true;
+      gitlab.enable = true;
+      github.enable = true;
+  };
+
   backupGit = {
     enable = true;
 
@@ -125,7 +133,7 @@
   };
 
   waybar = {
-      systemService = true;
+    systemService = true;
     hyprland.enable = true;
     mullvad.enable = true;
     wallpaper.enable = true;

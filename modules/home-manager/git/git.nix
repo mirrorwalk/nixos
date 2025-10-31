@@ -1,91 +1,147 @@
-{pkgs, ...}: {
-  programs.gh.enable = true;
-  home.packages = [
-    pkgs.glab
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.git;
+in {
+  imports = [
+    ../../custom/git/git.nix
   ];
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "mirrorwalk";
-        email = "git.cresting327@passmail.net";
-      };
+  options.git = {
+    enable = lib.mkEnableOption "Enable git";
 
-      alias = {
-        st = "status";
-        s = "status --short";
-        d = "diff";
-        p = "push";
-        b = "branch";
-        ba = "branch -a";
-        lg = "log --oneline --graph --all --decorate";
-        l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
+    github = {
+      enable = lib.mkEnableOption "Enable github";
+      sshFile = lib.mkOption {
+        type = lib.types.nonEmptyStr;
+        default = "~/.ssh/git";
+      };
+      # identityFile = "~/.ssh/git";
+    };
 
-        ci = "commit";
-        ca = "commit -a -m";
-        cm = "commit -m";
+    gitlab = {
+      enable = lib.mkEnableOption "Enable github";
+      sshFile = lib.mkOption {
+        type = lib.types.nonEmptyStr;
+        default = "~/.ssh/git";
+      };
+    };
 
-        co = "checkout";
-        cb = "checkout -b";
-      };
+    ssh.enable = lib.mkEnableOption "Enable ssh for git";
 
-      branch = {
-        sort = "-committerdate";
-      };
-      column = {
-        ui = "auto";
-      };
-      commit = {
-        gpgSign = "true";
-        verbose = "true";
-      };
-      core = {
-        editor = "nvim";
-      };
-      diff = {
-        algorithm = "histogram";
-        colorMoved = "plain";
-      };
-      gpg.format = "ssh";
-      help = {
-        autocorrect = "prompt";
-      };
-      init = {
-        defaultBranch = "master";
-      };
-      merge = {
-        conflictStyle = "zdiff3";
-      };
-      prone = {
-        prune = "true";
-        pruneTags = "true";
-      };
-      pull = {
-        rebase = "true";
-      };
-      push = {
-        autoSetupRemote = "true";
-        default = "simple";
-        followTags = "true";
-      };
-      rerere = {
-        autoupdate = "true";
-        enabled = "true";
-      };
-      tag = {
-        sort = "version:refname";
-      };
+    signKey = lib.mkOption {
+      type = lib.types.nonEmptyStr;
+      default = "~/.ssh/git";
     };
   };
 
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
-    options = {
-      navigate = true;
-      light = false;
-      line-numbers = true;
+  config = {
+    programs.gh.enable = lib.mkIf cfg.github.enable true;
+    home.packages = lib.mkIf cfg.github.enable [
+      pkgs.glab
+    ];
+
+    programs.git = lib.mkIf cfg.enable {
+      enable = true;
+      settings = {
+        user = {
+          name = "mirrorwalk";
+          email = "git.cresting327@passmail.net";
+          signingkey = lib.mkIf cfg.ssh.enable cfg.signKey;
+        };
+
+        alias = {
+          st = "status";
+          s = "status --short";
+          d = "diff";
+          p = "push";
+          b = "branch";
+          ba = "branch -a";
+          lg = "log --oneline --graph --all --decorate";
+          l = "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short";
+
+          ci = "commit";
+          ca = "commit -a -m";
+          cm = "commit -m";
+
+          co = "checkout";
+          cb = "checkout -b";
+        };
+
+        branch = {
+          sort = "-committerdate";
+        };
+        column = {
+          ui = "auto";
+        };
+        commit = {
+          gpgSign = "true";
+          verbose = "true";
+        };
+        core = {
+          editor = "nvim";
+        };
+        diff = {
+          algorithm = "histogram";
+          colorMoved = "plain";
+        };
+        gpg.format = "ssh";
+        help = {
+          autocorrect = "prompt";
+        };
+        init = {
+          defaultBranch = "master";
+        };
+        merge = {
+          conflictStyle = "zdiff3";
+        };
+        prone = {
+          prune = "true";
+          pruneTags = "true";
+        };
+        pull = {
+          rebase = "true";
+        };
+        push = {
+          autoSetupRemote = "true";
+          default = "simple";
+          followTags = "true";
+        };
+        rerere = {
+          autoupdate = "true";
+          enabled = "true";
+        };
+        tag = {
+          sort = "version:refname";
+        };
+      };
+    };
+
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        navigate = true;
+        light = false;
+        line-numbers = true;
+      };
+    };
+
+    programs.ssh.matchBlocks = lib.mkIf cfg.ssh.enable {
+      "github.com" = {
+        hostname = "github.com";
+        user = "git";
+        # identityFile = "~/.ssh/git";
+        identityFile = cfg.github.sshFile;
+      };
+      "gitlab.com" = {
+        hostname = "gitlab.com";
+        user = "git";
+        identityFile = cfg.gitlab.sshFile;
+      };
     };
   };
 }

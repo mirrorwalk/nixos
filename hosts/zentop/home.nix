@@ -17,7 +17,7 @@
     ../../modules/home-manager/nom/nom.nix
     ../../modules/home-manager/fuzzel/fuzzel.nix
     ../../modules/home-manager/hyprpaper/hyprpaper.nix
-    ../../modules/custom/backup-git/backup-git.nix
+    # ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
     inputs.privateConfig.homeModules.laptop
@@ -131,11 +131,18 @@
       defaultBrowser = true;
     };
     search.defaultEngine = "Kagi";
+    search.private.defaultEngine = "ddg";
   };
 
   wayland.windowManager.hyprland.enable = true;
 
-  programs.git.settings.user.signingkey = "~/.ssh/git";
+  git = {
+      enable = true;
+      ssh.enable = true;
+      setupGitRemotes.enable = true;
+      gitlab.enable = true;
+      github.enable = true;
+  };
 
   gtk = {
     enable = true;
