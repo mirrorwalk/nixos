@@ -22,7 +22,6 @@
     mkdir -p "$STATE_DIR"
     echo "true" > "$ENABLED_FILE"
     echo "${toString cfg.interval}" > "$INTERVAL_FILE"
-    echo "$HYPRLAND_INSTANCE_SIGNATURE" > /home/brog/instance_sig_start.txt
 
     [[ -p "$PIPE" ]] || mkfifo "$PIPE"
 
@@ -52,7 +51,9 @@
         if [[ -n "$WALLPAPER" ]]; then
             echo "Setting wallpaper: $WALLPAPER"
             hyprctl hyprpaper preload "$WALLPAPER" > /dev/null 2>&1
-            hyprctl hyprpaper wallpaper "${cfg.monitor},$WALLPAPER" > /dev/null 2>&1
+            for MONITOR in ${lib.concatStringsSep " " (map (m: m.name) (lib.filter (m: m.enabled) config.systemConfig.monitors))}; do
+              hyprctl hyprpaper wallpaper "$MONITOR,$WALLPAPER"
+            done
             hyprctl hyprpaper unload all > /dev/null 2>&1
         else
             echo "No wallpapers found in $WALLPAPER_FOLDER"
@@ -198,7 +199,7 @@
 
   hyprpaper-random-control-completion = pkgs.writeTextFile {
     name = "hyprpaper-random-control-completion";
-    destination = "/share/bash-completion/completions/hyprpaper-random-control";
+    destination = "/share/bash-completion/completions/${cfg.scriptName}";
     text = ''
       _hyprpaper-random-control_completions() {
           local cur prev opts
@@ -229,11 +230,6 @@ in {
 
     scriptName = lib.mkOption {
       default = "hyprpaper-random-control";
-      type = lib.types.nonEmptyStr;
-    };
-
-    monitor = lib.mkOption {
-      default = "DP-1";
       type = lib.types.nonEmptyStr;
     };
 

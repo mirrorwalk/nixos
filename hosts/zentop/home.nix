@@ -156,7 +156,6 @@
       scriptName = "hrc";
       interval = 3600;
       hyprland.enable = true;
-      monitor = "eDP-1";
     };
   };
 

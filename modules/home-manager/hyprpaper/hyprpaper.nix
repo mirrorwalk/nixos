@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./hyprpaper-random.nix
+    ../../custom/hyprpaper-random/hyprpaper-random.nix
   ];
   options.hyprpaper = {
     enable = lib.mkEnableOption "Enables hyprpaper";
