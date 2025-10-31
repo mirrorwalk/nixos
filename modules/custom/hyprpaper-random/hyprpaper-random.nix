@@ -248,10 +248,6 @@ in {
       hyprpaper-random-control-completion
     ];
 
-    # home.shellAliases = {
-    #   hrc = "${hyprpaper-random-control}/bin/${cfg.scriptName}";
-    # };
-
     wayland.windowManager.hyprland = lib.mkIf cfg.hyprland.enable {
       settings = {
         bind = [
@@ -273,11 +269,10 @@ in {
     };
 
     waybar.wallpaper = {
-      enable = true;
       settings."custom/wallpaper-category" = {
         exec = "basename $(${hyprpaper-random-control}/bin/${cfg.scriptName} get-current)";
-        format = "Wallpaper: {}";
-        interval = cfg.interval;
+        format = "Wallpaper Category: {}";
+        interval = config.waybar.interval;
       };
     };
 
