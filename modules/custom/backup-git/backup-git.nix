@@ -4,9 +4,6 @@
   config,
   ...
 }: let
-  # backup-git = pkgs.writeShellScriptBin "backup-git" ''
-  #   ${builtins.readFile ./backup-git.sh}
-  # '';
   backupFolders = config.backupGit.backupFolders;
 
   backup-git = pkgs.writeShellScriptBin "backup-git" ''
@@ -15,36 +12,40 @@
       AUTO_CONFIRM=false
       USE_NORMAL_TIME=false
       CUSTOM_PATHS=()
+      CUSTOM_ORIGIN=""
 
       while [[ $# -gt 0 ]]; do
           case $1 in
               -y)
                   AUTO_CONFIRM=true
+                  shift
                   ;;
               -d)
                   USE_NORMAL_TIME=true
+                  shift
+                  ;;
+              -o)
+                  CUSTOM_ORIGIN="$2"
+                  shift 2
                   ;;
               -h)
-                  echo "Usage: $0 [-y] [-d] [path1] [path2] ..."
-                  echo "  -y    Auto-confirm all prompts"
-                  echo "  -d    Use normal date format (YYYY-MM-DD HH:MM:SS) instead of epoch time"
-                  echo "  [path] Backup specified path(s) instead of default repos"
+                  echo "Usage: $0 [-y] [-d] [-o origin] [path1] [path2] ..."
+                  echo "  -y         Auto-confirm all prompts"
+                  echo "  -d         Use normal date format (YYYY-MM-DD HH:MM:SS) instead of epoch time"
+                  echo "  -o origin  Specify git remote origin (default: origin)"
+                  echo "  [path]     Backup specified path(s) instead of default repos"
                   exit 0
                   ;;
               *)
                   CUSTOM_PATHS+=("$1")
+                  shift
                   ;;
           esac
-          shift
       done
 
+      ORIGIN=''${CUSTOM_ORIGIN:-origin}
+
       if [ ''${#CUSTOM_PATHS[@]} -eq 0 ]; then
-          REPOS=(
-              "$HOME/.config/nvim"
-              "$HOME/.config/nixos-private"
-              "$HOME/.config/nixos"
-              "$HOME/.config"
-          )
           REPOS=(${lib.concatMapStringsSep " " (f: ''"${toString f}"'') backupFolders})
       else
           REPOS=("''${CUSTOM_PATHS[@]}")
@@ -68,7 +69,7 @@
 
           cd "$repo" || continue
 
-          git fetch origin &>/dev/null
+          git fetch "$ORIGIN" &>/dev/null
 
           if git diff --quiet && git diff --cached --quiet && git status -uno | grep -q "up to date"; then
               echo "$repo is already up to date, skipping."
@@ -92,15 +93,15 @@
               git add .
               COMMIT_MSG="Backup: $TIMESTAMP"
               git commit -m "$COMMIT_MSG"
-              git push
-              echo "Auto-pushed $repo"
+              git push "$ORIGIN"
+              echo "Auto-pushed $repo to $ORIGIN"
           else
-              read -p "Commit and push changes in $repo? (y/N): " choice
+              read -p "Commit and push changes in $repo to $ORIGIN? (y/N): " choice
               if [[ "$choice" =~ ^[Yy]$ ]]; then
                   git add .
                   COMMIT_MSG="Backup: $TIMESTAMP"
                   git commit -m "$COMMIT_MSG"
-                  git push
+                  git push "$ORIGIN"
               else
                   echo "Skipped $repo"
               fi
