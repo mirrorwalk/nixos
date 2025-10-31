@@ -23,5 +23,7 @@
         ''
         + config.shells.shFunctions;
     };
+
+    programs.fzf.enableZshIntegration = true;
   };
 }

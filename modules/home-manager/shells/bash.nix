@@ -6,6 +6,7 @@
   options = {
     shells.bash = {
       enable = lib.mkEnableOption "Enable bash";
+
       ps1 = lib.mkOption {
         type = lib.types.str;
         default = ''\[\e[38;5;51m\][\[\e[0m\]$(nix_indicator)\[\e[38;5;226m\]\u\[\e[38;5;40m\]@\[\e[38;5;33m\]\h \[\e[38;5;165m\]\w\[\e[38;5;51m\]]\[\e[38;5;196m\]$(git_branch)\[\e[38;5;51m\]$(if [ \j -gt 0 ]; then echo "(\j)"; fi)\[\e[0m\]$ '';
@@ -63,8 +64,6 @@
         + config.shells.shFunctions;
     };
 
-    programs.fzf = {
-      enableBashIntegration = true;
-    };
+    programs.fzf.enableBashIntegration = true;
   };
 }
