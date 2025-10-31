@@ -105,11 +105,14 @@
   programs.fzf.enable = true;
 
   git = {
+    enable = true;
+    ssh.enable = true;
+    setupGitRemotes = {
       enable = true;
-      ssh.enable = true;
-      setupGitRemotes.enable = true;
-      gitlab.enable = true;
-      github.enable = true;
+      scriptName = "sgr";
+    };
+    gitlab.enable = true;
+    github.enable = true;
   };
 
   backupGit = {
@@ -126,6 +129,7 @@
   hyprpaper = {
     enable = true;
     random = {
+      scriptName = "hrc";
       enable = true;
       interval = 300;
       hyprland.enable = true;

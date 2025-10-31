@@ -6,7 +6,11 @@
 }: let
   cfg = config.git;
 
-  setupGitRemotes = pkgs.writeShellScriptBin "setup-git-remotes" ''
+  sgr = pkgs.writeShellScriptBin "sgr" ''
+    ${setupGitRemotes.text}
+  '';
+
+  setupGitRemotes = pkgs.writeShellScriptBin "${cfg.setupGitRemotes.scriptName}" ''
     #!/usr/bin/env bash
 
     # Configuration from NixOS module
@@ -121,7 +125,14 @@
   '';
 in {
   options.git = {
-    setupGitRemotes.enable = lib.mkEnableOption "Enable setup-git-remotes script";
+    setupGitRemotes = {
+      enable = lib.mkEnableOption "Enable setup-git-remotes script";
+
+      scriptName = lib.mkOption {
+        type = lib.types.nonEmptyStr;
+        default = "setup-git-remotes";
+      };
+    };
 
     gitlab = {
       username = lib.mkOption {
@@ -144,8 +155,8 @@ in {
       setupGitRemotes
     ];
 
-    home.shellAliases = {
-      sgr = "${setupGitRemotes}/bin/setup-git-remotes";
-    };
+    # home.shellAliases = {
+    #   sgr = "${setupGitRemotes}/bin/setup-git-remotes";
+    # };
   };
 }

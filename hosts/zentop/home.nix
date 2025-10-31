@@ -137,11 +137,14 @@
   wayland.windowManager.hyprland.enable = true;
 
   git = {
+    enable = true;
+    ssh.enable = true;
+    setupGitRemotes = {
       enable = true;
-      ssh.enable = true;
-      setupGitRemotes.enable = true;
-      gitlab.enable = true;
-      github.enable = true;
+      scriptName = "sgr";
+    };
+    gitlab.enable = true;
+    github.enable = true;
   };
 
   gtk = {

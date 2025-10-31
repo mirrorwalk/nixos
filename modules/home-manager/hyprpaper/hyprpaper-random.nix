@@ -129,7 +129,7 @@
     done
   '';
 
-  hyprpaper-random-control = pkgs.writeShellScriptBin "hyprpaper-random-control" ''
+  hyprpaper-random-control = pkgs.writeShellScriptBin "${cfg.scriptName}" ''
     #!/usr/bin/env bash
     PIPE=${pipe}
     STATE_FILE="$HOME/.cache/hyprpaper-category-index"
@@ -220,12 +220,18 @@
           esac
       }
 
-      complete -F _hyprpaper-random-control_completions hyprpaper-random-control
+      complete -F _hyprpaper-random-control_completions ${cfg.scriptName}
     '';
   };
 in {
   options.hyprpaper.random = {
     enable = lib.mkEnableOption "Enable random hyprpaper";
+
+    scriptName = lib.mkOption {
+      default = "hyprpaper-random-control";
+      type = lib.types.nonEmptyStr;
+    };
+
     monitor = lib.mkOption {
       default = "DP-1";
       type = lib.types.nonEmptyStr;
@@ -246,9 +252,9 @@ in {
       hyprpaper-random-control-completion
     ];
 
-    home.shellAliases = {
-      hrc = "${hyprpaper-random-control}/bin/hyprpaper-random-control";
-    };
+    # home.shellAliases = {
+    #   hrc = "${hyprpaper-random-control}/bin/${cfg.scriptName}";
+    # };
 
     wayland.windowManager.hyprland = lib.mkIf cfg.hyprland.enable {
       settings = {
@@ -260,8 +266,8 @@ in {
         wallpaper = {
           settings = {
             bind = [
-              "SHIFT, c, exec, ${hyprpaper-random-control}/bin/hyprpaper-random-control change-category"
-              ", r, exec, ${hyprpaper-random-control}/bin/hyprpaper-random-control change"
+              "SHIFT, c, exec, ${hyprpaper-random-control}/bin/${cfg.scriptName} change-category"
+              ", r, exec, ${hyprpaper-random-control}/bin/${cfg.scriptName} change"
 
               ", escape, submap, reset"
             ];
