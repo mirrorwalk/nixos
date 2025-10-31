@@ -206,7 +206,7 @@
           COMPREPLY=()
           cur="''${COMP_WORDS[COMP_CWORD]}"
           prev="''${COMP_WORDS[COMP_CWORD-1]}"
-          opts="change change-category enable disable set-interval get-current quit"
+          opts="start change change-category enable disable set-interval get-current quit"
 
           if [[ ''${COMP_CWORD} -eq 1 ]]; then
               COMPREPLY=( $(compgen -W "''${opts}" -- ''${cur}) )

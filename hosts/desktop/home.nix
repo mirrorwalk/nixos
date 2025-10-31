@@ -90,6 +90,13 @@
     evi = "cd $HOME/.config/nvim && nvim .";
   };
 
+  fuzzel = {
+    width = 50;
+    horizontalPad = 20;
+    verticalPad = 8;
+    innerPad = 8;
+  };
+
   browsers = {
     zen-browser.enable = true;
 

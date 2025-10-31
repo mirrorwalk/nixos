@@ -69,14 +69,6 @@
     }
   ];
 
-  home.shellAliases = {
-    syss = "systemctl --user status";
-    sysst = "systemctl --user stop";
-    sysr = "systemctl --user restart";
-  };
-
-  # services.network-manager-applet.enable = true;
-
   wayland.windowManager.hyprland = {
     settings = {
       exec-once = [
@@ -88,12 +80,8 @@
   programs.fzf.enable = true;
 
   fuzzel = {
-    # width = 50;
-    # horizontalPad = 20;
-    # verticalPad = 8;
-    # innerPad = 8;
+    width = 50;
     dpiAware = "no";
-    # showActions = "no";
     showActions = false;
   };
 
