@@ -239,7 +239,7 @@ in {
 
     interval = lib.mkOption {
       description = "Interval between automatic changes of wallpaper";
-      default = 300;
+      default = 600;
       type = lib.types.int;
     };
 
@@ -277,16 +277,17 @@ in {
     };
 
     systemd.user.services.hyprpaper-random = {
+      Unit = {
+        Description = "Hyprpaper Random Wallpaper";
+        After = ["hyprpaper.service"];
+        Requires = ["hyprpaper.service"];
+      };
       Service = {
         ExecStart = "${hyprpaper-random}/bin/hyprpaper-random";
+        Type = "simple";
       };
-
-      Unit = {
-        After = ["hyprpaper.service"];
-      };
-
       Install = {
-        WantedBy = ["hyprpaper.service"];
+        WantedBy = ["hyprland-session.target"];
       };
     };
   };
