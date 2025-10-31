@@ -81,6 +81,16 @@
 
   programs.fzf.enable = true;
 
+  fuzzel = {
+    # width = 50;
+    # horizontalPad = 20;
+    # verticalPad = 8;
+    # innerPad = 8;
+    dpiAware = "no";
+    # showActions = "no";
+    showActions = false;
+  };
+
   shells = {
     bash.enable = true;
     tmux = {
@@ -99,6 +109,8 @@
   };
 
   waybar = {
+    interval = 5;
+    systemService = true;
     hyprland.enable = true;
     mullvad.enable = false;
   };
@@ -118,7 +130,7 @@
       enable = true;
       defaultBrowser = true;
     };
-    search.defaultEngine = "ddg";
+    search.defaultEngine = "Kagi";
   };
 
   wayland.windowManager.hyprland.enable = true;

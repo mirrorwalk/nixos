@@ -9,12 +9,12 @@ in {
   options.fuzzel = {
     width = mkOption {
       type = types.int;
-      default = 50;
+      default = 30;
     };
 
     horizontalPad = mkOption {
       type = types.int;
-      default = 20;
+      default = 40;
     };
 
     verticalPad = mkOption {
@@ -24,8 +24,23 @@ in {
 
     innerPad = mkOption {
       type = types.int;
-      default = 8;
+      default = 0;
     };
+
+    dpiAware = mkOption {
+      type = types.str;
+      default = "auto";
+    };
+
+    showActions = mkOption {
+      type = types.bool;
+      default = true;
+    };
+
+    # showActions = mkOption {
+    #   type = types.str;
+    #   default = "yes";
+    # };
   };
 
   config = {
@@ -41,7 +56,14 @@ in {
           vertical-pad = cfg.verticalPad;
           inner-pad = cfg.innerPad;
           icons-enabled = "yes";
-          show-actions = "yes";
+          # show-actions = cfg.showActions;
+
+          show-actions =
+            if cfg.showActions
+            then "yes"
+            else "no";
+
+          dpi-aware = cfg.dpiAware;
         };
 
         colors = let

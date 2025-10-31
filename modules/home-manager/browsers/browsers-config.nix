@@ -140,7 +140,41 @@
                 ];
               }
             ];
+
             definedAliases = ["@k" "@kagi"];
+          };
+          SearchNixOS = {
+            urls = [
+              {
+                template = "https://search.nixos.org/packages";
+                params = [
+                  {
+                    name = "channel";
+                    value = "unstable";
+                  }
+                  {
+                    name = "query";
+                    value = "{searchTerms}";
+                  }
+                ];
+              }
+
+              # {
+              #   template = "https://search.nixos.org/packages";
+              #   params = [
+              #     {
+              #       name = "channel";
+              #       value = "25.05";
+              #     }
+              #     {
+              #       name = "query";
+              #       value = "{searchTerms}";
+              #     }
+              #   ];
+              # }
+            ];
+
+            definedAliases = ["@sno"];
           };
 
           perplexity.metaData.alias = "@p";

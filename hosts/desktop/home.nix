@@ -125,6 +125,7 @@
   };
 
   waybar = {
+      systemService = true;
     hyprland.enable = true;
     mullvad.enable = true;
     wallpaper.enable = true;
