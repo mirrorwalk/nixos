@@ -360,7 +360,6 @@ in {
               "custom/separator"
               "tray"
               "custom/separator"
-              "custom/shutdown"
             ];
 
           # Core modules (always present)
@@ -426,12 +425,6 @@ in {
             tooltip = false;
           };
 
-          "custom/shutdown" = {
-            format = "X";
-            tooltip = false;
-            on-click = "~/.local/bin/shutdown-menu.sh";
-          };
-
           "custom/weather" = {
             exec = "curl -s 'wttr.in/${cfg.weatherCity}?format=1' | head -c 15";
             format = "{}";
@@ -461,8 +454,7 @@ in {
         #network,
         #tray,
         #privacy,
-        #custom-weather,
-        #custom-shutdown
+        #custom-weather
          {
           border-radius: 8px;
           border: 1px solid ${cScheme.accent};

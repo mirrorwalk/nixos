@@ -36,11 +36,6 @@ in {
       type = types.bool;
       default = true;
     };
-
-    # showActions = mkOption {
-    #   type = types.str;
-    #   default = "yes";
-    # };
   };
 
   config = {
@@ -56,7 +51,6 @@ in {
           vertical-pad = cfg.verticalPad;
           inner-pad = cfg.innerPad;
           icons-enabled = "yes";
-          # show-actions = cfg.showActions;
 
           show-actions =
             if cfg.showActions
@@ -75,13 +69,6 @@ in {
           selection = "${clrs.accent}ff";
           selection-text = "${clrs.secondary}ff";
           selection-match = "${clrs.primary}ff";
-
-          # background = "${clrs.background}ff";
-          # text = "${clrs.text}ff";
-          # match = "${clrs.accent}ff";
-          # selection = "${clrs.primary}ff";
-          # selection-text = "${clrs.text}ff";
-          # # selection-match = "${clrs.accent}ff";
         };
 
         dmenu = {
@@ -91,33 +78,3 @@ in {
     };
   };
 }
-# options = {
-#   colorScheme = {
-#     primary = lib.mkOption {
-#       type = lib.types.str;
-#       description = "Primary color in the color scheme";
-#       default = "#502380"; # Tekhelet
-#     };
-#     secondary = lib.mkOption {
-#       type = lib.types.str;
-#       description = "Secondary color in the color scheme";
-#       default = "#ffffff";
-#     };
-#     accent = lib.mkOption {
-#       type = lib.types.str;
-#       description = "Accent color in the color scheme";
-#       default = "#893BFF";
-#     };
-#     background = lib.mkOption {
-#       type = lib.types.str;
-#       description = "Background color in the color scheme";
-#       default = "#000000";
-#     };
-#     text = lib.mkOption {
-#       type = lib.types.str;
-#       description = "Background color in the color scheme";
-#       default = "#ffffff";
-#     };
-#   };
-# };
-

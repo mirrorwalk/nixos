@@ -19,7 +19,6 @@ in {
         type = lib.types.nonEmptyStr;
         default = "~/.ssh/git";
       };
-      # identityFile = "~/.ssh/git";
     };
 
     gitlab = {

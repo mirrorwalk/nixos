@@ -92,9 +92,7 @@
 
   fuzzel = {
     width = 50;
-    horizontalPad = 20;
-    verticalPad = 8;
-    innerPad = 8;
+    innerPad = 5;
   };
 
   browsers = {
