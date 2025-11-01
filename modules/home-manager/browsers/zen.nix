@@ -69,6 +69,7 @@
             "https://gitlab.com"
             "https://nano-gpt.com"
             "https://perplexity.ai"
+            "https://unicornuniversity.net"
           ];
         };
 
@@ -117,7 +118,7 @@
             url = "https://www.youtube.com/results?search_query=my+mix";
             position = 1;
             isEssential = false;
-            container = containers."Google".id;
+            container = containers.Google.id;
           };
 
           GitHub = {
@@ -126,7 +127,7 @@
             url = "https://github.com";
             position = 2;
             isEssential = false;
-            container = containers."Programming".id;
+            container = containers.Programming.id;
           };
 
           GitLab = {
@@ -135,7 +136,7 @@
             url = "https://gitlab.com";
             position = 3;
             isEssential = false;
-            container = containers."Programming".id;
+            container = containers.Programming.id;
           };
 
           School = {

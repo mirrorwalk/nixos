@@ -158,20 +158,6 @@
                   }
                 ];
               }
-
-              # {
-              #   template = "https://search.nixos.org/packages";
-              #   params = [
-              #     {
-              #       name = "channel";
-              #       value = "25.05";
-              #     }
-              #     {
-              #       name = "query";
-              #       value = "{searchTerms}";
-              #     }
-              #   ];
-              # }
             ];
 
             definedAliases = ["@sno"];
