@@ -18,6 +18,7 @@
     ../../modules/home-manager/nom/nom.nix
     ../../modules/home-manager/fuzzel/fuzzel.nix
     ../../modules/home-manager/hyprpaper/hyprpaper.nix
+    ../../modules/home-manager/nm-applet/nm-applet.nix
     # ../../modules/custom/backup-git/backup-git.nix
     ../../modules/system-config/system-config.nix
     ../../modules/style-config/style-config.nix
@@ -53,7 +54,6 @@
     pkgs.jq
     pkgs.xfce.thunar
     pkgs.rose-pine-hyprcursor
-    pkgs.networkmanagerapplet
   ];
 
   # programs.mullvad-vpn.enable = true;
@@ -72,12 +72,9 @@
     }
   ];
 
-  wayland.windowManager.hyprland = {
-    settings = {
-      exec-once = [
-        "nm-applet"
-      ];
-    };
+  nmApplet = {
+      enable = true;
+      intergration.hyprland = true;
   };
 
   programs.fzf.enable = true;
