@@ -1,5 +1,5 @@
 {
   imports = [
-    ./monitors.nix
+    ./ghostty.nix
   ];
 }

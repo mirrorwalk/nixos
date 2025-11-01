@@ -1,25 +1,35 @@
-{pkgs, inputs, ...}: {
+{
+  pkgs,
+  inputs,
+  lib,
+  config,
+  ...
+}: {
   imports = [
     inputs.nvimFZF.default
   ];
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+  options.nvim.enable = lib.mkEnableOption "Enable nvim";
 
-    extraPackages = [
-      pkgs.gcc
-      pkgs.gnumake
-      pkgs.git
-      pkgs.cargo
-      pkgs.nodejs
-    ];
-  };
+  config = lib.mkIf config.nvim.enable {
+    programs.neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
 
-  home.sessionVariables = {
-    VISUAL = "nvim";
+      extraPackages = [
+        pkgs.gcc
+        pkgs.gnumake
+        pkgs.git
+        pkgs.cargo
+        pkgs.nodejs
+      ];
+    };
+
+    home.sessionVariables = {
+      VISUAL = "nvim";
+    };
   };
 }

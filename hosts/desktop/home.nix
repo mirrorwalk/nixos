@@ -5,22 +5,7 @@
   ...
 }: {
   imports = [
-    ../../modules/home-manager/hyprland/hyprland.nix
-    ../../modules/home-manager/ghostty/ghostty.nix
-    ../../modules/home-manager/waybar/waybar.nix
-    ../../modules/home-manager/git/git.nix
-    ../../modules/home-manager/jj/jj.nix
-    ../../modules/home-manager/nvim/nvim.nix
-    ../../modules/home-manager/browsers/browsers.nix
-    ../../modules/home-manager/shells/shells.nix
-    ../../modules/home-manager/nh/nh.nix
-    ../../modules/home-manager/nom/nom.nix
-    ../../modules/home-manager/games/games.nix
-    ../../modules/home-manager/fuzzel/fuzzel.nix
-    ../../modules/home-manager/hyprpaper/hyprpaper.nix
-    # ../../modules/custom/backup-git/backup-git.nix
-    ../../modules/system-config/system-config.nix
-    ../../modules/style-config/style-config.nix
+    ../../modules/home-manager/imports/desktop.nix
     inputs.privateConfig.homeModules.desktop
   ];
 
@@ -151,6 +136,8 @@
     weather.enable = true;
   };
 
+  terminals.ghostty.enable = true;
+
   shells = {
     bash.enable = true;
     tmux = {
@@ -175,6 +162,8 @@
 
   nh.enable = true;
   nom.enable = true;
+
+  nvim.enable = true;
 
   programs.nvim-fzf = {
     enable = true;

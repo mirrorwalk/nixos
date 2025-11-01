@@ -4,24 +4,8 @@
   ...
 }: {
   imports = [
-    ../../modules/home-manager/hyprland/hyprland.nix
-    ../../modules/home-manager/ghostty/ghostty.nix
-    ../../modules/home-manager/git/git.nix
-    ../../modules/home-manager/jj/jj.nix
-    ../../modules/home-manager/shells/shells.nix
-    ../../modules/home-manager/nvim/nvim.nix
-    ../../modules/home-manager/browsers/browsers.nix
-    ../../modules/home-manager/waybar/waybar.nix
-    ../../modules/home-manager/shells/shells.nix
-    ../../modules/home-manager/nh/nh.nix
-    ../../modules/home-manager/cava/cava.nix
-    ../../modules/home-manager/nom/nom.nix
-    ../../modules/home-manager/fuzzel/fuzzel.nix
-    ../../modules/home-manager/hyprpaper/hyprpaper.nix
-    ../../modules/home-manager/nm-applet/nm-applet.nix
-    # ../../modules/custom/backup-git/backup-git.nix
-    ../../modules/system-config/system-config.nix
-    ../../modules/style-config/style-config.nix
+    ../../modules/home-manager/imports/laptop.nix
+    ../../modules/system/system.nix
     inputs.privateConfig.homeModules.laptop
   ];
 
@@ -63,6 +47,8 @@
     webBrowser = "zen-twilight";
   };
 
+  nvim.enable = true;
+
   systemConfig.monitors = [
     {
       name = "eDP-1";
@@ -74,7 +60,7 @@
 
   nmApplet = {
       enable = true;
-      intergration.hyprland = true;
+      integration.hyprland = true;
   };
 
   programs.fzf.enable = true;
@@ -159,6 +145,10 @@
     gitlab.enable = true;
     github.enable = true;
   };
+
+  jj.enable = true;
+
+  terminals.ghostty.enable = true;
 
   gtk = {
     enable = true;
