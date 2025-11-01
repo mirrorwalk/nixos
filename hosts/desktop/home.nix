@@ -142,6 +142,7 @@
   };
 
   waybar = {
+    enable = true;
     systemService.enable = true;
     hyprland.enable = true;
     mullvadVPN.enable = true;
