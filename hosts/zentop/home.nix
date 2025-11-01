@@ -14,6 +14,7 @@
     ../../modules/home-manager/waybar/waybar.nix
     ../../modules/home-manager/shells/shells.nix
     ../../modules/home-manager/nh/nh.nix
+    ../../modules/home-manager/cava/cava.nix
     ../../modules/home-manager/nom/nom.nix
     ../../modules/home-manager/fuzzel/fuzzel.nix
     ../../modules/home-manager/hyprpaper/hyprpaper.nix
@@ -54,6 +55,8 @@
     pkgs.rose-pine-hyprcursor
     pkgs.networkmanagerapplet
   ];
+
+  # programs.mullvad-vpn.enable = true;
 
   hyprland = {
     fileManager = "thunar";
@@ -103,10 +106,12 @@
   };
 
   waybar = {
+    enable = true;
     interval = 5;
-    systemService = true;
+    battery.enable = true;
+    systemService.enable = true;
     hyprland.enable = true;
-    mullvad.enable = false;
+    mullvadVPN.enable = true;
   };
 
   backupGit = {

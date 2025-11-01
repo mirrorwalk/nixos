@@ -142,10 +142,12 @@
   };
 
   waybar = {
-    systemService = true;
+    systemService.enable = true;
     hyprland.enable = true;
-    mullvad.enable = true;
-    wallpaper.enable = true;
+    mullvadVPN.enable = true;
+    wallpaperCategory.enable = true;
+    cava.enable = true;
+    weather.enable = true;
   };
 
   shells = {

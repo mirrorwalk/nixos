@@ -1,9 +1,10 @@
 {
-  config,
   lib,
+  config,
   pkgs,
   ...
 }: let
+  inherit (lib) mkIf mkOption mkEnableOption types;
   cfg = config.waybar;
   cScheme = config.styleConfig.colorScheme;
 
@@ -35,407 +36,233 @@
     echo "{\"text\": \"$status\", \"tooltip\": \"$tooltip\", \"class\": \"$class\"}"
   '';
 
-  # Helper to collect modules by position from enabled features
-  getModulesFor = position: features:
-    lib.flatten (lib.mapAttrsToList (
-        name: feat:
-          lib.optionals feat.enable (feat.${position} or [])
-      )
-      features);
-
-  # Helper to merge settings from enabled features
-  getSettings = features:
-    lib.mkMerge (lib.mapAttrsToList (
-        name: feat:
-          lib.mkIf feat.enable feat.settings
-      )
-      features);
-
-  # Helper to concatenate styles from enabled features
-  getStyles = features:
-    lib.concatStringsSep "\n" (lib.mapAttrsToList (
-        name: feat:
-          lib.optionalString feat.enable feat.style
-      )
-      features);
+  isEnabled = modules: enabled:
+    if enabled
+    then modules
+    else [];
 in {
-  imports = [../../nixos/desktop-variables/variables.nix];
-
   options.waybar = {
-    weatherCity = lib.mkOption {
-      type = lib.types.str;
-      default = "Prague";
-      description = "City for weather information";
+    enable = mkEnableOption "Enable waybar";
+
+    modules = {
+      left = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
+      right = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
+      center = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
     };
 
-    interval = lib.mkOption {
-      type = lib.types.int;
+    weather = {
+      enable = mkEnableOption "Enable weather module";
+      city = mkOption {
+        type = types.str;
+        default = "Prague";
+        description = "City for weather information";
+      };
+    };
+
+    mullvadVPN.enable = mkEnableOption "Enable mullvad-vpn module";
+
+    interval = mkOption {
+      type = types.int;
       default = 1;
     };
 
-    systemService = lib.mkEnableOption "Enable waybar systemd service";
+    hyprland.enable = mkEnableOption "Enable hyprland module";
 
-    # Hyprland feature module
-    hyprland = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkEnableOption "Hyprland integration";
+    cava.enable = mkEnableOption "Enable cava module";
 
-          modulesLeft = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [
-              "hyprland/workspaces"
-              "custom/separator"
-              "hyprland/submap"
-              "custom/separator"
-              "hyprland/window"
-              "custom/separator"
-              "custom/fullscreen"
-            ];
-          };
+    battery.enable = mkEnableOption "Enable battery module";
 
-          modulesCenter = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
-          };
-
-          modulesRight = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
-          };
-
-          settings = lib.mkOption {
-            type = lib.types.attrs;
-            default = {
-              "hyprland/workspaces" = {
-                format = "{icon}";
-                format-icons.urgent = "!";
-              };
-
-              "hyprland/window".max-length = 40;
-
-              "custom/fullscreen" = {
-                exec = "${fullscreenScript}/bin/fullscreen";
-                interval = cfg.interval;
-                format = "{}";
-              };
-            };
-          };
-
-          style = lib.mkOption {
-            type = lib.types.str;
-            default = ''
-              #workspaces,
-              #window,
-              #submap,
-              #custom-fullscreen {
-                border-radius: 8px;
-                border: 1px solid ${cScheme.accent};
-                margin: 0 3px;
-                padding: 0 3px;
-              }
-
-              #workspaces button.active,
-              #workspaces button:hover {
-                background: ${cScheme.primary};
-              }
-
-              #workspaces button.urgent {
-                background-color: red;
-                color: white;
-              }
-            '';
-          };
+    wallpaperCategory = {
+      enable = mkEnableOption "Enable wallpaper category module";
+      settings = {
+        command = mkOption {
+          type = types.str;
+          example = "basename $(hyprpaper-random-control get-current)";
+          default = "";
         };
       };
-      default = {};
     };
 
-    # Mullvad feature module
-    mullvad = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkEnableOption "Mullvad VPN status";
-
-          modulesLeft = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
-          };
-
-          modulesCenter = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
-          };
-
-          modulesRight = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = ["custom/separator" "custom/mullvad"];
-          };
-
-          settings = lib.mkOption {
-            type = lib.types.attrs;
-            default = {
-              "custom/mullvad" = {
-                format = "Mullvad: {}";
-                exec = "${mullvadStatus}/bin/mullvad-status";
-                interval = cfg.interval;
-                on-click = "mullvad connect && sleep 1 && pkill -RTMIN+10 waybar";
-                on-click-right = "mullvad disconnect && sleep 1 && pkill -RTMIN+10 waybar";
-                return-type = "json";
-              };
-            };
-          };
-
-          style = lib.mkOption {
-            type = lib.types.str;
-            default = ''
-              #custom-mullvad {
-                border-radius: 8px;
-                border: 1px solid ${cScheme.accent};
-                margin: 0 3px;
-                padding: 0 3px;
-              }
-
-              @keyframes flashBackground {
-                0% { background-color: red; }
-                50% { background-color: black; }
-                100% { background-color: red; }
-              }
-
-              #custom-mullvad.disconnected {
-                animation-name: flashBackground;
-                animation-duration: 1s;
-                animation-timing-function: linear;
-                animation-iteration-count: infinite;
-                background-color: black;
-              }
-
-              #custom-mullvad.connected {
-                background-color: green;
-              }
-            '';
-          };
-        };
-      };
-      default = {};
-    };
-
-    # Load monitoring feature module
-    load = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkEnableOption "System load monitoring";
-
-          modulesLeft = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
-          };
-
-          modulesCenter = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
-          };
-
-          modulesRight = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = ["cpu" "load" "memory" "custom/separator"];
-          };
-
-          settings = lib.mkOption {
-            type = lib.types.attrs;
-            default = {
-              cpu = {
-                format = "CPU: {usage}%";
-                states = {
-                  warning = 70;
-                  critical = 90;
-                };
-              };
-              load = {
-                format = "LOAD: {}";
-                interval = cfg.interval;
-              };
-              memory = {
-                format = "RAM: {percentage}%";
-                tooltip-format = "RAM: {used:0.1f}G/{total:0.1f}G\nSwap: {swapUsed}G/{swapTotal}G";
-                interval = cfg.interval;
-                states = {
-                  warning = 70;
-                  critical = 90;
-                };
-              };
-            };
-          };
-
-          style = lib.mkOption {
-            type = lib.types.str;
-            default = ''
-              #cpu,
-              #load,
-              #memory {
-                border-radius: 8px;
-                border: 1px solid ${cScheme.accent};
-                margin: 0 3px;
-                padding: 0 3px;
-              }
-            '';
-          };
-        };
-      };
-      default = {};
-    };
-
-    # Wallpaper feature module
-    wallpaper = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          enable = lib.mkEnableOption "Wallpaper control";
-
-          modulesLeft = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = ["custom/separator" "custom/wallpaper-category"];
-          };
-
-          modulesCenter = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
-          };
-
-          modulesRight = lib.mkOption {
-            type = lib.types.listOf lib.types.str;
-            default = [];
-          };
-
-          settings = lib.mkOption {
-            type = lib.types.attrs;
-            default = {
-              "custom/wallpaper-category" = {
-                exec = "basename $(hyprpaper-random-control get-current)";
-                format = "Wallpaper: {}";
-                interval = cfg.interval;
-              };
-            };
-          };
-
-          style = lib.mkOption {
-            type = lib.types.str;
-            default = ''
-              #custom-wallpaper-category {
-                border-radius: 8px;
-                border: 1px solid ${cScheme.accent};
-                margin: 0 3px;
-                padding: 0 3px;
-              }
-            '';
-          };
-        };
-      };
-      default = {};
-    };
+    systemService.enable = mkEnableOption "Enable waybar systemd service";
   };
 
-  config = let
-    features = {
-      inherit (cfg) hyprland mullvad load wallpaper;
-    };
-  in {
+  config = mkIf cfg.enable {
+    waybar.modules.left =
+      isEnabled [
+        "hyprland/workspaces"
+        # "custom/separator"
+        "hyprland/submap"
+        # "custom/separator"
+        "hyprland/window"
+        "custom/separator"
+        "custom/fullscreen"
+      ]
+      cfg.hyprland.enable
+      ++ [
+        "custom/separator"
+      ]
+      ++ isEnabled [
+        "custom/wallpaper-category"
+      ]
+      cfg.wallpaperCategory.enable;
+    waybar.modules.center = ["clock" "privacy"];
+    waybar.modules.right =
+      [
+        "network"
+      ]
+      ++ isEnabled [
+        "custom/mullvad"
+      ]
+      cfg.mullvadVPN.enable
+      ++ [
+        "custom/separator"
+        "pulseaudio"
+      ]
+      ++ isEnabled [
+        "cava"
+      ]
+      cfg.cava.enable
+      ++ [
+        "custom/separator"
+      ]
+      ++ isEnabled [
+        "custom/weather"
+      ]
+      cfg.weather.enable
+      ++ [
+        "custom/separator"
+        "tray"
+        "custom/separator"
+      ]
+      ++ isEnabled [
+        "battery"
+      ]
+      cfg.battery.enable;
+
     programs.waybar = {
       enable = true;
 
-      settings.mainBar = lib.mkMerge [
-        {
-          "modules-left" = getModulesFor "modulesLeft" features;
+      settings.mainBar = {
+        modules-left = cfg.modules.left;
+        modules-right = cfg.modules.right;
+        modules-center = cfg.modules.center;
 
-          "modules-center" = ["clock" "privacy"] ++ getModulesFor "modulesCenter" features;
+        cava = mkIf cfg.cava.enable {
+          framerate = 30;
+          autosens = 1;
+          bars = 14;
+          input_delay = 2;
+          stereo = true;
+          bar_delimiter = 0;
+          format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
+        };
 
-          "modules-right" =
-            getModulesFor "modulesRight" features
-            ++ [
-              "network"
-              "custom/separator"
-              "cava"
-              "pulseaudio"
-              "custom/separator"
-              "custom/weather"
-              "custom/separator"
-              "tray"
-              "custom/separator"
-            ];
+        network = {
+          format = "Connected";
+          format-disconnected = "Disconnected";
+          format-disabled = "Disabled";
+          tooltip-format = "UP: {bandwidthUpBytes} | DOWN: {bandwidthDownBytes}\n{ifname}: {ipaddr}/{cidr}";
+        };
 
-          # Core modules (always present)
-          privacy = {
-            icon-spacing = 4;
-            icon-size = 18;
-            transition-duration = 250;
-            modules = [
-              {
-                type = "screenshare";
-                tooltip = true;
-                tooltip-icon-size = 24;
-              }
-              {
-                type = "audio-out";
-                tooltip = true;
-                tooltip-icon-size = 24;
-              }
-              {
-                type = "audio-in";
-                tooltip = true;
-                tooltip-icon-size = 24;
-              }
-            ];
-            ignore = [
-              {
-                type = "audio-in";
-                name = "cava";
-              }
-            ];
+        clock = {
+          format = "{:%T %F}";
+          interval = cfg.interval;
+          tooltip = false;
+        };
+
+        pulseaudio = {
+          format = "Volume: {volume}%";
+          format-muted = "Muted: {volume}%";
+          on-click = "pavucontrol";
+        };
+
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          format-icons.urgent = "!";
+        };
+
+        "hyprland/window".max-length = 40;
+
+        privacy = {
+          icon-spacing = 4;
+          icon-size = 18;
+          transition-duration = 250;
+          modules = [
+            {
+              type = "screenshare";
+              tooltip = true;
+              tooltip-icon-size = 24;
+            }
+            {
+              type = "audio-out";
+              tooltip = true;
+              tooltip-icon-size = 24;
+            }
+            {
+              type = "audio-in";
+              tooltip = true;
+              tooltip-icon-size = 24;
+            }
+          ];
+          ignore = [
+            {
+              type = "audio-in";
+              name = "cava";
+            }
+          ];
+        };
+
+        battery = mkIf cfg.battery.enable {
+          interval = 60;
+          states = {
+            warning = 30;
+            critical = 15;
           };
+        };
 
-          clock = {
-            format = "{:%T %F}";
-            interval = cfg.interval;
-            tooltip = false;
-          };
+        "custom/wallpaper-category" = mkIf cfg.wallpaperCategory.enable {
+          exec = cfg.wallpaperCategory.settings.command;
+          format = "Wallpaper: {}";
+          interval = cfg.interval;
+        };
 
-          pulseaudio = {
-            format = "Volume: {volume}%";
-            on-click = "pavucontrol";
-          };
+        "custom/separator" = {
+          format = "│";
+          tooltip = false;
+        };
 
-          network = {
-            interval = cfg.interval;
-            format-disconnected = "Disconnected";
-            format-ethernet = "Ethernet";
-            tooltip-format = "UP: {bandwidthUpBytes} | DOWN: {bandwidthDownBytes}\n{ifname}: {ipaddr}/{cidr}";
-          };
+        "custom/fullscreen" = {
+          exec = "${fullscreenScript}/bin/fullscreen";
+          interval = cfg.interval;
+          format = "{}";
+        };
 
-          cava = {
-            framerate = 30;
-            autosens = 1;
-            bars = 14;
-            input_delay = 2;
-            stereo = true;
-            bar_delimiter = 0;
-            format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█"];
-          };
+        "custom/weather" = mkIf cfg.weather.enable {
+          exec = "curl -s 'wttr.in/${cfg.weather.city}?format=1' | head -c 15";
+          format = "{}";
+          interval = 3600;
+          tooltip = false;
+          on-click = "pkill -RTMIN+10 waybar";
+        };
 
-          "custom/separator" = {
-            format = "│";
-            tooltip = false;
-          };
-
-          "custom/weather" = {
-            exec = "curl -s 'wttr.in/${cfg.weatherCity}?format=1' | head -c 15";
-            format = "{}";
-            interval = 3600;
-            tooltip = false;
-            on-click = "pkill -RTMIN+10 waybar";
-          };
-        }
-
-        (getSettings features)
-      ];
+        "custom/mullvad" = mkIf cfg.mullvadVPN.enable {
+          format = "Mullvad: {}";
+          exec = "${mullvadStatus}/bin/mullvad-status";
+          interval = cfg.interval;
+          on-click = "mullvad connect && sleep 1 && pkill -RTMIN+10 waybar";
+          on-click-right = "mullvad disconnect && sleep 1 && pkill -RTMIN+10 waybar";
+          return-type = "json";
+        };
+      };
 
       style = ''
         * {
@@ -448,13 +275,41 @@ in {
           opacity: 0.8;
         }
 
-        /* Core module styles */
+        ${
+          if cfg.weather.enable
+          then "#custom-weather,"
+          else ""
+        }
+        ${
+          if cfg.mullvadVPN.enable
+          then "#custom-mullvad,"
+          else ""
+        }
+        ${
+          if cfg.wallpaperCategory.enable
+          then "#custom-wallpaper-category,"
+          else ""
+        }
+        ${
+          if cfg.battery.enable
+          then "#battery,"
+          else ""
+        }
+        ${
+          if cfg.hyprland.enable
+          then ''
+            #workspaces,
+            #window,
+            #submap,
+            #custom-fullscreen,
+          ''
+          else ""
+        }
         #pulseaudio,
         #clock,
         #network,
         #tray,
-        #privacy,
-        #custom-weather
+        #privacy
          {
           border-radius: 8px;
           border: 1px solid ${cScheme.accent};
@@ -462,28 +317,67 @@ in {
           padding: 0 3px;
         }
 
-        #custom-separator {
-        }
-
-        #network.ethernet {
+        #network {
           background-color: green;
         }
 
         #network.disconnected,
         #network.disabled {
-          animation-name: flashBackground;
-          animation-duration: 1s;
-          animation-timing-function: linear;
-          animation-iteration-count: 10;
           background-color: red;
         }
 
-        /* Feature-specific styles */
-        ${getStyles features}
+        ${
+          if cfg.mullvadVPN.enable
+          then ''
+            #custom-mullvad.disconnected {
+                background-color: red;
+            }
+
+            #custom-mullvad.connected {
+              background-color: green;
+            }
+          ''
+          else ""
+        }
+
+        ${
+          if cfg.hyprland.enable
+          then ''
+            #workspaces button.active,
+            #workspaces button:hover {
+              background: ${cScheme.primary};
+            }
+
+            #workspaces button.urgent {
+              background-color: red;
+              color: white;
+            }
+          ''
+          else ""
+        }
+
+        ${
+          if cfg.battery.enable
+          then ''
+            #battery.warning {
+              background-color: orange;
+            }
+
+            #battery.critical {
+              background-color: red;
+            }
+
+            #battery.charging {
+              background-color: green;
+            }
+          ''
+          else ""
+        }
+
       '';
     };
 
-    systemd.user.services.waybar = lib.mkIf cfg.systemService {
+    systemd.user.services.waybar = lib.mkIf cfg.systemService.enable {
       Unit = {
         Description = "Highly customizable Wayland bar for Sway and Wlroots based compositors";
         Documentation = "https://github.com/Alexays/Waybar/wiki";

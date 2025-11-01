@@ -21,7 +21,7 @@
   # programs.nix-ld.libraries = with pkgs; [
   # ];
 
-  # services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.enable = true;
 
   programs.hyprland.enable = true;
 

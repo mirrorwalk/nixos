@@ -1,13 +1,12 @@
-{config, ...}: {
-  imports = [
-    ../../nixos/desktop-variables/variables.nix
-  ];
+{config, ...}: let
+  cScheme = config.styleConfig.colorScheme;
+in{
   programs.cava = {
     enable = true;
     settings = {
       color = {
-        background = "'${config.colorScheme.background}'";
-        foreground = "'${config.colorScheme.primary}'";
+        background = "'${cScheme.secondary}'";
+        foreground = "'${cScheme.primary}'";
       };
     };
   };
