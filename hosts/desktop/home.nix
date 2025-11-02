@@ -169,9 +169,9 @@
     hyprpaper = {
       enable = true;
       random = {
-        enable = false;
+        enable = true;
         scriptName = "hrc";
-        interval = 3600;
+        interval = 300;
         hyprland.enable = true;
       };
     };
