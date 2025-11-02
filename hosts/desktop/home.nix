@@ -159,6 +159,7 @@
       enable = true;
       defaultTerminal = true;
     };
+    kitty.enable = true;
   };
 
   shells = {
@@ -167,7 +168,7 @@
       enable = true;
       tmuxStartup = {
         enable = true;
-        ghosttyIntegration = true;
+        aliasToTmux = true;
       };
       tmux-workspace = {
         enable = true;

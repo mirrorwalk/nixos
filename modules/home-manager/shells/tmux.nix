@@ -27,7 +27,7 @@
       keyMode = "vi";
       mouse = false;
       escapeTime = 0;
-      terminal = "screen-256color";
+      # terminal = "screen-256color";
       secureSocket = true;
       extraConfig = ''
         bind-key C-a send-prefix

@@ -10,6 +10,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/nixos/games.nix
+    ../../modules/nixos/ly.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -22,6 +23,8 @@
   hardware.graphics = {
     enable = true;
   };
+
+  games.enable = true;
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -51,9 +54,6 @@
   services.mullvad-vpn.enable = true;
 
   programs.hyprland.enable = true;
-
-  # Ly
-  services.displayManager.ly.enable = true;
 
   # security.pam.services.ly.enableGnomeKeyring = true;
   # security.polkit.enable = true;

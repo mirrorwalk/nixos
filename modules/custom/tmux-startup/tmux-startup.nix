@@ -45,12 +45,17 @@ in {
       enable = lib.mkEnableOption "Enable tmux startup";
       ghosttyIntegration = lib.mkEnableOption "Enable ghostty integration";
       addToPackages = lib.mkEnableOption "Add tmux-startup to packages";
+      aliasToTmux = lib.mkEnableOption "Realias tmux to tmux-startup";
     };
   };
   config = lib.mkIf cfg.enable {
     home.packages = lib.mkIf cfg.addToPackages [
       tmux-startup
     ];
+
+    home.shellAliases = {
+        tmux = "${tmux-startup}/bin/tmux-startup";
+    };
 
     # programs.bash = lib.mkIf config.shells.bash.enable {
     #   initExtra = lib.mkAfter "${tmux-startup}/bin/tmux-startup";
