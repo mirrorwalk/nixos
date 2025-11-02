@@ -28,6 +28,9 @@ in {
       installVimSyntax = lib.mkIf config.nvim.enable true;
     };
 
-    systemConfig.default.terminal.command = "${pkgs.ghostty}/bin/ghostty";
+    systemConfig.default.terminal = lib.mkIf cfg.defaultTerminal {
+      package = pkgs.ghostty;
+      command = "${pkgs.ghostty}/bin/ghostty";
+    };
   };
 }

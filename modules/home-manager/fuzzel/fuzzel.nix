@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   inherit (lib) mkOption types;
@@ -36,6 +37,8 @@ in {
       type = types.bool;
       default = true;
     };
+
+    defaultRunnerMenu = lib.mkEnableOption "fuzzel as default runner menu";
   };
 
   config = {
@@ -76,5 +79,7 @@ in {
         };
       };
     };
+
+    systemConfig.default.runnerMenu.command = "${pkgs.fuzzel}/bin/fuzzel";
   };
 }

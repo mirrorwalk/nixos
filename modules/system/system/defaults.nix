@@ -65,9 +65,16 @@ in {
       default = "${pkgs.fuzzel}/bin/fuzzel";
     };
 
-    terminal.command = mkOption {
-      type = types.str;
-      default = "${pkgs.ghostty}/bin/ghostty";
+    terminal = {
+      package = mkOption {
+        type = types.pkgs;
+        default = pkgs.ghostty;
+      };
+
+      command = mkOption {
+        type = types.str;
+        default = "${pkgs.ghostty}/bin/ghostty";
+      };
     };
 
     video = {
@@ -126,13 +133,14 @@ in {
   };
 
   config = lib.mkIf config.systemConfig.default.enable {
-
     xdg = {
-      portal.enable = true;
-      portal.extraPortals = [
-        pkgs.xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal-gtk
-      ];
+      portal = {
+        enable = true;
+        extraPortals = [
+          # pkgs.xdg-desktop-portal-hyprland
+          # pkgs.xdg-desktop-portal-gtk
+        ];
+      };
 
       mimeApps = let
         default = config.systemConfig.default;

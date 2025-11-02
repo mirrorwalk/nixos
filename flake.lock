@@ -101,17 +101,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1761931031,
-        "narHash": "sha256-ZP4rYVZyjILnXq3nJtiQ9xKqYdgRfqbets04I5ZOTqs=",
-        "ref": "refs/heads/master",
-        "rev": "7ac059d11ddf7195cfaf2107ea30c6fa45800331",
-        "revCount": 46,
-        "type": "git",
-        "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
+        "lastModified": 1762054796,
+        "narHash": "sha256-7Sd9KyhmS8wb3Zu0XGBcSWCMMtanXk0PJcgnEbZIjBU=",
+        "path": "/home/brog/.config/nixos-private",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
+        "path": "/home/brog/.config/nixos-private",
+        "type": "path"
       }
     },
     "root": {

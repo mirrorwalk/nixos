@@ -80,6 +80,7 @@ in {
           gpgSign = "true";
           verbose = "true";
         };
+        gpg.format = "ssh";
         core = {
           editor = "nvim";
         };
@@ -87,7 +88,6 @@ in {
           algorithm = "histogram";
           colorMoved = "plain";
         };
-        gpg.format = "ssh";
         help = {
           autocorrect = "prompt";
         };

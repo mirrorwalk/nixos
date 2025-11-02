@@ -5,7 +5,7 @@
 }: {
   options.jj.enable = lib.mkEnableOption "Enable jj";
 
-  config = lib.mkIf config.jj.enable{
+  config = lib.mkIf config.jj.enable {
     programs.jujutsu = {
       enable = true;
       settings = {

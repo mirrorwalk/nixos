@@ -58,9 +58,9 @@
 
           PS1='${config.shells.bash.ps1}'
 
-          eval "$(direnv hook bash)"
           source <(jj util completion bash)
         ''
+        # eval "$(direnv hook bash)"
         + config.shells.shFunctions;
     };
 

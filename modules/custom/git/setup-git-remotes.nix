@@ -6,10 +6,6 @@
 }: let
   cfg = config.git;
 
-  sgr = pkgs.writeShellScriptBin "sgr" ''
-    ${setupGitRemotes.text}
-  '';
-
   setupGitRemotes = pkgs.writeShellScriptBin "${cfg.setupGitRemotes.scriptName}" ''
     #!/usr/bin/env bash
 

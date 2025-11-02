@@ -56,9 +56,11 @@
     };
   };
 
-  fileManagers.thunar = {
-    enable = true;
-    defaultFileManager = true;
+  fileManagers = {
+    thunar = {
+      enable = true;
+      defaultFileManager = true;
+    };
   };
 
   styleConfig = {
@@ -70,14 +72,17 @@
     ];
   };
 
-  systemConfig.monitors = [
-    {
-      name = "DP-1";
-      width = 2560;
-      height = 1440;
-      refreshRate = 120.0;
-    }
-  ];
+  systemConfig = {
+    default.enable = true;
+    monitors = [
+      {
+        name = "DP-1";
+        width = 2560;
+        height = 1440;
+        refreshRate = 120.0;
+      }
+    ];
+  };
 
   home.shellAliases = {
     ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
@@ -93,6 +98,7 @@
 
   browsers = {
     zen-browser.enable = true;
+    librewolf.enable = true;
 
     mullvad = {
       enable = true;
@@ -116,6 +122,8 @@
     github.enable = true;
   };
 
+  jj.enable = true;
+
   backupGit = {
     enable = true;
 
@@ -137,6 +145,8 @@
     };
   };
 
+  cava.enable = true;
+
   waybar = {
     enable = true;
     systemService.enable = true;
@@ -147,7 +157,12 @@
     weather.enable = true;
   };
 
-  terminals.ghostty.enable = true;
+  terminals = {
+    ghostty = {
+      enable = true;
+      defaultTerminal = true;
+    };
+  };
 
   shells = {
     bash.enable = true;
@@ -193,10 +208,10 @@
     ];
   };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
+  # programs.direnv = {
+  #   enable = true;
+  #   nix-direnv.enable = true;
+  # };
 
   wayland.windowManager.hyprland.enable = true;
 

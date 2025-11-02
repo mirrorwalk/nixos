@@ -34,13 +34,15 @@ in {
           (config.systemConfig.monitors);
 
         exec-once = [
-          "hyprpaper"
+            # "dolphin --daemon"
+            # "thunar --daemon"
         ];
 
         env = [
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,24"
           "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+          # "FILE_MANAGER,dolphin"
         ];
 
         general = {
