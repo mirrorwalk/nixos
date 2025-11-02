@@ -9,12 +9,22 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/system/system/monitors.nix
     inputs.home-manager.nixosModules.default
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  systemConfig. monitors = [
+    {
+      name = "eDP-1";
+      width = 1920;
+      height = 1080;
+      refreshRate = 60.0;
+    }
+  ];
 
   programs.nix-ld.enable = true;
   # programs.nix-ld.libraries = with pkgs; [

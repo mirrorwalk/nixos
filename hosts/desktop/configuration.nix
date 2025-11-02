@@ -9,6 +9,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules/system/system/monitors.nix
     ../../modules/nixos/games.nix
     ../../modules/nixos/ly.nix
     inputs.home-manager.nixosModules.default
@@ -23,6 +24,15 @@
   hardware.graphics = {
     enable = true;
   };
+
+  systemConfig.monitors = [
+    {
+      name = "DP-1";
+      width = 2560;
+      height = 1440;
+      refreshRate = 120.0;
+    }
+  ];
 
   games.enable = true;
 

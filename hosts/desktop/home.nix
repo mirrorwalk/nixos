@@ -72,17 +72,7 @@
     ];
   };
 
-  systemConfig = {
-    default.enable = true;
-    monitors = [
-      {
-        name = "DP-1";
-        width = 2560;
-        height = 1440;
-        refreshRate = 120.0;
-      }
-    ];
-  };
+  systemConfig.default.enable = true;
 
   home.shellAliases = {
     ytdb = "${pkgs.yt-dlp}/bin/yt-dlp -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]'";
