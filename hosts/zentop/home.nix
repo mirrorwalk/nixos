@@ -55,7 +55,17 @@
     };
   };
 
-  systemConfig.default.enable = true;
+  systemConfig = {
+    default.enable = true;
+    systemConfig.monitors = [
+      {
+        name = "eDP-1";
+        width = 1920;
+        height = 1080;
+        refreshRate = 60.0;
+      }
+    ];
+  };
 
   nmApplet = {
     enable = true;

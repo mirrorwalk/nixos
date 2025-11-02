@@ -17,7 +17,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  systemConfig. monitors = [
+  systemConfig.monitors = [
     {
       name = "eDP-1";
       width = 1920;
