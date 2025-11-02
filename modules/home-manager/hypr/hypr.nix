@@ -5,7 +5,7 @@
   ];
 
   home.packages = with pkgs; [
-    hyprcursor
+    # hyprcursor
     rose-pine-hyprcursor
   ];
 }

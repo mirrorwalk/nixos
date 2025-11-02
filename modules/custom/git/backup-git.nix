@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  backupFolders = config.backupGit.backupFolders;
+  backupFolders = config.services.backupGit.backupFolders;
 
   backup-git = pkgs.writeShellScriptBin "backup-git" ''
     #!/usr/bin/env bash
@@ -109,7 +109,7 @@
       done
   '';
 in {
-  options.backupGit = {
+  options.services.backupGit = {
     enable = lib.mkEnableOption "Enable backup-git";
     backupFolders = lib.mkOption {
       type = lib.types.listOf lib.types.path;
@@ -121,7 +121,7 @@ in {
     };
   };
 
-  config = lib.mkIf (config.backupGit.enable && config.git.enable) {
+  config = lib.mkIf config.services.backupGit.enable {
     home.packages = [
       backup-git
     ];

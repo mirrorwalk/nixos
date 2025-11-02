@@ -4,7 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.git;
+  cfg = config.services;
+  gitlabUsername = cfg.gitlab.username;
+  githubUsername = cfg.github.username;
+
+  gitCommand = "${pkgs.git}/bin/git";
 
   setupGitRemotes = pkgs.writeShellScriptBin "${cfg.setupGitRemotes.scriptName}" ''
     #!/usr/bin/env bash
@@ -48,34 +52,34 @@
     if [[ "$ADD_ORIGIN" == true ]]; then
       if [[ "$GITHUB_ENABLED" == "true" && "$GITLAB_ENABLED" == "true" ]]; then
         # Both enabled: dual push setup
-        if git remote get-url origin &>/dev/null; then
+        if ${gitCommand} remote get-url origin &>/dev/null; then
             echo "Origin remote already exists, updating..."
-            git remote set-url origin "git@github.com:${cfg.github.username}/''${REPO_NAME}.git"
-            git remote set-url --add --push origin "git@github.com:${cfg.github.username}/''${REPO_NAME}.git"
-            git remote set-url --add --push origin "git@gitlab.com:${cfg.gitlab.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url --add --push origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url --add --push origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
         else
             echo "Adding origin remote with both GitHub and GitLab..."
-            git remote add origin "git@github.com:${cfg.github.username}/''${REPO_NAME}.git"
-            git remote set-url --add --push origin "git@github.com:${cfg.github.username}/''${REPO_NAME}.git"
-            git remote set-url --add --push origin "git@gitlab.com:${cfg.gitlab.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote add origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url --add --push origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url --add --push origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
         fi
       elif [[ "$GITHUB_ENABLED" == "true" ]]; then
         # Only GitHub enabled
-        if git remote get-url origin &>/dev/null; then
+        if ${gitCommand} remote get-url origin &>/dev/null; then
             echo "Origin remote already exists, updating to GitHub..."
-            git remote set-url origin "git@github.com:${cfg.github.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
         else
             echo "Adding origin remote (GitHub)..."
-            git remote add origin "git@github.com:${cfg.github.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote add origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
         fi
       elif [[ "$GITLAB_ENABLED" == "true" ]]; then
         # Only GitLab enabled
-        if git remote get-url origin &>/dev/null; then
+        if ${gitCommand} remote get-url origin &>/dev/null; then
             echo "Origin remote already exists, updating to GitLab..."
-            git remote set-url origin "git@gitlab.com:${cfg.gitlab.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
         else
             echo "Adding origin remote (GitLab)..."
-            git remote add origin "git@gitlab.com:${cfg.gitlab.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote add origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
         fi
       else
         echo "Error: No git remotes enabled in configuration"
@@ -86,12 +90,12 @@
     # Add GitHub remote (only if enabled)
     if [[ "$ADD_GITHUB" == true ]]; then
       if [[ "$GITHUB_ENABLED" == "true" ]]; then
-        if git remote get-url github &>/dev/null; then
+        if ${gitCommand} remote get-url github &>/dev/null; then
             echo "GitHub remote already exists, updating..."
-            git remote set-url github "git@github.com:${cfg.github.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url github "git@github.com:${githubUsername}/''${REPO_NAME}.git"
         else
             echo "Adding GitHub remote..."
-            git remote add github "git@github.com:${cfg.github.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote add github "git@github.com:${githubUsername}/''${REPO_NAME}.git"
         fi
       else
         echo "Warning: GitHub remote requested but not enabled in configuration"
@@ -101,12 +105,12 @@
     # Add GitLab remote (only if enabled)
     if [[ "$ADD_GITLAB" == true ]]; then
       if [[ "$GITLAB_ENABLED" == "true" ]]; then
-        if git remote get-url gitlab &>/dev/null; then
+        if ${gitCommand} remote get-url gitlab &>/dev/null; then
             echo "GitLab remote already exists, updating..."
-            git remote set-url gitlab "git@gitlab.com:${cfg.gitlab.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote set-url gitlab "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
         else
             echo "Adding GitLab remote..."
-            git remote add gitlab "git@gitlab.com:${cfg.gitlab.username}/''${REPO_NAME}.git"
+            ${gitCommand} remote add gitlab "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
         fi
       else
         echo "Warning: GitLab remote requested but not enabled in configuration"
@@ -115,12 +119,12 @@
 
     # Display configured remotes
     echo -e "\nConfigured remotes:"
-    git remote -v
+    ${gitCommand} remote -v
 
     echo -e "\nDone!"
   '';
 in {
-  options.git = {
+  options.services = {
     setupGitRemotes = {
       enable = lib.mkEnableOption "Enable setup-git-remotes script";
 
@@ -137,6 +141,7 @@ in {
         description = "GitLab username";
       };
     };
+
     github = {
       username = lib.mkOption {
         type = lib.types.str;
@@ -146,13 +151,13 @@ in {
     };
   };
 
-  config = lib.mkIf (cfg.enable && cfg.setupGitRemotes.enable) {
+  config = lib.mkIf cfg.setupGitRemotes.enable {
     home.packages = [
       setupGitRemotes
     ];
 
-    # home.shellAliases = {
-    #   sgr = "${setupGitRemotes}/bin/setup-git-remotes";
-    # };
+    home.shellAliases = {
+      sgr = "${setupGitRemotes}/bin/setup-git-remotes";
+    };
   };
 }

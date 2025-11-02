@@ -1,21 +1,10 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }: {
-  options.hyprpaper = {
-    enable = lib.mkEnableOption "Enables hyprpaper";
-    defaultWallpaper = lib.mkOption {
-      default = "/home/brog/Pictures/Wallpapers/thumb-1920-1345286.png";
-      type = lib.types.str;
-      description = "The default wallpaper to load";
-    };
-  };
-
-  config = lib.mkIf config.hyprpaper.enable {
+  config = lib.mkIf config.services.hyprpaper.enable {
     services.hyprpaper = {
-      enable = true;
       settings = {
         preload = toString config.styleConfig.defaultWallpaper;
         wallpaper =

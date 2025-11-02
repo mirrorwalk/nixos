@@ -6,7 +6,7 @@
 }: let
   inherit (lib) mkOption types;
 in {
-  options.systemConfig.default = {
+  options.systemConfig.defaults = {
     enable = lib.mkEnableOption "Enable xdg default setup";
 
     fileManager = {
@@ -132,7 +132,7 @@ in {
     };
   };
 
-  config = lib.mkIf config.systemConfig.default.enable {
+  config = lib.mkIf config.systemConfig.defaults.enable {
     xdg = {
       portal = {
         enable = true;
@@ -142,7 +142,7 @@ in {
       };
 
       mimeApps = let
-        default = config.systemConfig.default;
+        default = config.systemConfig.defaults;
 
         associations = builtins.listToAttrs (
           lib.concatMap (

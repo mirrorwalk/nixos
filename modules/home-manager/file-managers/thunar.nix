@@ -20,7 +20,7 @@ in {
       package
     ];
 
-    systemConfig.default.fileManager = mkIf cfg.defaultFileManager {
+    systemConfig.defaults.fileManager = mkIf cfg.defaultFileManager {
       command = "${package}/bin/thunar";
       desktopName = "thunar.desktop";
     };

@@ -4,9 +4,9 @@
   config,
   ...
 }: {
-  options.nom.enable = lib.mkEnableOption "Enable nom";
+  options.programs.nom.enable = lib.mkEnableOption "Enable nom";
 
-  config = lib.mkIf config.nom.enable {
+  config = lib.mkIf config.programs.nom.enable {
     home.packages = [
       pkgs.nix-output-monitor
     ];

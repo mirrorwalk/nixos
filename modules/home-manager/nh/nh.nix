@@ -4,11 +4,9 @@
   pkgs,
   ...
 }: {
-  options.nh.enable = lib.mkEnableOption "Enable nh";
 
-  config = lib.mkIf config.nh.enable {
+  config = lib.mkIf config.programs.nh.enable {
     programs.nh = {
-      enable = true;
       flake = "/home/brog/.config/nixos";
     };
 

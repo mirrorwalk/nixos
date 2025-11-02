@@ -19,7 +19,6 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    exfatprogs
     ripgrep
     pavucontrol
     pipewire
@@ -44,8 +43,7 @@
     };
   };
 
-  programs.neovim.enable = true;
-  hyprland.enable = true;
+  wayland.windowManager.hyprland.enable = true;
 
   fileManagers = {
     thunar = {
@@ -56,7 +54,7 @@
   };
 
   systemConfig = {
-    default.enable = true;
+    defaults.enable = true;
     monitors = [
       {
         name = "eDP-1";
@@ -72,9 +70,8 @@
     integration.hyprland = true;
   };
 
-  programs.fzf.enable = true;
-
-  fuzzel = {
+  runners.fuzzel = {
+    enable = true;
     width = 50;
     dpiAware = "no";
     showActions = false;
@@ -92,12 +89,7 @@
     bat.enable = true;
   };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  waybar = {
+  bars.waybar = {
     enable = true;
     interval = 5;
     battery.enable = true;
@@ -105,20 +97,6 @@
     hyprland.enable = true;
     mullvadVPN.enable = true;
   };
-
-  privateConfig.lewd.enable = false;
-
-  backupGit = {
-    enable = true;
-    backupFolders = [
-      /home/brog/.config/nixos-private
-      /home/brog/.config/nixos
-      /home/brog/.config
-    ];
-  };
-
-  nh.enable = true;
-  nom.enable = true;
 
   browsers = {
     zen-browser = {
@@ -133,8 +111,6 @@
     search.private.defaultEngine = "ddg";
   };
 
-  wayland.windowManager.hyprland.enable = true;
-
   styleConfig = {
     defaultWallpaper = /home/brog/Pictures/Wallpapers/andromenda-galaxy.jpg;
     wallpaperFolders = [
@@ -142,28 +118,55 @@
     ];
   };
 
-  hyprpaper = {
-    enable = true;
-    random = {
-      enable = false;
-      scriptName = "hrc";
-      interval = 3600;
-      hyprland.enable = true;
+  programs = {
+    git = {
+      enable = true;
+      sign.enable = true;
     };
+
+    jujutsu.enable = true;
+
+    nh.enable = true;
+    nom.enable = true;
+
+    neovim.enable = true;
+
+    fzf.enable = true;
   };
 
-  git = {
-    enable = true;
-    ssh.enable = true;
+  services = {
+    gitlab = {
+      enable = true;
+      ssh.enable = true;
+    };
+
+    github = {
+      enable = true;
+      ssh.enable = true;
+    };
+
     setupGitRemotes = {
       enable = true;
-      scriptName = "sgr";
     };
-    gitlab.enable = true;
-    github.enable = true;
-  };
 
-  jj.enable = true;
+    backupGit = {
+      enable = true;
+      backupFolders = [
+        /home/brog/.config/nixos-private
+        /home/brog/.config/nixos
+        /home/brog/.config
+      ];
+    };
+
+    hyprpaper = {
+      enable = true;
+      random = {
+        enable = false;
+        interval = 3600;
+        hyprland.enable = true;
+      };
+    };
+  };
 
   terminals = {
     kitty = {

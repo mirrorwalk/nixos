@@ -15,7 +15,7 @@
         pkgs.tor-browser
       ];
 
-    systemConfig.default.webBrowser = lib.mkIf config.browsers.tor.defaultBrowser {
+    systemConfig.defaults.webBrowser = lib.mkIf config.browsers.tor.defaultBrowser {
       command = "${pkgs.tor-browser}/bin/tor-browser";
       desktopName = "torbrowser.desktop";
     };

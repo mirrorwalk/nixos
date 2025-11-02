@@ -12,6 +12,13 @@
   config = lib.mkIf config.browsers.librewolf.enable {
     programs.librewolf = {
       enable = true;
+
+      policies = {
+        Cookies = {
+          Allow = config.browsers.allowedCookies; 
+        };
+      };
+
       profiles.default = {
         bookmarks = config.browsers.firefox.bookmarks;
         extensions = config.browsers.firefox.extensions;
@@ -24,7 +31,7 @@
       };
     };
 
-    systemConfig.default.webBrowser = lib.mkIf config.browsers.librewolf.defaultBrowser {
+    systemConfig.defaults.webBrowser = lib.mkIf config.browsers.librewolf.defaultBrowser {
       command = "${pkgs.librewolf}/bin/librewolf";
       desktopName = "librewolf.desktop";
     };

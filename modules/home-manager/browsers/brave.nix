@@ -14,7 +14,7 @@
       pkgs.brave
     ];
 
-    systemConfig.default.webBrowser = lib.mkIf config.browsers.brave.defaultBrowser {
+    systemConfig.defaults.webBrowser = lib.mkIf config.browsers.brave.defaultBrowser {
       command = "${pkgs.brave}/bin/brave";
       desktopName = "brave-desktop.desktop";
     };

@@ -5,9 +5,11 @@
   ...
 }: let
   inherit (lib) mkOption types;
-  cfg = config.fuzzel;
+  cfg = config.runners.fuzzel;
 in {
-  options.fuzzel = {
+  options.runners.fuzzel = {
+    enable = lib.mkEnableOption "Enable fuzzel";
+
     width = mkOption {
       type = types.int;
       default = 30;
@@ -41,12 +43,12 @@ in {
     defaultRunnerMenu = lib.mkEnableOption "fuzzel as default runner menu";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.fuzzel = {
       enable = true;
       settings = {
         main = {
-          terminal = "${config.systemConfig.default.terminal.command} -e";
+          terminal = "${config.systemConfig.defaults.terminal.command} -e";
           layer = "overlay";
           exit-on-keyboard-focus-loss = "yes";
           width = cfg.width;
@@ -80,6 +82,6 @@ in {
       };
     };
 
-    systemConfig.default.runnerMenu.command = "${pkgs.fuzzel}/bin/fuzzel";
+    systemConfig.defaults.runnerMenu.command = "${pkgs.fuzzel}/bin/fuzzel";
   };
 }

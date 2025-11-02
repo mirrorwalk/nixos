@@ -28,7 +28,7 @@ in {
       installVimSyntax = lib.mkIf config.programs.neovim.enable true;
     };
 
-    systemConfig.default.terminal = lib.mkIf cfg.defaultTerminal {
+    systemConfig.defaults.terminal = lib.mkIf cfg.defaultTerminal {
       package = pkgs.ghostty;
       command = "${pkgs.ghostty}/bin/ghostty";
     };

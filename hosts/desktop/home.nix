@@ -29,8 +29,8 @@
     exfatprogs
     ripgrep
     pavucontrol
-    tor
-    tor-browser
+    # tor
+    # tor-browser
     pipewire
     keepassxc
     # xwayland-satellite
@@ -45,7 +45,7 @@
     yt-dlp
   ];
 
-  hyprland.enable = true;
+  wayland.windowManager.hyprland.enable = true;
 
   imageVideo.mpv = {
     enable = true;
@@ -73,7 +73,7 @@
   };
 
   systemConfig = {
-    default.enable = true;
+    defaults.enable = true;
     monitors = [
       {
         name = "DP-1";
@@ -91,7 +91,8 @@
     evi = "cd $HOME/.config/nvim && nvim .";
   };
 
-  fuzzel = {
+  runners.fuzzel = {
+    enable = true;
     width = 50;
     innerPad = 5;
   };
@@ -106,45 +107,77 @@
     search.defaultEngine = "Kagi";
   };
 
-  programs.fzf.enable = true;
+  programs = {
+    git = {
+      enable = true;
+      sign.enable = true;
+    };
 
-  git = {
-    enable = true;
-    ssh.enable = true;
+    jujutsu.enable = true;
+
+    nh.enable = true;
+    nom.enable = true;
+
+    neovim.enable = true;
+
+    fzf.enable = true;
+
+    cava.enable = true;
+
+    nvim-fzf = {
+      enable = true;
+      bashKeybind.enable = true;
+      roots = [
+        "${config.home.homeDirectory}/.config/nixos"
+        "$HOME/.config"
+        "$HOME/projects"
+        "$HOME/.local/bin"
+      ];
+      ignore = [
+        ".git"
+        "node_modules"
+        "target"
+        ".direnv"
+      ];
+    };
+  };
+
+  services = {
+    gitlab = {
+      enable = true;
+      ssh.enable = true;
+    };
+
+    github = {
+      enable = true;
+      ssh.enable = true;
+    };
+
     setupGitRemotes = {
       enable = true;
-      scriptName = "sgr";
     };
-    gitlab.enable = true;
-    github.enable = true;
-  };
 
-  jj.enable = true;
-
-  backupGit = {
-    enable = true;
-
-    backupFolders = [
-      /home/brog/.config/nvim
-      /home/brog/.config/nixos-private
-      /home/brog/.config/nixos
-      /home/brog/.config
-    ];
-  };
-
-  hyprpaper = {
-    enable = true;
-    random = {
-      scriptName = "hrc";
+    backupGit = {
       enable = true;
-      interval = 300;
-      hyprland.enable = true;
+      backupFolders = [
+        /home/brog/.config/nixos-private
+        /home/brog/.config/nixos
+        /home/brog/.config
+      ];
+    };
+
+    hyprpaper = {
+      enable = true;
+      random = {
+        enable = false;
+        scriptName = "hrc";
+        interval = 3600;
+        hyprland.enable = true;
+      };
     };
   };
 
-  cava.enable = true;
-
-  waybar = {
+  bars.waybar = {
     enable = true;
     systemService.enable = true;
     hyprland.enable = true;
@@ -184,40 +217,14 @@
     bat.enable = true;
   };
 
-  nh.enable = true;
-  nom.enable = true;
-
-  programs.neovim.enable = true;
-
-  programs.nvim-fzf = {
-    enable = true;
-    bashKeybind.enable = true;
-    roots = [
-      "${config.home.homeDirectory}/.config/nixos"
-      "$HOME/.config"
-      "$HOME/projects"
-      "$HOME/.local/bin"
-    ];
-    ignore = [
-      ".git"
-      "node_modules"
-      "target"
-      ".direnv"
-    ];
-  };
-
   # programs.direnv = {
   #   enable = true;
   #   nix-direnv.enable = true;
   # };
 
-  wayland.windowManager.hyprland.enable = true;
-
   home.keyboard = {
     xkbOptions = ["caps:escape"];
   };
-
-  xdg.mimeApps.enable = true;
 
   gtk = {
     enable = true;

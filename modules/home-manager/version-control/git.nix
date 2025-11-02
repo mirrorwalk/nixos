@@ -4,52 +4,25 @@
   config,
   ...
 }: let
-  cfg = config.git;
+  cfg = config.programs.git;
 in {
-  imports = [
-    ../../custom/git/git.nix
-  ];
-
-  options.git = {
-    enable = lib.mkEnableOption "Enable git";
-
-    github = {
-      enable = lib.mkEnableOption "Enable github";
-      sshFile = lib.mkOption {
+  options.programs.git = {
+    sign = {
+      enable = lib.mkEnableOption "Enable signing git commits";
+      key = lib.mkOption {
         type = lib.types.nonEmptyStr;
         default = "~/.ssh/git";
       };
-    };
-
-    gitlab = {
-      enable = lib.mkEnableOption "Enable github";
-      sshFile = lib.mkOption {
-        type = lib.types.nonEmptyStr;
-        default = "~/.ssh/git";
-      };
-    };
-
-    ssh.enable = lib.mkEnableOption "Enable ssh for git";
-
-    signKey = lib.mkOption {
-      type = lib.types.nonEmptyStr;
-      default = "~/.ssh/git";
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    programs.gh.enable = lib.mkIf cfg.github.enable true;
-    home.packages = lib.mkIf cfg.github.enable [
-      pkgs.glab
-    ];
-
+  config = {
     programs.git = {
-      enable = true;
       settings = {
         user = {
           name = "mirrorwalk";
           email = "git.cresting327@passmail.net";
-          signingkey = lib.mkIf cfg.ssh.enable cfg.signKey;
+          signingkey = lib.mkIf cfg.sign.enable cfg.sign.key;
         };
 
         alias = {
@@ -77,10 +50,10 @@ in {
           ui = "auto";
         };
         commit = {
-          gpgSign = "true";
+          gpgSign = lib.mkIf cfg.sign.enable "true";
           verbose = "true";
         };
-        gpg.format = "ssh";
+        gpg.format = lib.mkIf cfg.sign.enable "ssh";
         core = {
           editor = "nvim";
         };
@@ -120,26 +93,12 @@ in {
     };
 
     programs.delta = {
-      enable = true;
+      enable = cfg.enable;
       enableGitIntegration = true;
       options = {
         navigate = true;
         light = false;
         line-numbers = true;
-      };
-    };
-
-    programs.ssh.matchBlocks = lib.mkIf cfg.ssh.enable {
-      "github.com" = {
-        hostname = "github.com";
-        user = "git";
-        # identityFile = "~/.ssh/git";
-        identityFile = cfg.github.sshFile;
-      };
-      "gitlab.com" = {
-        hostname = "gitlab.com";
-        user = "git";
-        identityFile = cfg.gitlab.sshFile;
       };
     };
   };

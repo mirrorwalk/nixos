@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.hyprpaper.random;
+  cfg = config.services.hyprpaper.random;
 
   pipe = "/tmp/hyprpaper-random.pipe";
   wallpaperFolders = config.styleConfig.wallpaperFolders;
@@ -225,7 +225,7 @@
     '';
   };
 in {
-  options.hyprpaper.random = {
+  options.services.hyprpaper.random = {
     enable = lib.mkEnableOption "Enable random hyprpaper";
 
     scriptName = lib.mkOption {
@@ -242,7 +242,7 @@ in {
     hyprland.enable = lib.mkEnableOption "Enable hyprland integration";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && config.services.hyprpaper.enable) {
     home.packages = [
       hyprpaper-random-control
       hyprpaper-random-control-completion
@@ -268,7 +268,7 @@ in {
       };
     };
 
-    waybar.wallpaperCategory.settings.command = "basename $(${hyprpaper-random-control}/bin/${cfg.scriptName} get-current)";
+    bars.waybar.wallpaperCategory.settings.command = "basename $(${hyprpaper-random-control}/bin/${cfg.scriptName} get-current)";
 
     systemd.user.services.hyprpaper-random = {
       Unit = {

@@ -25,9 +25,6 @@
 
   programs.hyprland.enable = true;
 
-  # Ly
-  # services.displayManager.ly.enable = true;
-
   services.logind.settings.Login = {
     HandlePowerKey = "ignore";
   };
@@ -100,15 +97,13 @@
     backupFileExtension = "backup";
   };
 
-  services.flatpak.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    file
+    # file
     unzip
   ];
 

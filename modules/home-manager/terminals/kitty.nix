@@ -16,7 +16,7 @@ in {
       enable = true;
     };
 
-    systemConfig.default.terminal = lib.mkIf cfg.defaultTerminal {
+    systemConfig.defaults.terminal = lib.mkIf cfg.defaultTerminal {
       package = pkgs.kitty;
       command = "${pkgs.kitty}/bin/kitty";
     };

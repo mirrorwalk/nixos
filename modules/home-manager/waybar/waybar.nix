@@ -5,7 +5,7 @@
   ...
 }: let
   inherit (lib) mkIf mkOption mkEnableOption types;
-  cfg = config.waybar;
+  cfg = config.bars.waybar;
   cScheme = config.styleConfig.colorScheme;
 
   fullscreenScript = pkgs.writeShellScriptBin "fullscreen" ''
@@ -41,7 +41,7 @@
     then modules
     else [];
 in {
-  options.waybar = {
+  options.bars.waybar = {
     enable = mkEnableOption "Enable waybar";
 
     modules = {
@@ -96,57 +96,59 @@ in {
   };
 
   config = mkIf cfg.enable {
-    waybar.modules.left =
-      isEnabled [
-        "hyprland/workspaces"
-        # "custom/separator"
-        "hyprland/submap"
-        # "custom/separator"
-        "hyprland/window"
-        "custom/separator"
-        "custom/fullscreen"
-      ]
-      cfg.hyprland.enable
-      ++ [
-        "custom/separator"
-      ]
-      ++ isEnabled [
-        "custom/wallpaper-category"
-      ]
-      cfg.wallpaperCategory.enable;
-    waybar.modules.center = ["clock" "privacy"];
-    waybar.modules.right =
-      [
-        "network"
-      ]
-      ++ isEnabled [
-        "custom/mullvad"
-      ]
-      cfg.mullvadVPN.enable
-      ++ [
-        "custom/separator"
-        "pulseaudio"
-      ]
-      ++ isEnabled [
-        "cava"
-      ]
-      cfg.cava.enable
-      ++ [
-        "custom/separator"
-      ]
-      ++ isEnabled [
-        "custom/weather"
-      ]
-      cfg.weather.enable
-      ++ [
-        "custom/separator"
-        "tray"
-        "custom/separator"
-      ]
-      ++ isEnabled [
-        "battery"
-      ]
-      cfg.battery.enable;
+    bars.waybar = {
+      modules.left =
+        isEnabled [
+          "hyprland/workspaces"
+          # "custom/separator"
+          "hyprland/submap"
+          # "custom/separator"
+          "hyprland/window"
+          "custom/separator"
+          "custom/fullscreen"
+        ]
+        cfg.hyprland.enable
+        ++ [
+          "custom/separator"
+        ]
+        ++ isEnabled [
+          "custom/wallpaper-category"
+        ]
+        cfg.wallpaperCategory.enable;
+      modules.center = ["clock" "privacy"];
+      modules.right =
+        [
+          "network"
+        ]
+        ++ isEnabled [
+          "custom/mullvad"
+        ]
+        cfg.mullvadVPN.enable
+        ++ [
+          "custom/separator"
+          "pulseaudio"
+        ]
+        ++ isEnabled [
+          "cava"
+        ]
+        cfg.cava.enable
+        ++ [
+          "custom/separator"
+        ]
+        ++ isEnabled [
+          "custom/weather"
+        ]
+        cfg.weather.enable
+        ++ [
+          "custom/separator"
+          "tray"
+          "custom/separator"
+        ]
+        ++ isEnabled [
+          "battery"
+        ]
+        cfg.battery.enable;
+    };
 
     programs.waybar = {
       enable = true;

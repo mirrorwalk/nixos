@@ -35,6 +35,10 @@
       };
     };
 
+    allowedCookies = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+    };
+
     search = {
       defaultEngine = lib.mkOption {
         type = lib.types.nonEmptyStr;
@@ -215,6 +219,16 @@
             }
           ];
         }
+      ];
+
+      allowedCookies = [
+        "https://proton.me"
+        "https://youtube.com"
+        "https://github.com"
+        "https://gitlab.com"
+        "https://nano-gpt.com"
+        "https://perplexity.ai"
+        "https://unicornuniversity.net"
       ];
     };
 

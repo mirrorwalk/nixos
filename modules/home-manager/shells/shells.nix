@@ -12,5 +12,6 @@
 
   home.shellAliases = {
     la = "ls -AF --color=auto";
+    backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
   };
 }

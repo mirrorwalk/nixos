@@ -26,7 +26,7 @@ in {
       };
     };
 
-    systemConfig.default.fileManager = mkIf cfg.defaultFileManager {
+    systemConfig.defaults.fileManager = mkIf cfg.defaultFileManager {
       command = "${package}/bin/ranger";
       desktopName = "ranger.desktop";
     };

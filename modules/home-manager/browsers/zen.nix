@@ -25,24 +25,6 @@
           Value = value;
           Status = "locked";
         });
-        mkPluginUrl = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
-
-        mkExtensionEntry = {
-          id,
-          pinned ? false,
-        }: let
-          base = {
-            install_url = mkPluginUrl id;
-            installation_mode = "force_installed";
-          };
-        in
-          if pinned
-          then base // {default_area = "navbar";}
-          else base;
-        mkExtensionSettings = builtins.mapAttrs (_: entry:
-          if builtins.isAttrs entry
-          then entry
-          else mkExtensionEntry {id = entry;});
       in {
         AutofillAddressEnabled = false;
         AutofillCreditCardEnabled = false;
@@ -64,15 +46,7 @@
           Cookies = true;
         };
         Cookies = {
-          Allow = [
-            "https://proton.me"
-            "https://youtube.com"
-            "https://github.com"
-            "https://gitlab.com"
-            "https://nano-gpt.com"
-            "https://perplexity.ai"
-            "https://unicornuniversity.net"
-          ];
+          Allow = config.browsers.allowedCookies;
         };
 
         Preferences = mkLockedAttrs {
@@ -300,7 +274,7 @@
       };
     };
 
-    systemConfig.default = lib.mkIf config.browsers.zen-browser.defaultBrowser {
+    systemConfig.defaults = lib.mkIf config.browsers.zen-browser.defaultBrowser {
       webBrowser = let
         zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
         desktopFile = zen-browser.meta.desktopFileName;

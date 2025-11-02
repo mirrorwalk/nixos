@@ -101,17 +101,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1762065727,
-        "narHash": "sha256-U0oNEDe1RKlolnSHkpgKv6EBlvSv6jsW0MyMND3YMXg=",
-        "ref": "refs/heads/master",
-        "rev": "0490d682ad7247102de4c6f214a3e04d59ae439a",
-        "revCount": 51,
-        "type": "git",
-        "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
+        "lastModified": 1762075265,
+        "narHash": "sha256-Bun1Y5uHkiSBq+KMeBJ3XL5icc+EfBZYaPbE/+MhV3M=",
+        "path": "/home/brog/.config/nixos-private",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/mirrorwalk/nixos-private.git"
+        "path": "/home/brog/.config/nixos-private",
+        "type": "path"
       }
     },
     "root": {
@@ -148,11 +145,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761970869,
-        "narHash": "sha256-dlcxJTY+MwR9u3yTkBkzqfHY2+MKonDS7UzoOLlGpuw=",
+        "lastModified": 1762067864,
+        "narHash": "sha256-Q7o8NTYIbGMmMrgrx9PTmmaj/GM/DWJjM6U+daaiiyk=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "5855db6427f25672d7f02e19af418a38fe82e26e",
+        "rev": "68b3775543b442b06a76e498fd342b16a8619757",
         "type": "github"
       },
       "original": {
