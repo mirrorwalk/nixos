@@ -40,6 +40,8 @@
         set -g renumber-windows on
         bind-key q kill-window
         bind-key K kill-session
+
+        set -g allow-passthrough on
       '';
     };
 

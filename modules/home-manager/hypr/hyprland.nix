@@ -3,44 +3,21 @@
   lib,
   config,
   ...
-}: {
-  imports = [
-  ];
-
+}: let
+  defaults = config.systemConfig.default;
+in {
   options.hyprland = {
-    terminal = lib.mkOption {
-      description = "Default terminal";
-      type = lib.types.str;
-      default = "ghostty";
-    };
-
-    menu = lib.mkOption {
-      description = "Default menu";
-      type = lib.types.str;
-      default = "fuzzel";
-    };
-
-    fileManager = lib.mkOption {
-      description = "Default file manager";
-      type = lib.types.str;
-      default = "thunar";
-    };
-
-    webBrowser = lib.mkOption {
-      description = "Default web browser";
-      type = lib.types.str;
-      default = "mullvad-browser";
-    };
+    enable = lib.mkEnableOption "Enable hyprland";
   };
 
-  config = {
+  config = lib.mkIf config.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
-        "$terminal" = config.hyprland.terminal;
-        "$fileManager" = config.hyprland.fileManager;
-        "$menu" = config.hyprland.menu;
-        "$webBrowser" = config.hyprland.webBrowser;
+        "$terminal" = defaults.terminal.command;
+        "$fileManager" = defaults.fileManager.command;
+        "$menu" = defaults.runnerMenu.command;
+        "$webBrowser" = defaults.webBrowser.command;
         "$mainMod" = "SUPER";
 
         monitor =

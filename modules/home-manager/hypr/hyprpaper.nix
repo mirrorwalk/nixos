@@ -4,9 +4,6 @@
   config,
   ...
 }: {
-  imports = [
-    ../../custom/hyprpaper-random/hyprpaper-random.nix
-  ];
   options.hyprpaper = {
     enable = lib.mkEnableOption "Enables hyprpaper";
     defaultWallpaper = lib.mkOption {

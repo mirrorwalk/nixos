@@ -18,6 +18,8 @@
     programs.zen-browser = {
       enable = true;
 
+      nativeMessagingHosts = [pkgs.firefoxpwa];
+
       policies = let
         mkLockedAttrs = builtins.mapAttrs (_: value: {
           Value = value;
@@ -298,13 +300,13 @@
       };
     };
 
-    browsers.default = lib.mkIf config.browsers.zen-browser.defaultBrowser {
-      browser = let
-        zen-browser = inputs.zen-browser.packages.${pkgs.system}.twilight;
+    systemConfig.default = lib.mkIf config.browsers.zen-browser.defaultBrowser {
+      webBrowser = let
+        zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
         desktopFile = zen-browser.meta.desktopFileName;
       in {
-        enable = true;
         desktopName = desktopFile;
+        command = "${zen-browser}/bin/zen-twilight";
       };
     };
   };

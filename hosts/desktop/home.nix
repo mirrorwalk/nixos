@@ -5,8 +5,7 @@
   ...
 }: {
   imports = [
-    ../../modules/home-manager/imports/desktop.nix
-    inputs.privateConfig.homeModules.desktop
+    ../../modules/desktop.nix
   ];
 
   home.username = "brog";
@@ -34,8 +33,6 @@
     tor-browser
     pipewire
     keepassxc
-    mpv
-    hyprcursor
     # xwayland-satellite
     # cryptsetup
     wl-clipboard
@@ -45,10 +42,24 @@
     tree
     fd
     jq
-    xfce.thunar
     yt-dlp
-    rose-pine-hyprcursor
   ];
+
+  hyprland.enable = true;
+
+  imageVideo.mpv = {
+    enable = true;
+    default = {
+      video = true;
+      image = true;
+      audio = true;
+    };
+  };
+
+  fileManagers.thunar = {
+    enable = true;
+    defaultFileManager = true;
+  };
 
   styleConfig = {
     defaultWallpaper = /home/brog/Pictures/Wallpapers/thumb-1920-1345286.png;

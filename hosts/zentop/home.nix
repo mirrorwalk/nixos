@@ -4,9 +4,7 @@
   ...
 }: {
   imports = [
-    ../../modules/home-manager/imports/laptop.nix
-    ../../modules/system/system.nix
-    inputs.privateConfig.homeModules.laptop
+    ../../modules/laptop.nix
   ];
 
   home.username = "brog";
@@ -24,43 +22,54 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  home.packages = [
-    pkgs.exfatprogs
-    pkgs.ripgrep
-    pkgs.pavucontrol
-    pkgs.pipewire
-    pkgs.mpv
-    pkgs.hyprcursor
-    pkgs.wl-clipboard
-    pkgs.btop
-    pkgs.tree
-    pkgs.fd
-    pkgs.jq
-    pkgs.xfce.thunar
-    pkgs.rose-pine-hyprcursor
+  home.packages = with pkgs; [
+    exfatprogs
+    ripgrep
+    pavucontrol
+    pipewire
+    wl-clipboard
+    btop
+    tree
+    fd
+    jq
   ];
 
   # programs.mullvad-vpn.enable = true;
 
-  hyprland = {
-    fileManager = "thunar";
-    webBrowser = "zen-twilight";
+  imageVideo.mpv = {
+    enable = true;
+    default = {
+      video = true;
+      image = true;
+      audio = true;
+    };
   };
 
   nvim.enable = true;
+  hyprland.enable = true;
 
-  systemConfig.monitors = [
-    {
-      name = "eDP-1";
-      width = 1920;
-      height = 1080;
-      refreshRate = 60.0;
-    }
-  ];
+  fileManagers = {
+    thunar = {
+      enable = true;
+      defaultFileManager = true;
+    };
+  };
+
+  systemConfig = {
+    default.enable = true;
+    monitors = [
+      {
+        name = "eDP-1";
+        width = 1920;
+        height = 1080;
+        refreshRate = 60.0;
+      }
+    ];
+  };
 
   nmApplet = {
-      enable = true;
-      integration.hyprland = true;
+    enable = true;
+    integration.hyprland = true;
   };
 
   programs.fzf.enable = true;
@@ -112,6 +121,10 @@
       enable = true;
       defaultBrowser = true;
     };
+    mullvad = {
+      enable = true;
+    };
+    librewolf.enable = true;
     search.defaultEngine = "Kagi";
     search.private.defaultEngine = "ddg";
   };
@@ -128,7 +141,7 @@
   hyprpaper = {
     enable = true;
     random = {
-      enable = true;
+      enable = false;
       scriptName = "hrc";
       interval = 3600;
       hyprland.enable = true;

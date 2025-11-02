@@ -268,14 +268,6 @@ in {
       };
     };
 
-    # waybar.wallpaper = {
-    #   settings."custom/wallpaper-category" = {
-    #     exec = "basename $(${hyprpaper-random-control}/bin/${cfg.scriptName} get-current)";
-    #     format = "Wallpaper Category: {}";
-    #     interval = config.waybar.interval;
-    #   };
-    # };
-
     waybar.wallpaperCategory.settings.command = "basename $(${hyprpaper-random-control}/bin/${cfg.scriptName} get-current)";
 
     systemd.user.services.hyprpaper-random = {

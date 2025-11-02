@@ -1,11 +1,15 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.terminals.ghostty;
 in {
-  options.terminals.ghostty.enable = lib.mkEnableOption "Enable ghostty shell";
+  options.terminals.ghostty = {
+    enable = lib.mkEnableOption "Enable ghostty shell";
+    defaultTerminal = lib.mkEnableOption "Set ghostty as default terminal";
+  };
 
   config = lib.mkIf cfg.enable {
     programs.ghostty = {
@@ -21,7 +25,9 @@ in {
       enableZshIntegration = lib.mkIf config.shells.zsh.enable true;
       enableBashIntegration = lib.mkIf config.shells.bash.enable true;
       installBatSyntax = lib.mkIf config.shells.bat.enable true;
-      installVimSyntax = true;
+      installVimSyntax = lib.mkIf config.nvim.enable true;
     };
+
+    systemConfig.default.terminal.command = "${pkgs.ghostty}/bin/ghostty";
   };
 }

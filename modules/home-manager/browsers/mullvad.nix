@@ -14,10 +14,9 @@
       pkgs.mullvad-browser
     ];
 
-    browsers.default.browser = {
-      enable = true;
-      desktopName =
-        lib.mkIf config.browsers.mullvad.defaultBrowser "mullvad-browser.desktop";
+    systemConfig.default.webBrowser = lib.mkIf config.browsers.mullvad.defaultBrowser {
+      desktopName = "mullvad-browser.desktop";
+      command = "${pkgs.mullvad-browser}/bin/mullvad-browser";
     };
   };
 }
