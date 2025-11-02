@@ -21,8 +21,8 @@
     };
 
     privateConfig = {
-      # url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
-      url = "path:/home/brog/.config/nixos-private";
+      url = "git+ssh://git@github.com/mirrorwalk/nixos-private.git";
+      # url = "path:/home/brog/.config/nixos-private";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
