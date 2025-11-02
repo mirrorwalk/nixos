@@ -37,13 +37,13 @@ in {
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.gh.enable = lib.mkIf cfg.github.enable true;
     home.packages = lib.mkIf cfg.github.enable [
       pkgs.glab
     ];
 
-    programs.git = lib.mkIf cfg.enable {
+    programs.git = {
       enable = true;
       settings = {
         user = {

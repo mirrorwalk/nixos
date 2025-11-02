@@ -19,12 +19,6 @@ in {
     programs.ranger = {
       enable = true;
 
-      # extraPackages = [
-      #   pkgs.kitty
-      #   pkgs.w3m
-      #   pkgs.python3Packages.ueberzug
-      # ];
-
       settings = {
         preview_images = true;
         preview_images_method = "kitty";

@@ -9,7 +9,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ../../modules/nixos/stylix/stylix.nix
     inputs.home-manager.nixosModules.default
   ];
 
@@ -40,10 +39,6 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "zentop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.extraHosts = ''
-  #   0.0.0.0 google.com
-  # '';
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 

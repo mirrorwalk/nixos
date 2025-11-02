@@ -34,8 +34,7 @@ in {
           (config.systemConfig.monitors);
 
         exec-once = [
-            # "dolphin --daemon"
-            # "thunar --daemon"
+          "${defaults.fileManager.command} --daemon"
         ];
 
         env = [
