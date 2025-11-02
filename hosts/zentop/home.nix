@@ -1,10 +1,7 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../modules/laptop.nix
+    ../../modules/custom/shutdown-menu/shutdown-menu.nix
   ];
 
   home.username = "brog";
@@ -35,8 +32,8 @@
   ];
 
   services.gnome-keyring = {
-      enable = true;
-      components = [ "secrets" ];
+    enable = true;
+    components = ["secrets"];
   };
 
   imageVideo.mpv = {
@@ -56,6 +53,7 @@
       enable = true;
       defaultFileManager = true;
     };
+    ranger.enable = true;
   };
 
   systemConfig = {
@@ -165,7 +163,15 @@
 
   jj.enable = true;
 
-  terminals.ghostty.enable = true;
+  terminals = {
+    kitty = {
+      enable = true;
+    };
+    ghostty = {
+      enable = true;
+      defaultTerminal = true;
+    };
+  };
 
   gtk = {
     enable = true;

@@ -46,7 +46,7 @@ in {
       enable = true;
       settings = {
         main = {
-          terminal = "foot";
+          terminal = "${config.systemConfig.default.terminal.command} -e";
           layer = "overlay";
           exit-on-keyboard-focus-loss = "yes";
           width = cfg.width;

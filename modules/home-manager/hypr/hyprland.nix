@@ -168,7 +168,7 @@ in {
           "$mainMod, mouse_up, workspace, e-1"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
-          ", XF86PowerOff, exec, ~/.local/bin/shutdown-menu.sh"
+          # ", XF86PowerOff, exec, ~/.local/bin/shutdown-menu.sh"
         ];
 
         bindm = [

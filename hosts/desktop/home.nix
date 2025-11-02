@@ -193,7 +193,7 @@
     enable = true;
     bashKeybind.enable = true;
     roots = [
-      "$HOME/.config/nixos"
+      "${config.home.homeDirectory}/.config/nixos"
       "$HOME/.config"
       "$HOME/projects"
       "$HOME/.local/bin"

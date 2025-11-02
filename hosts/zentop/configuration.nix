@@ -28,6 +28,10 @@
   # Ly
   # services.displayManager.ly.enable = true;
 
+  services.logind.settings.Login = {
+    HandlePowerKey = "ignore";
+  };
+
   # Fonts
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs;
