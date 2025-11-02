@@ -9,22 +9,13 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/system/system/monitors.nix
+    ../../modules/nixos/ly.nix
     inputs.home-manager.nixosModules.default
   ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  systemConfig.monitors = [
-    {
-      name = "eDP-1";
-      width = 1920;
-      height = 1080;
-      refreshRate = 60.0;
-    }
-  ];
 
   programs.nix-ld.enable = true;
   # programs.nix-ld.libraries = with pkgs; [
@@ -35,7 +26,7 @@
   programs.hyprland.enable = true;
 
   # Ly
-  services.displayManager.ly.enable = true;
+  # services.displayManager.ly.enable = true;
 
   # Fonts
   fonts.fontDir.enable = true;
@@ -58,6 +49,10 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  security.pam.services.ly.enableGnomeKeyring = true;
+
+  services.gnome.gnome-keyring.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";

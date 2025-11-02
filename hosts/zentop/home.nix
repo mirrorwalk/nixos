@@ -34,7 +34,10 @@
     jq
   ];
 
-  # programs.mullvad-vpn.enable = true;
+  services.gnome-keyring = {
+      enable = true;
+      components = [ "secrets" ];
+  };
 
   imageVideo.mpv = {
     enable = true;
@@ -86,7 +89,7 @@
       enable = true;
       tmuxStartup = {
         enable = true;
-        ghosttyIntegration = true;
+        aliasToTmux = true;
       };
     };
     bat.enable = true;
@@ -110,6 +113,7 @@
     enable = true;
     backupFolders = [
       /home/brog/.config/nixos
+      /home/brog/.config
     ];
   };
 

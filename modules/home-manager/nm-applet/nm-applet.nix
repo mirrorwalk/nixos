@@ -15,7 +15,7 @@ in {
     wayland.windowManager.hyprland = lib.mkIf config.nmApplet.integration.hyprland {
       settings = {
         exec-once = [
-          "${pkgs.networkmanagerapplet}/bin/nm-applet"
+          "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator"
         ];
       };
     };
