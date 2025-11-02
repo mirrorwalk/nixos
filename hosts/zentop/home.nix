@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ../../modules/laptop.nix
-    ../../modules/custom/shutdown-menu/shutdown-menu.nix
   ];
 
   home.username = "brog";
@@ -45,7 +44,7 @@
     };
   };
 
-  nvim.enable = true;
+  programs.neovim.enable = true;
   hyprland.enable = true;
 
   fileManagers = {
@@ -107,9 +106,12 @@
     mullvadVPN.enable = true;
   };
 
+  privateConfig.lewd.enable = false;
+
   backupGit = {
     enable = true;
     backupFolders = [
+      /home/brog/.config/nixos-private
       /home/brog/.config/nixos
       /home/brog/.config
     ];

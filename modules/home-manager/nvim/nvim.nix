@@ -1,19 +1,14 @@
 {
   pkgs,
-  inputs,
   lib,
   config,
   ...
 }: {
   imports = [
-    inputs.nvimFZF.default
   ];
 
-  options.nvim.enable = lib.mkEnableOption "Enable nvim";
-
-  config = lib.mkIf config.nvim.enable {
+  config = lib.mkIf config.programs.neovim.enable {
     programs.neovim = {
-      enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;

@@ -25,7 +25,7 @@ in {
       enableZshIntegration = lib.mkIf config.shells.zsh.enable true;
       enableBashIntegration = lib.mkIf config.shells.bash.enable true;
       installBatSyntax = lib.mkIf config.shells.bat.enable true;
-      installVimSyntax = lib.mkIf config.nvim.enable true;
+      installVimSyntax = lib.mkIf config.programs.neovim.enable true;
     };
 
     systemConfig.default.terminal = lib.mkIf cfg.defaultTerminal {

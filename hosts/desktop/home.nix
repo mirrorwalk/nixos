@@ -187,7 +187,7 @@
   nh.enable = true;
   nom.enable = true;
 
-  nvim.enable = true;
+  programs.neovim.enable = true;
 
   programs.nvim-fzf = {
     enable = true;

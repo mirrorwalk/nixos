@@ -1,4 +1,4 @@
-let
+{inputs, ...}: let
   hmm = [
     ./home-manager/bat/bat.nix
     ./home-manager/browsers/browsers.nix
@@ -27,6 +27,10 @@ let
     ./custom/hyprpaper-random/hyprpaper-random.nix
     ./custom/tmux-startup/tmux-startup.nix
   ];
+
+  im = [
+    inputs.nvimFZF.default
+  ];
 in {
-  imports = hmm ++ sm ++ cm;
+  imports = hmm ++ sm ++ cm ++ im;
 }
