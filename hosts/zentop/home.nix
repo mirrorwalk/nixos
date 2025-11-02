@@ -57,7 +57,7 @@
 
   systemConfig = {
     default.enable = true;
-    systemConfig.monitors = [
+    monitors = [
       {
         name = "eDP-1";
         width = 1920;
