@@ -7,16 +7,18 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/nixos/games.nix
-    ../../modules/nixos/ly.nix
-    inputs.home-manager.nixosModules.default
+    ../../modules/nixos/desktop.nix
   ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   services.xserver.videoDrivers = ["amdgpu"];
 
@@ -26,39 +28,14 @@
 
   games.enable = true;
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    libglvnd
-    xorg.libXmu
-    xorg.libX11
-    xorg.libXext
-    xorg.libSM
-    xorg.libICE
-    xorg.libXrender
-    xorg.libXfixes
-    xorg.libXi
-    SDL2
-    mesa
-    pulseaudio
-    pipewire
-    pkgsi686Linux.libglvnd
-    pkgsi686Linux.xorg.libX11
-    pkgsi686Linux.xorg.libXext
-    pkgsi686Linux.xorg.libXrender
-    pkgsi686Linux.xorg.libXfixes
-    pkgsi686Linux.xorg.libXi
-    pkgsi686Linux.SDL2
-    pkgsi686Linux.mesa
-  ];
+  displayManager.ly = {
+    enable = true;
+    animate = {
+      enable = true;
+      animation = "bool";
+    };
+  };
 
-  services.mullvad-vpn.enable = true;
-
-  programs.hyprland.enable = true;
-
-  # security.pam.services.ly.enableGnomeKeyring = true;
-  # security.polkit.enable = true;
-
-  # Fonts
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs;
     [
@@ -66,28 +43,14 @@
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  networking.hostName = "desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.extraHosts = ''
-  #   0.0.0.0 google.com
-  # '';
+  networking.hostName = "desktop";
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/Prague";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -102,16 +65,55 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "dvp";
-    options = "caps:escape";
+  services = {
+    mullvad-vpn.enable = true;
+
+    logind.settings.Login = {
+      HandlePowerKey = "ignore";
+    };
+
+    xserver.xkb = {
+      layout = "us";
+      variant = "dvp";
+      options = "caps:escape";
+    };
+
+    pipewire.enable = true;
   };
 
-  programs.bash.enable = true;
+  programs = {
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        libglvnd
+        xorg.libXmu
+        xorg.libX11
+        xorg.libXext
+        xorg.libSM
+        xorg.libICE
+        xorg.libXrender
+        xorg.libXfixes
+        xorg.libXi
+        SDL2
+        mesa
+        pulseaudio
+        pipewire
+        pkgsi686Linux.libglvnd
+        pkgsi686Linux.xorg.libX11
+        pkgsi686Linux.xorg.libXext
+        pkgsi686Linux.xorg.libXrender
+        pkgsi686Linux.xorg.libXfixes
+        pkgsi686Linux.xorg.libXi
+        pkgsi686Linux.SDL2
+        pkgsi686Linux.mesa
+      ];
+    };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+    hyprland.enable = true;
+
+    bash.enable = true;
+  };
+
   users.users.brog = {
     isNormalUser = true;
     description = "brog";
@@ -119,7 +121,6 @@
   };
 
   home-manager = {
-    # also pass inputs to home-manager modules
     extraSpecialArgs = {inherit inputs;};
     users = {
       "brog" = import ./home.nix;
@@ -129,41 +130,7 @@
 
   services.flatpak.enable = true;
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # gnome-keyring
-    # seahorse
-    # libsecret
-    # polkit_gnome
-    # libgnome-keyring
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh = {
-  #   enable = true;
-  #   openFirewall = true;
-  #   permitRootLogin = "no";
-  # };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

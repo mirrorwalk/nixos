@@ -1,12 +1,12 @@
 {pkgs, ...}: {
   imports = [
-    ../../modules/laptop.nix
+    ../../modules/home-manager/laptop.nix
   ];
 
   home.username = "brog";
   home.homeDirectory = "/home/brog";
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # This value determines the Home Manager release that your configuration is
 
@@ -17,17 +17,6 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
-
-  home.packages = with pkgs; [
-    ripgrep
-    pavucontrol
-    pipewire
-    wl-clipboard
-    btop
-    tree
-    fd
-    jq
-  ];
 
   services.gnome-keyring = {
     enable = true;
@@ -103,10 +92,11 @@
       enable = true;
       defaultBrowser = true;
     };
+
     mullvad = {
       enable = true;
     };
-    librewolf.enable = true;
+
     search.defaultEngine = "Kagi";
     search.private.defaultEngine = "ddg";
   };
@@ -132,6 +122,11 @@
     neovim.enable = true;
 
     fzf.enable = true;
+
+    jq.enable = true;
+    fd.enable = true;
+    btop.enable = true;
+    ripgrep.enable = true;
   };
 
   services = {

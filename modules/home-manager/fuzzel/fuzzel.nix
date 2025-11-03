@@ -84,7 +84,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [fuzzelWrap];
+    programs.fuzzel = {
+      enable = true;
+      # settings.colors.background = "000000ff";
+    };
+    # home.packages = [fuzzelWrap];
 
     systemConfig.defaults.runnerMenu.command = "${fuzzelWrap}/bin/fuzzel";
   };

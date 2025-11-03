@@ -30,20 +30,7 @@
 in {
   config = lib.mkIf config.services.hyprpaper.enable {
     services.hyprpaper = {
-        package = hyprpaperWrapper;
-    #   settings = {
-    #     preload = toString config.styleConfig.defaultWallpaper;
-    #
-    #     wallpaper =
-    #       map (
-    #         m: "${m.name},${toString config.styleConfig.defaultWallpaper}"
-    #       )
-    #       (
-    #         lib.filter
-    #         (m: m.enabled)
-    #         config.systemConfig.monitors
-    #       );
-    #   };
+      package = hyprpaperWrapper;
     };
 
     systemd.user.services.hyprpaper = {

@@ -23,28 +23,6 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  home.packages = with pkgs; [
-    file
-    unzip
-    exfatprogs
-    ripgrep
-    pavucontrol
-    # tor
-    # tor-browser
-    pipewire
-    keepassxc
-    # xwayland-satellite
-    # cryptsetup
-    wl-clipboard
-    qbittorrent
-    btop
-    wine
-    tree
-    fd
-    jq
-    yt-dlp
-  ];
-
   wayland.windowManager.hyprland.enable = true;
 
   imageVideo.mpv = {
@@ -118,11 +96,20 @@
     nh.enable = true;
     nom.enable = true;
 
+    yt-dlp.enable = true;
+
     neovim.enable = true;
 
     fzf.enable = true;
 
+    jq.enable = true;
+    fd.enable = true;
+    btop.enable = true;
+    ripgrep.enable = true;
+
     cava.enable = true;
+
+    keepassxc.enable = true;
 
     nvim-fzf = {
       enable = true;
@@ -175,6 +162,8 @@
         hyprland.enable = true;
       };
     };
+
+    qbittorrent.enable = true;
   };
 
   bars.waybar = {
