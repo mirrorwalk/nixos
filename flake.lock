@@ -117,8 +117,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1762129187,
-        "narHash": "sha256-JO+OWtxKSEpog2GXT64vIVBozSE31VlfT2DPZmABleM=",
+        "lastModified": 1762099624,
+        "narHash": "sha256-GHEHvYIu2oKlvfZYnE2fy6ES7KnzhACuF6+5n3dIEBg=",
         "path": "/home/brog/.config/nixos-private",
         "type": "path"
       },
