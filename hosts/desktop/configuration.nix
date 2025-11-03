@@ -83,8 +83,6 @@
     pipewire.enable = true;
 
     qbittorrent.enable = true;
-
-    flatpak.enable = true;
   };
 
   programs = {
