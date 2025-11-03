@@ -20,8 +20,6 @@
     };
   };
 
-  services.xserver.videoDrivers = ["amdgpu"];
-
   hardware.graphics = {
     enable = true;
   };
@@ -32,7 +30,7 @@
     enable = true;
     animate = {
       enable = true;
-      animation = "bool";
+      animation = "doom";
     };
   };
 
@@ -72,13 +70,21 @@
       HandlePowerKey = "ignore";
     };
 
-    xserver.xkb = {
-      layout = "us";
-      variant = "dvp";
-      options = "caps:escape";
+    xserver = {
+      xkb = {
+        layout = "us";
+        variant = "dvp";
+        options = "caps:escape";
+      };
+
+      videoDrivers = ["amdgpu"];
     };
 
     pipewire.enable = true;
+
+    qbittorrent.enable = true;
+
+    flatpak.enable = true;
   };
 
   programs = {
@@ -127,8 +133,6 @@
     };
     backupFileExtension = "backup";
   };
-
-  services.flatpak.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 

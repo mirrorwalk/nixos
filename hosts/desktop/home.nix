@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ../../modules/desktop.nix
+    ../../modules/home-manager/desktop.nix
   ];
 
   home.username = "brog";
@@ -163,7 +163,6 @@
       };
     };
 
-    qbittorrent.enable = true;
   };
 
   bars.waybar = {
