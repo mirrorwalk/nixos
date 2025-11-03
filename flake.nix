@@ -35,6 +35,8 @@
       url = "github:mirrorwalk/nvim-fzf";
       # url = "path:/home/brog/.local/bin/nvim-fzf";
     };
+
+    wrappers.url = "github:lassulus/wrappers";
   };
 
   outputs = {
@@ -44,6 +46,7 @@
     privateConfig,
     tmuxWorkspace,
     nvimFZF,
+    wrappers,
     ...
   } @ inputs: {
     nixosConfigurations = {

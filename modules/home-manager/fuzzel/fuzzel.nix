@@ -2,10 +2,50 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }: let
   inherit (lib) mkOption types;
   cfg = config.runners.fuzzel;
+
+  fuzzelWrap =
+    (inputs.wrappers.wrapperModules.fuzzel.apply {
+      inherit pkgs;
+      settings = {
+        main = {
+          terminal = "${config.systemConfig.defaults.terminal.command} -e";
+          layer = "overlay";
+          exit-on-keyboard-focus-loss = "yes";
+          width = cfg.width;
+          horizontal-pad = cfg.horizontalPad;
+          vertical-pad = cfg.verticalPad;
+          inner-pad = cfg.innerPad;
+          icons-enabled = "yes";
+
+          show-actions =
+            if cfg.showActions
+            then "yes"
+            else "no";
+
+          dpi-aware = cfg.dpiAware;
+        };
+
+        colors = let
+          clrs = config.styleConfig.colorScheme;
+        in {
+          background = "${clrs.primary}ff";
+          text = "${clrs.secondary}ff";
+          match = "${clrs.accent}ff";
+          selection = "${clrs.accent}ff";
+          selection-text = "${clrs.secondary}ff";
+          selection-match = "${clrs.primary}ff";
+        };
+
+        dmenu = {
+          exit-immediately-if-empty = "yes";
+        };
+      };
+    }).wrapper;
 in {
   options.runners.fuzzel = {
     enable = lib.mkEnableOption "Enable fuzzel";
@@ -44,44 +84,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.fuzzel = {
-      enable = true;
-      settings = {
-        main = {
-          terminal = "${config.systemConfig.defaults.terminal.command} -e";
-          layer = "overlay";
-          exit-on-keyboard-focus-loss = "yes";
-          width = cfg.width;
-          horizontal-pad = cfg.horizontalPad;
-          vertical-pad = cfg.verticalPad;
-          inner-pad = cfg.innerPad;
-          icons-enabled = "yes";
+    home.packages = [fuzzelWrap];
 
-          show-actions =
-            if cfg.showActions
-            then "yes"
-            else "no";
-
-          dpi-aware = cfg.dpiAware;
-        };
-
-        colors = let
-          clrs = config.styleConfig.colorScheme;
-        in {
-          background = "${clrs.primary}ff";
-          text = "${clrs.secondary}ff";
-          match = "${clrs.accent}ff";
-          selection = "${clrs.accent}ff";
-          selection-text = "${clrs.secondary}ff";
-          selection-match = "${clrs.primary}ff";
-        };
-
-        dmenu = {
-          exit-immediately-if-empty = "yes";
-        };
-      };
-    };
-
-    systemConfig.defaults.runnerMenu.command = "${pkgs.fuzzel}/bin/fuzzel";
+    systemConfig.defaults.runnerMenu.command = "${fuzzelWrap}/bin/fuzzel";
   };
 }

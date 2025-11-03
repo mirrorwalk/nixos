@@ -169,9 +169,6 @@
   };
 
   terminals = {
-    kitty = {
-      enable = true;
-    };
     ghostty = {
       enable = true;
       defaultTerminal = true;

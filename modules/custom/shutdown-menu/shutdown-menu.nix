@@ -7,7 +7,7 @@
       #!/usr/bin/env bash
 
       # Power menu options
-      options="⏻ Shutdown\n⭮ Reboot\n⏾ Suspend\n⏼ Hibernate\n🚪 Logout"
+      options="⏻ Shutdown\n⭮ Reboot\n⏾ Suspend\n⏼ Hibernate\n"
 
       # Show menu and get selection
       selected=$(echo -e "$options" | fuzzel --dmenu --prompt="Power: " --width=20)
@@ -25,9 +25,6 @@
               ;;
           "⏼ Hibernate")
               systemctl hibernate
-              ;;
-          "🚪 Logout")
-              hyprctl dispatch exit
               ;;
           *)
               exit 0

@@ -1,9 +1,16 @@
 {
   lib,
   config,
+  inputs,
+  pkgs,
   ...
 }: let
   cfg = config.imageVideo.mpv;
+
+  mpvWrap =
+    (inputs.wrappers.wrapperModules.mpv.apply {
+      inherit pkgs;
+    }).wrapper;
 in {
   options.imageVideo.mpv = {
     enable = lib.mkEnableOption "";
@@ -15,9 +22,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.mpv = {
-      enable = true;
-    };
+    home.packages = [mpvWrap];
 
     systemConfig.defaults.video.desktopName = lib.mkIf cfg.default.video "mpv.desktop";
     systemConfig.defaults.image.desktopName = lib.mkIf cfg.default.image "mpv.desktop";
