@@ -59,6 +59,9 @@ in {
       };
     };
 
+    backlight.enable = mkEnableOption "Enable backlight module";
+    cklight.enable = mkEnableOption "Enable backlight module";
+
     weather = {
       enable = mkEnableOption "Enable weather module";
       city = mkOption {
@@ -108,6 +111,10 @@ in {
           "custom/fullscreen"
         ]
         cfg.hyprland.enable
+        ++ [
+          "custom/separator"
+        ] ++ isEnabled
+        ["backlight"] cfg.backlight.enable
         ++ [
           "custom/separator"
         ]
@@ -184,6 +191,7 @@ in {
         pulseaudio = {
           format = "Volume: {volume}%";
           format-muted = "Muted: {volume}%";
+          scroll-step = 5;
           on-click = "pavucontrol";
         };
 
@@ -309,6 +317,7 @@ in {
         }
         #pulseaudio,
         #clock,
+        #backlight,
         #network,
         #tray,
         #privacy

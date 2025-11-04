@@ -32,6 +32,8 @@
     hyprland.enable = true;
 
     bash.enable = true;
+
+    light.brightnessKeys.enable = true;
   };
 
   fonts = {
@@ -101,12 +103,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    file
-    unzip
-    tree
-    wl-clipboard
-    pavucontrol
+  environment.systemPackages = [
+    (builtins.trace "modularize" pkgs.brightnessctl)
   ];
 
   # This value determines the NixOS release from which the default

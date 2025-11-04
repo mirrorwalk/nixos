@@ -85,20 +85,22 @@
     systemService.enable = true;
     hyprland.enable = true;
     mullvadVPN.enable = true;
+    backlight.enable = true;
   };
 
   browsers = {
     zen-browser = {
       enable = true;
       defaultBrowser = true;
+      shortcuts.enable = true;
     };
 
     chromium = {
-        enable = true;
+      enable = true;
     };
 
     librewolf = {
-        enable = true;
+      enable = true;
     };
 
     mullvad = {

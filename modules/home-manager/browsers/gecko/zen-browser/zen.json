@@ -1,0 +1,34 @@
+{
+    "shortcuts": [
+        {
+            "id": "123",
+            "key": "k",
+            "modifiers": {
+                "control": true,
+                "alt": false,
+                "meta": true,
+                "accel": false
+            }
+        },
+        {
+            "id": null,
+            "key": "y",
+            "modifiers": {
+                "control": true,
+                "alt": true,
+                "meta": true,
+                "accel": true
+            }
+        },
+        {
+            "id": "zen-compact-mode-toggle",
+            "key": "y",
+            "modifiers": {
+                "control": true,
+                "alt": true,
+                "meta": true,
+                "accel": true
+            }
+        }
+    ]
+}

@@ -212,6 +212,11 @@ in {
                 url = "https://home-manager-options.extranix.com/";
                 tags = ["nix"];
               }
+              {
+                name = "Nixpkgs References";
+                url = "https://nixos.org/manual/nixpkgs/stable/";
+                tags = ["nix"];
+              }
             ];
           }
         ];
