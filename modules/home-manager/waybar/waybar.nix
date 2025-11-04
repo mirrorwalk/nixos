@@ -113,8 +113,10 @@ in {
         cfg.hyprland.enable
         ++ [
           "custom/separator"
-        ] ++ isEnabled
-        ["backlight"] cfg.backlight.enable
+        ]
+        ++ isEnabled
+        ["backlight"]
+        cfg.backlight.enable
         ++ [
           "custom/separator"
         ]
@@ -239,6 +241,10 @@ in {
           };
         };
 
+        backlight = mkIf cfg.backlight.enable {
+          scroll-step = 5;
+        };
+
         "custom/wallpaper-category" = mkIf cfg.wallpaperCategory.enable {
           exec = cfg.wallpaperCategory.settings.command;
           format = "Wallpaper: {}";
@@ -306,6 +312,11 @@ in {
           else ""
         }
         ${
+          if cfg.backlight.enable
+          then "#backlight,"
+          else ""
+        }
+        ${
           if cfg.hyprland.enable
           then ''
             #workspaces,
@@ -317,7 +328,6 @@ in {
         }
         #pulseaudio,
         #clock,
-        #backlight,
         #network,
         #tray,
         #privacy
