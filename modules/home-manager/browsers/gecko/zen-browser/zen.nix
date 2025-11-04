@@ -9,6 +9,7 @@
 in {
   imports = [
     inputs.zen-browser.homeModules.twilight
+    ./zen-keyboard-shortcuts.nix
   ];
 
   options.browsers.zen-browser = {
