@@ -1,10 +1,13 @@
 {
   imports = [
     ./browsers-config.nix
-    ./zen.nix
-    ./librewolf.nix
-    ./mullvad.nix
-    ./brave.nix
-    ./tor.nix
+    ./gecko/gecko-config.nix
+    ./gecko/zen-browser/zen.nix
+    ./gecko/librewolf.nix
+    ./gecko/firefox.nix
+    ./gecko/mullvad.nix
+    ./gecko/tor.nix
+    ./chromium/brave.nix
+    ./chromium/chromium.nix
   ];
 }

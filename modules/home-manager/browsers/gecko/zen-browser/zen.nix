@@ -4,7 +4,9 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  cfg = config.browsers;
+in {
   imports = [
     inputs.zen-browser.homeModules.twilight
   ];
@@ -14,77 +16,38 @@
     defaultBrowser = lib.mkEnableOption "Mullvad as default browser";
   };
 
-  config = lib.mkIf config.browsers.zen-browser.enable {
+  config = lib.mkIf cfg.zen-browser.enable {
     programs.zen-browser = {
       enable = true;
 
       nativeMessagingHosts = [pkgs.firefoxpwa];
 
-      policies = let
-        mkLockedAttrs = builtins.mapAttrs (_: value: {
-          Value = value;
-          Status = "locked";
-        });
-      in {
-        AutofillAddressEnabled = false;
-        AutofillCreditCardEnabled = false;
-        DisableAppUpdate = true;
-        DisableFeedbackCommands = true;
-        DisableFirefoxStudies = true;
-        DisablePocket = true;
-        DisableTelemetry = true;
-        DontCheckDefaultBrowser = true;
-        OfferToSaveLogins = false;
-        EnableTrackingProtection = {
-          Value = true;
-          Locked = true;
-          Cryptomining = true;
-          Fingerprinting = true;
-        };
+      policies =
+        cfg.gecko.policies
+        // {
+          SanitizeOnShutdown = {
+            Cookies = true;
+          };
+          Cookies = {
+            Allow = cfg.allowedCookies;
+          };
 
-        SanitizeOnShutdown = {
-          Cookies = true;
+          Preferences = cfg.gecko.preferences;
         };
-        Cookies = {
-          Allow = config.browsers.allowedCookies;
-        };
-
-        Preferences = mkLockedAttrs {
-          "browser.aboutConfig.showWarning" = false;
-          # "browser.tabs.warnOnClose" = false;
-          # "media.videocontrols.picture-in-picture.video-toggle.enabled" = true;
-          # Disable swipe gestures (Browser:BackOrBackDuplicate, Browser:ForwardOrForwardDuplicate)
-          "browser.gesture.swipe.left" = "";
-          "browser.gesture.swipe.right" = "";
-          "browser.tabs.hoverPreview.enabled" = true;
-          "browser.newtabpage.activity-stream.feeds.topsites" = false;
-          "browser.topsites.contile.enabled" = false;
-
-          "privacy.resistFingerprinting" = true;
-          "privacy.firstparty.isolate" = true;
-          "network.cookie.cookieBehavior" = 5;
-          "dom.battery.enabled" = false;
-
-          # "gfx.webrender.all" = true;
-          "network.http.http3.enabled" = true;
-        };
-      };
 
       profiles.default = rec {
-        extensions = config.browsers.firefox.extensions;
-        bookmarks = config.browsers.firefox.bookmarks;
-        settings = {
-          "zen.workspaces.continue-where-left-off" = true;
-          "zen.workspaces.natural-scroll" = true;
-          "zen.view.compact.hide-tabbar" = true;
-          "zen.view.compact.hide-toolbar" = true;
-          "zen.view.compact.animate-sidebar" = false;
-          "zen.welcome-screen.seen" = true;
-          "browser.backspace_action" = 0;
-          "media.videocontrols.picture-in-picture.enabled" = false;
-          "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
-          "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
-        };
+        extensions = cfg.gecko.extensions;
+        bookmarks = cfg.gecko.bookmarks;
+        settings =
+          cfg.gecko.settings
+          // {
+            "zen.workspaces.continue-where-left-off" = true;
+            "zen.workspaces.natural-scroll" = true;
+            "zen.view.compact.hide-tabbar" = true;
+            "zen.view.compact.hide-toolbar" = true;
+            "zen.view.compact.animate-sidebar" = false;
+            "zen.welcome-screen.seen" = true;
+          };
 
         pinsForce = true;
         pins = {
@@ -136,37 +99,17 @@
 
         search = {
           force = true;
-          default = config.browsers.search.defaultEngine;
-          privateDefault = config.browsers.search.private.defaultEngine;
-          # if config.browsers.search.private.same
-          # then config.browsers.search.defaultEngine
-          # else config.browsers.search.private.defaultEngine;
-          engines = config.browsers.search.engines;
+          default = cfg.search.defaultEngine;
+          privateDefault = cfg.search.private.defaultEngine;
+          # if cfg.search.private.same
+          # then cfg.search.defaultEngine
+          # else cfg.search.private.defaultEngine;
+          engines = cfg.search.engines;
         };
 
         containersForce = true;
-        containers = {
-          Google = {
-            color = "red";
-            icon = "fingerprint";
-            id = 1;
-          };
-          Programming = {
-            color = "purple";
-            icon = "pet";
-            id = 2;
-          };
-          School = {
-            color = "blue";
-            icon = "circle";
-            id = 3;
-          };
-          Proton = {
-            color = "purple";
-            icon = "fingerprint";
-            id = 4;
-          };
-        };
+        containers = cfg.gecko.containers;
+
         spacesForce = true;
         spaces = {
           General = {
@@ -274,7 +217,7 @@
       };
     };
 
-    systemConfig.defaults = lib.mkIf config.browsers.zen-browser.defaultBrowser {
+    systemConfig.defaults = lib.mkIf cfg.zen-browser.defaultBrowser {
       webBrowser = let
         zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
         desktopFile = zen-browser.meta.desktopFileName;

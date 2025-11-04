@@ -93,6 +93,14 @@
       defaultBrowser = true;
     };
 
+    chromium = {
+        enable = true;
+    };
+
+    librewolf = {
+        enable = true;
+    };
+
     mullvad = {
       enable = true;
     };
