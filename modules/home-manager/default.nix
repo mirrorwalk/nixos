@@ -1,4 +1,8 @@
-{inputs, ...}: let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   hmm = [
     ./bat/bat.nix
     ./browsers/browsers.nix
@@ -33,4 +37,10 @@
   ];
 in {
   imports = hmm ++ sm ++ cm ++ im;
+
+  home.packages = [
+    pkgs.nixd
+  ];
+
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 }

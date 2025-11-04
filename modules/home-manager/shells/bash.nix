@@ -16,6 +16,7 @@
 
   config = lib.mkIf config.shells.bash.enable {
     programs.bash = {
+        
       enable = true;
       enableCompletion = true;
       initExtra =
