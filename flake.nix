@@ -36,7 +36,10 @@
       # url = "path:/home/brog/.local/bin/nvim-fzf";
     };
 
-    wrappers.url = "github:lassulus/wrappers";
+    wrappers = {
+      url = "github:lassulus/wrappers";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
