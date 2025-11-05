@@ -107,6 +107,11 @@
       enable = true;
     };
 
+    adblock = {
+        enable = true;
+        provider = "adnauseam";
+    };
+
     search.defaultEngine = "Kagi";
     search.private.defaultEngine = "ddg";
   };

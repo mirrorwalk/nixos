@@ -24,7 +24,7 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    qbittorrent 
+    qbittorrent
   ];
 
   wayland.windowManager.hyprland.enable = true;
@@ -85,7 +85,13 @@
       enable = true;
       defaultBrowser = true;
     };
+
     brave.enable = true;
+
+    adblock = {
+      enable = true;
+      provider = "adnauseam";
+    };
     search.defaultEngine = "Kagi";
   };
 
@@ -166,7 +172,6 @@
         hyprland.enable = true;
       };
     };
-
   };
 
   bars.waybar = {

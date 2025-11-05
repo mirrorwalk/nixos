@@ -10,6 +10,13 @@
       type = lib.types.listOf lib.types.str;
     };
 
+    adblock = {
+      enable = lib.mkEnableOption "";
+      provider = lib.mkOption {
+        type = lib.types.enum ["ublock" "adnauseam"];
+      };
+    };
+
     search = {
       defaultEngine = lib.mkOption {
         type = lib.types.nonEmptyStr;
@@ -144,7 +151,6 @@
         };
       };
 
-
       allowedCookies = [
         "https://proton.me"
         "https://youtube.com"
@@ -154,29 +160,24 @@
         "https://perplexity.ai"
         "https://unicornuniversity.net"
       ];
+
+      gecko = lib.mkIf config.browsers.adblock.enable {
+        extensions = let
+          ublock = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}.ublock-origin;
+          adnauseam = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}.adnauseam;
+
+          acfg = config.browsers.adblock.provider;
+
+          pckgs =
+            if acfg == "ublock"
+            then [ublock]
+            else if acfg == "adnauseam"
+            then [adnauseam]
+            else [];
+        in {
+          packages = pckgs;
+        };
+      };
     };
-
-    # xdg.mimeApps = let
-    #   default = config.systemConfig.default.webBrowser;
-    #   value = default.desktopName;
-    #   associations = builtins.listToAttrs (map (name: {
-    #       inherit name value;
-    #     })
-    #     default.associations);
-    # in {
-    #   defaultApplications = associations;
-    # };
-
-    # xdg = lib.mkIf config.browsers.default.browser.enable {
-    #   mimeApps = let
-    #     value = config.browsers.default.browser.desktopName;
-    #     associations = builtins.listToAttrs (map (name: {
-    #         inherit name value;
-    #       })
-    #       config.browsers.default.associations);
-    #   in {
-    #     defaultApplications = associations;
-    #   };
-    # };
   };
 }

@@ -38,6 +38,10 @@ in {
 
       profiles.default = rec {
         extensions = cfg.gecko.extensions;
+        # extensions = {
+        #     force = cfg.gecko.extensions.force;
+        #     packages = cfg.gecko.extensions.packages;
+        # };
         bookmarks = cfg.gecko.bookmarks;
         settings =
           cfg.gecko.settings

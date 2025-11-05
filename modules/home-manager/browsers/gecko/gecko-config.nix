@@ -70,21 +70,16 @@
   bookmarksType = types.oneOf [bookmarkType directoryType separatorType];
 in {
   options.browsers.gecko = {
-    extensions = lib.mkOption {
-      description = "gecko extensions";
-      type = lib.types.attrs;
-      default = {
-        force = true;
-        packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
-          # ublock-origin
-          proton-pass
-          sponsorblock
-          return-youtube-dislikes
-          dearrow
-          kagi-search
-          adnauseam
-        ];
+    extensions = {
+      force = mkOption {
+        type = types.bool;
+        default = true;
       };
+      packages = mkOption {
+        # type = types.listOf;
+      };
+      # description = "gecko extensions";
+      # type = lib.types.attrs;
     };
 
     bookmarks = {
@@ -222,6 +217,16 @@ in {
           }
         ];
       }
+    ];
+
+    extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+      # ublock-origin
+      proton-pass
+      sponsorblock
+      return-youtube-dislikes
+      dearrow
+      kagi-search
+      # adnauseam
     ];
 
     containers = {
