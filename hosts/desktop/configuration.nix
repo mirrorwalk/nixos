@@ -66,9 +66,9 @@
   services = {
     mullvad-vpn.enable = true;
 
-    logind.settings.Login = {
-      HandlePowerKey = "ignore";
-    };
+    # logind.settings.Login = {
+    #   HandlePowerKey = "ignore";
+    # };
 
     xserver = {
       xkb = {
