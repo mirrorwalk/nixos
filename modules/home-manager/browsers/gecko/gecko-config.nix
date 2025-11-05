@@ -76,12 +76,13 @@ in {
       default = {
         force = true;
         packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
-          ublock-origin
+          # ublock-origin
           proton-pass
           sponsorblock
           return-youtube-dislikes
           dearrow
           kagi-search
+          adnauseam
         ];
       };
     };

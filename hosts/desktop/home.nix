@@ -23,6 +23,10 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+  home.packages = with pkgs; [
+    qbittorrent 
+  ];
+
   wayland.windowManager.hyprland.enable = true;
 
   imageVideo.mpv = {

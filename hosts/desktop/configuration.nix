@@ -121,7 +121,7 @@
   users.users.brog = {
     isNormalUser = true;
     description = "brog";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "qbittorrent"];
   };
 
   home-manager = {
