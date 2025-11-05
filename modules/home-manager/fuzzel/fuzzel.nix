@@ -86,6 +86,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.fuzzel = {
       enable = true;
+      package = fuzzelWrap;
       # settings.colors.background = "000000ff";
     };
     # home.packages = [fuzzelWrap];
