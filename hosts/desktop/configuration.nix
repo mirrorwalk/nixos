@@ -11,6 +11,14 @@
     ../../modules/nixos/desktop.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    # udiskie
+    gvfs
+    usbutils
+  ];
+
+  plymouth.enable = true;
+
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
 
@@ -64,6 +72,8 @@
   };
 
   services = {
+    udisks2.enable = true;
+
     mullvad-vpn.enable = true;
 
     # logind.settings.Login = {

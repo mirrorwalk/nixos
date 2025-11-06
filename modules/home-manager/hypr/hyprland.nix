@@ -29,6 +29,7 @@ in {
 
       exec-once = [
         "${defaults.fileManager.command} --daemon"
+        "${pkgs.mako}/bin/mako"
       ];
 
       env = [

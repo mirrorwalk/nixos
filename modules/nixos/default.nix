@@ -6,6 +6,7 @@
   imports = [
     ./display-managers/display-managers.nix
     ./keyrings/keyrings.nix
+    ./plymouth/plymouth.nix
     inputs.home-manager.nixosModules.default
   ];
 
