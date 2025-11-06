@@ -197,6 +197,7 @@ in {
       backupFolders = [
         /home/brog/.config/nixos-private
         /home/brog/.config/nixos
+        /home/brog/.config/nvim
         /home/brog/.config
       ];
     };
