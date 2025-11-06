@@ -23,7 +23,7 @@ in {
 
       profiles.default = {
         bookmarks = cfg.gecko.bookmarks;
-        # extensions = cfg.gecko.extensions;
+        extensions = cfg.gecko.extensions;
         search = {
           force = true;
           default = cfg.search.defaultEngine;
