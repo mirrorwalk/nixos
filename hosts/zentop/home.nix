@@ -39,11 +39,13 @@
       enable = true;
       defaultFileManager = true;
     };
-    ranger.enable = true;
   };
 
   systemConfig = {
-    defaults.enable = true;
+    defaults = {
+        enable = true;
+        brightness.enable = true;
+    };
     monitors = [
       {
         name = "eDP-1";

@@ -19,6 +19,7 @@
     ./file-managers/fm.nix
     ./image-video/iv.nix
     ./udiskie/udiskie.nix
+    ./brightness/brightness.nix
   ];
 
   sm = [

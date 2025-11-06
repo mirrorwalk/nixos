@@ -5,9 +5,31 @@
   ...
 }: let
   inherit (lib) mkOption types;
+  cfg = config.systemConfig.defaults;
 in {
   options.systemConfig.defaults = {
     enable = lib.mkEnableOption "Enable xdg default setup";
+
+    brightness = {
+      enable = lib.mkEnableOption "";
+
+      command = {
+        increase = mkOption {
+          default = "${pkgs.brightnessctl}/bin/brightnessctl set +${toString cfg.brightness.step}%";
+          type = types.str;
+        };
+        decrease = mkOption {
+          default = "${pkgs.brightnessctl}/bin/brightnessctl set ${toString cfg.brightness.step}%-";
+    
+          type = types.str;
+        };
+      };
+
+      step = mkOption {
+        default = 5;
+        type = types.int;
+      };
+    };
 
     fileManager = {
       command = mkOption {
