@@ -8,8 +8,16 @@
 
   config = lib.mkIf config.games.enable {
     home.packages = with pkgs; [
-      lutris
+      # lutris
       protonup-ng
     ];
+
+    programs.lutris = {
+      enable = true;
+      extraPackages = with pkgs; [
+        gamemode
+        gamescope
+      ];
+    };
   };
 }

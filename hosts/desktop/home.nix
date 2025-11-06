@@ -20,10 +20,10 @@
   #   ];
   #   postBuild = "echo link added";
   # };
-  pictureFile = pkgs.writeTextFile {
-    name = "picture";
-    text = "${builtins.readFile ./picture.png}";
-  };
+  # pictureFile = pkgs.writeTextFile {
+  #   name = "picture";
+  #   text = "${builtins.readFile ./picture.png}";
+  # };
 in {
   imports = [
     ../../modules/home-manager/desktop.nix
@@ -71,6 +71,7 @@ in {
       enable = true;
       defaultFileManager = true;
     };
+    dolphin.enable = true;
   };
 
   styleConfig = {
@@ -233,6 +234,7 @@ in {
 
   shells = {
     bash.enable = true;
+    nu.enable = true;
     tmux = {
       enable = true;
       tmuxStartup = {

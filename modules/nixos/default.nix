@@ -17,5 +17,6 @@
     wl-clipboard
     pavucontrol
     exfatprogs
+    unrar
   ];
 }
