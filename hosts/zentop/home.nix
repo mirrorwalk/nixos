@@ -28,6 +28,8 @@
     components = ["secrets"];
   };
 
+  shutdownMenu.enable = true;
+
   systemConfig = {
     defaults = {
       brightness.enable = true;
@@ -65,10 +67,6 @@
       enable = true;
       defaultBrowser = true;
       shortcuts.enable = true;
-    };
-
-    mullvad = {
-      enable = true;
     };
 
     search.defaultEngine = "Kagi";
