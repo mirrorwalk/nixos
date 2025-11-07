@@ -28,26 +28,7 @@
     qbittorrent
   ];
 
-  wayland.windowManager.hyprland.enable = true;
-
   games.enable = true;
-
-  imageVideo.mpv = {
-    enable = true;
-    default = {
-      video = true;
-      image = true;
-      audio = true;
-    };
-  };
-
-  fileManagers = {
-    thunar = {
-      enable = true;
-      defaultFileManager = true;
-    };
-    dolphin.enable = true;
-  };
 
   styleConfig = {
     defaultWallpaper = /home/brog/Pictures/Wallpapers/thumb-1920-1345286.png;
@@ -59,7 +40,6 @@
   };
 
   systemConfig = {
-    defaults.enable = true;
     monitors = [
       {
         name = "DP-1";
@@ -78,7 +58,6 @@
   };
 
   runners.fuzzel = {
-    enable = true;
     width = 50;
     innerPad = 5;
   };
@@ -92,34 +71,11 @@
 
     brave.enable = true;
 
-    adblock = {
-      enable = true;
-      provider = "adnauseam";
-    };
     search.defaultEngine = "Kagi";
   };
 
   programs = {
-    git = {
-      enable = true;
-      sign.enable = true;
-    };
-
-    jujutsu.enable = true;
-
-    nh.enable = true;
-    nom.enable = true;
-
     yt-dlp.enable = true;
-
-    neovim.enable = true;
-
-    fzf.enable = true;
-
-    jq.enable = true;
-    fd.enable = true;
-    btop.enable = true;
-    ripgrep.enable = true;
 
     cava.enable = true;
 
@@ -144,22 +100,7 @@
   };
 
   services = {
-    gitlab = {
-      enable = true;
-      ssh.enable = true;
-    };
-
-    github = {
-      enable = true;
-      ssh.enable = true;
-    };
-
-    setupGitRemotes = {
-      enable = true;
-    };
-
     backupGit = {
-      enable = true;
       backupFolders = [
         /home/brog/.config/nixos-private
         /home/brog/.config/nixos
@@ -168,9 +109,7 @@
       ];
     };
 
-
     hyprpaper = {
-      enable = true;
       random = {
         enable = true;
         scriptName = "hrc";
@@ -180,35 +119,15 @@
     };
   };
 
-  notif.mako.enable = true;
-
   bars.waybar = {
-    enable = true;
-    systemService.enable = true;
-    hyprland.enable = true;
-    mullvadVPN.enable = true;
     wallpaperCategory.enable = true;
     cava.enable = true;
     weather.enable = true;
   };
 
-  terminals = {
-    ghostty = {
-      enable = true;
-      defaultTerminal = true;
-    };
-    kitty.enable = true;
-  };
-
   shells = {
-    bash.enable = true;
     nu.enable = true;
     tmux = {
-      enable = true;
-      tmuxStartup = {
-        enable = true;
-        aliasToTmux = true;
-      };
       tmux-workspace = {
         enable = true;
         rootFolders = {
@@ -220,13 +139,7 @@
         };
       };
     };
-    bat.enable = true;
   };
-
-  # programs.direnv = {
-  #   enable = true;
-  #   nix-direnv.enable = true;
-  # };
 
   home.keyboard = {
     xkbOptions = ["caps:escape"];
