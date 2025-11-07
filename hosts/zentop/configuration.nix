@@ -86,7 +86,7 @@
   };
 
   services = {
-    mullvad-vpn.enable = false;
+    mullvad-vpn.enable = true;
 
     logind.settings.Login = {
       HandlePowerKey = "ignore";
