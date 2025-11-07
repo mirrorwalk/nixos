@@ -3,7 +3,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  colors = config.styleConfig.colorScheme;
+in {
   options.notif.mako = {
     enable = lib.mkEnableOption "enable mako";
   };
@@ -12,8 +14,9 @@
     services.mako = {
       enable = true;
       settings = {
-        background-color = "#000000";
-        border-color = "#FFFFFF";
+        background-color = "${colors.secondary}";
+        text-color = "${colors.primary}";
+        border-color = "${colors.accent}";
         default-timeout = 1000;
         ignore-timeout = false;
       };
