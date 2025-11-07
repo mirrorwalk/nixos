@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: let
   hmm = [
@@ -41,114 +42,118 @@
   im = [
     inputs.nvimFZF.default
   ];
+
+  inherit (lib) mkDefault;
 in {
   imports = hmm ++ sm ++ cm ++ im;
 
-  desktop.hyprland.enable = true;
+  config = mkDefault {
+    desktop.hyprland.enable = true;
 
-  udiskie.enable = true;
+    udiskie.enable = true;
 
-  imageVideo.mpv = {
-    enable = true;
-    default = {
-      video = true;
-      image = true;
-      audio = true;
-    };
-  };
-
-  fileManagers = {
-    thunar = {
+    imageVideo.mpv = {
       enable = true;
-      defaultFileManager = true;
-    };
-  };
-
-  systemConfig.defaults = {
-    enable = true;
-  };
-
-  runners.fuzzel = {
-    enable = true;
-  };
-
-  shells = {
-    bash.enable = true;
-    tmux = {
-      enable = true;
-      tmuxStartup = {
-        enable = true;
-        aliasToTmux = true;
+      default = {
+        video = true;
+        image = true;
+        audio = true;
       };
     };
-    bat.enable = true;
-  };
 
-  bars.waybar = {
-    enable = true;
-    systemService.enable = true;
-    hyprland.enable = true;
-    mullvadVPN.enable = true;
-  };
-
-  browsers = {
-    adblock = {
-      enable = true;
-      provider = "adnauseam";
-    };
-  };
-
-  programs = {
-    git = {
-      enable = true;
-      sign.enable = true;
+    fileManagers = {
+      thunar = {
+        enable = true;
+        defaultFileManager = true;
+      };
     };
 
-    jujutsu.enable = true;
-
-    nh.enable = true;
-    nom.enable = true;
-
-    neovim.enable = true;
-
-    fzf.enable = true;
-
-    jq.enable = true;
-    fd.enable = true;
-    btop.enable = true;
-    ripgrep.enable = true;
-  };
-
-  notif.mako.enable = true;
-
-  services = {
-    gitlab = {
-      enable = true;
-      ssh.enable = true;
-    };
-
-    github = {
-      enable = true;
-      ssh.enable = true;
-    };
-
-    setupGitRemotes = {
+    systemConfig.defaults = {
       enable = true;
     };
 
-    backupGit = {
+    runners.fuzzel = {
       enable = true;
     };
 
-    hyprpaper = {
-      enable = true;
+    shells = {
+      bash.enable = true;
+      tmux = {
+        enable = true;
+        tmuxStartup = {
+          enable = true;
+          aliasToTmux = true;
+        };
+      };
+      bat.enable = true;
     };
-  };
 
-  terminals = {
-    ghostty = {
+    bars.waybar = {
       enable = true;
-      defaultTerminal = true;
+      systemService.enable = true;
+      hyprland.enable = true;
+      mullvadVPN.enable = true;
+    };
+
+    browsers = {
+      adblock = {
+        enable = true;
+        provider = "adnauseam";
+      };
+    };
+
+    programs = {
+      git = {
+        enable = true;
+        sign.enable = true;
+      };
+
+      jujutsu.enable = true;
+
+      nh.enable = true;
+      nom.enable = true;
+
+      neovim.enable = true;
+
+      fzf.enable = true;
+
+      jq.enable = true;
+      fd.enable = true;
+      btop.enable = true;
+      ripgrep.enable = true;
+    };
+
+    notif.mako.enable = true;
+
+    services = {
+      gitlab = {
+        enable = true;
+        ssh.enable = true;
+      };
+
+      github = {
+        enable = true;
+        ssh.enable = true;
+      };
+
+      setupGitRemotes = {
+        enable = true;
+      };
+
+      backupGit = {
+        enable = true;
+      };
+
+      hyprpaper = {
+        enable = true;
+      };
+    };
+
+    terminals = {
+      ghostty = {
+        enable = true;
+        defaultTerminal = true;
+      };
     };
   };
 }
