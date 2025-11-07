@@ -2,37 +2,10 @@
   pkgs,
   config,
   ...
-}: let
-  # meowEnv = pkgs.buildEnv {
-  #   name = "meow-env";
-  #   paths = [
-  #     meowza
-  #     meowzx
-  #   ];
-  #   postBuild = "echo sylink join";
-  # };
-  #
-  # combinedConfig = pkgs.symlinkJoin {
-  #   name = "my-combined-config";
-  #   paths = [
-  #     meowza
-  #     meowzx
-  #   ];
-  #   postBuild = "echo link added";
-  # };
-  # pictureFile = pkgs.writeTextFile {
-  #   name = "picture";
-  #   text = "${builtins.readFile ./picture.png}";
-  # };
-in {
+}: {
   imports = [
     ../../modules/home-manager/desktop.nix
   ];
-
-  # home.file."asd.png" = {
-  #   # source = pictureFile;
-  #   source = ./picture.png;
-  # };
 
   home.username = "brog";
   home.homeDirectory = "/home/brog";
