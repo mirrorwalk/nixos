@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: {
   imports = [
@@ -26,5 +27,10 @@
     home.sessionVariables = {
       VISUAL = "nvim";
     };
+
+    home.packages = [
+      pkgs.nixd
+    ];
+    nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 }

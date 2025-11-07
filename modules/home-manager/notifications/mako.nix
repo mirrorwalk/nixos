@@ -5,7 +5,7 @@
   ...
 }: {
   options.notif.mako = {
-    enable = lib.mkEnableOption "";
+    enable = lib.mkEnableOption "enable mako";
   };
 
   config = lib.mkIf config.notif.mako.enable {

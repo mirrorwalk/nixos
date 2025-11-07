@@ -18,7 +18,7 @@ in {
     };
 
     brightness = {
-      enable = lib.mkEnableOption "";
+      enable = lib.mkEnableOption "enable brightness defaults";
 
       command = {
         increase = mkOption {

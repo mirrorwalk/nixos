@@ -21,6 +21,8 @@
     ./udiskie/udiskie.nix
     ./brightness/brightness.nix
     ./notifications/notifications.nix
+    ./games/games.nix
+    ./nm-applet/nm-applet.nix
   ];
 
   sm = [
@@ -33,6 +35,7 @@
     ../custom/git/git.nix
     ../custom/hyprpaper-random/hyprpaper-random.nix
     ../custom/tmux-startup/tmux-startup.nix
+    ../custom/shutdown-menu/shutdown-menu.nix
   ];
 
   im = [
@@ -41,9 +44,111 @@
 in {
   imports = hmm ++ sm ++ cm ++ im;
 
-  home.packages = [
-    pkgs.nixd
-  ];
+  desktop.hyprland.enable = true;
 
-  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+  udiskie.enable = true;
+
+  imageVideo.mpv = {
+    enable = true;
+    default = {
+      video = true;
+      image = true;
+      audio = true;
+    };
+  };
+
+  fileManagers = {
+    thunar = {
+      enable = true;
+      defaultFileManager = true;
+    };
+  };
+
+  systemConfig.defaults = {
+    enable = true;
+  };
+
+  runners.fuzzel = {
+    enable = true;
+  };
+
+  shells = {
+    bash.enable = true;
+    tmux = {
+      enable = true;
+      tmuxStartup = {
+        enable = true;
+        aliasToTmux = true;
+      };
+    };
+    bat.enable = true;
+  };
+
+  bars.waybar = {
+    enable = true;
+    systemService.enable = true;
+    hyprland.enable = true;
+    mullvadVPN.enable = true;
+  };
+
+  browsers = {
+    adblock = {
+      enable = true;
+      provider = "adnauseam";
+    };
+  };
+
+  programs = {
+    git = {
+      enable = true;
+      sign.enable = true;
+    };
+
+    jujutsu.enable = true;
+
+    nh.enable = true;
+    nom.enable = true;
+
+    neovim.enable = true;
+
+    fzf.enable = true;
+
+    jq.enable = true;
+    fd.enable = true;
+    btop.enable = true;
+    ripgrep.enable = true;
+  };
+
+  notif.mako.enable = true;
+
+  services = {
+    gitlab = {
+      enable = true;
+      ssh.enable = true;
+    };
+
+    github = {
+      enable = true;
+      ssh.enable = true;
+    };
+
+    setupGitRemotes = {
+      enable = true;
+    };
+
+    backupGit = {
+      enable = true;
+    };
+
+    hyprpaper = {
+      enable = true;
+    };
+  };
+
+  terminals = {
+    ghostty = {
+      enable = true;
+      defaultTerminal = true;
+    };
+  };
 }

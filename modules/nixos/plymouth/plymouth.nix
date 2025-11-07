@@ -4,7 +4,7 @@
   ...
 }: {
   options.plymouth = {
-    enable = lib.mkEnableOption "";
+    enable = lib.mkEnableOption "enable plymouth";
   };
 
   config = lib.mkIf config.plymouth.enable {

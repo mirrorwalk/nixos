@@ -11,7 +11,7 @@
     };
 
     adblock = {
-      enable = lib.mkEnableOption "";
+      enable = lib.mkEnableOption "Enable adblock extensions";
       provider = lib.mkOption {
         type = lib.types.enum ["ublock" "adnauseam"];
       };

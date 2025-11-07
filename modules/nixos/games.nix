@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  options.games.enable = lib.mkEnableOption "";
+  options.games.enable = lib.mkEnableOption "enable game specific options";
 
   config = lib.mkIf config.games.enable {
     programs.gamemode.enable = true;

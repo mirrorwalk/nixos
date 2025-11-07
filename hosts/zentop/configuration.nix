@@ -28,6 +28,8 @@
 
   plymouth.enable = true;
 
+  autousb.enable = true;
+
   displayManager.ly = {
     enable = true;
   };

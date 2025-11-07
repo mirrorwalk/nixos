@@ -1,6 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
-    ../../modules/home-manager/laptop.nix
+    ../../modules/home-manager/default.nix
+    inputs.privateConfig.homeModules.laptop
   ];
 
   home.username = "brog";
@@ -23,29 +28,11 @@
     components = ["secrets"];
   };
 
-  imageVideo.mpv = {
-    enable = true;
-    default = {
-      video = true;
-      image = true;
-      audio = true;
-    };
-  };
-
-  wayland.windowManager.hyprland.enable = true;
-
-  fileManagers = {
-    thunar = {
-      enable = true;
-      defaultFileManager = true;
-    };
-  };
-
   systemConfig = {
     defaults = {
-        enable = true;
-        brightness.enable = true;
+      brightness.enable = true;
     };
+
     monitors = [
       {
         name = "eDP-1";
@@ -62,31 +49,14 @@
   };
 
   runners.fuzzel = {
-    enable = true;
     width = 50;
     dpiAware = "no";
     showActions = false;
   };
 
-  shells = {
-    bash.enable = true;
-    tmux = {
-      enable = true;
-      tmuxStartup = {
-        enable = true;
-        aliasToTmux = true;
-      };
-    };
-    bat.enable = true;
-  };
-
   bars.waybar = {
-    enable = true;
     interval = 5;
     battery.enable = true;
-    systemService.enable = true;
-    hyprland.enable = true;
-    mullvadVPN.enable = true;
     backlight.enable = true;
   };
 
@@ -101,11 +71,6 @@
       enable = true;
     };
 
-    adblock = {
-        enable = true;
-        provider = "adnauseam";
-    };
-
     search.defaultEngine = "Kagi";
     search.private.defaultEngine = "ddg";
   };
@@ -117,68 +82,13 @@
     ];
   };
 
-  programs = {
-    git = {
-      enable = true;
-      sign.enable = true;
-    };
-
-    jujutsu.enable = true;
-
-    nh.enable = true;
-    nom.enable = true;
-
-    neovim.enable = true;
-
-    fzf.enable = true;
-
-    jq.enable = true;
-    fd.enable = true;
-    btop.enable = true;
-    ripgrep.enable = true;
-  };
-
-  notif.mako.enable = true;
-
   services = {
-    gitlab = {
-      enable = true;
-      ssh.enable = true;
-    };
-
-    github = {
-      enable = true;
-      ssh.enable = true;
-    };
-
-    setupGitRemotes = {
-      enable = true;
-    };
-
     backupGit = {
-      enable = true;
       backupFolders = [
         /home/brog/.config/nixos-private
         /home/brog/.config/nixos
         /home/brog/.config
       ];
-    };
-
-
-    hyprpaper = {
-      enable = true;
-      random = {
-        enable = false;
-        interval = 3600;
-        hyprland.enable = true;
-      };
-    };
-  };
-
-  terminals = {
-    ghostty = {
-      enable = true;
-      defaultTerminal = true;
     };
   };
 
