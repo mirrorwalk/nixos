@@ -52,12 +52,11 @@
       ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   };
 
+  wifi.enable = true;
+
   networking = {
     hostName = "zentop";
-
-    networkmanager = {
-      enable = true;
-    };
+    networkmanager.enable = true;
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -87,7 +86,7 @@
   };
 
   services = {
-    mullvad-vpn.enable = true;
+    mullvad-vpn.enable = false;
 
     logind.settings.Login = {
       HandlePowerKey = "ignore";
