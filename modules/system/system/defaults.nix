@@ -10,6 +10,13 @@ in {
   options.systemConfig.defaults = {
     enable = lib.mkEnableOption "Enable xdg default setup";
 
+    notifications = {
+      command = mkOption {
+        default = "${pkgs.mako}/bin/mako";
+        type = types.str;
+      };
+    };
+
     brightness = {
       enable = lib.mkEnableOption "";
 
@@ -20,7 +27,7 @@ in {
         };
         decrease = mkOption {
           default = "${pkgs.brightnessctl}/bin/brightnessctl set ${toString cfg.brightness.step}%-";
-    
+
           type = types.str;
         };
       };

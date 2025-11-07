@@ -20,6 +20,7 @@
     ./image-video/iv.nix
     ./udiskie/udiskie.nix
     ./brightness/brightness.nix
+    ./notifications/notifications.nix
   ];
 
   sm = [

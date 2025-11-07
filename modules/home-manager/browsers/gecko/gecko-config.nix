@@ -119,12 +119,12 @@ in {
         OfferToSaveLogins = false;
         DisableFirefoxAccounts = true;
         DisableSafeMode = true;
-        EnableTrackingProtection = {
-          Value = true;
-          Locked = true;
-          Cryptomining = true;
-          Fingerprinting = true;
-        };
+        # EnableTrackingProtection = {
+        #   Value = true;
+        #   Locked = true;
+        #   Cryptomining = true;
+        #   Fingerprinting = true;
+        # };
       };
     };
 

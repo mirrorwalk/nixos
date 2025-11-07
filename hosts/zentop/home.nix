@@ -138,6 +138,8 @@
     ripgrep.enable = true;
   };
 
+  notif.mako.enable = true;
+
   services = {
     gitlab = {
       enable = true;
@@ -161,6 +163,7 @@
         /home/brog/.config
       ];
     };
+
 
     hyprpaper = {
       enable = true;
