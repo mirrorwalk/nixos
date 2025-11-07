@@ -1,5 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   options.shutdownMenu = {
+    enable = lib.mkEnableOption "Enable shutdown script";
   };
 
   config = let
@@ -32,7 +38,7 @@
       esac
     '';
   in {
-    wayland.windowManager.hyprland.settings.bind = [
+    wayland.windowManager.hyprland.settings.bind = lib.mkIf config.shutdownMenu.enable [
       ", XF86PowerOff, exec, ${shutdown-script}/bin/shutdown-script"
     ];
   };

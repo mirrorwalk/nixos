@@ -1,10 +1,12 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
   imports = [
-    ../../modules/home-manager/desktop.nix
+    ../../modules/home-manager/default.nix
+    inputs.privateConfig.homeModules.desktop
   ];
 
   home.username = "brog";
