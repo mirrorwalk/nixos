@@ -40,6 +40,11 @@
       url = "github:lassulus/wrappers";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -50,6 +55,7 @@
     tmuxWorkspace,
     nvimFZF,
     wrappers,
+    sops-nix,
     ...
   } @ inputs: {
     nixosConfigurations = {
@@ -57,6 +63,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/desktop/configuration.nix
+          inputs.sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager.sharedModules = [
