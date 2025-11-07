@@ -147,16 +147,6 @@
       ssh.enable = true;
     };
 
-    mako = {
-      enable = true;
-      settings = {
-        background-color = "#000000";
-        border-color = "#FFFFFF";
-        default-timeout = 1000;
-        ignore-timeout = false;
-      };
-    };
-
     github = {
       enable = true;
       ssh.enable = true;
@@ -176,6 +166,7 @@
       ];
     };
 
+
     hyprpaper = {
       enable = true;
       random = {
@@ -186,6 +177,8 @@
       };
     };
   };
+
+  notif.mako.enable = true;
 
   bars.waybar = {
     enable = true;

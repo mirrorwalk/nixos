@@ -7,6 +7,10 @@
     ./display-managers/display-managers.nix
     ./keyrings/keyrings.nix
     ./plymouth/plymouth.nix
+    ./autousb.nix
+    ./tor.nix
+    ./games.nix
+    ./wifi/wifi.nix
     inputs.home-manager.nixosModules.default
   ];
 

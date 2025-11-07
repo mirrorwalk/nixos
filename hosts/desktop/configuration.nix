@@ -9,7 +9,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/desktop.nix
+    ../../modules/nixos/default.nix
   ];
 
   sops.defaultSopsFile = ./secrets/secrets.yaml;
@@ -22,9 +22,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # udiskie
-    gvfs
-    usbutils
+    wine
   ];
 
   plymouth.enable = true;
@@ -51,6 +49,13 @@
       animation = "doom";
     };
   };
+
+  tor = {
+    enable = true;
+    snowflake.enable = true;
+  };
+
+  autousb.enable = true;
 
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs;
@@ -82,13 +87,7 @@
   };
 
   services = {
-    udisks2.enable = true;
-
     mullvad-vpn.enable = true;
-
-    # logind.settings.Login = {
-    #   HandlePowerKey = "ignore";
-    # };
 
     xserver = {
       xkb = {

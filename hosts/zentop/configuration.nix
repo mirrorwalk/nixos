@@ -9,7 +9,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/laptop.nix
+    ../../modules/nixos/default.nix
   ];
 
   sops.defaultSopsFile = ./secrets/secrets.json;
