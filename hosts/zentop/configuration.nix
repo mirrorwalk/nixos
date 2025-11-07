@@ -4,12 +4,18 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/laptop.nix
   ];
+
+  sops.defaultSopsFile = ./secrets/secrets.json;
+  sops.defaultSopsFormat = "json";
+
+  sops.age.keyFile = "/home/brog/.config/sops/age/keys.txt";
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -49,15 +55,8 @@
   networking = {
     hostName = "zentop";
 
-    # networkmanager.enable = true;
-
-    wireless = {
-        enable = true;
-        networks = {
-            "Shaan" = {
-                psk = "HadziHalefOmar";
-            };
-        };
+    networkmanager = {
+      enable = true;
     };
   };
 
@@ -88,7 +87,7 @@
   };
 
   services = {
-    mullvad-vpn.enable = false;
+    mullvad-vpn.enable = true;
 
     logind.settings.Login = {
       HandlePowerKey = "ignore";

@@ -75,6 +75,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/zentop/configuration.nix
+          inputs.sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager.sharedModules = [
