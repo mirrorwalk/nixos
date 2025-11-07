@@ -166,8 +166,6 @@ in {
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           ", XF86AudioRaiseVolume , exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
           ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-          # ", XF86MonBrightnessUp, exec, brightnessctl set +5%"
-          # ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
         ];
 
         bindm = [
@@ -178,8 +176,9 @@ in {
         windowrulev2 = [
           "opacity 1.0, class:^(steam|Steam)$"
           "float,class:^(Tor Browser)$"
-          "float,fullscreen:0,fullscreenrequest:0,class:Mullvad\ Browser"
-          # "float,fullscreen:0,fullscreenrequest:0,noinitialfocus,initialClass:^(Mullvad Browser)$"
+          "suppressevent fullscreen maximize fullscreenoutput,class:(Tor Browser)"
+          "float,class:(Mullvad Browser)"
+          "suppressevent fullscreen maximize fullscreenoutput,class:(Mullvad Browser)"
           "float, title:^(Picture-in-Picture)$"
           "pin, title:^(Picture-in-Picture)$"
           "move 75% 75%, title:^(Picture-in-Picture)$"

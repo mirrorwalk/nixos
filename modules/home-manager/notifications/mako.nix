@@ -14,9 +14,9 @@ in {
     services.mako = {
       enable = true;
       settings = {
-        background-color = "${colors.secondary}";
+        background-color = "${colors.accent}";
         text-color = "${colors.primary}";
-        border-color = "${colors.accent}";
+        border-color = "${colors.secondary}";
         default-timeout = 1000;
         ignore-timeout = false;
       };
