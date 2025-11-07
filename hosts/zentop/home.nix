@@ -57,7 +57,7 @@
   };
 
   nmApplet = {
-    enable = true;
+    enable = false;
     integration.hyprland = true;
   };
 

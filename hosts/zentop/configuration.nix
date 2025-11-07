@@ -49,7 +49,16 @@
   networking = {
     hostName = "zentop";
 
-    networkmanager.enable = true;
+    # networkmanager.enable = true;
+
+    wireless = {
+        enable = true;
+        networks = {
+            "Shaan" = {
+                psk = "HadziHalefOmar";
+            };
+        };
+    };
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -79,7 +88,7 @@
   };
 
   services = {
-    mullvad-vpn.enable = true;
+    mullvad-vpn.enable = false;
 
     logind.settings.Login = {
       HandlePowerKey = "ignore";
