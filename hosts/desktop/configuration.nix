@@ -40,7 +40,7 @@
     enable = true;
   };
 
-  services.sshd.enable = true;
+  services.sshd.enable = false;
 
   games.enable = true;
 
@@ -108,7 +108,7 @@
 
   programs = {
     nix-ld = {
-      enable = true;
+      enable = false;
       libraries = with pkgs; [
         libglvnd
         xorg.libXmu

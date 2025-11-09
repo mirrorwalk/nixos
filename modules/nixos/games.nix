@@ -1,16 +1,31 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: {
   options.games.enable = lib.mkEnableOption "enable game specific options";
 
   config = lib.mkIf config.games.enable {
-    programs.gamemode.enable = true;
+    programs = {
+      gamemode.enable = true;
 
-    programs.steam.enable = true;
-    programs.steam.gamescopeSession.enable = true;
+      steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+        protontricks.enable = true;
 
-    programs.gamescope.enable = true;
+        # extraPackages = with pkgs; [
+        #   protonup-ng
+        #   wine
+        # ];
+      };
+
+      gamescope.enable = true;
+    };
+
+    environment.systemPackages = with pkgs; [
+      wine
+    ];
   };
 }
