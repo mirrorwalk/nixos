@@ -176,12 +176,14 @@ in {
           "$mainMod, mouse:273, resizewindow"
         ];
 
-        windowrulev2 = [
+        windowrulev2 = builtins.trace "Modularize" [
           "opacity 1.0, class:^(steam|Steam)$"
           "float,class:^(Tor Browser)$"
           "suppressevent fullscreen maximize fullscreenoutput,class:(Tor Browser)"
           "float,class:(Mullvad Browser)"
           "suppressevent fullscreen maximize fullscreenoutput,class:(Mullvad Browser)"
+          "suppressevent fullscreen maximize fullscreenoutput,initialClass:(Godot)"
+          "suppressevent fullscreen maximize fullscreenoutput,initialTitle:(Godot)"
           "float, title:^(Picture-in-Picture)$"
           "pin, title:^(Picture-in-Picture)$"
           "move 75% 75%, title:^(Picture-in-Picture)$"
