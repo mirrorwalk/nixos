@@ -26,6 +26,7 @@
 
   home.packages = with pkgs; [
     qbittorrent
+    godot
   ];
 
   games.enable = true;

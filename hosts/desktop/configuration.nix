@@ -40,6 +40,8 @@
     enable = true;
   };
 
+  services.sshd.enable = true;
+
   games.enable = true;
 
   displayManager.ly = {

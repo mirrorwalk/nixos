@@ -17,6 +17,7 @@
       extraPackages = with pkgs; [
         gamemode
         gamescope
+        wine
       ];
     };
   };
