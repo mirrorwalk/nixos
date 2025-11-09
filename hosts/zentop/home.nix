@@ -69,9 +69,6 @@
       shortcuts.enable = true;
     };
 
-    tor.enable = true;
-    mullvad.enable = true;
-
     search.defaultEngine = "Kagi";
     search.private.defaultEngine = "ddg";
   };

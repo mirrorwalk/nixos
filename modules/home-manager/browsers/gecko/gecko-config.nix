@@ -189,6 +189,7 @@ in {
             url = "https://nano-gpt.com/conversation/new";
             tags = ["ai"];
           }
+          "separator"
           {
             name = "NixOS";
             bookmarks = [
@@ -215,6 +216,7 @@ in {
               }
             ];
           }
+          "separator"
         ];
       }
     ];

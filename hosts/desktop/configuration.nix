@@ -21,9 +21,9 @@
     owner = config.users.users.brog.name;
   };
 
-  environment.systemPackages = with pkgs; [
-    wine
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   wine
+  # ];
 
   plymouth.enable = true;
 

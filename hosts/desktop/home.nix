@@ -100,18 +100,11 @@
         ".direnv"
       ];
     };
-
-    # gpg.enable = true;
   };
 
   privateConfig.gpg.enable = false;
 
   services = {
-    # gpg-agent = {
-    #   enable = true;
-    #   pinentry.package = pkgs.pinentry-curses;
-    # };
-
     backupGit = {
       backupFolders = [
         /home/brog/.config/nixos-private
