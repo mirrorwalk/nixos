@@ -27,6 +27,9 @@
   home.packages = with pkgs; [
     qbittorrent
     godot
+    # kdePackages.kleopatra
+    # pinentry-curses
+    p7zip
   ];
 
   games.enable = true;
@@ -98,15 +101,23 @@
         ".direnv"
       ];
     };
+
+    # gpg.enable = true;
   };
 
+  privateConfig.gpg.enable = false;
+
   services = {
+    # gpg-agent = {
+    #   enable = true;
+    #   pinentry.package = pkgs.pinentry-curses;
+    # };
+
     backupGit = {
       backupFolders = [
         /home/brog/.config/nixos-private
         /home/brog/.config/nixos
         /home/brog/.config/nvim
-        /home/brog/.config
       ];
     };
 
@@ -132,9 +143,9 @@
       tmux-workspace = {
         enable = true;
         rootFolders = {
-          "${config.home.homeDirectory}/projects" = "1:1";
+          # "${config.home.homeDirectory}/projects" = "1:2";
           "${config.home.homeDirectory}/projects/zig" = "1:1";
-          "${config.home.homeDirectory}/projects/svelte" = "1:1";
+          "${config.home.homeDirectory}/projects/godot" = "1:1";
           "${config.home.homeDirectory}/.config" = "1:1";
           "${config.home.homeDirectory}/.config/nvim" = "0:1";
         };
