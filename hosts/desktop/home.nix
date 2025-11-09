@@ -29,7 +29,6 @@
     godot
     # kdePackages.kleopatra
     # pinentry-curses
-    p7zip
   ];
 
   games.enable = true;

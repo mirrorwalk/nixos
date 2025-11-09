@@ -22,5 +22,6 @@
     pavucontrol
     exfatprogs
     unrar
+    p7zip
   ];
 }
