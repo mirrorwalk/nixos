@@ -42,6 +42,11 @@
     hyprland.enable = true;
 
     bash.enable = true;
+
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [thunar-archive-plugin];
+    };
   };
 
   fonts = {
@@ -112,8 +117,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = [
-    pkgs.brightnessctl
+  environment.systemPackages = with pkgs;[
+    brightnessctl
+    xarchiver
   ];
 
   # This value determines the NixOS release from which the default

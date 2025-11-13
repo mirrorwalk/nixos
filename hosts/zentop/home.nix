@@ -23,12 +23,31 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+  home.packages = with pkgs; [
+    kdePackages.qt6ct
+    libsForQt5.qt5ct
+  ];
+
   services.gnome-keyring = {
     enable = true;
     components = ["secrets"];
   };
 
   shutdownMenu.enable = true;
+
+  fileManagers = {
+    thunar = {
+      enable = true;
+      defaultFileManager = false;
+    };
+    dolphin = {
+      enable = true;
+      defaultFileManager = true;
+    };
+    ranger = {
+        enable = true;
+    };
+  };
 
   systemConfig = {
     defaults = {
@@ -102,23 +121,7 @@
 
   qt = {
     enable = true;
-    style = {
-      name = "adwaita-dark";
-      package = pkgs.adwaita-qt;
-    };
-    platformTheme.name = "gtk3";
-  };
-
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      gtk-theme = "Adwaita-dark";
-      color-scheme = "prefer-dark";
-    };
-  };
-
-  home.sessionVariables = {
-    GTK_THEME = "Adwaita:dark";
-    QT_STYLE_OVERRIDE = "adwaita-dark";
+    platformTheme.name = "qtct";
   };
 
   programs.home-manager.enable = true;
