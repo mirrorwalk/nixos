@@ -163,7 +163,7 @@ in {
     };
   };
 
-  config.browsers.gecko = {
+  config.browsers.gecko = builtins.trace "modularize picture-in-picture" {
     bookmarks.settings = [
       {
         toolbar = true;

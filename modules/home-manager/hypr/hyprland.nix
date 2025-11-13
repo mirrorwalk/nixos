@@ -176,7 +176,7 @@ in {
           "$mainMod, mouse:273, resizewindow"
         ];
 
-        windowrulev2 = builtins.trace "Modularize" [
+        windowrulev2 = builtins.trace "Modularize hyprland window rules" [
           "opacity 1.0, class:^(steam|Steam)$"
           "float,class:^(Tor Browser)$"
           "suppressevent fullscreen maximize fullscreenoutput,class:(Tor Browser)"
