@@ -164,6 +164,7 @@ in {
           "$mainMod, Tab, cyclenext"
           "$mainMod SHIFT, Tab, cyclenext, tiled"
           "$mainMod ALT, Tab, cyclenext, floating"
+          (builtins.trace "modularize this keybind" "$mainMod CTRL, L, exec, hyprlock")
           "$mainMod, H, movefocus, l"
           "$mainMod, L, movefocus, r"
           "$mainMod, K, movefocus, u"
