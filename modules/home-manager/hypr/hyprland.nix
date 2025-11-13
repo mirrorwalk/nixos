@@ -68,7 +68,7 @@ in {
 
         animations = {
           enabled = anim.enable;
-          workspace_wraparound = true;
+          # workspace_wraparound = true;
 
           bezier = [
             "vampSlide, 0.13, 0.99, 0.29, 1.0"

@@ -16,10 +16,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # home.packages = [
-    #   package
-    #   pkgs.xfce.thunar-archive-plugin
-    # ];
+    home.packages = [
+      package
+      pkgs.xfce.thunar-archive-plugin
+      pkgs.xarchiver
+    ];
 
     systemConfig.defaults.fileManager = mkIf cfg.defaultFileManager {
       command = "${package}/bin/thunar";
