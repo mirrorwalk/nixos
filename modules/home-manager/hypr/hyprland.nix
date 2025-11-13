@@ -5,8 +5,21 @@
   ...
 }: let
   defaults = config.systemConfig.defaults;
+  anim = config.desktop.hyprland.animation;
 in {
-  options.desktop.hyprland.enable = lib.mkEnableOption "Enable hyprland desktop environment";
+  options.desktop.hyprland = {
+    enable = lib.mkEnableOption "Enable hyprland desktop environment";
+
+    animation = {
+        enable = lib.mkEnableOption "Enable animations";
+
+      speed = lib.mkOption {
+        type = lib.types.int;
+        default = 4;
+        description = "Animation speed multiplier (1ds = 100ms). Lower = faster, higher = slower.";
+      };
+    };
+  };
 
   config = lib.mkIf config.desktop.hyprland.enable {
     wayland.windowManager.hyprland = {
@@ -40,22 +53,40 @@ in {
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,24"
           "HYPRCURSOR_THEME,rose-pine-hyprcursor"
-          # "FILE_MANAGER,dolphin"
         ];
 
         general = {
           gaps_in = 2;
           gaps_out = 4;
           border_size = 2;
-          "col.active_border" = "rgba(ff0000ff) rgba(ff3333ff) rgba(ffffffff) 45deg";
-          "col.inactive_border" = "rgba(330000aa) rgba(1a1a1aff) 45deg";
+          "col.active_border" = "rgba(ff0033ee) rgba(990000ee) rgba(330000ee) 45deg";
+          "col.inactive_border" = "rgba(1a1a1aaa)";
           resize_on_border = false;
           allow_tearing = false;
           layout = "dwindle";
         };
 
         animations = {
-          enabled = false;
+          enabled = anim.enable;
+          workspace_wraparound = true;
+
+          bezier = [
+            "vampSlide, 0.13, 0.99, 0.29, 1.0"
+            "bloodPulse, 0.87, 0, 0.13, 1"
+          ];
+
+          animation = [
+            "windowsIn, 1, ${toString anim.speed}, vampSlide, slide"
+            "windowsOut, 1, ${toString (anim.speed - 1)}, bloodPulse, slide"
+            "windowsMove, 1, ${toString (anim.speed - 1)}, vampSlide, slide"
+            "fadeIn, 1, ${toString (anim.speed + 2)}, vampSlide"
+            "fadeOut, 1, ${toString anim.speed}, bloodPulse"
+            "fadeSwitch, 1, ${toString anim.speed}, vampSlide"
+            "fadeShadow, 1, ${toString anim.speed}, vampSlide"
+            "fadeDim, 1, ${toString anim.speed}, vampSlide"
+            "workspaces, 1, ${toString (anim.speed - 1)}, vampSlide, slidevert"
+            "borderangle, 1, 100, bloodPulse, loop"
+          ];
         };
 
         decoration = {
@@ -64,10 +95,10 @@ in {
           inactive_opacity = 0.85;
 
           shadow = {
-            enabled = false;
-            range = 8;
+            enabled = true;
+            range = 20;
             render_power = 3;
-            color = "rgba(ffffffff)";
+            color = "rgba(ff003355)";
           };
 
           blur = {
@@ -75,6 +106,9 @@ in {
             size = 6;
             passes = 3;
             vibrancy = 0.3;
+            noise = 0.02;
+            contrast = 1.1;
+            brightness = 1.2;
           };
         };
 

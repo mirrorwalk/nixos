@@ -31,6 +31,13 @@
     # pinentry-curses
   ];
 
+  desktop.hyprland = {
+      enable = true;
+      animation = {
+          enable = true;
+      };
+  };
+
   games.enable = true;
 
   styleConfig = {
