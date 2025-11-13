@@ -44,11 +44,11 @@ in {
         ];
 
         general = {
-          gaps_in = 8;
-          gaps_out = 15;
-          border_size = 3;
-          "col.active_border" = "rgba(00ffddff) rgba(ff0080ff) rgba(ffff00ff) 45deg";
-          "col.inactive_border" = "rgba(0d1117aa) rgba(1a1a2eff) 45deg";
+          gaps_in = 2;
+          gaps_out = 4;
+          border_size = 2;
+          "col.active_border" = "rgba(ff0000ff) rgba(ff3333ff) rgba(ffffffff) 45deg";
+          "col.inactive_border" = "rgba(330000aa) rgba(1a1a1aff) 45deg";
           resize_on_border = false;
           allow_tearing = false;
           layout = "dwindle";
@@ -64,10 +64,10 @@ in {
           inactive_opacity = 0.85;
 
           shadow = {
-            enabled = true;
+            enabled = false;
             range = 8;
             render_power = 3;
-            color = "rgba(00ddffaa)";
+            color = "rgba(ffffffff)";
           };
 
           blur = {
@@ -127,7 +127,9 @@ in {
           "$mainMod, F, fullscreen, 1"
           "$mainMod SHIFT, F, fullscreen, 0"
           "$mainMod, B, exec, $webBrowser"
-          "$mainMod, T, cyclenext"
+          "$mainMod, Tab, cyclenext"
+          "$mainMod SHIFT, Tab, cyclenext, tiled"
+          "$mainMod ALT, Tab, cyclenext, floating"
           "$mainMod, H, movefocus, l"
           "$mainMod, L, movefocus, r"
           "$mainMod, K, movefocus, u"
