@@ -18,6 +18,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = [
       package
+      pkgs.xfce.thunar-archive-plugin
     ];
 
     systemConfig.defaults.fileManager = mkIf cfg.defaultFileManager {

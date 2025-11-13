@@ -98,9 +98,9 @@ in {
       type = lib.types.attrs;
       default = {
         "browser.backspace_action" = 0;
-        "media.videocontrols.picture-in-picture.enabled" = false;
-        "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
-        "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
+        # "media.videocontrols.picture-in-picture.enabled" = false;
+        # "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
+        # "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
       };
     };
 
@@ -138,7 +138,9 @@ in {
         mkLockedAttrs {
           "browser.aboutConfig.showWarning" = false;
           # "browser.tabs.warnOnClose" = false;
-          # "media.videocontrols.picture-in-picture.video-toggle.enabled" = true;
+          "media.videocontrols.picture-in-picture.video-toggle.enabled" = true;
+          "media.videocontrols.picture-in-picture.enabled" = true;
+          "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = true;
           # Disable swipe gestures (Browser:BackOrBackDuplicate, Browser:ForwardOrForwardDuplicate)
           "browser.gesture.swipe.left" = "";
           "browser.gesture.swipe.right" = "";
