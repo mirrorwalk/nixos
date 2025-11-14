@@ -24,8 +24,6 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    kdePackages.qt6ct
-    libsForQt5.qt5ct
   ];
 
   services.gnome-keyring = {
@@ -40,12 +38,9 @@
       enable = true;
       defaultFileManager = false;
     };
-    dolphin = {
-      enable = true;
-      defaultFileManager = true;
-    };
     ranger = {
         enable = true;
+        defaultFileManager = true;
     };
   };
 
@@ -121,6 +116,9 @@
 
   qt = {
     enable = true;
+    style = {
+      name = "adwaita-dark";
+    };
     platformTheme.name = "qtct";
   };
 
