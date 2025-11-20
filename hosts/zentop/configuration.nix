@@ -12,6 +12,10 @@
     ../../modules/nixos/default.nix
   ];
 
+  hardware.opengl = {
+    enable = true;
+  };
+
   sops.defaultSopsFile = ./secrets/secrets.json;
   sops.defaultSopsFormat = "json";
 
@@ -37,7 +41,32 @@
   keyring.gnome.enable = true;
 
   programs = {
-    nix-ld.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        libglvnd
+        xorg.libXmu
+        xorg.libX11
+        xorg.libXext
+        xorg.libSM
+        xorg.libICE
+        xorg.libXrender
+        xorg.libXfixes
+        xorg.libXi
+        SDL2
+        mesa
+        pulseaudio
+        pipewire
+        pkgsi686Linux.libglvnd
+        pkgsi686Linux.xorg.libX11
+        pkgsi686Linux.xorg.libXext
+        pkgsi686Linux.xorg.libXrender
+        pkgsi686Linux.xorg.libXfixes
+        pkgsi686Linux.xorg.libXi
+        pkgsi686Linux.SDL2
+        pkgsi686Linux.mesa
+      ];
+    };
 
     hyprland.enable = true;
 
@@ -99,9 +128,11 @@
       HandlePowerKey = "ignore";
     };
 
-    xserver.xkb = {
-      layout = "us";
-      variant = "dvp";
+    xserver = {
+      xkb = {
+        layout = "us";
+        variant = "dvp";
+      };
     };
 
     pipewire.enable = true;
@@ -117,7 +148,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs;[
+  environment.systemPackages = with pkgs; [
     brightnessctl
     xarchiver
   ];
