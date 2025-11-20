@@ -15,7 +15,7 @@ in {
     programs.ghostty = {
       enable = true;
       settings = {
-        theme = "Cyberpunk Scarlet Protocol";
+        theme = "Aura";
         confirm-close-surface = false;
         font-family = "Orbitron Regular";
         font-size = 12;

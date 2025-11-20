@@ -45,7 +45,7 @@ in {
           (config.systemConfig.monitors);
 
         exec-once = [
-          "${defaults.fileManager.command} --daemon"
+          # "${defaults.fileManager.command} --daemon"
           "${pkgs.mako}/bin/mako"
         ];
 
@@ -156,7 +156,8 @@ in {
           "$mainMod, E, exec, $fileManager"
           "$mainMod, V, togglefloating,"
           "$mainMod, Space, exec, $menu"
-          "$mainMod, P, pseudo,"
+          "$mainMod SHIFT, P, pseudo,"
+          "$mainMod, P, pin,"
           "$mainMod ALT, J, togglesplit,"
           "$mainMod, F, fullscreen, 1"
           "$mainMod SHIFT, F, fullscreen, 0"

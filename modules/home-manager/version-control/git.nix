@@ -40,6 +40,8 @@ in {
 
           co = "checkout";
           cob = "checkout -b";
+
+          ad = "add .";
         };
 
         branch = {

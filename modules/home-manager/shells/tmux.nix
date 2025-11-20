@@ -27,15 +27,11 @@
       keyMode = "vi";
       mouse = false;
       escapeTime = 0;
-      # terminal = "screen-256color";
+      terminal = "screen-256color";
       secureSocket = true;
+      historyLimit = 10000;
       extraConfig = ''
         bind-key C-a send-prefix
-        set-window-option -g mode-keys vi
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
         set -g status-style 'bg=#000000 fg=#ffffff'
         set -g renumber-windows on
         bind-key q kill-window
@@ -43,6 +39,20 @@
 
         set -g allow-passthrough on
       '';
+      # extraConfig = ''
+      #   bind-key C-a send-prefix
+      #   set-window-option -g mode-keys vi
+      #   bind h select-pane -L
+      #   bind j select-pane -D
+      #   bind k select-pane -U
+      #   bind l select-pane -R
+      #   set -g status-style 'bg=#000000 fg=#ffffff'
+      #   set -g renumber-windows on
+      #   bind-key q kill-window
+      #   bind-key K kill-session
+      #
+      #   set -g allow-passthrough on
+      # '';
     };
 
     home.shellAliases = lib.mkIf config.shells.tmux.shellAliases.enable {

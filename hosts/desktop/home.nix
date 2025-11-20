@@ -27,8 +27,7 @@
   home.packages = with pkgs; [
     qbittorrent
     godot
-    # kdePackages.kleopatra
-    # pinentry-curses
+    blender
   ];
 
   desktop.hyprland = {
@@ -72,12 +71,19 @@
     innerPad = 5;
   };
 
+  fileManagers = {
+      ranger = {
+          enable = true;
+      };
+  };
+
   browsers = {
     zen-browser.enable = true;
     mullvad = {
       enable = true;
       defaultBrowser = true;
     };
+    librewolf.enable = true;
 
     brave.enable = true;
 

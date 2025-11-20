@@ -19,7 +19,7 @@
         fi
     else
         cd ~/.config/nixos
-        tmux new -d -s nixos -c ~/.config/nixos 'nvim .'
+        tmux new-session -d -s nixos -c ~/.config/nixos 'nvim .'
         if [ -n "$TMUX" ]; then
             tmux switch-client -t "nixos"
         else

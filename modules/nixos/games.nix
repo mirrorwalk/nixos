@@ -26,6 +26,7 @@
 
     environment.systemPackages = with pkgs; [
       wine
+      freetype
     ];
   };
 }

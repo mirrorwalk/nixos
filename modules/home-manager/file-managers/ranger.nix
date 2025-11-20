@@ -8,6 +8,8 @@
 
   cfg = config.fileManagers.ranger;
 
+  term = config.systemConfig.defaults.terminal.command;
+
   package = pkgs.ranger;
 in {
   options.fileManagers.ranger = {
@@ -22,12 +24,11 @@ in {
       settings = {
         preview_images = true;
         preview_images_method = "kitty";
-        preview_imagesize = 100;
       };
     };
 
     systemConfig.defaults.fileManager = mkIf cfg.defaultFileManager {
-      command = "${package}/bin/ranger";
+      command = "${term} -e ${package}/bin/ranger";
       desktopName = "ranger.desktop";
     };
   };

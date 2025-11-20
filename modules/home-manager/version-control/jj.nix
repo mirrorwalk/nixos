@@ -16,6 +16,7 @@
         d = ["diff" "--color=always"];
         n = ["new"];
         l = ["log" "--color=always"];
+        cm = ["commit" "-m"];
       };
     };
   };
