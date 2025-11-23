@@ -96,12 +96,17 @@
               git push "$ORIGIN"
               echo "Auto-pushed $repo to $ORIGIN"
           else
-              read -p "Commit and push changes in $repo to $ORIGIN? (y/N): " choice
+              read -p "Commit and push changes in $repo to $ORIGIN? ('c' just for commit) (y/N/c): " choice
               if [[ "$choice" =~ ^[Yy]$ ]]; then
                   git add .
                   COMMIT_MSG="Backup: $TIMESTAMP"
                   git commit -m "$COMMIT_MSG"
                   git push "$ORIGIN"
+              elif [[ "$choice" =~ ^[Cc]$ ]]; then
+                  git add .
+                  COMMIT_MSG="Backup: $TIMESTAMP"
+                  git commit -m "$COMMIT_MSG"
+                  echo "Committed changes in $repo (not pushed)"
               else
                   echo "Skipped $repo"
               fi
