@@ -68,7 +68,6 @@
   };
 
   browsers = {
-    zen-browser.enable = true;
     mullvad = {
       enable = true;
       defaultBrowser = true;

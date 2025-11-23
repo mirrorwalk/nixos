@@ -14,8 +14,8 @@
     #!/usr/bin/env bash
 
     # Configuration from NixOS module
-    GITHUB_ENABLED=${lib.boolToString cfg.github.enable}
-    GITLAB_ENABLED=${lib.boolToString cfg.gitlab.enable}
+    GITHUB_ENABLED=true
+    GITLAB_ENABLED=true
 
     # Get repository name from current directory
     REPO_NAME=$(basename "$(pwd)")
@@ -26,95 +26,95 @@
     ADD_ORIGIN=false
 
     while [[ $# -gt 0 ]]; do
-      case $1 in
-        -gh|--github)
-          ADD_GITHUB=true
-          shift
-          ;;
-        -gl|--gitlab)
-          ADD_GITLAB=true
-          shift
-          ;;
+        case $1 in
+        -gh | --github)
+            ADD_GITHUB=true
+            shift
+            ;;
+        -gl | --gitlab)
+            ADD_GITLAB=true
+            shift
+            ;;
         *)
-          echo "Unknown option: $1"
-          echo "Usage: setup-git-remotes [-gh|--github] [-gl|--gitlab]"
-          exit 1
-          ;;
-      esac
+            echo "Unknown option: $1"
+            echo "Usage: setup-git-remotes [-gh|--github] [-gl|--gitlab]"
+            exit 1
+            ;;
+        esac
     done
 
     # If no flags provided, add origin with enabled remotes
     if [[ "$ADD_GITHUB" == false && "$ADD_GITLAB" == false ]]; then
-      ADD_ORIGIN=true
+        ADD_ORIGIN=true
     fi
 
     # Add origin with enabled remotes
     if [[ "$ADD_ORIGIN" == true ]]; then
-      if [[ "$GITHUB_ENABLED" == "true" && "$GITLAB_ENABLED" == "true" ]]; then
-        # Both enabled: dual push setup
-        if ${gitCommand} remote get-url origin &>/dev/null; then
-            echo "Origin remote already exists, updating..."
-            ${gitCommand} remote set-url origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
-            ${gitCommand} remote set-url --add --push origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
-            ${gitCommand} remote set-url --add --push origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+        if [[ "$GITHUB_ENABLED" == "true" && "$GITLAB_ENABLED" == "true" ]]; then
+            # Both enabled: dual push setup
+            if ${gitCommand} remote get-url origin &>/dev/null; then
+                echo "Origin remote already exists, updating..."
+                ${gitCommand} remote set-url origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+                ${gitCommand} remote set-url --add --push origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+                ${gitCommand} remote set-url --add --push origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+            else
+                echo "Adding origin remote with both GitHub and GitLab..."
+                ${gitCommand} remote add origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+                ${gitCommand} remote set-url --add --push origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+                ${gitCommand} remote set-url --add --push origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+            fi
+        elif [[ "$GITHUB_ENABLED" == "true" ]]; then
+            # Only GitHub enabled
+            if ${gitCommand} remote get-url origin &>/dev/null; then
+                echo "Origin remote already exists, updating to GitHub..."
+                ${gitCommand} remote set-url origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            else
+                echo "Adding origin remote (GitHub)..."
+                ${gitCommand} remote add origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            fi
+        elif [[ "$GITLAB_ENABLED" == "true" ]]; then
+            # Only GitLab enabled
+            if ${gitCommand} remote get-url origin &>/dev/null; then
+                echo "Origin remote already exists, updating to GitLab..."
+                ${gitCommand} remote set-url origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+            else
+                echo "Adding origin remote (GitLab)..."
+                ${gitCommand} remote add origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+            fi
         else
-            echo "Adding origin remote with both GitHub and GitLab..."
-            ${gitCommand} remote add origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
-            ${gitCommand} remote set-url --add --push origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
-            ${gitCommand} remote set-url --add --push origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+            echo "Error: No git remotes enabled in configuration"
+            exit 1
         fi
-      elif [[ "$GITHUB_ENABLED" == "true" ]]; then
-        # Only GitHub enabled
-        if ${gitCommand} remote get-url origin &>/dev/null; then
-            echo "Origin remote already exists, updating to GitHub..."
-            ${gitCommand} remote set-url origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
-        else
-            echo "Adding origin remote (GitHub)..."
-            ${gitCommand} remote add origin "git@github.com:${githubUsername}/''${REPO_NAME}.git"
-        fi
-      elif [[ "$GITLAB_ENABLED" == "true" ]]; then
-        # Only GitLab enabled
-        if ${gitCommand} remote get-url origin &>/dev/null; then
-            echo "Origin remote already exists, updating to GitLab..."
-            ${gitCommand} remote set-url origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
-        else
-            echo "Adding origin remote (GitLab)..."
-            ${gitCommand} remote add origin "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
-        fi
-      else
-        echo "Error: No git remotes enabled in configuration"
-        exit 1
-      fi
     fi
 
     # Add GitHub remote (only if enabled)
     if [[ "$ADD_GITHUB" == true ]]; then
-      if [[ "$GITHUB_ENABLED" == "true" ]]; then
-        if ${gitCommand} remote get-url github &>/dev/null; then
-            echo "GitHub remote already exists, updating..."
-            ${gitCommand} remote set-url github "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+        if [[ "$GITHUB_ENABLED" == "true" ]]; then
+            if ${gitCommand} remote get-url github &>/dev/null; then
+                echo "GitHub remote already exists, updating..."
+                ${gitCommand} remote set-url github "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            else
+                echo "Adding GitHub remote..."
+                ${gitCommand} remote add github "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            fi
         else
-            echo "Adding GitHub remote..."
-            ${gitCommand} remote add github "git@github.com:${githubUsername}/''${REPO_NAME}.git"
+            echo "Warning: GitHub remote requested but not enabled in configuration"
         fi
-      else
-        echo "Warning: GitHub remote requested but not enabled in configuration"
-      fi
     fi
 
     # Add GitLab remote (only if enabled)
     if [[ "$ADD_GITLAB" == true ]]; then
-      if [[ "$GITLAB_ENABLED" == "true" ]]; then
-        if ${gitCommand} remote get-url gitlab &>/dev/null; then
-            echo "GitLab remote already exists, updating..."
-            ${gitCommand} remote set-url gitlab "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+        if [[ "$GITLAB_ENABLED" == "true" ]]; then
+            if ${gitCommand} remote get-url gitlab &>/dev/null; then
+                echo "GitLab remote already exists, updating..."
+                ${gitCommand} remote set-url gitlab "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+            else
+                echo "Adding GitLab remote..."
+                ${gitCommand} remote add gitlab "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+            fi
         else
-            echo "Adding GitLab remote..."
-            ${gitCommand} remote add gitlab "git@gitlab.com:${gitlabUsername}/''${REPO_NAME}.git"
+            echo "Warning: GitLab remote requested but not enabled in configuration"
         fi
-      else
-        echo "Warning: GitLab remote requested but not enabled in configuration"
-      fi
     fi
 
     # Display configured remotes
