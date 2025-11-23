@@ -1,12 +1,9 @@
 {
   pkgs,
   config,
-  inputs,
   ...
 }: {
   imports = [
-    ../../modules/home-manager/default.nix
-    inputs.privateConfig.homeModules.desktop
   ];
 
   home.username = "brog";
@@ -29,13 +26,6 @@
     godot
     blender
   ];
-
-  desktop.hyprland = {
-      enable = true;
-      animation = {
-          enable = true;
-      };
-  };
 
   games.enable = true;
 
@@ -72,9 +62,9 @@
   };
 
   fileManagers = {
-      ranger = {
-          enable = true;
-      };
+    ranger = {
+      enable = true;
+    };
   };
 
   browsers = {
@@ -83,8 +73,6 @@
       enable = true;
       defaultBrowser = true;
     };
-    librewolf.enable = true;
-
     brave.enable = true;
 
     search.defaultEngine = "Kagi";
@@ -125,7 +113,15 @@
         /home/brog/.config/nvim
       ];
     };
+  };
 
+  desktop. hyprland = {
+    animation = {
+      enable = true;
+    };
+  };
+
+  hypr = {
     hyprpaper = {
       random = {
         enable = true;

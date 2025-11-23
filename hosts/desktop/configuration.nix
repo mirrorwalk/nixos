@@ -9,7 +9,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/default.nix
   ];
 
   sops.defaultSopsFile = ./secrets/secrets.yaml;
@@ -21,9 +20,8 @@
     owner = config.users.users.brog.name;
   };
 
-  # environment.systemPackages = with pkgs; [
-  #   wine
-  # ];
+  environment.systemPackages = with pkgs; [
+  ];
 
   plymouth.enable = true;
 
@@ -108,7 +106,7 @@
 
   programs = {
     nix-ld = {
-      enable = false;
+      enable = true;
       libraries = with pkgs; [
         libglvnd
         xorg.libXmu

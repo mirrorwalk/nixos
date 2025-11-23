@@ -1,29 +1,29 @@
 {
   inputs,
-  pkgs,
   lib,
   ...
 }: let
   hmm = [
-    ./bat/bat.nix
+    ./bat.nix
     ./browsers/browsers.nix
-    ./cava/cava.nix
-    ./fuzzel/fuzzel.nix
+    ./cava.nix
+    ./fuzzel.nix
     ./hypr/hypr.nix
-    ./nh/nh.nix
-    ./nom/nom.nix
-    ./nvim/nvim.nix
+    ./nh.nix
+    ./nom.nix
+    ./nvim.nix
     ./shells/shells.nix
     ./terminals/terminals.nix
-    ./waybar/waybar.nix
+    ./waybar.nix
     ./version-control/vc.nix
     ./file-managers/fm.nix
     ./image-video/iv.nix
-    ./udiskie/udiskie.nix
-    ./brightness/brightness.nix
+    ./udiskie.nix
+    ./brightness.nix
     ./notifications/notifications.nix
-    ./games/games.nix
-    ./nm-applet/nm-applet.nix
+    ./games.nix
+    ./nm-applet.nix
+    ./desktops/desktops.nix
   ];
 
   sm = [
@@ -143,10 +143,19 @@ in {
       backupGit = {
         enable = true;
       };
+    };
 
+    hypr = {
       hyprpaper = {
         enable = true;
       };
+      hyprlock = {
+        enable = true;
+        hyprland = {
+          enable = true;
+        };
+      };
+      hyprshot.enable = true;
     };
 
     terminals = {
@@ -154,6 +163,13 @@ in {
         enable = true;
         defaultTerminal = true;
       };
+    };
+
+    browsers = {
+      gecko = {
+          picture-in-picture.enable = true;
+      };
+      zen-browser.enable = true;
     };
   };
 }

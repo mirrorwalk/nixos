@@ -15,12 +15,13 @@
       vimAlias = true;
       vimdiffAlias = true;
 
-      extraPackages = [
-        pkgs.gcc
-        pkgs.gnumake
-        pkgs.git
-        pkgs.cargo
-        pkgs.nodejs
+      extraPackages = with pkgs;[
+        gcc
+        gnumake
+        git
+        cargo
+        nodejs
+        lua
       ];
     };
 

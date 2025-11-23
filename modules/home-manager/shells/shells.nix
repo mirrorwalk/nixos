@@ -6,7 +6,6 @@
     ./tmux.nix
     ./nushell.nix
     ./sh-functions.nix
-    ../bat/bat.nix
     ../../custom/enix/enix.nix
   ];
 

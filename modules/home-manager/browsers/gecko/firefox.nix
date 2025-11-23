@@ -4,46 +4,48 @@
   config,
   ...
 }: let
-  cfg = config.browsers;
+  cfgBrowsers = config.browsers;
+  cfg = cfgBrowsers.firefox;
+  cfgS = cfg.search;
 in {
   options.browsers.firefox = {
     enable = lib.mkEnableOption "Enables librewolf";
     defaultBrowser = lib.mkEnableOption "Librewolf as default browser";
   };
 
-  config = lib.mkIf cfg.firefox.enable {
+  config = lib.mkIf cfg.enable {
     programs.firefox = {
       enable = true;
 
       nativeMessagingHosts = [pkgs.firefoxpwa];
 
       policies =
-        cfg.gecko.policies
+        cfgBrowsers.gecko.policies
         // {
           SanitizeOnShutdown = {
             Cookies = true;
           };
           Cookies = {
-            Allow = cfg.allowedCookies;
+            Allow = cfgBrowsers.allowedCookies;
           };
 
-          Preferences = cfg.gecko.preferences;
+          Preferences = cfgBrowsers.gecko.preferences;
         };
 
       profiles.default = {
-        extensions = cfg.gecko.extensions;
-        bookmarks = cfg.gecko.bookmarks;
-        settings = cfg.gecko.settings;
+        extensions = cfgBrowsers.gecko.extensions;
+        bookmarks = cfgBrowsers.gecko.bookmarks;
+        settings = cfgBrowsers.gecko.settings;
 
         search = {
           force = true;
-          default = cfg.search.defaultEngine;
-          privateDefault = cfg.search.private.defaultEngine;
-          engines = cfg.search.engines;
+          default = cfgS.defaultEngine;
+          privateDefault = cfgS.private.defaultEngine;
+          engines = cfgBrowsers.search.engines;
         };
 
         containersForce = true;
-        containers = cfg.gecko.containers;
+        containers = cfgBrowsers.gecko.containers;
       };
     };
   };

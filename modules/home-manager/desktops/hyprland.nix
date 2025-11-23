@@ -4,15 +4,17 @@
   config,
   ...
 }: let
+  cfg = config.desktop.hyprland;
   defaults = config.systemConfig.defaults;
-  anim = config.desktop.hyprland.animation;
-  volumeBindsEnabled = config.desktop.hyprland.volumeBinds;
+  anim = cfg.animation;
+  volumeBindsEnabled = cfg.volumeBinds.enable;
+  pinP = cfg.pinPIP.enable;
 in {
   options.desktop.hyprland = {
     enable = lib.mkEnableOption "Enable hyprland desktop environment";
 
     animation = {
-        enable = lib.mkEnableOption "Enable animations";
+      enable = lib.mkEnableOption "Enable animations";
 
       speed = lib.mkOption {
         type = lib.types.int;
@@ -21,7 +23,9 @@ in {
       };
     };
 
-    volumeBinds = lib.mkEnableOption "Enable volume control binds";
+    volumeBinds.enable = lib.mkEnableOption "Enable volume control binds";
+
+    pinPIP.enable = lib.mkEnableOption "window rule to pin pip";
   };
 
   config = lib.mkIf config.desktop.hyprland.enable {
@@ -152,86 +156,85 @@ in {
           sensitivity = 0.2;
         };
 
-        bind = [
-          "$mainMod, Return, exec, $terminal"
-          "$mainMod, Q, killactive,"
-          "$mainMod SHIFT, Q, exit,"
-          "$mainMod, E, exec, $fileManager"
-          "$mainMod, V, togglefloating,"
-          "$mainMod, Space, exec, $menu"
-          "$mainMod SHIFT, P, pseudo,"
-          "$mainMod, P, pin,"
-          "$mainMod ALT, J, togglesplit,"
-          "$mainMod, F, fullscreen, 1"
-          "$mainMod SHIFT, F, fullscreen, 0"
-          "$mainMod, B, exec, $webBrowser"
-          "$mainMod, Tab, cyclenext"
-          "$mainMod SHIFT, Tab, cyclenext, tiled"
-          "$mainMod ALT, Tab, cyclenext, floating"
-          (builtins.trace "modularize this keybind" "$mainMod CTRL, L, exec, hyprlock")
-          "$mainMod, H, movefocus, l"
-          "$mainMod, L, movefocus, r"
-          "$mainMod, K, movefocus, u"
-          "$mainMod, J, movefocus, d"
-          "$mainMod, left, movefocus, l"
-          "$mainMod, right, movefocus, r"
-          "$mainMod, up, movefocus, u"
-          "$mainMod, down, movefocus, d"
-          "$mainMod SHIFT, H, movewindow, l"
-          "$mainMod SHIFT, L, movewindow, r"
-          "$mainMod SHIFT, K, movewindow, u"
-          "$mainMod SHIFT, J, movewindow, d"
-          "$mainMod, 1, workspace, 1"
-          "$mainMod, 2, workspace, 2"
-          "$mainMod, 3, workspace, 3"
-          "$mainMod, 4, workspace, 4"
-          "$mainMod, 5, workspace, 5"
-          "$mainMod, 6, workspace, 6"
-          "$mainMod, 7, workspace, 7"
-          "$mainMod, 8, workspace, 8"
-          "$mainMod, 9, workspace, 9"
-          "$mainMod, 0, workspace, 10"
-          "$mainMod SHIFT, 1, movetoworkspace, 1"
-          "$mainMod SHIFT, 2, movetoworkspace, 2"
-          "$mainMod SHIFT, 3, movetoworkspace, 3"
-          "$mainMod SHIFT, 4, movetoworkspace, 4"
-          "$mainMod SHIFT, 5, movetoworkspace, 5"
-          "$mainMod SHIFT, 6, movetoworkspace, 6"
-          "$mainMod SHIFT, 7, movetoworkspace, 7"
-          "$mainMod SHIFT, 8, movetoworkspace, 8"
-          "$mainMod SHIFT, 9, movetoworkspace, 9"
-          "$mainMod SHIFT, 0, movetoworkspace, 10"
-          "$mainMod ALT, E, togglespecialworkspace, editor"
-          "$mainMod SHIFT, E, movetoworkspace, special:editor"
-          "$mainMod, S, togglespecialworkspace, over"
-          "$mainMod SHIFT, S, movetoworkspace, special:over"
-          "$mainMod, mouse_down, workspace, e+1"
-          "$mainMod, mouse_up, workspace, e-1"
-        ] ++ lib.optionals volumeBindsEnabled [
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-          ", XF86AudioRaiseVolume , exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ];
+        bind =
+          [
+            "$mainMod, Return, exec, $terminal"
+            "$mainMod, Q, killactive,"
+            "$mainMod SHIFT, Q, exit,"
+            "$mainMod, E, exec, $fileManager"
+            "$mainMod, V, togglefloating,"
+            "$mainMod, Space, exec, $menu"
+            "$mainMod SHIFT, P, pseudo,"
+            "$mainMod, P, pin,"
+            "$mainMod ALT, J, togglesplit,"
+            "$mainMod, F, fullscreen, 1"
+            "$mainMod SHIFT, F, fullscreen, 0"
+            "$mainMod, B, exec, $webBrowser"
+            "$mainMod, Tab, cyclenext"
+            "$mainMod SHIFT, Tab, cyclenext, tiled"
+            "$mainMod ALT, Tab, cyclenext, floating"
+            "$mainMod, H, movefocus, l"
+            "$mainMod, L, movefocus, r"
+            "$mainMod, K, movefocus, u"
+            "$mainMod, J, movefocus, d"
+            "$mainMod, left, movefocus, l"
+            "$mainMod, right, movefocus, r"
+            "$mainMod, up, movefocus, u"
+            "$mainMod, down, movefocus, d"
+            "$mainMod SHIFT, H, movewindow, l"
+            "$mainMod SHIFT, L, movewindow, r"
+            "$mainMod SHIFT, K, movewindow, u"
+            "$mainMod SHIFT, J, movewindow, d"
+            "$mainMod, 1, workspace, 1"
+            "$mainMod, 2, workspace, 2"
+            "$mainMod, 3, workspace, 3"
+            "$mainMod, 4, workspace, 4"
+            "$mainMod, 5, workspace, 5"
+            "$mainMod, 6, workspace, 6"
+            "$mainMod, 7, workspace, 7"
+            "$mainMod, 8, workspace, 8"
+            "$mainMod, 9, workspace, 9"
+            "$mainMod, 0, workspace, 10"
+            "$mainMod SHIFT, 1, movetoworkspace, 1"
+            "$mainMod SHIFT, 2, movetoworkspace, 2"
+            "$mainMod SHIFT, 3, movetoworkspace, 3"
+            "$mainMod SHIFT, 4, movetoworkspace, 4"
+            "$mainMod SHIFT, 5, movetoworkspace, 5"
+            "$mainMod SHIFT, 6, movetoworkspace, 6"
+            "$mainMod SHIFT, 7, movetoworkspace, 7"
+            "$mainMod SHIFT, 8, movetoworkspace, 8"
+            "$mainMod SHIFT, 9, movetoworkspace, 9"
+            "$mainMod SHIFT, 0, movetoworkspace, 10"
+            "$mainMod ALT, E, togglespecialworkspace, editor"
+            "$mainMod SHIFT, E, movetoworkspace, special:editor"
+            "$mainMod, S, togglespecialworkspace, over"
+            "$mainMod SHIFT, S, movetoworkspace, special:over"
+            "$mainMod, mouse_down, workspace, e+1"
+            "$mainMod, mouse_up, workspace, e-1"
+          ]
+          ++ lib.optionals volumeBindsEnabled [
+            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            ", XF86AudioRaiseVolume , exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+            ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+          ];
 
         bindm = [
           "$mainMod, mouse:272, movewindow"
           "$mainMod, mouse:273, resizewindow"
         ];
 
-        windowrulev2 = builtins.trace "Modularize hyprland window rules" [
-          "opacity 1.0, class:^(steam|Steam)$"
-          "float,class:^(Tor Browser)$"
-          "suppressevent fullscreen maximize fullscreenoutput,class:(Tor Browser)"
-          "float,class:(Mullvad Browser)"
-          "suppressevent fullscreen maximize fullscreenoutput,class:(Mullvad Browser)"
-          "suppressevent fullscreen maximize fullscreenoutput,initialClass:(Godot)"
-          "suppressevent fullscreen maximize fullscreenoutput,initialTitle:(Godot)"
-          "float, title:^(Picture-in-Picture)$"
-          "pin, title:^(Picture-in-Picture)$"
-          "move 75% 75%, title:^(Picture-in-Picture)$"
-        ];
+        windowrulev2 =
+          builtins.trace "Modularize hyprland window rules" [
+            "opacity 1.0, class:^(steam|Steam)$"
+            "suppressevent fullscreen maximize fullscreenoutput,initialClass:(Godot)"
+            "suppressevent fullscreen maximize fullscreenoutput,initialTitle:(Godot)"
+          ]
+          ++ lib.optionals pinP [
+            "float, title:^(Picture-in-Picture)$"
+            "pin, title:^(Picture-in-Picture)$"
+            "move 75% 75%, title:^(Picture-in-Picture)$"
+          ];
       };
     };
   };
 }
-

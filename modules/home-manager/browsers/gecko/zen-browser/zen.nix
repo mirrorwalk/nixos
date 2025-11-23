@@ -5,7 +5,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.browsers;
+  cfgBrowsers = config.browsers;
+  cfg = cfgBrowsers.zen-browser;
+  cfgS = cfg.search;
 in {
   imports = [
     inputs.zen-browser.homeModules.twilight
@@ -15,36 +17,49 @@ in {
   options.browsers.zen-browser = {
     enable = lib.mkEnableOption "Enables Zen browser";
     defaultBrowser = lib.mkEnableOption "Mullvad as default browser";
+
+    search = {
+      defaultEngine = lib.mkOption {
+        description = "default search engine";
+        default = cfgBrowsers.search.defaultEngine;
+        type = lib.types.nonEmptyStr;
+      };
+      private.defaultEngine = lib.mkOption {
+        description = "default private search engine";
+        default = cfgBrowsers.search.private.defaultEngine;
+        type = lib.types.nonEmptyStr;
+      };
+    };
   };
 
-  config = lib.mkIf cfg.zen-browser.enable {
+  config = lib.mkIf cfg.enable {
     programs.zen-browser = {
       enable = true;
 
       nativeMessagingHosts = [pkgs.firefoxpwa];
 
       policies =
-        cfg.gecko.policies
+        cfgBrowsers.gecko.policies
         // {
           SanitizeOnShutdown = {
             Cookies = true;
           };
           Cookies = {
-            Allow = cfg.allowedCookies;
+            Allow = cfgBrowsers.allowedCookies;
           };
 
-          Preferences = cfg.gecko.preferences;
+          Preferences = cfgBrowsers.gecko.preferences;
         };
 
       profiles.default = rec {
-        extensions = cfg.gecko.extensions;
+        extensions = cfgBrowsers.gecko.extensions;
         # extensions = {
         #     force = cfg.gecko.extensions.force;
         #     packages = cfg.gecko.extensions.packages;
         # };
-        bookmarks = cfg.gecko.bookmarks;
+        bookmarks = cfgBrowsers.gecko.bookmarks;
         settings =
-          cfg.gecko.settings
+          cfgBrowsers.gecko.settings
           // {
             "zen.workspaces.continue-where-left-off" = true;
             "zen.workspaces.natural-scroll" = true;
@@ -104,16 +119,16 @@ in {
 
         search = {
           force = true;
-          default = cfg.search.defaultEngine;
-          privateDefault = cfg.search.private.defaultEngine;
+          default = cfgS.defaultEngine;
+          privateDefault = cfgS.private.defaultEngine;
           # if cfg.search.private.same
           # then cfg.search.defaultEngine
           # else cfg.search.private.defaultEngine;
-          engines = cfg.search.engines;
+          engines = cfgBrowsers.search.engines;
         };
 
         containersForce = true;
-        containers = cfg.gecko.containers;
+        containers = cfgBrowsers.gecko.containers;
 
         spacesForce = true;
         spaces = {
@@ -222,7 +237,7 @@ in {
       };
     };
 
-    systemConfig.defaults = lib.mkIf cfg.zen-browser.defaultBrowser {
+    systemConfig.defaults = lib.mkIf cfg.defaultBrowser {
       webBrowser = let
         zen-browser = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight;
         desktopFile = zen-browser.meta.desktopFileName;

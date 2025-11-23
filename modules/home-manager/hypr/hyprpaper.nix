@@ -27,17 +27,23 @@
       XDG_CONFIG_HOME = hyprpaperConfig;
     };
   };
+
+  cfg = config.hypr.hyprpaper;
 in {
-  config = lib.mkIf config.services.hyprpaper.enable {
+  options.hypr.hyprpaper = {
+    enable = lib.mkEnableOption "Enable hyprpaper";
+  };
+  config = lib.mkIf cfg.enable {
     services.hyprpaper = {
+      enable = true;
       package = hyprpaperWrapper;
     };
 
     systemd.user.services.hyprpaper = {
       Install.WantedBy = ["hyprland-session.target"];
-      Service.Environment = [
-        # "XDG_CONFIG_HOME=${hyprpaperConfig}"
-      ];
+      # Service.Environment = [
+      #   "XDG_CONFIG_HOME=${hyprpaperConfig}"
+      # ];
     };
   };
 }

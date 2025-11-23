@@ -2,6 +2,7 @@
   lib,
   inputs,
   pkgs,
+  config,
   ...
 }: let
   containerSubmodule = lib.types.submodule {
@@ -68,6 +69,8 @@
 
   # bookmarksType = types.either bookmarkType directoryType;
   bookmarksType = types.oneOf [bookmarkType directoryType separatorType];
+
+  pip = config.browsers.gecko.picture-in-picture.enable;
 in {
   options.browsers.gecko = {
     extensions = {
@@ -75,11 +78,9 @@ in {
         type = types.bool;
         default = true;
       };
-      packages = mkOption {
-        # type = types.listOf;
-      };
-      # description = "gecko extensions";
-      # type = lib.types.attrs;
+      packages =
+        mkOption {
+        };
     };
 
     bookmarks = {
@@ -89,7 +90,6 @@ in {
       };
       settings = lib.mkOption {
         description = "Gecko bookmarks";
-        # type = lib.types.listOf lib.types.attrs;
         type = lib.types.listOf bookmarksType;
       };
     };
@@ -103,6 +103,8 @@ in {
         # "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
       };
     };
+
+    picture-in-picture.enable = lib.mkEnableOption "Enable pip";
 
     policies = lib.mkOption {
       type = lib.types.attrs;
@@ -138,8 +140,8 @@ in {
         mkLockedAttrs {
           "browser.aboutConfig.showWarning" = false;
           # "browser.tabs.warnOnClose" = false;
-          "media.videocontrols.picture-in-picture.video-toggle.enabled" = true;
-          "media.videocontrols.picture-in-picture.enabled" = true;
+          "media.videocontrols.picture-in-picture.video-toggle.enabled" = pip;
+          "media.videocontrols.picture-in-picture.enabled" = pip;
           "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
 
           # Disable swipe gestures (Browser:BackOrBackDuplicate, Browser:ForwardOrForwardDuplicate)
@@ -165,7 +167,7 @@ in {
     };
   };
 
-  config.browsers.gecko = builtins.trace "modularize picture-in-picture" {
+  config.browsers.gecko = {
     bookmarks.settings = [
       {
         toolbar = true;

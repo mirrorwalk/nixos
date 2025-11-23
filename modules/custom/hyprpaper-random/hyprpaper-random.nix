@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.services.hyprpaper.random;
+  cfg = config.hypr.hyprpaper.random;
 
   pipe = "/tmp/hyprpaper-random.pipe";
   wallpaperFolders = config.styleConfig.wallpaperFolders;
@@ -225,7 +225,7 @@
     '';
   };
 in {
-  options.services.hyprpaper.random = {
+  options.hypr.hyprpaper.random = {
     enable = lib.mkEnableOption "Enable random hyprpaper";
 
     scriptName = lib.mkOption {
