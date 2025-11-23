@@ -6,6 +6,7 @@
 }: let
   defaults = config.systemConfig.defaults;
   anim = config.desktop.hyprland.animation;
+  volumeBindsEnabled = config.desktop.hyprland.volumeBinds;
 in {
   options.desktop.hyprland = {
     enable = lib.mkEnableOption "Enable hyprland desktop environment";
@@ -19,6 +20,8 @@ in {
         description = "Animation speed multiplier (1ds = 100ms). Lower = faster, higher = slower.";
       };
     };
+
+    volumeBinds = lib.mkEnableOption "Enable volume control binds";
   };
 
   config = lib.mkIf config.desktop.hyprland.enable {
@@ -204,6 +207,7 @@ in {
           "$mainMod SHIFT, S, movetoworkspace, special:over"
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
+        ] ++ lib.optionals volumeBindsEnabled [
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           ", XF86AudioRaiseVolume , exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
           ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
@@ -230,3 +234,4 @@ in {
     };
   };
 }
+
