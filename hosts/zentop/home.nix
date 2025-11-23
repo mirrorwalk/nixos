@@ -39,8 +39,8 @@
       defaultFileManager = false;
     };
     ranger = {
-        enable = true;
-        defaultFileManager = true;
+      enable = true;
+      defaultFileManager = true;
     };
   };
 
@@ -57,6 +57,10 @@
         refreshRate = 60.0;
       }
     ];
+  };
+
+  desktop.hyprland = {
+    volumeBinds = true;
   };
 
   nmApplet = {
