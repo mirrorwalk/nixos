@@ -31,8 +31,9 @@ in {
       animation = cfg.animate.animation;
       bigclock = true;
       hide_borders = true;
-      hide_f1_commands = true;
+      hide_version_string = true;
       background_color = "colorcode";
+      session_log = config.users.users.brog.home + "/.local/state/ly-session.log";
     };
   };
 }

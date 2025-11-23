@@ -16,10 +16,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
-      package
-      pkgs.xfce.thunar-archive-plugin
-      pkgs.xarchiver
+    home.packages = with pkgs.xfce; [
+      thunar
+      thunar-archive-plugin
+      # (pkgs.xarchiver)
     ];
 
     systemConfig.defaults.fileManager = mkIf cfg.defaultFileManager {

@@ -9,7 +9,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/default.nix
   ];
 
   sops.defaultSopsFile = ./secrets/secrets.json;
@@ -26,9 +25,9 @@
     };
   };
 
-  plymouth.enable = true;
+  autoMounting.enable = true;
 
-  autousb.enable = true;
+  plymouth.enable = true;
 
   displayManager.ly = {
     enable = true;
@@ -68,10 +67,10 @@
 
     bash.enable = true;
 
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [thunar-archive-plugin];
-    };
+    # thunar = {
+    #   enable = true;
+    #   plugins = with pkgs.xfce; [thunar-archive-plugin thunar-volman];
+    # };
   };
 
   fonts = {
@@ -119,6 +118,8 @@
 
   services = {
     mullvad-vpn.enable = true;
+
+    dbus.enable = true;
 
     logind.settings.Login = {
       HandlePowerKey = "ignore";

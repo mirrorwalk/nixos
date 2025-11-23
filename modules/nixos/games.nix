@@ -14,11 +14,6 @@
         enable = true;
         gamescopeSession.enable = true;
         protontricks.enable = true;
-
-        # extraPackages = with pkgs; [
-        #   protonup-ng
-        #   wine
-        # ];
       };
 
       gamescope.enable = true;

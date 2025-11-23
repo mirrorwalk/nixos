@@ -10,7 +10,7 @@
   backup-git = pkgs.writeShellScriptBin "backup-git" ''
     #!/usr/bin/env bash
 
-    AUTO_CONFIRM=false
+        AUTO_CONFIRM=false
     USE_NORMAL_TIME=false
     CUSTOM_PATHS=()
     CUSTOM_ORIGIN=""
