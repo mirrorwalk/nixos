@@ -60,7 +60,7 @@
   };
 
   desktop.hyprland = {
-    volumeBinds = true;
+    volumeBinds.enable = true;
   };
 
   nmApplet = {

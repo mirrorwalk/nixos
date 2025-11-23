@@ -12,10 +12,6 @@
     ../../modules/nixos/default.nix
   ];
 
-  hardware.opengl = {
-    enable = true;
-  };
-
   sops.defaultSopsFile = ./secrets/secrets.json;
   sops.defaultSopsFormat = "json";
 
