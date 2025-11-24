@@ -23,6 +23,10 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+  home.packages = with pkgs; [
+    kiwix
+  ];
+
   udiskie.enable = false;
 
   services.gnome-keyring = {
@@ -109,12 +113,11 @@
 
   gtk = {
     enable = true;
+    colorScheme = "dark";
     theme = {
       name = "Adwaita-dark";
       package = pkgs.gnome-themes-extra;
     };
-    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
   };
 
   qt = {
@@ -122,7 +125,6 @@
     style = {
       name = "adwaita-dark";
     };
-    platformTheme.name = "qtct";
   };
 
   programs.home-manager.enable = true;
