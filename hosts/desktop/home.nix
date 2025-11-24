@@ -163,5 +163,21 @@
     xkbOptions = ["caps:escape"];
   };
 
+  gtk = {
+    enable = true;
+    colorScheme = "dark";
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+  };
+
+  qt = {
+    enable = true;
+    style = {
+      name = "adwaita-dark";
+    };
+  };
+
   programs.home-manager.enable = true;
 }
