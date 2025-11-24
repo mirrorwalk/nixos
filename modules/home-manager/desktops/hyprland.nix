@@ -211,6 +211,7 @@ in {
             "$mainMod SHIFT, S, movetoworkspace, special:over"
             "$mainMod, mouse_down, workspace, e+1"
             "$mainMod, mouse_up, workspace, e-1"
+            ", PRINT, exec, hyprshot -m region"
           ]
           ++ lib.optionals volumeBindsEnabled [
             ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
