@@ -28,7 +28,6 @@
 
   udiskie.enable = false;
 
-
   services.gnome-keyring = {
     enable = true;
     components = ["secrets"];

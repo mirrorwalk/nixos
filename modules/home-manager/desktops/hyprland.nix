@@ -225,7 +225,7 @@ in {
         ];
 
         windowrulev2 =
-          builtins.trace "Modularize hyprland window rules" [
+          [
             "opacity 1.0, class:^(steam|Steam)$"
             "suppressevent fullscreen maximize fullscreenoutput,initialClass:(Godot)"
             "suppressevent fullscreen maximize fullscreenoutput,initialTitle:(Godot)"

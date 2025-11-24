@@ -23,5 +23,6 @@
     exfatprogs
     unrar
     p7zip
+    zpaqfranz
   ];
 }
