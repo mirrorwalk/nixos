@@ -20,10 +20,9 @@
     owner = config.users.users.brog.name;
   };
 
-  environment.systemPackages = with pkgs; [
-  ];
-
   plymouth.enable = true;
+
+  autoMounting.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -54,8 +53,6 @@
     enable = true;
     snowflake.enable = true;
   };
-
-  autousb.enable = true;
 
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs;

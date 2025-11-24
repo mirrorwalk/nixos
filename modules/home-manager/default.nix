@@ -63,8 +63,12 @@ in {
 
     fileManagers = {
       thunar = {
-        enable = true;
-        defaultFileManager = true;
+        # enable = true;
+        # defaultFileManager = true;
+      };
+      ranger = {
+          enable = true;
+          defaultFileManager = true;
       };
     };
 

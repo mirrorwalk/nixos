@@ -21,7 +21,6 @@
         git
         cargo
         nodejs
-        lua
       ];
     };
 
