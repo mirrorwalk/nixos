@@ -25,9 +25,12 @@
     qbittorrent
     godot
     blender
+    kiwix
   ];
 
   games.enable = true;
+
+  udiskie.enable = false;
 
   styleConfig = {
     defaultWallpaper = /home/brog/Pictures/Wallpapers/thumb-1920-1345286.png;
@@ -62,6 +65,9 @@
   };
 
   fileManagers = {
+      thunar = {
+          enable = true;
+      };
     ranger = {
       enable = true;
     };
@@ -133,7 +139,7 @@
 
   bars.waybar = {
     wallpaperCategory.enable = true;
-    cava.enable = true;
+    # cava.enable = true;
     weather.enable = true;
   };
 
@@ -155,37 +161,6 @@
 
   home.keyboard = {
     xkbOptions = ["caps:escape"];
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
-    };
-    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
-  };
-
-  qt = {
-    enable = true;
-    style = {
-      name = "adwaita-dark";
-      package = pkgs.adwaita-qt;
-    };
-    platformTheme.name = "gtk3";
-  };
-
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      gtk-theme = "Adwaita-dark";
-      color-scheme = "prefer-dark";
-    };
-  };
-
-  home.sessionVariables = {
-    GTK_THEME = "Adwaita:dark";
-    QT_STYLE_OVERRIDE = "adwaita-dark";
   };
 
   programs.home-manager.enable = true;
