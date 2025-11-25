@@ -24,5 +24,10 @@
     unrar
     p7zip
     zpaqfranz
+    parted
   ];
+
+  boot.supportedFilesystems = {
+    exfat = true;
+  };
 }

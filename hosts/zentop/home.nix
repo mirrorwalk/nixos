@@ -23,10 +23,6 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  home.packages = with pkgs; [
-    kiwix
-  ];
-
   udiskie.enable = false;
 
   services.gnome-keyring = {
