@@ -233,7 +233,7 @@ in {
           ++ lib.optionals pinP [
             "float, title:^(Picture-in-Picture)$"
             "pin, title:^(Picture-in-Picture)$"
-            "move 75% 75%, title:^(Picture-in-Picture)$"
+            # "move 75% 75%, title:^(Picture-in-Picture)$"
           ];
       };
     };

@@ -48,7 +48,10 @@ in {
   imports = hmm ++ sm ++ cm ++ im;
 
   config = mkDefault {
-    desktop.hyprland.enable = true;
+    desktop.hyprland = {
+        enable = true;
+        pinPIP.enable = true;
+    };
 
     udiskie.enable = true;
 

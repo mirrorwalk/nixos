@@ -37,8 +37,6 @@
     enable = true;
   };
 
-  services.sshd.enable = false;
-
   games.enable = true;
 
   displayManager.ly = {
@@ -85,6 +83,12 @@
 
   services = {
     mullvad-vpn.enable = true;
+
+    sshd.enable = false;
+
+    open-webui = {
+        enable = false;
+    };
 
     xserver = {
       xkb = {

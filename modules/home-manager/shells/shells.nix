@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ./zsh.nix
     ./bash.nix
@@ -12,5 +12,6 @@
   home.shellAliases = {
     la = "ls -AF --color=auto";
     backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
+    zpaq = "${pkgs.zpaqfranz}/bin/zpaqfranz";
   };
 }

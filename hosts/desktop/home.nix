@@ -26,6 +26,8 @@
     godot
     blender
     kiwix
+    motrix
+    # xdg.portal.config
   ];
 
   games.enable = true;
@@ -65,9 +67,9 @@
   };
 
   fileManagers = {
-      thunar = {
-          enable = true;
-      };
+    thunar = {
+      enable = true;
+    };
     ranger = {
       enable = true;
     };
@@ -111,6 +113,10 @@
   privateConfig.gpg.enable = false;
 
   services = {
+    ollama = {
+      enable = false;
+    };
+
     backupGit = {
       backupFolders = [
         /home/brog/.config/nixos-private
