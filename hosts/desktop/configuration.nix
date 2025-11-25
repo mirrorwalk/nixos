@@ -84,7 +84,7 @@
   services = {
     mullvad-vpn.enable = true;
 
-    sshd.enable = false;
+    sshd.enable = true;
 
     open-webui = {
         enable = false;
