@@ -10,7 +10,6 @@
     ./autoMounting.nix
     ./tor.nix
     ./games.nix
-    ./wifi/wifi.nix
     inputs.home-manager.nixosModules.default
   ];
 
