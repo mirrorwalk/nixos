@@ -159,6 +159,8 @@
         "https://nano-gpt.com"
         "https://perplexity.ai"
         "https://unicornuniversity.net"
+        "https://excalidraw.com"
+        "https://spotify.com"
       ];
 
       gecko = lib.mkIf config.browsers.adblock.enable {

@@ -191,6 +191,12 @@ in {
           }
           "separator"
           {
+            name = "GOG Games";
+            url = "https://gog.com";
+            tags = ["games"];
+          }
+          "separator"
+          {
             name = "Nano Gpt";
             url = "https://nano-gpt.com/conversation/new";
             tags = ["ai"];

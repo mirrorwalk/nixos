@@ -103,6 +103,10 @@
     pipewire.enable = true;
 
     qbittorrent.enable = true;
+
+    flatpak = {
+        enable = true;
+    };
   };
 
   programs = {
@@ -130,6 +134,7 @@
         pkgsi686Linux.xorg.libXi
         pkgsi686Linux.SDL2
         pkgsi686Linux.mesa
+        icu
       ];
     };
 

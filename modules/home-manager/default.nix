@@ -37,6 +37,7 @@
     ../custom/hyprpaper-random/hyprpaper-random.nix
     ../custom/tmux-startup/tmux-startup.nix
     ../custom/shutdown-menu/shutdown-menu.nix
+    ../custom/music.nix
   ];
 
   im = [

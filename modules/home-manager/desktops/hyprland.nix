@@ -26,6 +26,11 @@ in {
     volumeBinds.enable = lib.mkEnableOption "Enable volume control binds";
 
     pinPIP.enable = lib.mkEnableOption "window rule to pin pip";
+
+    fileManager = lib.mkOption {
+        type = lib.types.nonEmptyStr;
+        default = defaults.fileManager.command;
+    };
   };
 
   config = lib.mkIf config.desktop.hyprland.enable {
@@ -33,7 +38,7 @@ in {
       enable = true;
       settings = {
         "$terminal" = defaults.terminal.command;
-        "$fileManager" = defaults.fileManager.command;
+        "$fileManager" = cfg.fileManager;
         "$menu" = defaults.runnerMenu.command;
         "$webBrowser" = defaults.webBrowser.command;
         "$mainMod" = "SUPER";
@@ -209,6 +214,8 @@ in {
             "$mainMod SHIFT, E, movetoworkspace, special:editor"
             "$mainMod, S, togglespecialworkspace, over"
             "$mainMod SHIFT, S, movetoworkspace, special:over"
+            "${builtins.trace "Modularize this" "$mainMod, M, togglespecialworkspace, music"}"
+            "$mainMod SHIFT, M, movetoworkspace, special:music"
             "$mainMod, mouse_down, workspace, e+1"
             "$mainMod, mouse_up, workspace, e-1"
             ", PRINT, exec, hyprshot -m region"

@@ -14,13 +14,13 @@
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
+      withNodeJs = true;
 
       extraPackages = with pkgs;[
         gcc
         gnumake
         git
         cargo
-        nodejs
       ];
     };
 

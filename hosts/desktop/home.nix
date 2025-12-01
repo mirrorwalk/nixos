@@ -27,8 +27,27 @@
     blender
     kiwix
     motrix
-    # xdg.portal.config
+    aseprite
+    bottles
   ];
+
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+
+    config = {
+      hyprland = {
+        default = ["hyprland" "gtk"];
+      };
+      common = {
+        default = ["hyprland" "gtk"];
+      };
+    };
+  };
 
   games.enable = true;
 
@@ -59,7 +78,10 @@
     flake = "${pkgs.nix}/bin/nix flake";
     backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
     evi = "cd $HOME/.config/nvim && nvim .";
+    # music = "${pkgs.tmux}/bin/tmux new-session -A -s music";
   };
+
+  music.enable = true;
 
   runners.fuzzel = {
     width = 50;
@@ -69,9 +91,11 @@
   fileManagers = {
     thunar = {
       enable = true;
+      defaultFileManager = true;
     };
     ranger = {
       enable = true;
+      defaultFileManager = false;
     };
   };
 
@@ -91,6 +115,10 @@
     cava.enable = true;
 
     keepassxc.enable = true;
+
+    ncspot = {
+        enable = true;
+    };
 
     nvim-fzf = {
       enable = true;
@@ -126,10 +154,16 @@
     };
   };
 
-  desktop. hyprland = {
+  desktop.hyprland = {
     animation = {
       enable = true;
     };
+
+    fileManager = let
+      term = config.systemConfig.defaults.terminal.command;
+
+      package = pkgs.ranger;
+    in "${term} -e ${package}/bin/ranger";
   };
 
   hypr = {
@@ -186,4 +220,5 @@
   };
 
   programs.home-manager.enable = true;
+
 }
