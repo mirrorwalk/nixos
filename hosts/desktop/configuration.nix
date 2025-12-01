@@ -4,21 +4,11 @@
 {
   pkgs,
   inputs,
-  config,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
   ];
-
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-
-  sops.age.keyFile = "/home/brog/.config/sops/age/keys.txt";
-
-  sops.secrets.example-key = {
-    owner = config.users.users.brog.name;
-  };
 
   plymouth.enable = true;
 
