@@ -5,7 +5,7 @@
 }: {
   imports = [
     ../../modules/home-manager/default.nix
-    inputs.privateConfig.homeModules.laptop
+    # inputs.privateConfig.homeModules.laptop
   ];
 
   home.username = "brog";
@@ -22,6 +22,8 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  programs.ssh.enable = true;
 
   udiskie.enable = false;
 

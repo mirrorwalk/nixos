@@ -11,10 +11,10 @@
     ./hardware-configuration.nix
   ];
 
-  sops.defaultSopsFile = ./secrets/secrets.json;
-  sops.defaultSopsFormat = "json";
-
-  sops.age.keyFile = "/home/brog/.config/sops/age/keys.txt";
+  # sops.defaultSopsFile = ./secrets/secrets.json;
+  # sops.defaultSopsFormat = "json";
+  #
+  # sops.age.keyFile = "/home/brog/.config/sops/age/keys.txt";
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
@@ -83,7 +83,7 @@
       ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   };
 
-  wifi.enable = true;
+  # wifi.enable = true;
 
   networking = {
     hostName = "zentop";

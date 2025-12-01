@@ -13,35 +13,35 @@ in {
     enable = lib.mkEnableOption "Enable wifi";
   };
   config = lib.mkIf config.wifi.enable {
-    sops.secrets.shaan_key = {};
+    # sops.secrets.shaan_key = {};
 
-    networking.networkmanager = {
-      ensureProfiles.profiles = {
-        home-wifi = {
-          connection = {
-            id = "Shaan";
-            type = "wifi";
-          };
-          wifi = {
-            ssid = "Shaan";
-            mode = "infrastructure";
-          };
-          wifi-security = {
-            auth-alg = "open";
-            key-mgmt = "wpa-psk";
-          };
-        };
-      };
-    };
-
-    systemd.services.network-set = {
-      after = ["NetworkManager.service"];
-      wants = ["NetworkManager.service"];
-      wantedBy = ["NetworkManager.service"];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${setNetwork}/bin/setNetwork";
-      };
-    };
+    # networking.networkmanager = {
+    #   ensureProfiles.profiles = {
+    #     home-wifi = {
+    #       connection = {
+    #         id = "Shaan";
+    #         type = "wifi";
+    #       };
+    #       wifi = {
+    #         ssid = "Shaan";
+    #         mode = "infrastructure";
+    #       };
+    #       wifi-security = {
+    #         auth-alg = "open";
+    #         key-mgmt = "wpa-psk";
+    #       };
+    #     };
+    #   };
+    # };
+    #
+    # systemd.services.network-set = {
+    #   after = ["NetworkManager.service"];
+    #   wants = ["NetworkManager.service"];
+    #   wantedBy = ["NetworkManager.service"];
+    #   serviceConfig = {
+    #     Type = "oneshot";
+    #     ExecStart = "${setNetwork}/bin/setNetwork";
+    #   };
+    # };
   };
 }
