@@ -161,6 +161,7 @@
         "https://unicornuniversity.net"
         "https://excalidraw.com"
         "https://spotify.com"
+        "https://gog.com"
       ];
 
       gecko = lib.mkIf config.browsers.adblock.enable {

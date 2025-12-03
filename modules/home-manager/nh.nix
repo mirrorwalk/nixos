@@ -11,13 +11,9 @@
     };
 
     home.shellAliases = {
-      rnos = "${pkgs.nh}/bin/nh os switch";
-      nosr = "${pkgs.nh}/bin/nh os switch";
       nr = "${pkgs.nh}/bin/nh os switch";
+      nb = "${pkgs.nh}/bin/nh os build";
       nt = "${pkgs.nh}/bin/nh os test";
-      rn = "${pkgs.nh}/bin/nh os switch";
-      ns = "${pkgs.nh}/bin/nh os switch";
-      nos = "${pkgs.nh}/bin/nh os switch";
     };
   };
 }

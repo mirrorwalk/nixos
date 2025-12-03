@@ -15,7 +15,7 @@
       enable = true;
     };
 
-    home.sessionVariables = {
+    home.sessionVariables = lib.mkDefault {
       PAGER = "bat";
     };
   };

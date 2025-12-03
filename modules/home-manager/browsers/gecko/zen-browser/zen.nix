@@ -71,14 +71,14 @@ in {
 
         pinsForce = true;
         pins = {
-          Music = {
-            id = "04b980ef-0fb1-447e-9ff9-23f2fcf5dd2c";
-            workspace = spaces.YouTube.id;
-            url = "https://www.youtube.com/results?search_query=my+mix";
-            position = 1;
-            isEssential = false;
-            container = containers.Google.id;
-          };
+          # Music = {
+          #   id = "04b980ef-0fb1-447e-9ff9-23f2fcf5dd2c";
+          #   workspace = spaces.YouTube.id;
+          #   url = "https://www.youtube.com/results?search_query=my+mix";
+          #   position = 1;
+          #   isEssential = false;
+          #   container = containers.Google.id;
+          # };
 
           GitHub = {
             id = "962ebf2c-d92e-438f-aab9-193cccb49054";
@@ -133,7 +133,7 @@ in {
         spacesForce = true;
         spaces = {
           General = {
-            id = "178f0a7f-e847-4e02-b719-80a630cbf1fe";
+            id = "42b8f271-ce25-477a-bf50-361c4348e07d";
             icon = "💻";
             position = 1;
             theme = {

@@ -28,12 +28,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.ncspot = {
       enable = true;
-
-      settings = {
-          gapless = true;
-          use_nerdfont = true;
-          hide_display_names = true;
-      };
     };
 
     home.shellAliases = {

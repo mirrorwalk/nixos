@@ -11,6 +11,13 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  sops = {
+    defaultSopsFile = ./secrets/secrets.json;
+    defaultSopsFormat = "json";
+
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  };
+
   # This value determines the Home Manager release that your configuration is
 
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -26,10 +33,16 @@
     godot
     blender
     kiwix
-    motrix
     aseprite
     bottles
+    moor
+    tauon
+    spotdl
   ];
+
+  home.sessionVariables = {
+    PAGER = "moor";
+  };
 
   xdg.portal = {
     enable = true;
@@ -78,7 +91,7 @@
     flake = "${pkgs.nix}/bin/nix flake";
     backup-message = "echo Backup: $(date '+%Y-%m-%d %H:%M:%S')";
     evi = "cd $HOME/.config/nvim && nvim .";
-    # music = "${pkgs.tmux}/bin/tmux new-session -A -s music";
+    less = "moor";
   };
 
   music.enable = true;
@@ -105,20 +118,61 @@
       defaultBrowser = true;
     };
     brave.enable = true;
+    chromium.enable = true;
 
     search.defaultEngine = "Kagi";
   };
 
+  mopidy = {
+      enable = false;
+      spotify.enable = true;
+  };
+
   programs = {
+    ncmpcpp = {
+      enable = false;
+
+      bindings = [
+        {
+          key = "j";
+          command = "scroll_down";
+        }
+        {
+          key = "k";
+          command = "scroll_up";
+        }
+        {
+          key = "J";
+          command = ["select_item" "scroll_down"];
+        }
+        {
+          key = "K";
+          command = ["select_item" "scroll_up"];
+        }
+        {
+          key = "l";
+          command = "next_column";
+        }
+        {
+          key = "l";
+          command = "slave_screen";
+        }
+        {
+          key = "h";
+          command = "previous_column";
+        }
+        {
+          key = "h";
+          command = "master_screen";
+        }
+      ];
+    };
+
     yt-dlp.enable = true;
 
     cava.enable = true;
 
     keepassxc.enable = true;
-
-    ncspot = {
-        enable = true;
-    };
 
     nvim-fzf = {
       enable = true;
@@ -220,5 +274,4 @@
   };
 
   programs.home-manager.enable = true;
-
 }

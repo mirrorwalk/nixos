@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,6 +42,11 @@
       url = "github:lassulus/wrappers";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -51,6 +57,7 @@
     tmuxWorkspace,
     nvimFZF,
     wrappers,
+    sops-nix,
     ...
   } @ inputs: {
     nixosConfigurations = {
@@ -59,11 +66,13 @@
         modules = [
           ./hosts/desktop/configuration.nix
           ./modules/nixos/default.nix
-          home-manager.nixosModules.home-manager
+          # home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           {
             home-manager.sharedModules = [
               ./modules/home-manager/default.nix
               inputs.privateConfig.homeModules.desktop
+              inputs.sops-nix.homeManagerModules.sops
             ];
           }
         ];

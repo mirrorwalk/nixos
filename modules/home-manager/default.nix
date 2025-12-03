@@ -24,6 +24,7 @@
     ./games.nix
     ./nm-applet.nix
     ./desktops/desktops.nix
+    ./mopidy.nix
   ];
 
   sm = [

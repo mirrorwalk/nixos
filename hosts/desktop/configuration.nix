@@ -4,11 +4,26 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
   ];
+
+  # sops = {
+  #   defaultSopsFile = ./secrets/secrets.json;
+  #   defaultSopsFormat = "json";
+  #
+  #   age.keyFile = "/home/brog/.config/sops/age/keys.txt";
+  #
+  #   secrets = {
+  #     hello = {
+  #       owner = config.users.users.brog.name;
+  #       path = "/home/brog/asd.txt";
+  #     };
+  #   };
+  # };
 
   plymouth.enable = true;
 
@@ -77,7 +92,7 @@
     sshd.enable = true;
 
     open-webui = {
-        enable = false;
+      enable = false;
     };
 
     xserver = {
@@ -95,7 +110,7 @@
     qbittorrent.enable = true;
 
     flatpak = {
-        enable = true;
+      enable = true;
     };
   };
 
@@ -125,6 +140,7 @@
         pkgsi686Linux.SDL2
         pkgsi686Linux.mesa
         icu
+        gamemode
       ];
     };
 

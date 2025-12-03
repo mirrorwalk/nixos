@@ -240,6 +240,7 @@ in {
       return-youtube-dislikes
       dearrow
       kagi-search
+      indie-wiki-buddy
       # adnauseam
     ];
 
